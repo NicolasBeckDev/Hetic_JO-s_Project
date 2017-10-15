@@ -11,10 +11,10 @@ Encore
     .cleanupOutputBeforeBuild()
 
     // will output as web/build/app.js
-    .addEntry('app', './src/AppBundle/Resources/assets/js/main.js')
+    .addEntry('app', './app/Resources/assets/js/main.js')
 
     // will output as web/build/global.css
-    .addStyleEntry('global', './src/AppBundle/Resources/assets/css/global.scss')
+    .addEntry('global', './app/Resources/assets/scss/global.scss')
 
     // allow sass/scss files to be processed
      .enableSassLoader(function(sassOptions) {}, {
