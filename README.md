@@ -22,7 +22,6 @@ Create new copie of docker/.env.dist named docker/.env.
 
     yarn install
     cd ../docker
-    docker-compose build
     
 
 ## Docker run
