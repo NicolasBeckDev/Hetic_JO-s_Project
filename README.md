@@ -17,6 +17,9 @@ Web application for Hetic project made with great workers
     cd symfony
     composer install
     # Accepts default parameters but enter "db" for database_host
+
+Create new copie of docker/.env.dist named docker/.env and delete Symfony part.
+
     yarn install
     cd ../docker
     docker-compose build
