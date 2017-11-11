@@ -13,7 +13,7 @@ Web application for Hetic project made with great workers
 
     
     git clone https://github.com/NicolasBeck/Hetic_JO-s_Project
-    cd symfony
+    cd Hetic_JO-s_Project/symfony
     composer install
     Enter Database parameters
     
