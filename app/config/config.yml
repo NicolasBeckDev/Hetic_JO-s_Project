@@ -30,7 +30,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+        json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     php_errors:
         log: true
 
@@ -39,8 +39,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     paths:
-        '%kernel.project_dir%/src/AppBundle/Resources/views/public': Public
-        '%kernel.project_dir%/src/AppBundle/Resources/views/private': Private
+        '%kernel.project_dir%/app/Resources/views/public': Public
+        '%kernel.project_dir%/app/Resources/views/private': Private
 
 # Doctrine Configuration
 doctrine:
