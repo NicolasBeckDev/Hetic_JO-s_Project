@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\ForgottenPasswordType;
 use AppBundle\Form\RegisterType;
+use AppBundle\Form\ReinitialisationPasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,9 +76,6 @@ class SecurityController extends Controller
 
         $form->handleRequest($request);
 
-        $message = false;
-        $type = false;
-
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
 
@@ -113,16 +111,47 @@ class SecurityController extends Controller
 
         return $this->render('@Public/forgottenPassword.html.twig', [
             'form' => $form->createView(),
-            'message' => $message,
-            'type' => $type
+            'message' => $message ?? false,
+            'type' => $type ?? false,
         ]);
     }
 
     /**
      * @Route("/reinitialization/{$id}", name="reinitialization")
      */
-    public function reinitializationAction()
+    public function reinitializationAction($id, Request $request, UserPasswordEncoderInterface $encoder)
     {
+        $form = $this->createForm(ReinitialisationPasswordType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $data = $form->getData();
+
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'id' => $id]);
+
+            $user->setPassword($encoder->encodePassword($user, $data['password']));
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($user);
+            $em->flush();
+
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+
+            $this->get('session')->set('_security_main', serialize($token));
+
+            $event = new InteractiveLoginEvent($request, $token);
+            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('@Public/register.html.twig', [
+            'form' => $form->createView()
+        ]);
 
     }
 
