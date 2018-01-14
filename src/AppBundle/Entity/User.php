@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -13,6 +14,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+
+    public function __construct() {
+        $this->followedProjects = new ArrayCollection();
+        $this->participatingProject = new ArrayCollection();
+        $this->createdProject = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -72,10 +80,27 @@ class User implements UserInterface
     private $city;
 
     /**
-     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      *
      */
-    private $picture;
+    private $profilePicture;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
+     * @ORM\JoinTable(name="users_projects_follow")
+     */
+    private $followedProjects;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
+     * @ORM\JoinTable(name="users_projects_participate")
+     */
+    private $participatingProject;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
+     */
+    private $createdProject;
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -262,27 +287,130 @@ class User implements UserInterface
     }
 
     /**
-     * Set picture
+     * Set profilePicture
      *
-     * @param string $picture
+     * @param string $profilePicture
      *
      * @return User
      */
-    public function setPicture($picture)
+    public function setProfilePicture($profilePicture)
     {
-        $this->picture = $picture;
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }
 
     /**
-     * Get picture
+     * Get profilePicture
      *
      * @return string
      */
-    public function getPicture()
+    public function getProfilePicture()
     {
-        return $this->picture;
+        return $this->profilePicture;
+    }
+
+
+    /**
+     * Add followedProject
+     *
+     * @param \AppBundle\Entity\Project $followedProject
+     *
+     * @return User
+     */
+    public function addFollowedProject(\AppBundle\Entity\Project $followedProject)
+    {
+        $this->followedProjects[] = $followedProject;
+
+        return $this;
+    }
+
+    /**
+     * Remove followedProject
+     *
+     * @param \AppBundle\Entity\Project $followedProject
+     */
+    public function removeFollowedProject(\AppBundle\Entity\Project $followedProject)
+    {
+        $this->followedProjects->removeElement($followedProject);
+    }
+
+    /**
+     * Get followedProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowedProjects()
+    {
+        return $this->followedProjects;
+    }
+
+    /**
+     * Add participatingProject
+     *
+     * @param \AppBundle\Entity\Project $participatingProject
+     *
+     * @return User
+     */
+    public function addParticipatingProject(\AppBundle\Entity\Project $participatingProject)
+    {
+        $this->participatingProject[] = $participatingProject;
+
+        return $this;
+    }
+
+    /**
+     * Remove participatingProject
+     *
+     * @param \AppBundle\Entity\Project $participatingProject
+     */
+    public function removeParticipatingProject(\AppBundle\Entity\Project $participatingProject)
+    {
+        $this->participatingProject->removeElement($participatingProject);
+    }
+
+    /**
+     * Get participatingProject
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParticipatingProject()
+    {
+        return $this->participatingProject;
+    }
+
+    /**
+     * Add createdProject
+     *
+     * @param \AppBundle\Entity\Project $createdProject
+     *
+     * @return User
+     */
+    public function addCreatedProject(\AppBundle\Entity\Project $createdProject)
+    {
+        $this->createdProject[] = $createdProject;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdProject
+     *
+     * @param \AppBundle\Entity\Project $createdProject
+     */
+    public function removeCreatedProject(\AppBundle\Entity\Project $createdProject)
+    {
+        $this->createdProject->removeElement($createdProject);
+    }
+
+    /**
+     * Get createdProject
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCreatedProject()
+    {
+        return $this->createdProject;
     }
 
     /**
@@ -318,7 +446,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return null;
     }
 
     /**
@@ -339,7 +467,6 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        return null;
     }
 }
-
