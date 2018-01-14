@@ -163,7 +163,7 @@ $hasMinorProblems = (bool) count($minorProblems);
                 background-color: #FFFFFF;
                 border: 1px solid #dfdfdf;
                 padding: 40px 50px;
-                word-break: break-all;
+                word-break: break-word;
             }
             .sf-reset h2 {
                 font-size: 16px;
