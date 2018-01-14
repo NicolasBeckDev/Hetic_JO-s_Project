@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\ForgottenPasswordType;
 use AppBundle\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -63,6 +64,66 @@ class SecurityController extends Controller
         return $this->render('@Public/register.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/forgotten_password", name="forgotten_password")
+     */
+    public function forgottenPasswordAction(Request $request, \Swift_Mailer $mailer)
+    {
+        $form = $this->createForm(ForgottenPasswordType::class);
+
+        $form->handleRequest($request);
+
+        $message = false;
+        $type = false;
+
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $data['email']]);
+
+            if ($user){
+                $routerContext = $this->container->get('router')->getContext();
+
+                $mail = (new \Swift_Message('Réinitialisation de votre mot de passe'))
+                    ->setFrom('nicolasbeck.dev@gmail.com')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            '@Email/forgottenPassword.html.twig',
+                            [
+                                'name' => $user->getFirstname(),
+                                'url' => $routerContext->getHost() . ":" . $routerContext->getHttpPort() . '/reinitialization/' . $user->getId()
+                            ]
+                        ),
+                        'text/html'
+                    )
+                ;
+
+                $mailer->send($mail);
+
+                $message = 'Nous venons de vous envoyer une demande de réinitialisation par e-mail, veuillez la compléter.';
+                $type = 'success';
+            }else{
+                $message = "L'adresse e-mail saisie n'est associée à aucun compte.";
+                $type = 'danger';
+            }
+        }
+
+        return $this->render('@Public/forgottenPassword.html.twig', [
+            'form' => $form->createView(),
+            'message' => $message,
+            'type' => $type
+        ]);
+    }
+
+    /**
+     * @Route("/reinitialization/{$id}", name="reinitialization")
+     */
+    public function reinitializationAction()
+    {
+
     }
 
     /**
