@@ -1,3 +1,16 @@
 app:
-    name: Choisis ton Paris 2024
-    contact: example@hetic.net
+    name: Parisy.
+    layout:
+        header:
+            connection: "Connexion / Inscription"
+    page:
+        client:
+            home:
+                citation: "Soyez volontaire"
+                description: >
+                    Nul besoin d'attendre 2024 pour s'impliquer dans les Jeux. Joignez-vous à nous pour contribuer à
+                    améliorer les quartiers de Paris. Devenez acteur de votre ville et améliorer Paris.
+                more: "En savoir plus"
+                button:
+                    participate: "Participer à un projet"
+                    create: "Créer un projet"

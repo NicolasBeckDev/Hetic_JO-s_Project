@@ -1,5 +1,26 @@
-
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$fa-font-path: "~font-awesome/fonts";
+@import 'helpers/variables';
 
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+// helpers
+@import 'helpers/border_radius';
+@import 'helpers/linear_gradient';
+
+// components
+@import "components/fonts";
+
+// layout
+@import "layout/header";
+
+// pages
+@import "pages/client/homepage/homepage";
+
+html, body {
+    height: 100%;
+
+    .no-padding
+    {
+        padding: 0;
+        margin: 0;
+    }
+}

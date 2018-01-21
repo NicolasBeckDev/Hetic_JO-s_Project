@@ -1,0 +1,83 @@
+.header-wrapper
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    padding: 25px;
+    z-index: 10;
+
+    .media
+    {
+        float: left;
+    }
+
+    .media-body
+    {
+        width: auto;
+    }
+
+    .menu-icon{
+        margin-right: 25px;
+        float: left;
+        cursor: pointer;
+
+        &__line{
+            height: 3px;
+            width: 25px;
+            display: block;
+            background-color: $light-black;
+            margin-bottom: 4px;
+            transition: transform .2s ease;
+        }
+        &__line-left{
+            width: calc(25px / 2);
+        }
+        &__line-right{
+            width: calc(25px / 2);
+            float: right;
+        }
+
+        &.menu-active
+        {
+            &__line{
+                transform: translateX(0px) rotate(-45deg);
+            }
+            &__line-left{
+                transform: translateX(1px) rotate(45deg);
+            }
+            &__line-right{
+                transform: translateX(-2px) rotate(45deg);
+            }
+        }
+    }
+
+    .logo-wrapper
+    {
+        float: left;
+
+        span
+        {
+            @extend .futura-bold;
+            font-size: 25px;
+            color: $light-black;
+        }
+    }
+
+    .connection-button-wrapper
+    {
+        float: right;
+
+        input
+        {
+            @include border-radius(35px);
+            @extend .proxima-bold;
+            padding: 10px 30px;
+            color: $light-black;
+            border: none;
+            background-color: white;
+            font-size: 20px;
+        }
+    }
+}

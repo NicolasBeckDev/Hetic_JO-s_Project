@@ -1,0 +1,51 @@
+$proximaPath: '../fonts/ProximaNova/';
+$futuraPath: '../fonts/Futura/';
+
+/** Proxima Nova **/
+
+@font-face {
+    font-family: 'Proxima Nova Bold';
+    src: url($proximaPath + 'proxima-bold.eot');
+    src: url($proximaPath + 'proxima-bold.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'proxima-bold.woff2') format('woff2'),
+    url($proximaPath + 'proxima-bold.woff') format('woff'),
+    url($proximaPath + 'proxima-bold.ttf') format('truetype'),
+    url($proximaPath + 'proxima-bold.svg#proxima_nova_altbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova Regular';
+    src: url($proximaPath + 'proxima-regular.eot');
+    src: url($proximaPath + 'proxima-regular.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'proxima-regular.woff') format('woff'),
+    url($proximaPath + 'proxima-regular.ttf') format('truetype'),
+    url($proximaPath + 'proxima-regular.svg#proxima_nova_altregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.proxima-bold
+{
+    font-family: 'Proxima Nova Bold', sans-serif;
+}
+
+.proxima-regular
+{
+    font-family: 'Proxima Nova Regular', sans-serif;
+}
+
+/** Futura **/
+
+@font-face {
+    font-family: 'Futura Bold';
+    src: url($futuraPath + 'futura-bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.futura-bold
+{
+    font-family: 'Futura Bold', sans-serif;
+}
