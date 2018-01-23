@@ -163,7 +163,7 @@ $hasMinorProblems = (bool) count($minorProblems);
                 background-color: #FFFFFF;
                 border: 1px solid #dfdfdf;
                 padding: 40px 50px;
-                word-break: break-all;
+                word-break: break-word;
             }
             .sf-reset h2 {
                 font-size: 16px;
@@ -307,7 +307,7 @@ $hasMinorProblems = (bool) count($minorProblems);
             }
             .sf-reset p.help {
                 padding: 12px 16px;
-                word-break: break-word;
+                word-break: break-all;
             }
             .version {
                 text-align: right;
