@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -60,22 +59,40 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(name="profile_picture", type="string", nullable=true)
+     * @var string
      *
-     * @Assert\NotBlank(message="Veuillez choisir une image.")
-     * @Assert\File(mimeTypes={ "image/*" })
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     */
+    private $street;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zipccode", type="string", length=255, nullable=true)
+     */
+    private $zipcode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      *
      */
     private $profilePicture;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Project", inversedBy="followers")
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
      * @ORM\JoinTable(name="users_projects_follow")
      */
     private $followedProjects;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Project", inversedBy="participants")
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users")
      * @ORM\JoinTable(name="users_projects_participate")
      */
     private $participatingProject;
@@ -86,7 +103,7 @@ class User implements UserInterface
     private $createdProject;
 
     /**
-     * @ORM\Column(type="array", nullable=false)
+     * @ORM\Column(type="array", nullable=true)
      *
      */
     private $roles;
@@ -198,27 +215,156 @@ class User implements UserInterface
     }
 
     /**
-     * Set profilePicture
+     * Set street
      *
-     * @param string $profilePicture
+     * @param string $street
      *
      * @return User
      */
-    public function setProfilePicture($profilePicture)
+    public function setStreet($street)
     {
-        $this->profilePicture = $profilePicture;
+        $this->street = $street;
 
         return $this;
     }
 
     /**
-     * Get profilePicture
+     * Get street
      *
      * @return string
      */
-    public function getProfilePicture()
+    public function getStreet()
     {
-        return $this->profilePicture;
+        return $this->street;
+    }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     *
+     * @return User
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get street
+     *
+     * @return string
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return User
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param (Role|string)[] The user roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 
     /**
@@ -228,7 +374,7 @@ class User implements UserInterface
      *
      * @return User
      */
-    public function addFollowedProject(Project $followedProject)
+    public function addFollowedProject(\AppBundle\Entity\Project $followedProject)
     {
         $this->followedProjects[] = $followedProject;
 
@@ -240,7 +386,7 @@ class User implements UserInterface
      *
      * @param \AppBundle\Entity\Project $followedProject
      */
-    public function removeFollowedProject(Project $followedProject)
+    public function removeFollowedProject(\AppBundle\Entity\Project $followedProject)
     {
         $this->followedProjects->removeElement($followedProject);
     }
@@ -262,7 +408,7 @@ class User implements UserInterface
      *
      * @return User
      */
-    public function addParticipatingProject(Project $participatingProject)
+    public function addParticipatingProject(\AppBundle\Entity\Project $participatingProject)
     {
         $this->participatingProject[] = $participatingProject;
 
@@ -274,7 +420,7 @@ class User implements UserInterface
      *
      * @param \AppBundle\Entity\Project $participatingProject
      */
-    public function removeParticipatingProject(Project $participatingProject)
+    public function removeParticipatingProject(\AppBundle\Entity\Project $participatingProject)
     {
         $this->participatingProject->removeElement($participatingProject);
     }
@@ -287,96 +433,5 @@ class User implements UserInterface
     public function getParticipatingProject()
     {
         return $this->participatingProject;
-    }
-
-    /**
-     * Add createdProject
-     *
-     * @param \AppBundle\Entity\Project $createdProject
-     *
-     * @return User
-     */
-    public function addCreatedProject(Project $createdProject)
-    {
-        $this->createdProject[] = $createdProject;
-
-        return $this;
-    }
-
-    /**
-     * Remove createdProject
-     *
-     * @param \AppBundle\Entity\Project $createdProject
-     */
-    public function removeCreatedProject(Project $createdProject)
-    {
-        $this->createdProject->removeElement($createdProject);
-    }
-
-    /**
-     * Get createdProject
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCreatedProject()
-    {
-        return $this->createdProject;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param string The user roles
-     *
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     * @return string The user roles
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-        return null;
-    }
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
-    public function eraseCredentials()
-    {
-        return null;
     }
 }

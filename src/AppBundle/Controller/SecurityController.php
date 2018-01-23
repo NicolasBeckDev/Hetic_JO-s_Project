@@ -24,7 +24,7 @@ class SecurityController extends Controller
         $error = $authUtils->getLastAuthenticationError();
         $lastUsername = $authUtils->getLastUsername();
 
-        return $this->render('@Public/login.html.twig', [
+        return $this->render('@Client/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
@@ -62,7 +62,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@Public/register.html.twig', [
+        return $this->render('@Client/register.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -109,7 +109,7 @@ class SecurityController extends Controller
             }
         }
 
-        return $this->render('@Public/forgottenPassword.html.twig', [
+        return $this->render('@Client/forgottenPassword.html.twig', [
             'form' => $form->createView(),
             'message' => $message ?? false,
             'type' => $type ?? false,
@@ -149,7 +149,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@Public/register.html.twig', [
+        return $this->render('@Client/register.html.twig', [
             'form' => $form->createView()
         ]);
 

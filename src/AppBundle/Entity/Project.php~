@@ -95,7 +95,7 @@ class Project
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdProject")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="creator")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $creator;
@@ -368,29 +368,5 @@ class Project
     public function getParticipants()
     {
         return $this->participants;
-    }
-
-    /**
-     * Set creator
-     *
-     * @param \AppBundle\Entity\User $creator
-     *
-     * @return Project
-     */
-    public function setCreator(\AppBundle\Entity\User $creator = null)
-    {
-        $this->creator = $creator;
-
-        return $this;
-    }
-
-    /**
-     * Get creator
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getCreator()
-    {
-        return $this->creator;
     }
 }
