@@ -8,10 +8,12 @@ class FileUploader
 {
 
     private $userProfilePictureDir;
+    private $projectPictureDir;
 
-    public function __construct($userProfilePictureDir)
+    public function __construct($userProfilePictureDir, $projectPictureDir)
     {
         $this->userProfilePictureDir = $userProfilePictureDir;
+        $this->projectPictureDir = $projectPictureDir;
     }
 
     public function upload(UploadedFile $file, $dir)
@@ -26,5 +28,10 @@ class FileUploader
     public function getUserProfilePictureDir()
     {
         return $this->userProfilePictureDir;
+    }
+
+    public function getProjectPictureDir()
+    {
+        return $this->projectPictureDir;
     }
 }

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -17,6 +18,7 @@ class Project
     public function __construct() {
         $this->followers = new ArrayCollection();
         $this->participants = new ArrayCollection();
+        $this->subPictures = new ArrayCollection();
     }
 
     /**
@@ -45,9 +47,9 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="objectif", type="text")
      */
-    private $image;
+    private $objectif;
 
     /**
      * @var \DateTime
@@ -64,25 +66,23 @@ class Project
     private $inProgress;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="lng", type="float")
+     * @ORM\Column(name="address", type="string", length=255)
      */
-    private $lng;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="lat", type="float")
-     */
-    private $lat;
-
+    private $address;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="District", inversedBy="projects")
+     * @ORM\JoinColumn(name="district_id", referencedColumnName="id")
+     */
+    private $district;
 
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="followedProjects")
@@ -95,10 +95,24 @@ class Project
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="creator")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdProject")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $creator;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mainPicture", type="string", length=255)
+     */
+    private $mainPicture;
+
+    /**
+     * @var string
+     *
+    @ORM\Column(name="subPictures", type="array", nullable=true)
+     */
+    private $subPictures;
 
     /**
      * Get id
@@ -159,30 +173,6 @@ class Project
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Project
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set date
      *
      * @param \DateTime $date
@@ -228,54 +218,6 @@ class Project
     public function getInProgress()
     {
         return $this->inProgress;
-    }
-
-    /**
-     * Set lng
-     *
-     * @param float $lng
-     *
-     * @return Project
-     */
-    public function setLng($lng)
-    {
-        $this->lng = $lng;
-
-        return $this;
-    }
-
-    /**
-     * Get lng
-     *
-     * @return float
-     */
-    public function getLng()
-    {
-        return $this->lng;
-    }
-
-    /**
-     * Set lat
-     *
-     * @param float $lat
-     *
-     * @return Project
-     */
-    public function setLat($lat)
-    {
-        $this->lat = $lat;
-
-        return $this;
-    }
-
-    /**
-     * Get lat
-     *
-     * @return float
-     */
-    public function getLat()
-    {
-        return $this->lat;
     }
 
     /**
@@ -369,4 +311,101 @@ class Project
     {
         return $this->participants;
     }
+
+    /**
+     * Set creator
+     *
+     * @param \AppBundle\Entity\User $creator
+     *
+     * @return Project
+     */
+    public function setCreator(\AppBundle\Entity\User $creator = null)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * Get creator
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * Set district
+     *
+     * @param \AppBundle\Entity\District $district
+     *
+     * @return Project
+     */
+    public function setDistrict(\AppBundle\Entity\District $district = null)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return \AppBundle\Entity\District
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * Set objectif
+     *
+     * @param string $objectif
+     *
+     * @return Project
+     */
+    public function setObjectif($objectif)
+    {
+        $this->objectif = $objectif;
+
+        return $this;
+    }
+
+    /**
+     * Get objectif
+     *
+     * @return string
+     */
+    public function getObjectif()
+    {
+        return $this->objectif;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Project
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
 }

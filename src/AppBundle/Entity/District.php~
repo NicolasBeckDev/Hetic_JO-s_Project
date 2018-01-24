@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * District
  *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="district")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DistrictRepository")
  */
-class Category
+class District
 {
 
     public function __construct() {
@@ -35,7 +35,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="district")
      */
     private $projects;
 
@@ -54,7 +54,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return District
      */
     public function setName($name)
     {
@@ -78,7 +78,7 @@ class Category
      *
      * @param \AppBundle\Entity\Project $project
      *
-     * @return Category
+     * @return District
      */
     public function addProject(\AppBundle\Entity\Project $project)
     {

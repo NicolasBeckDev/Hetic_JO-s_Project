@@ -2,14 +2,14 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Entity\Project;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use AppBundle\Entity\User;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\File;
 
-class UserProfilePictureUploadListener
+class ProjectPictureUploadListener
 {
     private $uploader;
 
@@ -34,15 +34,15 @@ class UserProfilePictureUploadListener
 
     private function uploadFile($entity)
     {
-        if (!$entity instanceof User) {
+        if (!$entity instanceof Project) {
             return;
         }
 
-        $file = $entity->getProfilePicture();
+        $file = $entity->getMainPicture();
 
         if ($file instanceof UploadedFile) {
-            $fileName = $this->uploader->upload($file, $this->uploader->getUserProfilePictureDir());
-            $entity->setProfilePicture($fileName);
+            $fileName = $this->uploader->upload($file, $this->uploader->getProjectPictureDir());
+            $entity->setMainPicture($fileName);
         }
     }
 
@@ -50,12 +50,12 @@ class UserProfilePictureUploadListener
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof User) {
+        if (!$entity instanceof Project) {
             return;
         }
 
-        if ($fileName = $entity->getProfilePicture()) {
-            $entity->setProfilePicture(new File($this->uploader->getUserProfilePictureDir().'/'.$fileName));
+        if ($fileName = $entity->getMainPicture()) {
+            $entity->setMainPicture(new File($this->uploader->getProjectPictureDir().'/'.$fileName));
         }
     }
 
