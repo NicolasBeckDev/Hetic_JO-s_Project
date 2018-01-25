@@ -46,12 +46,13 @@ class UserController extends Controller
     public function newAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\AdminUserType', $user);
+        $form = $this->createForm('AppBundle\Form\UserType', $user, [
+            'type' => 'new'
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -97,12 +98,22 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        $user->setProfilePicture(new File($this->getParameter('user_profile_picture_directory').'/'.$user->getProfilePicture()));
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('AppBundle\Form\AdminUserType', $user);
+
+        $roles = '';
+        foreach ($user->getRoles() as $role){
+            $roles= $roles . $role . ';';
+        }
+        $roles = substr($roles, 0, -1);
+        $user->setRoles($roles);
+
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user, [
+            'type' => 'edit'
+        ]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_user_edit', array('id' => $user->getId()));

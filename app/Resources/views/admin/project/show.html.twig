@@ -18,8 +18,14 @@
                 <td>{{ project.description }}</td>
             </tr>
             <tr>
-                <th>Image</th>
-                <td>{{ project.picture }}</td>
+                <th>Photo pincipale</th>
+                <td>{{ project.mainPicture }}</td>
+            </tr>
+            <tr>
+                <th>autres photos</th>
+                {% for subPicture in project.subPictures %}
+                    <td>{{ subPicture }}</td>
+                {% endfor %}
             </tr>
             <tr>
                 <th>Date</th>
@@ -45,4 +51,5 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
 {% endblock %}

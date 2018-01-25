@@ -10,7 +10,7 @@
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
-            <th>Profilepicture</th>
+            <th>Picture</th>
             <th>Roles</th>
             <th>Actions</th>
         </tr>
@@ -22,8 +22,8 @@
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.profilePicture }}</td>
-                <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
+                <td>{{ user.picture }}</td>
+                <td>{% if user.roles %}{{ user.roles|join(';') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>

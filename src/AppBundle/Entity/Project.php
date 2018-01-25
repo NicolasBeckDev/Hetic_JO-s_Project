@@ -18,7 +18,6 @@ class Project
     public function __construct() {
         $this->followers = new ArrayCollection();
         $this->participants = new ArrayCollection();
-        $this->subPictures = new ArrayCollection();
     }
 
     /**
@@ -108,7 +107,7 @@ class Project
     private $mainPicture;
 
     /**
-     * @var string
+     * @var array
      *
     @ORM\Column(name="subPictures", type="array", nullable=true)
      */

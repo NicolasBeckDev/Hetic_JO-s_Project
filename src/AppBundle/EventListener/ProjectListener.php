@@ -3,19 +3,22 @@
 namespace AppBundle\EventListener;
 
 use AppBundle\Entity\Project;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ProjectPictureUploadListener
+class ProjectListener
 {
     private $uploader;
+    private $fs;
 
-    public function __construct(FileUploader $uploader)
+    public function __construct(FileUploader $uploader, Filesystem $fs)
     {
         $this->uploader = $uploader;
+        $this->fs = $fs;
     }
 
     public function prePersist(LifecycleEventArgs $args)
@@ -30,6 +33,33 @@ class ProjectPictureUploadListener
         $entity = $args->getEntity();
 
         $this->uploadFile($entity);
+    }
+
+    public function postLoad(LifecycleEventArgs $args)
+    {
+        $entity = $args->getEntity();
+
+        if (!$entity instanceof Project) {
+            return;
+        }
+
+        if ($mainPictureName = $entity->getMainPicture()) {
+            $entity->setMainPicture(new File($this->uploader->getProjectPictureDir().'/'.$mainPictureName));
+        }
+
+        if ($subPicturesNames = $entity->getSubPictures()){
+            $files = [];
+            foreach ($subPicturesNames as $subPictureName){
+                $files[] = new File($this->uploader->getProjectPictureDir().'/'.$subPictureName);
+            }
+            $entity->setSubPictures($files);
+        }
+    }
+
+    public function preRemove(LifecycleEventArgs $args){
+        $entity = $args->getEntity();
+
+        $this->deleteFile($entity);
     }
 
     private function uploadFile($entity)
@@ -57,25 +87,15 @@ class ProjectPictureUploadListener
         }
     }
 
-    public function postLoad(LifecycleEventArgs $args)
-    {
-        $entity = $args->getEntity();
+    public function deleteFile($entity){
 
         if (!$entity instanceof Project) {
             return;
         }
 
-        if ($mainPictureName = $entity->getMainPicture()) {
-            $entity->setMainPicture(new File($this->uploader->getProjectPictureDir().'/'.$mainPictureName));
-        }
-
-        if ($subPicturesNames = $entity->getSubPictures()){
-            $files = [];
-            foreach ($subPicturesNames as $subPictureName){
-                $files[] = new File($this->uploader->getProjectPictureDir().'/'.$subPictureName);
-            }
-            $entity->setSubPictures($files);
+        $this->fs->remove($entity->getMainPicture());
+        foreach ($entity->getSubPictures() as $subPicture){
+            $this->fs->remove($subPicture);
         }
     }
-
 }

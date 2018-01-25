@@ -13,47 +13,50 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdminUserType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (in_array($options['type'], ['new'])){
+        if (in_array($options['type'], ['new','edit','register'])){
             $builder
                 ->add('firstname', TextType::class, [
-                    'label' => 'Prénom *'
+                    'label' => 'Prénom *',
+                    'required' => false,
                 ]);
         }
-        if (in_array($options['type'], ['new'])){
+        if (in_array($options['type'], ['new','edit','register'])){
             $builder
                 ->add('lastname', TextType::class, [
-                    'label' => 'Nom *'
+                    'label' => 'Nom *',
+                    'required' => false,
                 ]);
         }
-        if (in_array($options['type'], ['new'])){
+        if (in_array($options['type'], ['new','edit','register','forgotten'])){
             $builder
                 ->add('email', EmailType::class, [
                     'label' => 'E-mail *',
                     'required' => false,
                 ]);
         }
-        if (in_array($options['type'], ['new'])){
+        if (in_array($options['type'], ['new','edit','register'])){
             $builder
                 ->add('picture', FileType::class, [
                     'label' => 'Photo de profil',
                     'required' => false
                 ]);
         }
-        if (in_array($options['type'], ['new'])){
+        if (in_array($options['type'], ['new','edit'])){
             $builder
                 ->add('roles', ChoiceType::class, [
                     'label' => 'role *',
                     'choices' => [
                         'Utilisateur' => 'ROLE_USER',
                         'Administrateur' => 'ROLE_USER;ROLE_ADMIN'
-                    ]
+                    ],
+                    'required' => true,
                 ]);
         }
-        if (in_array($options['type'], ['new'])){
+        if (in_array($options['type'], ['new','register','reinitialisation'])){
             $builder
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,

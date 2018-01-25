@@ -9,12 +9,10 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Picture</th>
-                <th>Picture</th>
+                <th>MainPicture</th>
+                <th>SubPicture</th>
                 <th>Date</th>
                 <th>Inprogress</th>
-                <th>Lng</th>
-                <th>Lat</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,7 +25,7 @@
                 <td>{{ project.mainPicture }}</td>
                 <td>
                 {% for subPicture in project.subPictures %}
-                    {{ subpicture }}
+                    {{ subPicture }}
                     <br>
                 {% endfor %}
                 </td>
@@ -53,4 +51,8 @@
             <a href="{{ path('admin_project_new') }}">Create a new project</a>
         </li>
     </ul>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>YOUHOU JE SUIS UN ADMIN !!!</h1>
+    {% endif %}
 {% endblock %}

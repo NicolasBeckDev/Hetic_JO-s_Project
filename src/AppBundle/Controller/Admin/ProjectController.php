@@ -29,7 +29,6 @@ class ProjectController extends Controller
             ->getRepository(Project::class)
             ->findAll();
 
-
         return $this->render('@Admin/project/index.html.twig', array(
             'projects' => $projects,
         ));
@@ -47,7 +46,7 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $project->setInProgress(false);
-        $form = $this->createForm('AppBundle\Form\AdminProjectType', $project);
+        $form = $this->createForm('AppBundle\Form\ProjectType', $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,9 +94,8 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $project->setMainPicture(new File($this->getParameter('project_picture_directory').'/'.$project->getMainPicture()));
         $deleteForm = $this->createDeleteForm($project);
-        $editForm = $this->createForm('AppBundle\Form\AdminProjectType', $project);
+        $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

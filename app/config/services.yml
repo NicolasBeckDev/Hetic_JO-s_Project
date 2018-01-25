@@ -39,12 +39,16 @@ services:
             $userProfilePictureDir: '%user_profile_picture_directory%'
             $projectPictureDir: '%project_picture_directory%'
 
-    AppBundle\EventListener\UserProfilePictureUploadListener:
+    AppBundle\EventListener\UserListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+            - { name: doctrine.event_listener, event: preRemove }
 
-    AppBundle\EventListener\ProjectPictureUploadListener:
+    AppBundle\EventListener\ProjectListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+            - { name: doctrine.event_listener, event: preRemove }
