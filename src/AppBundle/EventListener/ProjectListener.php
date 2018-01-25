@@ -9,14 +9,18 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ProjectListener
 {
+    private $tokenStorage;
     private $uploader;
     private $fs;
 
-    public function __construct(FileUploader $uploader, Filesystem $fs)
+    public function __construct(TokenStorageInterface $tokenStorage, FileUploader $uploader, Filesystem $fs)
     {
+        $this->tokenStorage = $tokenStorage;
         $this->uploader = $uploader;
         $this->fs = $fs;
     }
@@ -25,6 +29,11 @@ class ProjectListener
     {
         $entity = $args->getEntity();
 
+        if (!$entity instanceof Project) {
+            return;
+        }
+
+        $entity->setCreator($this->tokenStorage->getToken()->getUser());
         $this->uploadFile($entity);
     }
 
