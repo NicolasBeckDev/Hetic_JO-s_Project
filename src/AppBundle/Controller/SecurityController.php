@@ -14,6 +14,9 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     * @param Request $request
+     * @param AuthenticationUtils $authUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
@@ -28,6 +31,8 @@ class SecurityController extends Controller
 
     /**
      * @Route("/register", name="register")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function register(Request $request)
     {
@@ -66,6 +71,9 @@ class SecurityController extends Controller
 
     /**
      * @Route("/forgotten_password", name="forgotten_password")
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function forgottenPasswordAction(Request $request, \Swift_Mailer $mailer)
     {
@@ -118,6 +126,9 @@ class SecurityController extends Controller
 
     /**
      * @Route("/reinitialization/{$id}", name="reinitialization")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function reinitializationAction($id, Request $request)
     {
