@@ -3,14 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
-use AppBundle\Form\ForgottenPasswordType;
-use AppBundle\Form\RegisterType;
-use AppBundle\Form\ReinitialisationPasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
@@ -18,13 +14,16 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     * @param Request $request
+     * @param AuthenticationUtils $authUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
         $error = $authUtils->getLastAuthenticationError();
         $lastUsername = $authUtils->getLastUsername();
 
-        return $this->render('@Public/login.html.twig', [
+        return $this->render('@Client/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
@@ -32,19 +31,22 @@ class SecurityController extends Controller
 
     /**
      * @Route("/register", name="register")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request)
     {
         $user = New User();
 
-        $form = $this->createForm(RegisterType::class,$user);
+        $form = $this->createForm('AppBundle\Form\UserType', $user, [
+            'type' => 'register'
+        ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setRoles(['ROLE_USER']);
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setRoles('ROLE_USER');
 
             $em = $this->getDoctrine()->getManager();
 
@@ -62,24 +64,30 @@ class SecurityController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@Public/register.html.twig', [
+        return $this->render('@Client/register.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/forgotten_password", name="forgotten_password")
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function forgottenPasswordAction(Request $request, \Swift_Mailer $mailer)
     {
-        $form = $this->createForm(ForgottenPasswordType::class);
+        $user = New User();
+
+        $form = $this->createForm('AppBundle\Form\UserType', $user, [
+            'type' => 'forgotten'
+        ]);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $data = $form->getData();
 
-            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $data['email']]);
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $user->getEmail()]);
 
             if ($user){
                 $routerContext = $this->container->get('router')->getContext();
@@ -109,7 +117,7 @@ class SecurityController extends Controller
             }
         }
 
-        return $this->render('@Public/forgottenPassword.html.twig', [
+        return $this->render('@Client/forgottenPassword.html.twig', [
             'form' => $form->createView(),
             'message' => $message ?? false,
             'type' => $type ?? false,
@@ -118,25 +126,27 @@ class SecurityController extends Controller
 
     /**
      * @Route("/reinitialization/{$id}", name="reinitialization")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function reinitializationAction($id, Request $request, UserPasswordEncoderInterface $encoder)
+    public function reinitializationAction($id, Request $request)
     {
-        $form = $this->createForm(ReinitialisationPasswordType::class);
+        $userForm = New User();
+
+        $form = $this->createForm('AppBundle\Form\UserType', $userForm, [
+            'type' => 'reinitialisation'
+        ]);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $data = $form->getData();
-
             $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'id' => $id]);
 
-            $user->setPassword($encoder->encodePassword($user, $data['password']));
+            $user->setPassword($userForm->getPassword());
 
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($user);
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
             $this->get('security.token_storage')->setToken($token);
@@ -149,7 +159,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@Public/register.html.twig', [
+        return $this->render('@Client/register.html.twig', [
             'form' => $form->createView()
         ]);
 

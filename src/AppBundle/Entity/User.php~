@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
 
     public function __construct() {
@@ -60,9 +60,13 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(name="picture", type="string", nullable=true)
+     * @ORM\Column(name="profile_picture", type="string", nullable=true)
+     *
+     * @Assert\NotBlank(message="Veuillez choisir une image.")
+     * @Assert\File(mimeTypes={ "image/*" })
+     *
      */
-    private $picture;
+    private $profilePicture;
 
     /**
      * @ORM\ManyToMany(targetEntity="Project", inversedBy="followers")
@@ -200,9 +204,9 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setPicture($picture)
+    public function setProfilePicture($profilePicture)
     {
-        $this->picture = $picture;
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }
@@ -212,9 +216,9 @@ class User implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getPicture()
+    public function getProfilePicture()
     {
-        return $this->picture;
+        return $this->profilePicture;
     }
 
     /**
@@ -322,7 +326,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set roles
      *
-     * @param array The user roles
+     * @param string The user roles
      *
      * @return User
      */
@@ -336,7 +340,7 @@ class User implements UserInterface, \Serializable
     /**
      * Returns the roles granted to the user.
      *
-     * @return array The user roles
+     * @return string The user roles
      */
     public function getRoles()
     {
@@ -374,38 +378,5 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         return null;
-    }
-
-    /**
-     * String representation of object
-     * @link http://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or null
-     * @since 5.1.0
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-        ));
-    }
-
-    /**
-     * Constructs the object
-     * @link http://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
-     * The string representation of the object.
-     * </p>
-     * @return void
-     * @since 5.1.0
-     */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->email,
-            $this->password,
-            ) = unserialize($serialized);
     }
 }
