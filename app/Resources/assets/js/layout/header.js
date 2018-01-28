@@ -1,20 +1,23 @@
 module.exports = function ()
 {
-    console.clear();
-
-    alert('test');
-
     const app = (() => {
+        let menuIcon;
         let menu;
+        let filter;
 
         const init = () => {
-            menu = document.querySelector('.menu-icon');
-
+            menuIcon = document.querySelector('.menu-icon');
+            menu = document.querySelector('.menu');
+            filter = document.querySelector('.black-filter');
             applyListeners();
         };
 
         const applyListeners = () => {
-            menu.addEventListener('click', () => toggleClass(menu, 'menu-active'));
+            menuIcon.addEventListener('click', () => {
+                toggleClass(menuIcon, 'menu-active');
+                //toggleClass(menu, 'active');
+                //toggleClass(filter, 'active');
+            });
         };
 
         const toggleClass = (element, stringClass) => {

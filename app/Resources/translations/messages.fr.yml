@@ -3,6 +3,20 @@ app:
     layout:
         header:
             connection: "Connexion / Inscription"
+        menu:
+            onglets:
+                1:
+                    name: Démarrer un projet
+                    path: projet/creation
+                2:
+                    name: Accueil
+                    path: accueil
+                3:
+                    name: A propos
+                    path: a-propos
+                4:
+                    name: Projets finis
+                    path: projet/fini
     page:
         client:
             home:

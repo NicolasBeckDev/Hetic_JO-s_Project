@@ -8,9 +8,16 @@
     padding: 25px;
     z-index: 10;
 
+    @media screen and (max-width: $screen-xs-max)
+    {
+        background-color: white;
+    }
+
     .media
     {
         float: left;
+        line-height: 20px;
+        z-index: 110;
     }
 
     .media-body
@@ -23,32 +30,31 @@
         float: left;
         cursor: pointer;
 
-        &__line{
-            height: 3px;
+        .line{
+            height: 4px;
             width: 25px;
             display: block;
             background-color: $light-black;
             margin-bottom: 4px;
-            transition: transform .2s ease;
-        }
-        &__line-left{
-            width: calc(25px / 2);
-        }
-        &__line-right{
-            width: calc(25px / 2);
-            float: right;
+            transition: all .3s ease;
         }
 
         &.menu-active
         {
-            &__line{
-                transform: translateX(0px) rotate(-45deg);
-            }
-            &__line-left{
-                transform: translateX(1px) rotate(45deg);
-            }
-            &__line-right{
-                transform: translateX(-2px) rotate(45deg);
+            .line{
+                &.top{
+                    transform: rotate(45deg) translateY(7px) translateX(7px);
+                }
+
+                &.middle
+                {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+
+                &.bottom{
+                    transform: rotate(-45deg) translateY(-4px) translateX(4px);
+                }
             }
         }
     }
