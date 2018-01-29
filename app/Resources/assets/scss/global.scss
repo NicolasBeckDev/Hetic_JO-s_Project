@@ -1,5 +1,18 @@
-
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$fa-font-path: "~font-awesome/fonts";
+@import 'helpers/variables';
 
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+// helpers
+@import 'helpers/border_radius';
+@import 'helpers/linear_gradient';
+
+// components
+@import "components/fonts";
+
+// layout
+@import "layout/header";
+@import "layout/menu";
+
+// pages
+@import "pages/client/layout";
+@import "pages/client/homepage/homepage";

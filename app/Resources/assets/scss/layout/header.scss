@@ -1,0 +1,89 @@
+.header-wrapper
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    padding: 25px;
+    z-index: 10;
+
+    @media screen and (max-width: $screen-xs-max)
+    {
+        background-color: white;
+    }
+
+    .media
+    {
+        float: left;
+        line-height: 20px;
+        z-index: 110;
+    }
+
+    .media-body
+    {
+        width: auto;
+    }
+
+    .menu-icon{
+        margin-right: 25px;
+        float: left;
+        cursor: pointer;
+
+        .line{
+            height: 4px;
+            width: 25px;
+            display: block;
+            background-color: $light-black;
+            margin-bottom: 4px;
+            transition: all .3s ease;
+        }
+
+        &.menu-active
+        {
+            .line{
+                &.top{
+                    transform: rotate(45deg) translateY(7px) translateX(7px);
+                }
+
+                &.middle
+                {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+
+                &.bottom{
+                    transform: rotate(-45deg) translateY(-4px) translateX(4px);
+                }
+            }
+        }
+    }
+
+    .logo-wrapper
+    {
+        float: left;
+
+        span
+        {
+            @extend .futura-bold;
+            font-size: 25px;
+            color: $light-black;
+        }
+    }
+
+    .connection-button-wrapper
+    {
+        float: right;
+
+        input
+        {
+            @include border-radius(35px);
+            @extend .proxima-bold;
+            padding: 10px 30px;
+            color: $light-black;
+            border: none;
+            background-color: white;
+            font-size: 20px;
+        }
+    }
+}

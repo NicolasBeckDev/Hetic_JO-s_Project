@@ -1,0 +1,99 @@
+.homepage-wrapper
+{
+    .left-part
+    {
+        background-color: white;
+        padding: 0 100px;
+        height: 100vh;
+
+        @media screen and (max-width: $screen-xs-max)
+        {
+            background-color: darkseagreen;
+        }
+
+        .content
+        {
+            height: 100%;
+            position: relative;
+
+            .main
+            {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 100%;
+
+                .citation
+                {
+                    margin-bottom: 30px;
+
+                    span
+                    {
+                        @extend .proxima-bold;
+                        font-size: 70px;
+                    }
+                }
+
+                .description
+                {
+                    margin-bottom: 50px;
+
+                    p
+                    {
+                        @extend .proxima-regular;
+                        font-size: 22px;
+                        line-height: 40px;
+                        text-align: justify;
+
+                        a
+                        {
+                            @extend .proxima-bold;
+                        }
+                    }
+                }
+
+                .button-wrapper
+                {
+                    display: inline-block;
+
+                    input
+                    {
+                        @include border-radius(35px);
+                        @extend .proxima-bold;
+                        float: left;
+                        padding: 10px 30px;
+                        color: white;
+                        border: none;
+                        font-size: 20px;
+
+                        &.participate
+                        {
+                            @include linear-gradient(to right, #4885e7, #569ceb);
+                        }
+
+                        &.create
+                        {
+                            @include linear-gradient(to left, #eb3351, #ff5250);
+                        }
+
+                        &:first-child
+                        {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .right-part
+    {
+        height: 100vh;
+        overflow: hidden;
+
+        img
+        {
+            height: 100%;
+        }
+    }
+}
