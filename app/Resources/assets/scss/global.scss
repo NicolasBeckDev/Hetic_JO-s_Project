@@ -14,14 +14,5 @@
 @import "layout/menu";
 
 // pages
+@import "pages/client/layout";
 @import "pages/client/homepage/homepage";
-
-html, body {
-    height: 100%;
-
-    .no-padding
-    {
-        padding: 0;
-        margin: 0;
-    }
-}
