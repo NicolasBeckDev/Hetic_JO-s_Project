@@ -5,15 +5,18 @@ namespace AppBundle\Controller\Client;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\District;
 use AppBundle\Entity\Project;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Project controller.
  *
- * @Route("projets")
+ * @Route("projects")
  */
 class ProjectController extends Controller
 {
@@ -71,17 +74,52 @@ class ProjectController extends Controller
      * Finds and displays a project entity.
      *
      * @Route("/{id}", name="project_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @param Project $project
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Project $project)
+    public function showAction(Project $project, Request $request)
     {
-        $deleteForm = $this->createDeleteForm($project);
+        $followForm = $this->createFormBuilder()->getForm();
+        $participateForm = $this->createFormBuilder()->getForm();
+
+        $followForm->handleRequest($request);
+        $participateForm->handleRequest($request);
+
+        if ($followForm->isSubmitted() && $followForm->isValid()) {
+
+            /** @var User $user */
+            $user = $this->getUser();
+
+            if (in_array($project, $user->getFollowedProjects()->toArray())){
+                $user->removeFollowedProject($project);
+            }else{
+                $user->addFollowedProject($project);
+            }
+
+            $this->getDoctrine()->getManager()->flush();
+
+        }elseif ($participateForm->isSubmitted() && $participateForm->isValid()){
+
+            /** @var User $user */
+            $user = $this->getUser();
+
+            if (in_array($project, $user->getParticipatingProject()->toArray())){
+                $user->removeParticipatingProject($project);
+            }else{
+                $user->addParticipatingProject($project);
+            }
+
+            $this->getDoctrine()->getManager()->flush();
+
+        }
+
 
         return $this->render('@Client/project/show.html.twig', array(
             'project' => $project,
-            'delete_form' => $deleteForm->createView(),
+            'followForm' => $followForm->createView(),
+            'participateForm' => $participateForm->createView()
         ));
     }
 
@@ -147,7 +185,7 @@ class ProjectController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->getForm()
             ;
     }

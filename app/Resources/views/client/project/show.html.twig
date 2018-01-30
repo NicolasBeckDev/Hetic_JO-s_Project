@@ -46,9 +46,18 @@
             <a href="{{ path('admin_project_edit', { 'id': project.id }) }}">Edit</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            {{ form_start(followForm) }}
+            <div style="display: none">
+                {{ form_widget(followForm) }}
+            </div>
+                <input type="submit" value="Suivre">
+            {{ form_end(followForm) }}
+            {{ form_start(participateForm) }}
+            <div style="display: none">
+                {{ form_widget(participateForm) }}
+            </div>
+                <input type="submit" value="Participer">
+            {{ form_end(participateForm) }}
         </li>
     </ul>
 

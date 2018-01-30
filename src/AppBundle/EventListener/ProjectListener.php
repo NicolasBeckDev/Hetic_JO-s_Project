@@ -46,23 +46,7 @@ class ProjectListener
 
     public function postLoad(LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
 
-        if (!$entity instanceof Project) {
-            return;
-        }
-
-        if ($mainPictureName = $entity->getMainPicture()) {
-            $entity->setMainPicture(new File($this->uploader->getProjectPictureDir().'/'.$mainPictureName));
-        }
-
-        if ($subPicturesNames = $entity->getSubPictures()){
-            $files = [];
-            foreach ($subPicturesNames as $subPictureName){
-                $files[] = new File($this->uploader->getProjectPictureDir().'/'.$subPictureName);
-            }
-            $entity->setSubPictures($files);
-        }
     }
 
     public function preRemove(LifecycleEventArgs $args){

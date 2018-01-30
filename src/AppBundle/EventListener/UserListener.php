@@ -30,8 +30,11 @@ class UserListener
         $entity = $args->getEntity();
 
         $this->uploadFile($entity);
-        $this->EncodePassword($entity);
         $this->UpdateRoles($entity);
+
+        if(isset($entityChangeSet['password'])){
+            $this->EncodePassword($entity);
+        }
     }
 
     /**
@@ -58,15 +61,6 @@ class UserListener
 
     public function postLoad(LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
-
-        if (!$entity instanceof User) {
-            return;
-        }
-
-        if ($picture = $entity->getPicture()) {
-            $entity->setPicture(new File($this->uploader->getUserProfilePictureDir() . '/' . $picture));
-        }
 
     }
 
@@ -113,9 +107,10 @@ class UserListener
         if (!$entity instanceof User) {
             return;
         }
+        if(is_string($entity->getRoles())){
+            $roles = explode(';', $entity->getRoles());
+            $entity->setRoles($roles);
+        }
 
-        $roles = explode(';', $entity->getRoles());
-
-        $entity->setRoles($roles);
     }
 }
