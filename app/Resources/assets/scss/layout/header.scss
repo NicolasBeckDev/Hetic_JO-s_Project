@@ -75,10 +75,13 @@
     {
         float: right;
 
-        input
+        a
         {
             @include border-radius(35px);
             @extend .proxima-bold;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
             padding: 10px 30px;
             color: $light-black;
             border: none;

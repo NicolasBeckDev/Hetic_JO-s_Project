@@ -1,0 +1,63 @@
+{% extends "@Client/template/two-columns.html.twig" %}
+
+{% block left_content %}
+    <div class="connection-content">
+        <div class="main">
+            <div class="title">
+                <span>{{ 'app.page.client.connection.title'|trans }}</span>
+            </div>
+
+            <div class="form-container">
+                {% if error %}
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <form action="{{ path('login') }}" method="post">
+                    <div class="input-wrapper">
+                        <div class="input-placeholder-effect">
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'app.page.client.user.inputs.email'|trans }}" />
+                            <span>{{ 'app.page.client.user.inputs.email'|trans }}</span>
+                            <div class="before-border"></div>
+                        </div>
+
+                        <div class="input-placeholder-effect">
+                            <input type="password" id="password" name="_password" placeholder="{{ 'app.page.client.user.inputs.password'|trans }}" />
+                            <span>{{ 'app.page.client.user.inputs.password'|trans }}</span>
+                            <div class="before-border"></div>
+                        </div>
+                    </div>
+
+                    {#
+                        If you want to control the URL the user
+                        is redirected to on success (more details below)
+                        <input type="hidden" name="_target_path" value="/account" />
+                    #}
+
+                    <div class="button-wrapper">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" class="connection" value="{{ 'app.page.client.connection.button'|trans }}" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <a href="{{ path('register') }}" class="registration">{{ 'app.page.client.registration.button'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="or-container">
+                <span class="or">{{ 'app.page.client.connection.or'|trans }}</span>
+            </div>
+
+            <div class="forgotten-password-container">
+                <a href="{{ path('forgotten_password') }}" class="forgotten-password">{{ 'app.page.client.connection.forgotten_password'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock  %}
+
+{% block right_content %}
+    <img src="{{ asset('build/images/background-homepage.jpg') }}" />
+{% endblock %}

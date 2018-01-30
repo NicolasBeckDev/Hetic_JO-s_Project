@@ -1,0 +1,68 @@
+.registration-content {
+    $bottom-margin: 30px;
+
+    .main {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+
+        .title {
+            margin-bottom: $bottom-margin * 2;
+            text-align: center;
+
+            span {
+                @extend .proxima-bold;
+                font-size: 35px;
+            }
+        }
+
+        .form-container
+        {
+            margin-bottom: $bottom-margin;
+
+            .input-wrapper
+            {
+                margin-bottom: $bottom-margin;
+
+                div[class^='col-']
+                {
+                    &:first-child
+                    {
+                        padding-right: 5px;
+                    }
+
+                    &:last-child
+                    {
+                        padding-left: 5px;
+                    }
+                }
+
+                input
+                {
+                    &:first-child
+                    {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+
+        .button-wrapper {
+            text-align: center;
+
+            input {
+                @include border-radius(35px);
+                @extend .proxima-bold;
+                padding: 10px 60px;
+                color: white;
+                border: none;
+                font-size: 20px;
+
+                &.registration {
+                    @include linear-gradient(to left, #eb3351, #ff5250);
+                }
+            }
+        }
+    }
+}

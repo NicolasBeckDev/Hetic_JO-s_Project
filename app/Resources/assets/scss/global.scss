@@ -5,6 +5,7 @@
 // helpers
 @import 'helpers/border_radius';
 @import 'helpers/linear_gradient';
+@import 'helpers/placeholder';
 
 // components
 @import "components/fonts";
@@ -14,5 +15,9 @@
 @import "layout/menu";
 
 // pages
+@import "pages/form/form-widget";
 @import "pages/client/layout";
+@import "pages/client/template/two-columns";
 @import "pages/client/homepage/homepage";
+@import "pages/client/connection/connection";
+@import "pages/client/registration/registration";
