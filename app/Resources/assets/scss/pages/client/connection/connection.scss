@@ -1,0 +1,124 @@
+.connection-content {
+    $bottom-margin: 30px;
+
+    .main {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+
+        .title {
+            margin-bottom: $bottom-margin * 2;
+            text-align: center;
+
+            span {
+                @extend .proxima-bold;
+                font-size: 35px;
+            }
+        }
+
+        .form-container
+        {
+            margin-bottom: $bottom-margin;
+
+            .input-wrapper
+            {
+                margin-bottom: $bottom-margin;
+
+                input
+                {
+                    &:first-child
+                    {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+
+        .button-wrapper {
+
+            div[class^='col-']
+            {
+                &:first-child
+                {
+                    padding-left: 30px;
+                }
+
+                &:last-child {
+                    padding-right: 30px;
+                }
+            }
+
+            input, a {
+                @include border-radius(35px);
+                @extend .proxima-bold;
+                text-decoration: none;
+                display: inline-block;
+                text-align: center;
+                padding: 10px 30px;
+                color: white;
+                border: none;
+                width: 100%;
+                font-size: 20px;
+
+                &.connection {
+                    @include linear-gradient(to right, #4885e7, #569ceb);
+                }
+
+                &.registration {
+                    @include linear-gradient(to left, #eb3351, #ff5250);
+                }
+            }
+        }
+
+        .or-container
+        {
+            text-align: center;
+            margin-bottom: $bottom-margin;
+
+            .or
+            {
+                @extend .proxima-regular;
+                position: relative;
+                width: 100%;
+                display: inline-block;
+                color: $light-black;
+                font-size: 16px;
+
+                &:before, &:after
+                {
+                    content: "";
+                    position: absolute;
+                    width: 40%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 2px;
+                    background-color: #d8d8d8;
+                }
+
+                &:before
+                {
+                    left: 0;
+                }
+
+                &:after
+                {
+                    right: 0;
+                }
+            }
+        }
+
+        .forgotten-password-container
+        {
+            text-align: center;
+
+            .forgotten-password
+            {
+                @extend .proxima-regular;
+                text-decoration: none;
+                color: $light-black;
+                font-size: 16px;
+            }
+        }
+    }
+}

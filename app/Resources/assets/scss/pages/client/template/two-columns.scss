@@ -1,0 +1,25 @@
+.two-columns-wrapper {
+    .left-part {
+        background-color: white;
+        padding: 0 100px;
+        height: 100vh;
+
+        @media screen and (max-width: $screen-xs-max) {
+            background-color: darkseagreen;
+        }
+
+        .content {
+            height: 100%;
+            position: relative;
+        }
+    }
+
+    .right-part {
+        height: 100vh;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+        }
+    }
+}

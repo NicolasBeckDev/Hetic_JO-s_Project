@@ -20,29 +20,41 @@ class UserType extends AbstractType
         if (in_array($options['type'], ['new','edit','register'])){
             $builder
                 ->add('firstname', TextType::class, [
-                    'label' => 'Prénom *',
+                    'label' => false,
                     'required' => false,
+                    'attr' => [
+                        'placeholder' => 'app.page.client.user.inputs.firstname'
+                    ]
                 ]);
         }
         if (in_array($options['type'], ['new','edit','register'])){
             $builder
                 ->add('lastname', TextType::class, [
-                    'label' => 'Nom *',
+                    'label' => false,
                     'required' => false,
+                    'attr' => [
+                        'placeholder' => 'app.page.client.user.inputs.lastname'
+                    ]
                 ]);
         }
         if (in_array($options['type'], ['new','edit','register','forgotten'])){
             $builder
                 ->add('email', EmailType::class, [
-                    'label' => 'E-mail *',
+                    'label' => false,
                     'required' => false,
+                    'attr' => [
+                        'placeholder' => 'app.page.client.user.inputs.email'
+                    ]
                 ]);
         }
         if (in_array($options['type'], ['new','edit','register'])){
             $builder
                 ->add('picture', FileType::class, [
-                    'label' => 'Photo de profil',
-                    'required' => false
+                    'label' => false,
+                    'required' => false,
+                    'attr' => [
+                        'placeholder' => 'app.page.client.user.inputs.picture'
+                    ]
                 ]);
         }
         if (in_array($options['type'], ['new','edit'])){
@@ -61,10 +73,24 @@ class UserType extends AbstractType
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
                     'invalid_message' => 'Les mots de passe doivent correspondre.',
-                    'options' => array('attr' => array('class' => 'password-field')),
+                    'options' => [
+                        'attr' => [
+                            'class' => 'password-field'
+                        ]
+                    ],
                     'required' => true,
-                    'first_options'  => array('label' => 'Mot de passe *'),
-                    'second_options' => array('label' => 'Répeter le mot de passe *'),
+                    'first_options'  => [
+                        'label' => false,
+                        'attr' => [
+                            'placeholder' => 'app.page.client.user.inputs.password'
+                        ]
+                    ],
+                    'second_options' => [
+                        'label' => false,
+                        'attr' => [
+                            'placeholder' => 'app.page.client.user.inputs.confirm_password'
+                        ]
+                    ],
                 ])
                 ;
         }

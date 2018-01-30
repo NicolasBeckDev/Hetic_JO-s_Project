@@ -1,45 +1,33 @@
-{% extends "@Client/layout.html.twig" %}
+{% extends "@Client/template/two-columns.html.twig" %}
 
-{% block content %}
-    <div class="homepage-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-md-6 no-padding">
-                    <div class="left-part">
-                        <div class="content">
-                            <div class="main">
-                                <div class="citation">
-                                    <span>{{ 'app.page.client.home.citation'|trans }}</span>
-                                </div>
+{% block left_content %}
+    <div class="homepage-content">
+        <div class="main">
+            <div class="citation">
+                <span>{{ 'app.page.client.home.citation'|trans }}</span>
+            </div>
 
-                                <div class="description">
-                                    <p>
-                                        {{ 'app.page.client.home.description'|trans }}
-                                        <a href="#">{{ 'app.page.client.home.more'|trans }}</a>
-                                    </p>
-                                </div>
+            <div class="description">
+                <p>
+                    {{ 'app.page.client.home.description'|trans }}
+                    <a href="#">{{ 'app.page.client.home.more'|trans }}</a>
+                </p>
+            </div>
 
-                                <div class="button-wrapper">
-                                    <input type="button" class="participate" value="{{ 'app.page.client.home.button.participate'|trans }}" />
-                                    <input type="button" class="create" value="{{ 'app.page.client.home.button.create'|trans }}" />
-                                </div>
-                            </div>
+            <div class="button-wrapper">
+                <input type="button" class="participate" value="{{ 'app.page.client.home.buttons.participate'|trans }}" />
+                <input type="button" class="create" value="{{ 'app.page.client.home.buttons.create'|trans }}" />
+            </div>
+        </div>
 
-                            <div class="sub">
-                                <div class="social-links">
+        <div class="sub">
+            <div class="social-links">
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-hide col-md-6 no-padding">
-                    <div class="right-part">
-                        <img src="{{ asset('build/images/background-homepage.jpg') }}" />
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+{% endblock  %}
+
+{% block right_content %}
+    <img src="{{ asset('build/images/background-homepage.jpg') }}" />
 {% endblock %}
