@@ -1,5 +1,5 @@
 {
-  "build/app.js": "/build/app.58cdaf1ab5a570aa5356.js",
+  "build/app.js": "/build/app.c54049f3d3e9cc34d200.js",
   "build/fonts/futura-bold.ttf": "/build/fonts/futura-bold.4c62644b.ttf",
   "build/fonts/glyphicons-halflings-regular.eot": "/build/fonts/glyphicons-halflings-regular.f4769f9b.eot",
   "build/fonts/glyphicons-halflings-regular.ttf": "/build/fonts/glyphicons-halflings-regular.e18bbf61.ttf",
@@ -12,10 +12,12 @@
   "build/fonts/proxima-regular.eot": "/build/fonts/proxima-regular.e802340f.eot",
   "build/fonts/proxima-regular.ttf": "/build/fonts/proxima-regular.0b420bac.ttf",
   "build/fonts/proxima-regular.woff": "/build/fonts/proxima-regular.12ccd551.woff",
-  "build/global.css": "/build/global.3080aabf611f98cc76bba3657a6a2ca6.css",
+  "build/global.css": "/build/global.e66f7c1120ee95891398bb5dfdf7d0da.css",
   "build/global.js": "/build/global.8d29bfd78f00ef42e358.js",
   "build/images/background-homepage.jpg": "/build/images/background-homepage.e66198a0.jpg",
+  "build/images/connexion.png": "/build/images/connexion.89a52d9a.png",
   "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.89889688.svg",
+  "build/images/inscription.png": "/build/images/inscription.ab0d47cb.png",
   "build/images/proxima-bold.svg": "/build/images/proxima-bold.ef2e45d5.svg",
   "build/images/proxima-regular.svg": "/build/images/proxima-regular.b13cdca1.svg"
 }
