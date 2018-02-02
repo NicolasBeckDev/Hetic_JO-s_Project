@@ -189,4 +189,16 @@ class ProjectController extends Controller
             ->getForm()
             ;
     }
+
+    /**
+     * Location.
+     *
+     * @Route("/location", name="project_location")
+     * @Method("GET")
+     */
+    public function locationAction()
+    {
+        return $this->render('@Client/project/location.html.twig', [
+            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
+    }
 }
