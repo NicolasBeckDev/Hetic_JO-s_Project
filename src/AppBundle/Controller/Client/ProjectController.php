@@ -176,10 +176,8 @@ class ProjectController extends Controller
 
     /**
      * Creates a form to delete a project entity.
-     *
-     * @param Project $project The project entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @param Project $project
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createDeleteForm(Project $project)
     {
@@ -200,5 +198,6 @@ class ProjectController extends Controller
     {
         return $this->render('@Client/project/location.html.twig', [
             'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
+            ]);
     }
 }
