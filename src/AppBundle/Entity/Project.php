@@ -94,7 +94,7 @@ class Project
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdProject")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdProjects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $creator;
