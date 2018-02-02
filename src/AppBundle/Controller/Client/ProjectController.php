@@ -37,7 +37,7 @@ class ProjectController extends Controller
         $districts = $this->getDoctrine()->getRepository(District::class)->findAll();
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
-        return $this->render('@Client/project/index.html.twig', [
+        return $this->render('@Client/project/list.html.twig', [
             'projects' => $projects,
             'districts' => $districts,
             'categories' => $categories,

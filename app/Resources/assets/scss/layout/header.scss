@@ -4,8 +4,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 100px;
-    padding: 25px;
+    height: $header-height;
+    padding: $header-padding;
     z-index: 10;
 
     @media screen and (max-width: $screen-xs-max)
@@ -86,7 +86,17 @@
             color: $light-black;
             border: none;
             background-color: white;
-            font-size: 20px;
+            font-size: 16px;
         }
     }
+}
+
+.header-background-block
+{
+    position: relative;
+    background-color: white;
+    border-bottom: 3px solid $light-black;
+    height: $header-height;
+    padding: $header-padding;
+    width: 100%;
 }

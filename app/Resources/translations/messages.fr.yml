@@ -28,6 +28,10 @@ app:
                 buttons:
                     participate: "Participer à un projet"
                     create: "Créer un projet"
+            project:
+                list:
+                    district: "Arrondissements"
+                    all: "Tous"
             connection:
                 title: "Connectez-vous"
                 button: "Se connecter"

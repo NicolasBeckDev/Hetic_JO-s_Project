@@ -1,0 +1,123 @@
+.project-list-content
+{
+    padding: 15px 35px;
+    width: 100%;
+    margin-top: $header-height + $header-padding * 2;
+
+    .filter-wrapper
+    {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 15px;
+
+        .filter
+        {
+            @include border-radius(25px);
+            @extend .proxima-bold;
+            padding: 5px 15px;
+            border: none;
+            background-color: #f4f4f4;
+            color: $light-black;
+            font-size: 15px;
+            cursor: pointer;
+            float: left;
+            transition: all .2s ease-in-out;
+
+            &.active
+            {
+                @include linear-gradient(to right, #4885e7, #569ceb);
+                color: white;
+            }
+
+            &:not(:first-child)
+            {
+                margin-left: 10px;
+            }
+
+            &:not(:last-child)
+            {
+                margin-right: 10px;
+            }
+
+            &:hover
+            {
+                &:not(.active)
+                {
+                    background-color: grey;
+                }
+            }
+        }
+    }
+
+    .project-wrapper
+    {
+        width: 100%;
+
+        .project
+        {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+            background-color: white;
+            width: 100%;
+            border-bottom: 8px solid transparent;
+            -moz-border-image: -moz-linear-gradient(to right, #ffbf38, #ff8b24);
+            -webkit-border-image: -webkit-linear-gradient(to right, #ffbf38, #ff8b24);
+            border-image: linear-gradient(to right, #ffbf38, #ff8b24);
+            border-image-slice: 1;
+            margin-bottom: 15px;
+
+            .image-container
+            {
+                width: 100%;
+
+                img
+                {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+
+            .text-content-wrapper
+            {
+                padding: 15px;
+                text-align: center;
+
+                .category-container
+                {
+                    margin-bottom: 10px;
+
+                    .category
+                    {
+                        @extend .proxima-bold;
+                        font-size: 20px;
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-image: linear-gradient(to right, #ffbf38, #ff8b24);
+                    }
+                }
+
+                .name-container
+                {
+                    margin-bottom: 10px;
+
+                    .name
+                    {
+                        @extend .proxima-bold;
+                        font-size: 25px;
+                        color: $light-black;
+                    }
+                }
+
+                .district-container
+                {
+                    .district
+                    {
+                        @extend .proxima-regular;
+                        font-size: 15px;
+                        color: #9b9b9b;
+                    }
+                }
+            }
+        }
+    }
+}
