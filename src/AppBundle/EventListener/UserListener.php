@@ -32,7 +32,7 @@ class UserListener
         $this->uploadFile($entity);
         $this->UpdateRoles($entity);
 
-        if(isset($entityChangeSet['password'])){
+        if($entity->getId() == null){
             $this->EncodePassword($entity);
         }
     }
@@ -52,7 +52,12 @@ class UserListener
         $entityChangeSet = $args->getEntityChangeSet();
 
         $this->updateRoles($entity);
-        $this->uploadFile($entity);
+
+        if(isset($entityChangeSet['picture']) && $entityChangeSet['picture'][1] != null && $entityChangeSet['picture'][1]->getFilename() != $entityChangeSet['picture'][0]) {
+            $this->uploadFile($entity);
+        }elseif($entity->getPicture() != null && $entityChangeSet['picture'][1]->getFilename() == $entityChangeSet['picture'][0]){
+            $entity->setPicture($entityChangeSet['picture'][0]);
+        }
 
         if(isset($entityChangeSet['password'])){
             $this->EncodePassword($entity);

@@ -4,9 +4,11 @@ namespace AppBundle\Controller\Client;
 
 use AppBundle\Entity\Project;
 use AppBundle\Entity\User;
+use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,6 +18,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AccountController extends Controller
 {
+
+    private $uploader;
+
+    public function __construct(FileUploader $uploader)
+    {
+        $this->uploader = $uploader;
+    }
 
     /**
      * Edit current user.
@@ -37,10 +46,19 @@ class AccountController extends Controller
         $roles = substr($roles, 0, -1);
         $user->setRoles($roles);
 
+        if ($user->getPicture() != null && gettype($user->getPicture()) == 'string'){
+            $picture = new File($this->uploader->getUserProfilePictureDir().'/'.$user->getPicture());
+            $user->setPicture($picture);
+        }
+
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, [
             'type' => 'edit'
         ]);
         $editForm->handleRequest($request);
+
+        if ($user->getPicture() == null && isset($picture)){
+            $user->setPicture($picture);
+        }
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\User;
+use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,6 +18,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends Controller
 {
+
+    private $uploader;
+
+    public function __construct(FileUploader $uploader)
+    {
+        $this->uploader = $uploader;
+    }
+
+
     /**
      * Lists all user entities.
      *
@@ -107,10 +117,21 @@ class UserController extends Controller
         $roles = substr($roles, 0, -1);
         $user->setRoles($roles);
 
+        if ($user->getPicture() != null && gettype($user->getPicture()) == 'string'){
+            $picture = new File($this->uploader->getUserProfilePictureDir().'/'.$user->getPicture());
+            $user->setPicture($picture);
+        }
+
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, [
             'type' => 'edit'
         ]);
+
         $editForm->handleRequest($request);
+
+        if ($user->getPicture() == null && isset($picture)){
+            $user->setPicture($picture);
+        }
+
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
