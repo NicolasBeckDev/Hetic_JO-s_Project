@@ -1,0 +1,98 @@
+.swiper-container {
+  width: 100vw;
+  height: 300px;
+}
+.swiper-wrapper {
+
+}
+.cards {
+  display: flex;
+}
+
+.card--holder {
+  position: relative;
+  width: 100vw;
+  height: 300px;
+}
+
+.card {
+  top: 30%;
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 3.5px 5px 0 rgba(155, 155, 155, 0.5);
+  border-radius: 2.5px;
+  max-width: 250px;
+  background-color: #ffffff;
+
+  &--image {
+    height: 110px;
+    min-width: 100%;
+    object-fit: cover;
+  }
+  &--desc {
+    padding: 8px;
+    display: inline-block;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+
+// TINDER CARD
+
+
+.cards {
+  flex-grow: 1;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+.card {
+  display: inline-block;
+  width: 90vw;
+  max-width: 400px;
+  height: 70vh;
+  background: #FFFFFF;
+  padding-bottom: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+  img {
+    max-width: 100%;
+    pointer-events: none;
+  }
+
+  h3 {
+    margin-top: 32px;
+    font-size: 32px;
+    padding: 0 16px;
+    pointer-events: none;
+  }
+
+  p {
+    margin-top: 24px;
+    font-size: 20px;
+    padding: 0 16px;
+    pointer-events: none;
+  }
+}
+
+.moving.card {
+  transition: none;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  cursor: grabbing;
+}
