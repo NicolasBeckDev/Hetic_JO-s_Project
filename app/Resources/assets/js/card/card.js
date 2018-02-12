@@ -66,6 +66,7 @@ allCards.forEach(function (el) {
                 event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
             }
             initCards();
+            getCards();
         }
     });
 });
@@ -91,6 +92,9 @@ function createButtonListener(love) {
 
         event.preventDefault();
     };
+}
+function getCards() {
+    console.log('CALLBACK INTENSIFIES')
 }
 
 var nopeListener = createButtonListener(false);
