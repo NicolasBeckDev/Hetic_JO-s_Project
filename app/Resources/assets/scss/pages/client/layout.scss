@@ -1,9 +1,86 @@
-html, body {
+html, body
+{
     min-height: 100%;
+    background-color: #f8f8f9;
 
     .no-padding
     {
         padding: 0;
         margin: 0;
+    }
+
+    button, a, input
+    {
+        transition: all .2s ease-in-out;
+
+        &.black {
+            @include linear-gradient(to right, #4b4b4b, #272727);
+            position: relative;
+            border: 2px solid transparent;
+
+            &:not(.active):hover
+            {
+                @include border-gradient(#4b4b4b, #272727, 1px);
+                background: linear-gradient(to right, #4b4b4b, #272727) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.blue {
+            @include linear-gradient(to right, #4885e7, #569ceb);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient(#4885e7, #569ceb, 1px);
+                background: linear-gradient(to right, #4885e7, #569ceb) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.green {
+            @include linear-gradient(to right, #61d432, #429321);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient(#61d432, #429321, 1px);
+                background: linear-gradient(to right, #61d432, #429321) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.red {
+            @include linear-gradient(to right, #ff5250, #eb3351);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient(#ff5250, #eb3351, 1px);
+                background: linear-gradient(to right, #ff5250, #eb3351) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.yellow {
+            @include linear-gradient(to right, #ffbf38, #ff8b24);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient(#ffbf38, #ff8b24, 1px);
+                background: linear-gradient(to right, #ffbf38, #ff8b24) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &:focus {
+            outline: 0;
+        }
     }
 }

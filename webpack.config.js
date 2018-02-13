@@ -12,7 +12,6 @@ Encore
 
     // will output as web/build/app.js
     .addEntry('app', './app/Resources/assets/js/main.js')
-    .addEntry('isotope', './app/Resources/assets/js/lib/isotope/init.js')
 
     // will output as web/build/global.css
     .addEntry('global', './app/Resources/assets/scss/global.scss')

@@ -1,2 +1,0 @@
-require('./isotope.min')();
-

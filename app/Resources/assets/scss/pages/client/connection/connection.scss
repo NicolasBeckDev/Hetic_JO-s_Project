@@ -60,15 +60,6 @@
                 border: none;
                 width: 100%;
                 font-size: 20px;
-
-
-                &.connection {
-                    @include linear-gradient(to right, #4885e7, #569ceb);
-                }
-
-                &.registration {
-                    @include linear-gradient(to left, #eb3351, #ff5250);
-                }
             }
         }
 

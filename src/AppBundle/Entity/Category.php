@@ -35,6 +35,13 @@ class Category
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string")
+     */
+    private $color;
+
+    /**
      * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
      */
     private $projects;
@@ -105,5 +112,21 @@ class Category
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
     }
 }

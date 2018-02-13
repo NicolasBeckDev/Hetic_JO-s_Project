@@ -57,3 +57,20 @@
     background: -ms-linear-gradient(legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
 }
+
+/// @access public
+/// @param {Keyword | Angle} $direction - Linear gradient direction
+/// @param {Arglist} $color-stops - List of color-stops composing the gradient
+@mixin linear-border-gradient($direction, $color-stops...)
+{
+    @if is-direction($direction) == false {
+        $color-stops: $direction, $color-stops;
+        $direction: 180deg;
+    }
+
+    -webkit-border-image: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    -moz-border-image: -moz-linear-gradient(legacy-direction($direction), $color-stops);
+    -o-border-image: -o-linear-gradient(legacy-direction($direction), $color-stops);
+    border-image: linear-gradient(legacy-direction($direction), $color-stops);
+    border-image-slice: 1;
+}

@@ -5,35 +5,41 @@
     <div class="project-list-content">
         <div class="filter-wrapper">
             {% for category in categories %}
-                <button type="button" class="filter">{{ category.name }}</button>
+                <button type="button" class="filter {{ category.color }}" data-filter="{{ '.' ~ category.name|snake }}">{{ category.name }}</button>
             {% endfor %}
 
-            <button type="button" class="filter active">{{ 'app.page.client.project.list.all'|trans }}</button>
-            <button type="button" class="filter">{{ 'app.page.client.project.list.district'|trans }}</button>
+            <button type="button" class="filter blue active" data-filter="*">{{ 'app.page.client.project.list.all'|trans }}</button>
         </div>
 
         <div class="project-wrapper">
             <div class="grid row">
+                <div class="grid-sizer"></div>
                 {% for project in projects %}
-                    <div class="grid-item col-md-4">
-                        <div class="project">
-                            <div class="image-container">
-                                <img src="{{ asset('build/images/background-homepage.jpg') }}" />
-                            </div>
-
-                            <div class="text-content-wrapper">
-                                <div class="category-container">
-                                    <span class="category">{{ project.category.name }}</span>
+                    <div class="grid-item {{ project.category.name|snake }}">
+                        <div class="project {{ project.category.color }}">
+                            <a href="{{ path('project_show', { 'id': project.id }) }}">
+                                <div class="image-container">
+                                    <div class="image-positioner">
+                                        <img src="{{ asset('uploads/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
+                                    </div>
                                 </div>
 
-                                <div class="name-container">
-                                    <span class="name">{{ project.name }}</span>
-                                </div>
+                                <div class="text-content-wrapper">
+                                    <div class="category-container">
+                                        <span class="category">{{ project.category.name }}</span>
+                                    </div>
 
-                                <div class="district-container">
-                                    <span class="district">{{ project.district.name }}</span>
+                                    <div class="name-container">
+                                        <span class="name">{{ project.name }}</span>
+                                    </div>
+
+                                    <div class="district-container">
+                                        <span class="district">{{ project.district.name }}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+
+                            <div class="color-line"></div>
                         </div>
                     </div>
                 {% endfor %}
@@ -41,60 +47,7 @@
         </div>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>MainPicture</th>
-                <th>SubPicture</th>
-                <th>Date</th>
-                <th>Inprogress</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.id }}</a></td>
-                <td>{{ project.name }}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.mainPicture }}</td>
-                <td>
-                {% for subPicture in project.subPictures %}
-                    {{ subPicture }}
-                    <br>
-                {% endfor %}
-                </td>
-                <td>{% if project.date %}{{ project.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if project.inProgress %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('project_show', { 'id': project.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('project_edit', { 'id': project.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('project_new') }}">Create a new project</a>
-        </li>
-    </ul>
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <h1>YOUHOU JE SUIS UN ADMIN !!!</h1>
-    {% endif %}
-
     {% block addJavascripts %}
-
+        <script src="https://unpkg.com/isotope-layout@3.0.5/dist/isotope.pkgd.min.js"></script>
     {% endblock %}
 {% endblock %}

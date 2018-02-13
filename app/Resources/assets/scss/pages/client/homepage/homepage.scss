@@ -41,14 +41,6 @@
                 border: none;
                 font-size: 20px;
 
-                &.participate {
-                    @include linear-gradient(to right, #4885e7, #569ceb);
-                }
-
-                &.create {
-                    @include linear-gradient(to left, #eb3351, #ff5250);
-                }
-
                 &:first-child {
                     margin-right: 20px;
                 }
