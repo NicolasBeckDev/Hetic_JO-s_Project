@@ -1,7 +1,6 @@
 {% extends "@Client/layout.html.twig" %}
 
 {% block content %}
-
     <div class="project-list-content">
         <div class="filter-wrapper">
             {% for category in categories %}
@@ -15,7 +14,7 @@
             <div class="grid row">
                 <div class="grid-sizer"></div>
                 {% for project in projects %}
-                    <div class="grid-item {{ project.category.name|snake }}">
+                    <div class="grid-item col-sm-6 col-md-4 col-lg-3 {{ project.category.name|snake }}">
                         <div class="project {{ project.category.color }}">
                             <a href="{{ path('project_show', { 'id': project.id }) }}">
                                 <div class="image-container">

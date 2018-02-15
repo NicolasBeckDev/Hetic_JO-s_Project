@@ -12,11 +12,12 @@ html, body
     button, a, input
     {
         transition: all .2s ease-in-out;
+        cursor: pointer;
+        border: none;
 
         &.black {
             @include linear-gradient(to right, #4b4b4b, #272727);
             position: relative;
-            border: 2px solid transparent;
 
             &:not(.active):hover
             {

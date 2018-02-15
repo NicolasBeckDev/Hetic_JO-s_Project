@@ -30,8 +30,15 @@ app:
                     create: "Créer un projet"
             project:
                 list:
-                    district: "Arrondissements"
                     all: "Tous"
+                show:
+                    description: "Description"
+                    goal: "Objectif"
+                    participant: "Participants"
+                    day_left: "Restants"
+                    buttons:
+                        participate: "Participer au projet"
+                        finance: "Financer"
             connection:
                 title: "Connectez-vous"
                 button: "Se connecter"
@@ -39,8 +46,6 @@ app:
                 forgotten_password: "Mot de passe oublié ?"
             registration:
                 title: "Inscrivez-vous, soyez volontaire"
-                inputs:
-
                 button: "S'inscrire"
             user:
                 inputs:

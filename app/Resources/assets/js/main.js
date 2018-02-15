@@ -8,6 +8,7 @@ require('../img/inscription.png');
 
 require('./layout/header')();
 require('./pages/form/form-widget')();
+require('./pages/client/project/show/display-text')();
 
 $(function () {
 

@@ -1,64 +1,86 @@
-{% extends "@Admin/project/layout.html.twig" %}
+{% extends "@Client/layout.html.twig" %}
 
-{% block body %}
-    <h1>Project</h1>
+{% block content %}
+    <div class="project-show-content">
+        <div class="project-container {{ project.category.color }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="owl-carousel">
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ project.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ project.description }}</td>
-            </tr>
-            <tr>
-                <th>Photo pincipale</th>
-                <td>{{ project.mainPicture }}</td>
-            </tr>
-            <tr>
-                <th>autres photos</th>
-                {% for subPicture in project.subPictures %}
-                    <td>{{ subPicture }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{% if project.date %}{{ project.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Inprogress</th>
-                <td>{% if project.inProgress %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+                    </div>
+                </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_project_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_project_edit', { 'id': project.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(followForm) }}
-            <div style="display: none">
-                {{ form_widget(followForm) }}
+                <div class="col-md-6">
+                    <div class="category-container">
+                        <span class="category">{{ project.category.name }}</span>
+                    </div>
+
+                    <div class="name-container">
+                        <span class="name">{{ project.name }}</span>
+                    </div>
+
+                    <div class="district-container">
+                        <span class="district">{{ project.district.name }}</span>
+                    </div>
+
+                    <div class="switch-text-wrapper">
+                        <span class="switch active" data-target="description">{{ 'app.page.client.project.show.description'|trans }}</span>
+                        <span class="switch" data-target="goal">{{ 'app.page.client.project.show.goal'|trans }}</span>
+                    </div>
+
+                    <div class="text-wrapper">
+                        <p class="description active">
+                            {{ project.description }}
+                        </p>
+
+                        <p class="goal">
+                            {{ project.objectif }}
+                        </p>
+                    </div>
+
+                    <div class="participant-day-left-wrapper">
+                        <div class="participant">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <span class="number">15</span>
+                                </div>
+
+                                <div class="media-body media-middle">
+                                    <span class="text">{{ 'app.page.client.project.show.participant'|trans }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="day-left">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <span class="number">27j</span>
+                                </div>
+
+                                <div class="media-body media-middle">
+                                    <span class="text">{{ 'app.page.client.project.show.day_left'|trans }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-wrapper">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="button" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.participate'|trans }}" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="button" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.finance'|trans }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-                <input type="submit" value="Suivre">
-            {{ form_end(followForm) }}
-            {{ form_start(participateForm) }}
-            <div style="display: none">
-                {{ form_widget(participateForm) }}
-            </div>
-                <input type="submit" value="Participer">
-            {{ form_end(participateForm) }}
-        </li>
-    </ul>
+        </div>
 
+        <div class="share-container">
+
+        </div>
+    </div>
 {% endblock %}

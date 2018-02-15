@@ -6,7 +6,9 @@
 
     .filter-wrapper
     {
-        width: 100%;
+        @include border-radius(5px);
+        padding: 10px;
+        background-color: white;
         display: inline-block;
         margin-bottom: 15px;
         text-align: center;
@@ -15,17 +17,15 @@
         {
             @include border-radius(25px);
             @extend .proxima-bold;
-            border: none;
             padding: 5px 15px;
             color: white;
             font-size: 18px;
-            cursor: pointer;
             float: left;
 
             &:not(.active)
             {
                 color: $light-black;
-                background: #f4f4f4;
+                background: none;
             }
 
             &:not(:first-child)
@@ -42,43 +42,28 @@
 
     .grid-sizer
     {
-        width: calc(100% * 25 / 100);
+        width: 50%;
 
-        @media screen and (min-width: $screen-lg-min) and (max-width: $screen-lg) {
-            width: calc(100% * 33 / 100);
+        @media screen and (min-width: $screen-md-min) {
+            width: 33.333%;
         }
 
-        @media screen and (max-width: $screen-md-max) {
-            width: calc(100% * 50 / 100);
+        @media screen and (min-width: $screen-lg-min) {
+            width: 25%;
         }
     }
 
     .grid-item
     {
         overflow: hidden;
-        float: left;
-        width: calc(100% * 25 / 100);
-        padding: 0 15px;
         margin-bottom: 30px;
-
-        @media screen and (min-width: $screen-lg-min) and (max-width: $screen-lg) {
-            width: calc(100% * 33 / 100);
-        }
-
-        @media screen and (max-width: $screen-md-max) {
-            width: calc(100% * 50 / 100);
-        }
 
         &.width-2
         {
-            width: calc(100% * 50 / 100);
+            width: 50%;
 
-            @media screen and (min-width: $screen-lg-min) and (max-width: $screen-lg) {
-                width: calc(100% * 66 / 100);
-            }
-
-            @media screen and (max-width: $screen-md-max) {
-                width: calc(100% * 50 / 100);
+            @media screen and (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+                width: 66.666%;
             }
         }
     }
@@ -92,12 +77,14 @@
             @include border-radius(5px);
             overflow: hidden;
             position: relative;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
             background-color: white;
             width: 100%;
+            box-shadow: 0 2px 20px -5px rgba(0,0,0,0.3);
 
             &.black
             {
+                border-bottom: 2px solid #212121;
+
                 .category {
                     background-image: linear-gradient(to right, #4b4b4b, #272727);
                 }
@@ -109,6 +96,8 @@
 
             &.blue
             {
+                border-bottom: 2px solid #3e68ac;
+
                 .category {
                     background-image: linear-gradient(to right, #4885e7, #569ceb);
                 }
@@ -120,6 +109,8 @@
 
             &.green
             {
+                border-bottom: 2px solid #41752c;
+
                 .category {
                     background-image: linear-gradient(to right, #61d432, #429321);
                 }
@@ -131,6 +122,8 @@
 
             &.red
             {
+                border-bottom: 2px solid #b22b41;
+
                 .category {
                     background-image: linear-gradient(to right, #ff5250, #eb3351);
                 }
@@ -142,6 +135,8 @@
 
             &.yellow
             {
+                border-bottom: 2px solid #bf712c;
+
                 .category {
                     background-image: linear-gradient(to right, #ffbf38, #ff8b24);
                 }
