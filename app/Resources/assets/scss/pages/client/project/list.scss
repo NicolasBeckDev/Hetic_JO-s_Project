@@ -55,7 +55,6 @@
 
     .grid-item
     {
-        overflow: hidden;
         margin-bottom: 30px;
 
         &.width-2
@@ -76,6 +75,7 @@
         {
             @include border-radius(5px);
             overflow: hidden;
+            transition: all 0.2s ease-in-out;
             position: relative;
             background-color: white;
             width: 100%;
@@ -144,6 +144,11 @@
                 .color-line {
                     @include linear-gradient(to right, #ffbf38, #ff8b24);
                 }
+            }
+
+            &:hover
+            {
+                transform: scale(1.02);
             }
 
             a

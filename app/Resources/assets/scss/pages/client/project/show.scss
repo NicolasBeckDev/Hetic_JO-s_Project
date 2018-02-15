@@ -8,6 +8,7 @@
     {
         width: 90%;
         float: left;
+        padding: 40px;
 
         &.black
         {
@@ -15,8 +16,11 @@
                 background-image: linear-gradient(to right, #4b4b4b, #272727);
             }
 
-            .color-line {
-                @include linear-gradient(to right, #4b4b4b, #272727);
+            .switch-container.active
+            {
+                .color-line {
+                    @include linear-gradient(to right, #4b4b4b, #272727);
+                }
             }
         }
 
@@ -26,8 +30,11 @@
                 background-image: linear-gradient(to right, #4885e7, #569ceb);
             }
 
-            .color-line {
-                @include linear-gradient(to right, #4885e7, #569ceb);
+            .switch-container.active
+            {
+                .color-line {
+                    @include linear-gradient(to right, #4885e7, #569ceb);
+                }
             }
         }
 
@@ -37,8 +44,11 @@
                 background-image: linear-gradient(to right, #61d432, #429321);
             }
 
-            .color-line {
-                @include linear-gradient(to right, #61d432, #429321);
+            .switch-container.active
+            {
+                .color-line {
+                    @include linear-gradient(to right, #61d432, #429321);
+                }
             }
         }
 
@@ -48,8 +58,11 @@
                 background-image: linear-gradient(to right, #ff5250, #eb3351);
             }
 
-            .color-line {
-                @include linear-gradient(to right, #ff5250, #eb3351);
+            .switch-container.active
+            {
+                .color-line {
+                    @include linear-gradient(to right, #ff5250, #eb3351);
+                }
             }
         }
 
@@ -59,97 +72,127 @@
                 background-image: linear-gradient(to right, #ffbf38, #ff8b24);
             }
 
-            .color-line {
-                @include linear-gradient(to right, #ffbf38, #ff8b24);
+            .switch-container.active
+            {
+                .color-line {
+                    @include linear-gradient(to right, #ffbf38, #ff8b24);
+                }
             }
         }
 
-        .category-container
+        .header-information
         {
-            margin-bottom: 10px;
+            margin-bottom: 50px;
 
-            .category
+            .category-container
             {
-                @extend .proxima-bold;
-                font-size: 25px;
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-        }
+                margin-bottom: 10px;
 
-        .name-container
-        {
-            margin-bottom: 10px;
-
-            .name
-            {
-                @extend .proxima-bold;
-                font-size: 35px;
-                color: $light-black;
-            }
-        }
-
-        .district-container
-        {
-            margin-bottom: 25px;
-
-            .district
-            {
-                @extend .proxima-regular;
-                font-size: 15px;
-                color: #9b9b9b;
-            }
-        }
-
-        .switch-text-wrapper
-        {
-            margin-bottom: 15px;
-
-            .switch
-            {
-                @extend .proxima-bold;
-                position: relative;
-                font-size: 18px;
-                color: #999999;
-                cursor: pointer;
-
-                &.active
+                .category
                 {
-                    color: $light-black;
+                    @extend .proxima-bold;
+                    font-size: 25px;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+            }
 
-                    &::after
+            .name-container
+            {
+                margin-bottom: 10px;
+
+                .name
+                {
+                    @extend .proxima-bold;
+                    font-size: 35px;
+                    color: $light-black;
+                }
+            }
+
+            .district-container
+            {
+                .district
+                {
+                    @extend .proxima-regular;
+                    font-size: 15px;
+                    color: #9b9b9b;
+                }
+            }
+        }
+
+        .detail-information
+        {
+            margin-bottom: 50px;
+
+            .switch-text-wrapper
+            {
+                margin-bottom: 25px;
+
+                .switch-container
+                {
+                    position: relative;
+                    display: inline-block;
+
+                    &:first-child
                     {
-                        content: '';
+                        margin-right: 100px;
+                    }
+
+                    &.active
+                    {
+                        .switch
+                        {
+                            color: $light-black;
+                        }
+                    }
+
+                    &:not(.active)
+                    {
+                        .switch:hover
+                        {
+                            color: #777777;
+                        }
+
+                        .color-line
+                        {
+                            background: none;
+                        }
+                    }
+
+                    .switch
+                    {
+                        @extend .proxima-bold;
                         position: absolute;
-                        bottom: 0;
+                        font-size: 18px;
+                        color: #999999;
+                        cursor: pointer;
+                        top: 0;
                         left: 0;
-                        height: 10px;
-                        width: 40px;
                         transform: translateY(-50%);
+                        transition: color .2s ease-in-out;
+                    }
+
+                    .color-line
+                    {
+                        height: 12px;
+                        width: 70px;
                     }
                 }
-
-                &:first-child
-                {
-                    margin-right: 50px;
-                }
             }
-        }
 
-        .text-wrapper
-        {
-            margin-bottom: 25px;
-
-            p
+            .text-wrapper
             {
-                @extend .proxima-regular;
-                font-size: 15px;
-                line-height: 16px;
-
-                &:not(.active)
+                p
                 {
-                    display: none;
+                    @extend .proxima-regular;
+                    font-size: 15px;
+                    line-height: 25px;
+
+                    &:not(.active)
+                    {
+                        display: none;
+                    }
                 }
             }
         }
@@ -158,6 +201,7 @@
         {
             @extend .proxima-regular;
             display: inline-block;
+            margin-bottom: 50px;
 
             > div
             {
