@@ -6,12 +6,17 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\District;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\User;
+use AppBundle\Form\LocationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Project controller.
@@ -73,7 +78,7 @@ class ProjectController extends Controller
     /**
      * Finds and displays a project entity.
      *
-     * @Route("/{id}", name="project_show")
+     * @Route("show/{id}", name="project_show")
      * @Method({"GET", "POST"})
      * @param Project $project
      * @param Request $request
@@ -126,7 +131,7 @@ class ProjectController extends Controller
     /**
      * Displays a form to edit an existing project entity.
      *
-     * @Route("/{id}/edit", name="project_edit")
+     * @Route("/edit/{id}", name="project_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Project $project
@@ -196,8 +201,19 @@ class ProjectController extends Controller
      */
     public function locationAction()
     {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object;
+        });
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        $projects = $this->getDoctrine()->getRepository(Project::class)->findAll();
+
         return $this->render('@Client/project/location.html.twig', [
-            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
+            'form' => $this->createForm(LocationType::class)->createView(),
+            'projects' => $serializer->serialize($projects, 'json')
             ]);
     }
 }
