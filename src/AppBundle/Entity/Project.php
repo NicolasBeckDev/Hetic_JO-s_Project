@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="project")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjectRepository")
  */
-class Project
+class Project implements \JsonSerializable
 {
 
     public function __construct() {
@@ -94,7 +94,7 @@ class Project
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdProject")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdProjects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $creator;
@@ -454,5 +454,19 @@ class Project
     public function getSubPictures()
     {
         return $this->subPictures;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return[
+            'name' => $this->name
+        ];
     }
 }

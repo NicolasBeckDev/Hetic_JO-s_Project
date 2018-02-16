@@ -1,0 +1,260 @@
+{% extends "@Admin/project/layout.html.twig" %}
+
+{% block body %}
+
+    <div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+    <div id="map" style="height: 300px"></div>
+
+    <div id="projectsHandler"></div>
+
+    </body>
+
+
+{% endblock %}
+
+{% block addJavascripts %}
+    <script>
+
+        //INIT
+        projects = {{ projects|raw }};
+
+        (function() {
+            showProjects(projects)
+        })();
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 48.866667, lng: 2.333333},
+                zoom: 11
+            });
+
+            infowindow = new google.maps.InfoWindow({map: window.map});
+
+            marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+            marker.setIcon(/** @type {google.maps.Icon} */({
+                url: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(35, 35)
+            }));
+
+            geocoder = new google.maps.Geocoder;
+
+            autocomplete = new google.maps.places.Autocomplete(document.getElementById('{{ form.address.vars.id }}'));
+            autocomplete.bindTo('bounds', map);
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Aucun détail disponible pour la saisie: '" + place.name + "'");
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                    map.setZoom(15);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15);
+                }
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].long_name || ''),
+                        (' '),
+                        (place.address_components[1] && place.address_components[1].long_name || ''),
+                        (', '),
+                        (place.address_components[2] && place.address_components[2].long_name || ''),
+                        (', '),
+                        (place.address_components[5] && place.address_components[5].long_name || '')
+                    ].join('');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+            });
+        }
+
+        // LOCATION
+            document.getElementById('{{ form.location.vars.id }}').addEventListener("click", function () {
+
+            infowindow.close();
+            marker.setVisible(false);
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    infowindow.setPosition(pos);
+                    map.setCenter(pos);
+                    map.setZoom(15);
+
+
+                    var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+                    geocoder.geocode({'location': latlng}, function(results, status) {
+                        if (status === 'OK') {
+                            if (results[1]) {
+
+                                marker.setPosition(latlng);
+                                address = [
+                                    (results[0].address_components[0].long_name || ''),
+                                    (' '),
+                                    (results[0].address_components[1].long_name || ''),
+                                    (', '),
+                                    (results[0].address_components[2].long_name || ''),
+                                    (', '),
+                                    (results[0].address_components[5].long_name || '')
+                                ].join('');
+
+                                infowindow.setContent('<div><strong>' + results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name + '</strong><br>' + address);
+                                infowindow.open(map, marker);
+                                marker.setVisible(true);
+
+                                document.getElementById('{{ form.address.vars.id }}').value = address
+                            } else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+
+
+                }, function() {
+                    handleLocationError(true, infowindow, map.getCenter());
+                });
+
+            } else {
+                handleLocationError(false, infowindow, map.getCenter());
+            }
+
+        });
+
+        function handleLocationError(browserHasGeolocation, infowindow, pos) {
+            infowindow.setPosition(pos);
+            infowindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+        }
+
+        function distanceCalc(project) {
+            const FromLoc=[];
+            const ToLoc=[];
+            const addressInputValue = document.getElementById('{{ form.address.vars.id }}').value;
+
+            window.geocoder.geocode({'address': addressInputValue}, function(results, status) {
+                if (status === 'OK') {
+                    FromLoc[0]=results[0].geometry.location.lat();
+                    FromLoc[1]=results[0].geometry.location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+                window.geocoder.geocode({'address': project.address}, function(results, status) {
+                    if (status === 'OK') {
+                        ToLoc[0]=results[0].geometry.location.lat();
+                        ToLoc[1]=results[0].geometry.location.lng();
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                    let range = document.getElementById('{{ form.range.vars.id }}').value;
+                    let dist = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(FromLoc[0],FromLoc[1]), new google.maps.LatLng(ToLoc[0],ToLoc[1]));
+                    console.log(dist);
+                    if(dist <= (range*1000)){
+                        showProject(project);
+                    }
+                });
+            });
+        }
+
+        document.getElementById('{{ form.search.vars.id }}').addEventListener("click", function () {
+            let p = window.projects;
+            projectsHandlerCleaner();
+            p = categorySorter(p);
+            p = statusSorter(p);
+            rangeSorter(p);
+        });
+
+        function projectsHandlerCleaner() {
+            document.getElementById('projectsHandler').innerText = ""
+        }
+
+        function categorySorter(projects) {
+            let categories = [...document.getElementById('{{ form.category.vars.id }}').childNodes].filter(option => option.selected).map(option => option.value);
+
+            if (typeof categories !== 'undefined' && categories.length > 0) {
+                return projects.filter( project => categories.includes(project.category.id.toString()));
+            }else{
+                return projects;
+            }
+        }
+
+        function statusSorter(projects) {
+            let status = [...document.getElementById('{{ form.status.vars.id }}').childNodes].filter(option => option.selected).map(option => option.value);
+
+            if (typeof status !== 'undefined' && status.length > 0) {
+                let pr = [];
+
+                projects.forEach( function (project) {
+                    // En préparation
+                    if(project.inProgress && new Date(project.date.timestamp*1000) > new Date() && status.includes("1")){
+                        pr.push(project);
+                    }
+                    // En cours
+                    else if(project.inProgress && new Date(project.date.timestamp*1000) < new Date() && status.includes("2")){
+                        pr.push(project);
+                    }
+                    // Fini
+                    else if(!project.inProgress && new Date(project.date.timestamp*1000) < new Date() && status.includes("3")){
+                        pr.push(project);
+                    }
+                });
+                return pr
+            }else{
+                return projects
+            }
+        }
+        
+        function rangeSorter(projects) {
+
+            if( document.getElementById('{{ form.address.vars.id }}').value!== ""){
+                projects.forEach(function (project) {
+                    distanceCalc(project);
+                });
+            }else{
+                showProjects(projects);
+            }
+        }
+
+        function showProjects(projects) {
+            if (typeof projects !== 'undefined' && projects.length > 0) {
+                projects.forEach(function (project) {
+                    showProject(project);
+                })
+            }
+        }
+
+        function showProject(project) {
+            document.getElementById('projectsHandler').innerHTML += project.name;
+        }
+
+
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&libraries=places,geometry&callback=initMap"></script>
+{% endblock %}

@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Service\FileUploader;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 

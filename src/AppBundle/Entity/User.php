@@ -19,7 +19,7 @@ class User implements UserInterface, \Serializable
     public function __construct() {
         $this->followedProjects = new ArrayCollection();
         $this->participatingProject = new ArrayCollection();
-        $this->createdProject = new ArrayCollection();
+        $this->createdProjects = new ArrayCollection();
     }
 
     /**
@@ -79,7 +79,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
      */
-    private $createdProject;
+    private $createdProjects;
 
     /**
      * @ORM\Column(type="array", nullable=false)
@@ -196,8 +196,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set profilePicture
      *
-     * @param string $profilePicture
-     *
+     * @param $picture
      * @return User
      */
     public function setPicture($picture)
@@ -294,7 +293,7 @@ class User implements UserInterface, \Serializable
      */
     public function addCreatedProject(Project $createdProject)
     {
-        $this->createdProject[] = $createdProject;
+        $this->createdProjects[] = $createdProject;
 
         return $this;
     }
@@ -306,17 +305,17 @@ class User implements UserInterface, \Serializable
      */
     public function removeCreatedProject(Project $createdProject)
     {
-        $this->createdProject->removeElement($createdProject);
+        $this->createdProjects->removeElement($createdProject);
     }
 
     /**
-     * Get createdProject
+     * Get createdProjects
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCreatedProject()
+    public function getCreatedProjects()
     {
-        return $this->createdProject;
+        return $this->createdProjects;
     }
 
     /**
