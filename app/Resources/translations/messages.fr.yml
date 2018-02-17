@@ -1,22 +1,15 @@
 app:
-    name: Parisy.
+    name: Tous Paris
     layout:
         header:
             connection: "Connexion / Inscription"
         menu:
             onglets:
-                1:
-                    name: Démarrer un projet
-                    path: projet/creation
-                2:
-                    name: Accueil
-                    path: accueil
-                3:
-                    name: A propos
-                    path: a-propos
-                4:
-                    name: Projets finis
-                    path: projet/fini
+                home: Accueil
+                listing_projects: Liste des projets
+                near_projects: Projets autour de moi
+                about: A propos
+                paris_2024: Paris 2024
     page:
         client:
             home:

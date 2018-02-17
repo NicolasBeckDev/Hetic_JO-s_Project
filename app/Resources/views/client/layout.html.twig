@@ -10,6 +10,7 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('build/global.css') }}">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         {% block addStylesheets %}{% endblock %}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -23,10 +24,15 @@
 </head>
 <body>
 {% block body %}
+    {% block variables %}
+        {{ app.session.set('headerBackground', 'transparent') }}
+    {% endblock %}
+
     {% include 'layout/header.html.twig' %}
-    {% include 'layout/menu.html.twig' %}
+
     {% block content %}{% endblock %}
 {% endblock %}
+
 {% block javascripts %}
     <script src="{{ asset('build/app.js') }}"></script>
     {% block addJavascripts %}{% endblock %}

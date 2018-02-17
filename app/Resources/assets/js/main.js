@@ -1,16 +1,42 @@
-const $ = require('jquery').noConflict(true);
+const $ = require('jquery');
 
 require('bootstrap-sass');
+
+require('../img/pages/admin/project/create/arrow.png');
+require('../img/pages/admin/project/create/delete.png');
+require('../img/pages/admin/project/create/validate.png');
 
 require('../img/background-homepage.jpg');
 require('../img/connexion.png');
 require('../img/inscription.png');
 
+require('./lib/jquery-nice-select/jquery.nice-select.min')();
+require('./lib/picker/picker')();
+require('./lib/picker/picker.date')();
+require('./lib/picker/picker.time')();
+require('./lib/owl-carousel/owl.carousel.min')();
+
 require('./layout/header')();
 require('./pages/form/form-widget')();
+require('./pages/admin/project/create/create')();
 require('./pages/client/project/show/display-text')();
 
 $(function () {
+
+    $(document).ready(function(){
+        $(".owl-carousel").owlCarousel({
+            items : 1,
+            mouseDrag : false,
+            nav: true,
+            rewind: true,
+            lazyLoad: true,
+            dots: false,
+            navText: [
+                "<i class='fa fa-chevron-left'></i>",
+                "<i class='fa fa-chevron-right'></i>"
+            ]
+        });
+    });
 
     function addRandomSizeClass(project)
     {

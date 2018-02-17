@@ -1,5 +1,9 @@
 {% extends "@Client/layout.html.twig" %}
 
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
+
 {% block content %}
     <div class="project-list-content">
         <div class="filter-wrapper">
@@ -19,7 +23,7 @@
                             <a href="{{ path('project_show', { 'id': project.id }) }}">
                                 <div class="image-container">
                                     <div class="image-positioner">
-                                        <img src="{{ asset('uploads/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
+                                        <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
                                     </div>
                                 </div>
 

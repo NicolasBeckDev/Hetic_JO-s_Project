@@ -1,25 +1,28 @@
 .project-show-content
 {
+    $content-padding: 40px;
+    $content-width: 90%;
+
     width: 100%;
-    margin-top: $header-height + $header-padding * 2;
+    margin-top: $header-height;
     display: inline-block;
 
     .project-container
     {
-        width: 90%;
+        width: $content-width;
         float: left;
-        padding: 40px;
+        padding: $content-padding;
 
         &.black
         {
             .category, .number {
-                background-image: linear-gradient(to right, #4b4b4b, #272727);
+                background-image: linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
             }
 
             .switch-container.active
             {
                 .color-line {
-                    @include linear-gradient(to right, #4b4b4b, #272727);
+                    @include linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
                 }
             }
         }
@@ -27,13 +30,13 @@
         &.blue
         {
             .category, .number {
-                background-image: linear-gradient(to right, #4885e7, #569ceb);
+                background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
             }
 
             .switch-container.active
             {
                 .color-line {
-                    @include linear-gradient(to right, #4885e7, #569ceb);
+                    @include linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
                 }
             }
         }
@@ -41,13 +44,13 @@
         &.green
         {
             .category, .number {
-                background-image: linear-gradient(to right, #61d432, #429321);
+                background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
             }
 
             .switch-container.active
             {
                 .color-line {
-                    @include linear-gradient(to right, #61d432, #429321);
+                    @include linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
                 }
             }
         }
@@ -55,13 +58,13 @@
         &.red
         {
             .category, .number {
-                background-image: linear-gradient(to right, #ff5250, #eb3351);
+                background-image: linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
             }
 
             .switch-container.active
             {
                 .color-line {
-                    @include linear-gradient(to right, #ff5250, #eb3351);
+                    @include linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
                 }
             }
         }
@@ -69,13 +72,79 @@
         &.yellow
         {
             .category, .number {
-                background-image: linear-gradient(to right, #ffbf38, #ff8b24);
+                background-image: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
             }
 
             .switch-container.active
             {
                 .color-line {
-                    @include linear-gradient(to right, #ffbf38, #ff8b24);
+                    @include linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
+                }
+            }
+        }
+
+        > .row > [class^='col-']
+        {
+            &:first-child
+            {
+                position: fixed;
+                width: calc(#{$content-width} * 0.5 - (#{$content-padding} - 15px));
+            }
+
+            &:last-child
+            {
+                float: right;
+            }
+        }
+
+
+        .carousel-container
+        {
+            height: calc(100vh - (#{$header-height} + #{$content-padding} * 2));
+            width: 100%;
+
+            .owl-carousel
+            {
+                height: 100%;
+                background-color: white;
+
+                .owl-stage-outer
+                {
+                    height: 100%;
+
+                    .owl-stage
+                    {
+                        height: 100%;
+
+                        .owl-item
+                        {
+                            min-height: 100%;
+
+                            img
+                            {
+                                max-width: 100%;
+                                width: auto;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                            }
+                        }
+                    }
+                }
+
+                .owl-nav
+                {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    background-color: white;
+
+                    div
+                    {
+                        float: left;
+                        padding: 10px 15px;
+                    }
                 }
             }
         }

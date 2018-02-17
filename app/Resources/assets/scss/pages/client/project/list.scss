@@ -2,7 +2,7 @@
 {
     padding: 15px 35px;
     width: 100%;
-    margin-top: $header-height + $header-padding * 2;
+    margin-top: $header-height;
 
     .filter-wrapper
     {
@@ -83,66 +83,66 @@
 
             &.black
             {
-                border-bottom: 2px solid #212121;
+                border-bottom: 2px solid $border-black;
 
                 .category {
-                    background-image: linear-gradient(to right, #4b4b4b, #272727);
+                    background-image: linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
                 }
 
                 .color-line {
-                    @include linear-gradient(to right, #4b4b4b, #272727);
+                    @include linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
                 }
             }
 
             &.blue
             {
-                border-bottom: 2px solid #3e68ac;
+                border-bottom: 2px solid $border-blue;
 
                 .category {
-                    background-image: linear-gradient(to right, #4885e7, #569ceb);
+                    background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
                 }
 
                 .color-line {
-                    @include linear-gradient(to right, #4885e7, #569ceb);
+                    @include linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
                 }
             }
 
             &.green
             {
-                border-bottom: 2px solid #41752c;
+                border-bottom: 2px solid $border-green;
 
                 .category {
-                    background-image: linear-gradient(to right, #61d432, #429321);
+                    background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
                 }
 
                 .color-line {
-                    @include linear-gradient(to right, #61d432, #429321);
+                    @include linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
                 }
             }
 
             &.red
             {
-                border-bottom: 2px solid #b22b41;
+                border-bottom: 2px solid $border-red;
 
                 .category {
-                    background-image: linear-gradient(to right, #ff5250, #eb3351);
+                    background-image: linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
                 }
 
                 .color-line {
-                    @include linear-gradient(to right, #ff5250, #eb3351);
+                    @include linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
                 }
             }
 
             &.yellow
             {
-                border-bottom: 2px solid #bf712c;
+                border-bottom: 2px solid $border-yellow;
 
                 .category {
-                    background-image: linear-gradient(to right, #ffbf38, #ff8b24);
+                    background-image: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
                 }
 
                 .color-line {
-                    @include linear-gradient(to right, #ffbf38, #ff8b24);
+                    @include linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
                 }
             }
 

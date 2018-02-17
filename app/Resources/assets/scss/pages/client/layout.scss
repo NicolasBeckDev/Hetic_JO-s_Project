@@ -16,65 +16,65 @@ html, body
         border: none;
 
         &.black {
-            @include linear-gradient(to right, #4b4b4b, #272727);
+            @include linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
             position: relative;
 
             &:not(.active):hover
             {
-                @include border-gradient(#4b4b4b, #272727, 1px);
-                background: linear-gradient(to right, #4b4b4b, #272727) !important;
+                @include border-gradient($gradient-light-black, $gradient-dark-black, 1px);
+                background: linear-gradient(to right, $gradient-light-black, $gradient-dark-black) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent;
             }
         }
 
         &.blue {
-            @include linear-gradient(to right, #4885e7, #569ceb);
+            @include linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
             position: relative;
 
             &:not(.active):hover
             {
-                @include border-gradient(#4885e7, #569ceb, 1px);
-                background: linear-gradient(to right, #4885e7, #569ceb) !important;
+                @include border-gradient($gradient-light-blue, $gradient-dark-blue, 1px);
+                background: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent;
             }
         }
 
         &.green {
-            @include linear-gradient(to right, #61d432, #429321);
+            @include linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
             position: relative;
 
             &:not(.active):hover
             {
-                @include border-gradient(#61d432, #429321, 1px);
-                background: linear-gradient(to right, #61d432, #429321) !important;
+                @include border-gradient($gradient-light-green, $gradient-dark-green, 1px);
+                background: linear-gradient(to right, $gradient-light-green, $gradient-dark-green) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent;
             }
         }
 
         &.red {
-            @include linear-gradient(to right, #ff5250, #eb3351);
+            @include linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
             position: relative;
 
             &:not(.active):hover
             {
-                @include border-gradient(#ff5250, #eb3351, 1px);
-                background: linear-gradient(to right, #ff5250, #eb3351) !important;
+                @include border-gradient($gradient-light-red, $gradient-dark-red, 1px);
+                background: linear-gradient(to right, $gradient-light-red, $gradient-dark-red) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent;
             }
         }
 
         &.yellow {
-            @include linear-gradient(to right, #ffbf38, #ff8b24);
+            @include linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
             position: relative;
 
             &:not(.active):hover
             {
-                @include border-gradient(#ffbf38, #ff8b24, 1px);
-                background: linear-gradient(to right, #ffbf38, #ff8b24) !important;
+                @include border-gradient($gradient-light-yellow, $gradient-dark-yellow, 1px);
+                background: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent;
             }

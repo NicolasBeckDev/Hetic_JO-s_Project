@@ -5,23 +5,68 @@ $futuraPath: '../fonts/Futura/';
 
 @font-face {
     font-family: 'Proxima Nova Bold';
-    src: url($proximaPath + 'proxima-bold.eot');
-    src: url($proximaPath + 'proxima-bold.eot?#iefix') format('embedded-opentype'),
-    url($proximaPath + 'proxima-bold.woff2') format('woff2'),
-    url($proximaPath + 'proxima-bold.woff') format('woff'),
-    url($proximaPath + 'proxima-bold.ttf') format('truetype'),
-    url($proximaPath + 'proxima-bold.svg#proxima_nova_altbold') format('svg');
+    src: url($proximaPath + 'ProximaNova-Bold.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'ProximaNova-Bold.woff2') format('woff2'),
+    url($proximaPath + 'ProximaNova-Bold.woff') format('woff'),
+    url($proximaPath + 'ProximaNova-Bold.ttf') format('truetype'),
+    url($proximaPath + 'ProximaNova-Bold.svg#ProximaNova-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova Semibold';
+    src: url($proximaPath + 'ProximaNova-Semibold.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'ProximaNova-Semibold.woff2') format('woff2'),
+    url($proximaPath + 'ProximaNova-Semibold.woff') format('woff'),
+    url($proximaPath + 'ProximaNova-Semibold.ttf') format('truetype'),
+    url($proximaPath + 'ProximaNova-Semibold.svg#ProximaNova-Semibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova Black';
+    src: url($proximaPath + 'ProximaNova-Black.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'ProximaNova-Black.woff2') format('woff2'),
+    url($proximaPath + 'ProximaNova-Black.woff') format('woff'),
+    url($proximaPath + 'ProximaNova-Black.ttf') format('truetype'),
+    url($proximaPath + 'ProximaNova-Black.svg#ProximaNova-Black') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Proxima Nova Regular';
-    src: url($proximaPath + 'proxima-regular.eot');
-    src: url($proximaPath + 'proxima-regular.eot?#iefix') format('embedded-opentype'),
-    url($proximaPath + 'proxima-regular.woff') format('woff'),
-    url($proximaPath + 'proxima-regular.ttf') format('truetype'),
-    url($proximaPath + 'proxima-regular.svg#proxima_nova_altregular') format('svg');
+    src: url($proximaPath + 'ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'ProximaNova-Regular.woff2') format('woff2'),
+    url($proximaPath + 'ProximaNova-Regular.woff') format('woff'),
+    url($proximaPath + 'ProximaNova-Regular.ttf') format('truetype'),
+    url($proximaPath + 'ProximaNova-Regular.svg#ProximaNova-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova Light';
+    src: url($proximaPath + 'ProximaNova-Light.eot?#iefix') format('embedded-opentype'),
+    url($proximaPath + 'ProximaNova-Light.woff2') format('woff2'),
+    url($proximaPath + 'ProximaNova-Light.woff') format('woff'),
+    url($proximaPath + 'ProximaNova-Light.ttf') format('truetype'),
+    url($proximaPath + 'ProximaNova-Light.svg#ProximaNova-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/** Futura **/
+
+@font-face {
+    font-family: 'Futura Bold';
+    src: url($futuraPath + 'Futura-Bold.eot?#iefix') format('embedded-opentype'),
+    url($futuraPath + 'Futura-Bold.woff2') format('woff2'),
+    url($futuraPath + 'Futura-Bold.woff') format('woff'),
+    url($futuraPath + 'Futura-Bold.ttf') format('truetype'),
+    url($futuraPath + 'Futura-Bold.svg#Futura-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -34,15 +79,6 @@ $futuraPath: '../fonts/Futura/';
 .proxima-regular
 {
     font-family: 'Proxima Nova Regular', sans-serif;
-}
-
-/** Futura **/
-
-@font-face {
-    font-family: 'Futura Bold';
-    src: url($futuraPath + 'futura-bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 .futura-bold

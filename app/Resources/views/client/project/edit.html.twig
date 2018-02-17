@@ -1,7 +1,7 @@
 {% extends "@Admin/project/layout.html.twig" %}
 
 {% block body %}
-    <h1>Project edit</h1>
+    {#<h1>Project edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -17,5 +17,115 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
-    </ul>
+    </ul>#}
+
+    <form action="addremove.php" id="projectPage" name="projectPage" method="post" enctype="multipart/form-data">
+        <div class="menuForm">
+            <div class="container">
+                <div class="left">
+                    <a href="#" class="blockButton goBack">
+                        <span><img src="src/img/arrow.png" alt=""></span>
+                        <p>Retour au listing produits</p>
+                    </a>
+                </div>
+                <div class="right">
+                    <div class="statutProjet">
+                        <input type="checkbox" id="switch" />
+                        <label for="switch">Toggle</label>
+                        <p class="enCours">En cours</p>
+                        <p  class="finis no">Finis</p>
+                    </div>
+                    <button type="submit" class="blockButton validate">
+                        <p>Enregister le projet</p>
+                        <span><img src="src/img/validate.png" alt=""></span>
+                    </button>
+                    <button type="button" class="blockButton delete">
+                        <p>Supprimer le projet</p>
+                        <span><img src="src/img/delete.png" alt=""></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="containerForm">
+            <div class="left">
+                <div class="blockInput file">
+                    <label for="imgProjet">Ajouter une image à la une
+                        <input type="file" id="imgProjet" name="imgProjet" accept="image/*">
+                    </label>
+                    <img class="imgFirstProject" src="#" alt="Image à la une">
+                    <span class="modif"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="remove">&#10005;</span>
+                </div>
+                <div class="blockInput multipleFile">
+                    <div class="addFiles">
+                        <p>Ajouter d’autre images <span></span>
+                    </div>
+                    <div class="containerOtherFile"></div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="blockInput titreProjet">
+                    <label for="titreProjet">Titre du projet</label>
+                    <input type="text" id="titreProjet" name="titreProjet" placeholder="Ex : Amélioration du métro parisien" required>
+                </div>
+                <div class="block2x">
+                    <div class="blockInput arrondissement noContain">
+                        <label for="arrondissement">Arrondissement</label>
+                        <select name=arrondissement" id="arrondissement" required>
+                            <option value="Paris 20eme" disabled selected data-display="Paris 20eme">Paris 20eme</option>
+                            <option value="Paris 1er">Paris 1er</option>
+                            <option value="Paris 2eme">Paris 2eme</option>
+                            <option value="Paris 3eme">Paris 3eme</option>
+                            <option value="Paris 4eme">Paris 4eme</option>
+                            <option value="Paris 5eme">Paris 5eme</option>
+                            <option value="Paris 6eme">Paris 6eme</option>
+                            <option value="Paris 7eme">Paris 7eme</option>
+                            <option value="Paris 8eme">Paris 8eme</option>
+                            <option value="Paris 9eme">Paris 9eme</option>
+                            <option value="Paris 10eme">Paris 10eme</option>
+                            <option value="Paris 11eme">Paris 11eme</option>
+                            <option value="Paris 12eme">Paris 12eme</option>
+                            <option value="Paris 13eme">Paris 13eme</option>
+                            <option value="Paris 14eme">Paris 14eme</option>
+                            <option value="Paris 15eme">Paris 15eme</option>
+                            <option value="Paris 16eme">Paris 16eme</option>
+                            <option value="Paris 17eme">Paris 17eme</option>
+                            <option value="Paris 18eme">Paris 18eme</option>
+                            <option value="Paris 19eme">Paris 19eme</option>
+                            <option value="Paris 20eme">Paris 20eme</option>
+                        </select>
+                    </div>
+                    <div class="blockInput date ">
+                        <label for="dateFirst">Date de début du projet</label>
+                        <input type="text" id="dateFirst" name="dateFirst" required placeholder="Ex : 02/08/2024" >
+                    </div>
+                </div>
+                <div class="block2x">
+                    <div class="blockInput categorie noContain">
+                        <label for="categorie">Catégorie du projet</label>
+                        <select name=categorie" id="categorie" required>
+                            <option value="Mobilité & transport" disabled data-display="Mobilité & transport" selected>Mobilité & transport</option>
+                            <option value="Environnement">Environnement</option>
+                            <option value="Solidaire & citoyen">Solidaire & citoyen</option>
+                            <option value="Mobilité & transport">Mobilité & transport</option>
+                            <option value="Urbanisme">Urbanisme</option>
+                            <option value="Technologies">Technologies</option>
+                        </select>
+                    </div>
+                    <div class="blockInput">
+                        <label for="adresse">Adresse du projet</label>
+                        <input type="text" id="adresse" name="adresse" required placeholder="Ex : 24 rue du buisson Paris 75012" >
+                    </div>
+                </div>
+                <div class="blockInput">
+                    <label for="objectif">Objectif du projet</label>
+                    <textarea name="objectif" id="objectif" cols="30" rows="3" required placeholder="Ex : Améliorer l'accueil ainsi que la propreté des stations de métro" ></textarea>
+                </div>
+                <div class="blockInput">
+                    <label for="description">Description du projet</label>
+                    <textarea name="objectif" id="description" cols="30" rows="6" required placeholder="Ex : Dans le cadre des JO, nous voulons améliorer les conditions de transport des visiteurs" ></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
 {% endblock %}

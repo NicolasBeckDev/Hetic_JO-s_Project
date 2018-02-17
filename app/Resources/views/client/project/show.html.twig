@@ -1,12 +1,21 @@
 {% extends "@Client/layout.html.twig" %}
 
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
+
 {% block content %}
     <div class="project-show-content">
         <div class="project-container {{ project.category.color }}">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    <div class="owl-carousel">
-
+                    <div class="carousel-container">
+                        <div class="owl-carousel">
+                            <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
+                            {% for picture in project.subPictures %}
+                                <img src="{{ asset('uploads/project/picture/' ~ picture) }}" />
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
 

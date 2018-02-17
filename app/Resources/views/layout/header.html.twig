@@ -1,23 +1,125 @@
-<header>
-    <div class="header-wrapper">
-        <div class="media">
-            <div class="media-left media-middle">
-                <div class="menu-icon">
-                    <span class="line top"></span>
-                    <span class="line middle"></span>
-                    <span class="line bottom"></span>
+<header class="{{ app.session.get('headerBackground') }}">
+    <div class="header-container">
+        <div class="menu-desktop">
+            <div class="left">
+                <div class="content">
+                    <div class="menuBurger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <a href="{{ path('homepage') }}" class="title">{{ 'app.name'|trans }}</a>
+                </div>
+            </div>
+            <div class="right connect">
+                <a href="#" >Connexion / inscription</a>
+
+                <div class="containerImg">
+                    <div class="content">
+                        <div class="imageProfil">
+                            <img src="{{ asset('build/images/connexion.png') }}" alt="">
+                        </div>
+
+                        <p>William Nisole</p>
+                    </div>
+                </div>
+
+                <div class="menuUser">
+                    <div class="top">
+                        <p>William Nisole</p>
+                        <p>william.nisole@gmail.com</p>
+                    </div>
+
+                    <div class="bottom">
+                        <p>Mon profil</p>
+                        <p>Mes projets</p>
+                        <p>Déconnexion</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="media-body">
-                <div class="logo-wrapper">
-                    <span>{{ 'app.name'|trans }}</span>
+            <div class="menuComplet">
+                <div class="containerMenu">
+                    <ul>
+                        <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.home'|trans }}</a></li>
+                        <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.listing_projects'|trans }}</a></li>
+                        <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.near_projects'|trans }}</a></li>
+                        <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
+                        <li><a href="http://www.paris2024.org/fr">{{ 'app.layout.menu.onglets.paris_2024'|trans }}</a></li>
+                    </ul>
+
+                    <div class="social">
+                        <div>
+                            <span><a href="#"><i class="fab fa-facebook-f"></i></a></span>
+                            <span><a href="#"><i class="fab fa-linkedin-in"></i></a></span>
+                            <span><a href="#"><i class="fab fa-twitter"></i></a></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="connection-button-wrapper">
-            <a href="{{ path('login') }}">{{ 'app.layout.header.connection'|trans }}</a>
+        <div class="menu-mobile">
+            <div class="menuBurger">
+                <div class="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="titreMenu">
+                    <p class="menu">Menu</p>
+                    <p class="filtres">Filtres</p>
+                </div>
+            </div>
+
+            <div>
+                <a href="{{ path('homepage') }}" class="title">{{ 'app.name'|trans }}</a>
+            </div>
+
+            <div class="right">
+                <div class="user connect">
+                    <i class="fas fa-user"></i>
+
+                    <div class="imageProfil">
+                        <img src="{{ asset('build/images/connexion.png') }}" alt="">
+                    </div>
+
+                    <div class="menuUser">
+                        <div class="top">
+                            <p>William Nisole</p>
+                            <p>william.nisole@gmail.com</p>
+                        </div>
+
+                        <div class="bottom">
+                            <p>Mon profil</p>
+                            <p>Mes projets</p>
+                            <p>Déconnexion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menuComplet">
+                <div class="containerMenu">
+                    <ul>
+                        <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.home'|trans }}</a></li>
+                        <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.listing_projects'|trans }}</a></li>
+                        <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.near_projects'|trans }}</a></li>
+                        <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
+                        <li><a href="http://www.paris2024.org/fr">{{ 'app.layout.menu.onglets.paris_2024'|trans }}</a></li>
+                    </ul>
+
+                    <div class="social">
+                        <div>
+                            <span><a href="#"><i class="fab fa-facebook-f"></i></a></span>
+                            <span><a href="#"><i class="fab fa-linkedin-in"></i></a></span>
+                            <span><a href="#"><i class="fab fa-twitter"></i></a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </header>

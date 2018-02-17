@@ -13,10 +13,18 @@
 
 // layout
 @import "layout/header";
-@import "layout/menu";
+
+// lib
+@import "lib/jquery-nice-select/nice-select.css";
+@import "lib/picker/classic.css";
+@import "lib/picker/classic.date.css";
+@import "lib/picker/classic.time.css";
+@import "lib/owl-carousel/owl.carousel";
+@import "lib/owl-carousel/owl.theme.default";
 
 // pages
 @import "pages/form/form-widget";
+@import "pages/admin/project/create";
 @import "pages/client/layout";
 @import "pages/client/template/two-columns";
 @import "pages/client/homepage/homepage";
