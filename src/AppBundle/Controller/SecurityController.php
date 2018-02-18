@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class SecurityController extends Controller
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/connexion", name="login")
      * @param Request $request
      * @param AuthenticationUtils $authUtils
      * @return \Symfony\Component\HttpFoundation\Response
@@ -30,7 +30,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/register", name="register")
+     * @Route("/inscription", name="register")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -70,7 +70,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/forgotten_password", name="forgotten_password")
+     * @Route("/mot-de-passe-oublié", name="forgotten_password")
      * @param Request $request
      * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\Response
@@ -125,7 +125,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/reinitialization/{$id}", name="reinitialization")
+     * @Route("/réinitialisation/{$id}", name="reinitialization")
      * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -166,7 +166,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/logout", name="logout")
+     * @Route("/déconnexion", name="logout")
      */
     public function logoutAction()
     {

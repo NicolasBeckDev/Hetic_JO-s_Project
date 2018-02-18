@@ -18,7 +18,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct() {
         $this->followedProjects = new ArrayCollection();
-        $this->participatingProject = new ArrayCollection();
+        $this->participatingProjects = new ArrayCollection();
         $this->createdProjects = new ArrayCollection();
     }
 
@@ -74,7 +74,7 @@ class User implements UserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="Project", inversedBy="participants")
      * @ORM\JoinTable(name="users_projects_participate")
      */
-    private $participatingProject;
+    private $participatingProjects;
 
     /**
      * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
@@ -259,7 +259,7 @@ class User implements UserInterface, \Serializable
      */
     public function addParticipatingProject(Project $participatingProject)
     {
-        $this->participatingProject[] = $participatingProject;
+        $this->participatingProjects[] = $participatingProject;
 
         return $this;
     }
@@ -271,7 +271,7 @@ class User implements UserInterface, \Serializable
      */
     public function removeParticipatingProject(Project $participatingProject)
     {
-        $this->participatingProject->removeElement($participatingProject);
+        $this->participatingProjects->removeElement($participatingProject);
     }
 
     /**
@@ -279,9 +279,9 @@ class User implements UserInterface, \Serializable
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getParticipatingProject()
+    public function getParticipatingProjects()
     {
-        return $this->participatingProject;
+        return $this->participatingProjects;
     }
 
     /**

@@ -13,14 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Project controller.
  *
- * @Route("admin/projets")
+ * @Route("administration/projets")
  */
 class ProjectController extends Controller
 {
     /**
      * Lists all project entities.
      *
-     * @Route("/", name="admin_project_index")
+     * @Route("/liste", name="admin_project_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -37,7 +37,7 @@ class ProjectController extends Controller
     /**
      * Creates a new project entity.
      *
-     * @Route("/new", name="admin_project_new")
+     * @Route("/nouveau", name="admin_project_new")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -68,7 +68,7 @@ class ProjectController extends Controller
     /**
      * Finds and displays a project entity.
      *
-     * @Route("/{id}", name="admin_project_show")
+     * @Route("/voir/{id}", name="admin_project_show")
      * @Method("GET")
      * @param Project $project
      * @return \Symfony\Component\HttpFoundation\Response
@@ -86,7 +86,7 @@ class ProjectController extends Controller
     /**
      * Displays a form to edit an existing project entity.
      *
-     * @Route("/{id}/edit", name="admin_project_edit")
+     * @Route("/modifier/{id}", name="admin_project_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Project $project
@@ -114,7 +114,7 @@ class ProjectController extends Controller
     /**
      * Deletes a project entity.
      *
-     * @Route("/{id}", name="admin_project_delete")
+     * @Route("/supprimer/{id}", name="admin_project_delete")
      * @Method("DELETE")
      * @param Request $request
      * @param Project $project

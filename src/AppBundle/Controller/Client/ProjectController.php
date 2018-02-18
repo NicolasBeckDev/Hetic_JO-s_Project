@@ -21,33 +21,29 @@ use Symfony\Component\Serializer\Serializer;
 /**
  * Project controller.
  *
- * @Route("projects")
+ * @Route("projets")
  */
 class ProjectController extends Controller
 {
     /**
      * Lists all project entities.
      *
-     * @Route("/", name="project_index")
+     * @Route("/liste", name="project_index")
      * @Method("GET")
      */
     public function indexAction()
     {
-        $projects = $this->getDoctrine()->getRepository(Project::class)->findAll();
-        $districts = $this->getDoctrine()->getRepository(District::class)->findAll();
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-
         return $this->render('@Client/project/list.html.twig', [
-            'projects' => $projects,
-            'districts' => $districts,
-            'categories' => $categories,
+            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll(),
+            'districts' => $this->getDoctrine()->getRepository(District::class)->findAll(),
+            'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll(),
         ]);
     }
 
     /**
      * Creates a new project entity.
      *
-     * @Route("/new", name="project_new")
+     * @Route("/nouveau", name="project_new")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -78,7 +74,7 @@ class ProjectController extends Controller
     /**
      * Finds and displays a project entity.
      *
-     * @Route("show/{id}", name="project_show")
+     * @Route("/voir/{id}", name="project_show")
      * @Method({"GET", "POST"})
      * @param Project $project
      * @param Request $request
@@ -131,7 +127,7 @@ class ProjectController extends Controller
     /**
      * Displays a form to edit an existing project entity.
      *
-     * @Route("/edit/{id}", name="project_edit")
+     * @Route("/modifier/{id}", name="project_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Project $project
@@ -159,7 +155,7 @@ class ProjectController extends Controller
     /**
      * Deletes a project entity.
      *
-     * @Route("/{id}", name="project_delete")
+     * @Route("/supprimer/{id}", name="project_delete")
      * @Method("DELETE")
      * @param Request $request
      * @param Project $project
@@ -196,7 +192,7 @@ class ProjectController extends Controller
     /**
      * Location.
      *
-     * @Route("/location", name="project_location")
+     * @Route("/localisation", name="project_location")
      * @Method("GET")
      */
     public function locationAction()
@@ -209,11 +205,11 @@ class ProjectController extends Controller
         });
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $projects = $this->getDoctrine()->getRepository(Project::class)->findAll();
+        $projects = $serializer->serialize($this->getDoctrine()->getRepository(Project::class)->findAll(), 'json');
 
         return $this->render('@Client/project/location.html.twig', [
             'form' => $this->createForm(LocationType::class)->createView(),
-            'projects' => $serializer->serialize($projects, 'json')
+            'projects' => $projects
             ]);
     }
 }

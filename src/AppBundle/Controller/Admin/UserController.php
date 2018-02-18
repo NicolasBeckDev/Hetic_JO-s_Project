@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * User controller.
  *
- * @Route("admin/users")
+ * @Route("administrations/utilisateurs")
  */
 class UserController extends Controller
 {
@@ -30,7 +30,7 @@ class UserController extends Controller
     /**
      * Lists all user entities.
      *
-     * @Route("/", name="admin_user_index")
+     * @Route("/liste", name="admin_user_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -47,7 +47,7 @@ class UserController extends Controller
     /**
      * Creates a new user entity.
      *
-     * @Route("/new", name="admin_user_new")
+     * @Route("/nouveau", name="admin_user_new")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
@@ -82,7 +82,7 @@ class UserController extends Controller
     /**
      * Finds and displays a user entity.
      *
-     * @Route("/{id}", name="admin_user_show")
+     * @Route("/voir/{id}", name="admin_user_show")
      * @Method("GET")
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response
@@ -100,7 +100,7 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing user entity.
      *
-     * @Route("/{id}/edit", name="admin_user_edit")
+     * @Route("/modifier/{id}", name="admin_user_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param User $user
@@ -150,7 +150,7 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="admin_user_delete")
+     * @Route("/supprimer/{id}", name="admin_user_delete")
      * @Method("DELETE")
      * @param Request $request
      * @param User $user
