@@ -192,7 +192,7 @@ class ProjectController extends Controller
     /**
      * Location.
      *
-     * @Route("/localisation", name="project_location")
+     * @Route("/geolocalisation", name="project_location")
      * @Method("GET")
      */
     public function locationAction()

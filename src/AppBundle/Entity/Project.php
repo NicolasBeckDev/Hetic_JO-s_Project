@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="project")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjectRepository")
  */
-class Project implements \JsonSerializable
+class Project
 {
 
     public function __construct() {
@@ -65,6 +65,13 @@ class Project implements \JsonSerializable
     private $inProgress;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_validated", type="boolean")
+     */
+    private $isValidated;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255)
@@ -89,7 +96,7 @@ class Project implements \JsonSerializable
     private $followers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="participatingProject")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="participatingProjects")
      */
     private $participants;
 
@@ -217,6 +224,30 @@ class Project implements \JsonSerializable
     public function getInProgress()
     {
         return $this->inProgress;
+    }
+
+    /**
+     * Set isValidated
+     *
+     * @param boolean $isValidated
+     *
+     * @return Project
+     */
+    public function setIsValidated($isValidated)
+    {
+        $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    /**
+     * Get isValidated
+     *
+     * @return bool
+     */
+    public function getIsValidated()
+    {
+        return $this->isValidated;
     }
 
     /**
@@ -454,19 +485,5 @@ class Project implements \JsonSerializable
     public function getSubPictures()
     {
         return $this->subPictures;
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
-     */
-    public function jsonSerialize()
-    {
-        return[
-            'name' => $this->name
-        ];
     }
 }

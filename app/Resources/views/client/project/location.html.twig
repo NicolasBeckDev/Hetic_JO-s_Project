@@ -21,9 +21,12 @@
 
         //INIT
         let projects = {{ projects|raw }};
+        let markers = [];
 
         (function() {
-            showProjects(projects)
+            setTimeout(function(){
+                showProjects(projects)
+            }, 2000);
         })();
 
         function initMap() {
@@ -154,7 +157,15 @@
         }
 
         document.getElementById('{{ form.search.vars.id }}').addEventListener("click", function () {
+
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+
+            markers = [];
+
             let p = projects;
+
             projectsHandlerCleaner();
             p = categorySorter(p);
             p = statusSorter(p);
@@ -235,8 +246,51 @@
                     const dist = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(FromLoc[0],FromLoc[1]), new google.maps.LatLng(ToLoc[0],ToLoc[1]));
                     if(dist <= (range*1000)){
                         showProject(project);
+                        createMarker(ToLoc, project, results);
                     }
                 });
+            });
+        }
+
+        function createMarker(loc, project, results) {
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(loc[0],loc[1]),
+                map: map
+            });
+            const address = [
+                (results[0].address_components[0].long_name || ''),
+                (' '),
+                (results[0].address_components[1].long_name || ''),
+                (', '),
+                (results[0].address_components[2].long_name || ''),
+                (', '),
+                (results[0].address_components[5].long_name || '')
+            ].join('');
+
+            const infoWindow = new google.maps.InfoWindow({
+                map: map,
+                disableAutoPan: true,
+                content: '<div><strong>' + project.name + '</strong><br>' + address,
+            });
+            infoWindow.open(map, marker);
+
+            markers.push(marker);
+        }
+
+        function initMarkerFromProjet(project) {
+
+            const loc = [];
+
+            const geocoder = new google.maps.Geocoder;
+
+            geocoder.geocode({'address': project.address}, function(results, status) {
+                if (status === 'OK') {
+                    loc[0]=results[0].geometry.location.lat();
+                    loc[1]=results[0].geometry.location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+                createMarker(loc, project, results);
             });
         }
 
@@ -244,6 +298,7 @@
             if (typeof projects !== 'undefined' && projects.length > 0) {
                 projects.forEach(function (project) {
                     showProject(project);
+                    initMarkerFromProjet(project);
                 })
             }
         }

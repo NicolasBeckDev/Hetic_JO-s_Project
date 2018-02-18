@@ -35,40 +35,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * Creates a new project entity.
-     *
-     * @Route("/nouveau", name="admin_project_new")
-     * @Method({"GET", "POST"})
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function newAction(Request $request)
-    {
-        $project = new Project();
-        $project->setInProgress(false);
-        $form = $this->createForm('AppBundle\Form\ProjectType', $project);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_project_show', [
-                    'id' => $project->getId()
-            ]);
-        }
-
-        return $this->render('@Admin/project/new.html.twig', array(
-            'project' => $project,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
      * Finds and displays a project entity.
      *
-     * @Route("/voir/{id}", name="admin_project_show")
+     * @Route("voir/{id}", name="admin_project_show")
      * @Method("GET")
      * @param Project $project
      * @return \Symfony\Component\HttpFoundation\Response
@@ -109,6 +78,44 @@ class ProjectController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * validate a project entity.
+     *
+     * @Route("/valider/{id}", name="admin_project_validate")
+     * @Method("POST")
+     * @param Request $request
+     * @param Project $project
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function validateAction(Request $request, Project $project)
+    {
+        $form = $this->createValidateForm($project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $project->setIsValidated(true);
+            $em->persist($project);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_project_index');
+    }
+
+    /**
+     * Creates a form to validate a project entity.
+     * @param Project $project
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    private function createValidateForm(Project $project)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_project_validate', array('id' => $project->getId())))
+            ->setMethod('POST')
+            ->getForm()
+            ;
     }
 
     /**
