@@ -1,7 +1,7 @@
-{% extends "@Admin/project/layout.html.twig" %}
+{% extends "@Client/layout.html.twig" %}
 
 {% block body %}
-    <h1>Project creation</h1>
+    {#<h1>Project creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,7 +10,88 @@
 
     <ul>
         <li>
-            <a href="{{ path('project_index') }}">Back to the list</a>
+            <a href="{{ path('admin_project_index') }}">Back to the list</a>
         </li>
-    </ul>
+    </ul>#}
+
+    {{ form_start(form) }}
+        <div class="menuForm">
+            <div class="container">
+                <div class="left">
+                    <a href="{{ path('project_index') }}" class="blockButton goBack">
+                        <span><img src="{{ asset('build/images/arrow.png') }}" alt=""></span>
+                        <p>Retour au listing produits</p>
+                    </a>
+                </div>
+                <div class="right">
+                    <div class="statutProjet">
+                        <input type="checkbox" id="switch" />
+                        <label for="switch">Toggle</label>
+                        <p class="enCours">En cours</p>
+                        <p  class="finis no">Finis</p>
+                    </div>
+                    <button type="submit" class="blockButton validate">
+                        <p>Enregister le projet</p>
+                        <span><img src="{{ asset('build/images/validate.png') }}" alt=""></span>
+                    </button>
+                    <button type="button" class="blockButton delete">
+                        <p>Supprimer le projet</p>
+                        <span><img src="{{ asset('build/images/delete.png') }}" alt=""></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="containerForm">
+            <div class="left">
+                <div class="blockInput file">
+                    <label for="imgProjet">Ajouter une image à la une
+                        {{ form_widget(form.mainPicture) }}
+                    </label>
+                    <img class="imgFirstProject" src="#" alt="Image à la une">
+                    <span class="modif"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="remove">&#10005;</span>
+                </div>
+                <div class="blockInput multipleFile">
+                    <div class="addFiles">
+                        <p>Ajouter d’autre images <span></span>
+                    </div>
+                    <div class="containerOtherFile"></div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="blockInput titreProjet">
+                    <label for="titreProjet">Titre du projet</label>
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="block2x">
+                    <div class="blockInput arrondissement noContain">
+                        <label for="arrondissement">Arrondissement</label>
+                        {{ form_widget(form.district) }}
+                    </div>
+                    <div class="blockInput date ">
+                        <label for="dateFirst">Date de début du projet</label>
+                        {{ form_widget(form.date) }}
+                    </div>
+                </div>
+                <div class="block2x">
+                    <div class="blockInput categorie noContain">
+                        <label for="categorie">Catégorie du projet</label>
+                        {{ form_widget(form.category) }}
+                    </div>
+                    <div class="blockInput">
+                        <label for="adresse">Adresse du projet</label>
+                        {{ form_widget(form.address) }}
+                    </div>
+                </div>
+                <div class="blockInput">
+                    <label for="objectif">Objectif du projet</label>
+                    {{ form_widget(form.objectif) }}
+                </div>
+                <div class="blockInput">
+                    <label for="description">Description du projet</label>
+                    {{ form_widget(form.description) }}
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
 {% endblock %}

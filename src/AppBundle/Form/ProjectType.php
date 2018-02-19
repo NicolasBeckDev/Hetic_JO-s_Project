@@ -45,7 +45,7 @@ class ProjectType extends AbstractType
                 'label' => 'Arrondissement',
                 'required' => true
             ])
-            ->add('date', DateType::class, [
+            ->add('date', TextType::class, [
                 'label' => 'Date de début du contrat *',
                 'required' => true
             ])

@@ -44,7 +44,7 @@ module.exports = function ()
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#imgProjet").change(function() {
+        $("[name='project[mainPicture]']").change(function() {
             readURL(this);
         });
         /*** FIN AFFICHER L'IMAGE A LA UNE ****/
@@ -52,10 +52,10 @@ module.exports = function ()
         /*** REMOVE & ADD IMAGE A LA UNE ****/
         $(document).ready(function () {
             $('span.modif').on('click', function () {
-                $('#imgProjet').click()
+                $("[name='project[mainPicture]']").click()
             });
             $('span.remove').on('click', function () {
-                $('#imgProjet').val('');
+                $("[name='project[mainPicture]']").val('');
                 $('.file').removeClass('imgAdd')
             });
         })
@@ -63,7 +63,7 @@ module.exports = function ()
         /*** FIN REMOVE & ADD IMAGE A LA UNE ****/
 
         /**** DATEPICKER *****/
-        $('#dateFirst').pickadate({
+        $("[name='project[date]']").pickadate({
             labelMonthNext: 'Mois suivant',
             labelMonthPrev: 'Mois précédent',
             labelMonthSelect: 'Selectionner le mois',

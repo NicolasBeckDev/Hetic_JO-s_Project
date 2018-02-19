@@ -12,6 +12,7 @@
                     <div class="carousel-container">
                         <div class="owl-carousel">
                             <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
+                            <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
                             {% for picture in project.subPictures %}
                                 <img src="{{ asset('uploads/project/picture/' ~ picture) }}" />
                             {% endfor %}

@@ -9,10 +9,6 @@
     }
 }
 
-body{
-    font-family: 'Proxima Nova';
-    background-color: #f8f8f9;
-}
 .header {
     width: 100%;
     background-color: white;
@@ -24,7 +20,7 @@ body{
         background-color: #fff;
     }
 }
-#projectPage{
+form[name='project']{
     .menuForm{
         background-color: white;
         border-top: 2px solid #f8f8f9;
@@ -134,12 +130,18 @@ body{
                 color: $light-black;
                 border: 0px;
                 cursor: pointer;
+                background: none;
+
+                &:not(:last-of-type)
+                {
+                    margin-right: 20px;
+                }
+
                 span{
                     width: 40px;
                     height: 40px;
                     position: relative;
                     display: inline-block;
-                    margin-right: 20px;
                     border-radius: 30px;
                     vertical-align: middle;
                     img{
@@ -339,7 +341,7 @@ body{
                                 background-color: $gradient-light-blue;
                             }
                             button{
-                                font-family: 'Proxima Nova';
+                                @extend .proxima-regular;
                             }
                         }
                     }
@@ -374,6 +376,7 @@ body{
                         }
                     }
                     label{
+                        @extend .proxima-bold;
                         cursor: pointer;
                         margin-bottom: 0px;
                         position: relative;
@@ -385,7 +388,6 @@ body{
                         font-size: 18px;
                         padding: 15px 20px;
                         display: inline-block;
-                        font-weight: 600;
                         background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
                         background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
                         background-image:    -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
@@ -475,12 +477,12 @@ body{
                             background-image:      -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
                             background-image:         linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
                             &:after{
+                                @extend .proxima-regular;
                                 content: '+';
                                 position: absolute;
                                 color: #ffffff;
                                 top:53%;
                                 left:47%;
-                                font-weight: 100;
                                 font-size: 20px;
                                 -webkit-transform: translate(-50%,-50%);
                                 -moz-transform: translate(-50%,-50%);
@@ -538,11 +540,11 @@ body{
                                         vertical-align: middle;
                                     }
                                     span{
+                                        @extend .proxima-regular;
                                         cursor: pointer;
                                         margin-left: 10px;
                                         display: inline-block;
                                         font-size: 30px;
-                                        font-weight: 300;
                                         -webkit-transform: rotate(45deg);
                                         -moz-transform: rotate(45deg);
                                         -ms-transform: rotate(45deg);
@@ -593,40 +595,41 @@ body{
                     }
                 }
                 label, .addFiles{
+                    @extend .proxima-regular;
                     display: block;
                     color: #999999;
-                    font-weight: 600;
                     font-size: 14px;
                     margin-bottom: 10px;
                 }
                 input, textarea{
+                    @extend .proxima-regular;
                     width: 100%;
                     color: $light-black;
                     font-size: 18px;
-                    font-weight: 600;
                     border: 0px;
                     resize: none;
                     &:focus{
                         outline: none;
                     }
                     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                        @extend .proxima-regular;
                         color: #D1D1D1;
-                        font-weight:500;
                     }
                     &::-moz-placeholder { /* Firefox 19+ */
+                        @extend .proxima-regular;
                         color: #D1D1D1;
-                        font-weight:500;
                     }
                     &:-ms-input-placeholder { /* IE 10+ */
+                        @extend .proxima-regular;
                         color: #D1D1D1;
-                        font-weight:500;
                     }
                     &:-moz-placeholder { /* Firefox 18- */
+                        @extend .proxima-regular;
                         color: #D1D1D1;
-                        font-weight:500;
                     }
                 }
                 .nice-select{
+                    @extend .proxima-bold;
                     width: 100%;
                     border: 0px;
                     padding: 0;
@@ -635,8 +638,6 @@ body{
                     float: inherit;
                     font-size: 18px;
                     color: $light-black;
-                    font-weight:600;
-                    font-family: 'Proxima Nova';
                     &:after{
                         border-width: 8.7px 5px 10px 5px;
                         border-style: solid;
