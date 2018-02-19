@@ -1,15 +1,44 @@
 .connection-content {
     $bottom-margin: 30px;
 
+    @media screen and (max-width: $screen-xs-max) {
+        height:  calc(100vh - (#{$header-height-mobile}));
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: -ms-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+    }
     .main {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         width: 100%;
 
+        @media screen and (max-width: $screen-xs-max) {
+            padding:0 20px;
+            position: relative;
+            top: inherit;
+            -webkit-transform: inherit;
+            -moz-transform: inherit;
+            -ms-transform: inherit;
+            -o-transform: inherit;
+            transform: inherit;
+        }
+
         .title {
             margin-bottom: $bottom-margin * 2;
             text-align: center;
+
+            @media screen and (max-width: $screen-xs-max) {
+                margin-bottom: $bottom-margin;
+            }
 
             span {
                 @extend .proxima-bold;
@@ -39,14 +68,23 @@
 
             div[class^='col-']
             {
+                @media screen and (max-width: $screen-xs-max) {
+                    padding: 0 20px !important;
+                }
                 &:first-child
                 {
                     padding-left: 30px;
+
+                    @media screen and (max-width: $screen-xs-max) {
+                        margin-bottom: 15px;
+                    }
+
                 }
 
                 &:last-child {
                     padding-right: 30px;
                 }
+
             }
 
             input, a {
