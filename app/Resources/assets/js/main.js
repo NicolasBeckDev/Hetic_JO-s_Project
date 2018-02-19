@@ -9,6 +9,7 @@ require('../img/pages/admin/project/create/validate.png');
 require('../img/background-homepage.jpg');
 require('../img/connexion.png');
 require('../img/inscription.png');
+require('../img/user.png');
 
 require('./lib/jquery-nice-select/jquery.nice-select.min')();
 require('./lib/picker/picker')();

@@ -39,7 +39,7 @@ class UserController extends Controller
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('@Admin/user/index.html.twig', [
+        return $this->render('@Admin/user/list.html.twig', [
             'users' => $users
         ]);
     }

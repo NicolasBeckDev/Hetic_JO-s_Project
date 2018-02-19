@@ -1,20 +1,54 @@
 {% extends "@Admin/project/layout.html.twig" %}
 
 {% block body %}
+
+    <div class="project-index">
+
+        <div class="header"></div>
+
+        <div class="content">
+
+            <div class="wrapper-filters">
+
+                <div class="type">
+
+                    <div class="tous">
+                        <p>Tous</p>
+                    </div>
+                    <div class="environment">Environnement</div>
+                    <div class="solidaritie">Solidarité & citoyen</div>
+                    <div class="mobility">Mobilité & transport</div>
+                    <div class="urbanism">Urbanisme</div>
+                    <div class="technology">Technologie</div>
+                </div>
+
+                <div class="button-search"></div>
+
+                <div class="status">
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
     <h1>Projects list</h1>
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>MainPicture</th>
-                <th>SubPicture</th>
-                <th>Date</th>
-                <th>Inprogress</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>MainPicture</th>
+            <th>SubPicture</th>
+            <th>Date</th>
+            <th>Inprogress</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for project in projects %}
@@ -24,10 +58,10 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.mainPicture }}</td>
                 <td>
-                {% for subPicture in project.subPictures %}
-                    {{ subPicture }}
-                    <br>
-                {% endfor %}
+                    {% for subPicture in project.subPictures %}
+                        {{ subPicture }}
+                        <br>
+                    {% endfor %}
                 </td>
                 <td>{% if project.date %}{{ project.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if project.inProgress %}Yes{% else %}No{% endif %}</td>
