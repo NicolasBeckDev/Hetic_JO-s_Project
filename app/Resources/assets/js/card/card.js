@@ -5,8 +5,7 @@ var swiperContainer = document.querySelector('.swiper-container');
 var cardEvent = "";
 
 
-function initCards(card, index, next) {
-    var nextIndex = next;
+function initCards() {
     var newCards = document.querySelectorAll('.card:not(.card-removed)');
 
     newCards.forEach(function (card, index) {
