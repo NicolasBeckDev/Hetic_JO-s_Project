@@ -1,4 +1,3 @@
-
 const Hammer = require('hammerjs')
 
 var allCards = document.querySelectorAll('.card');
@@ -37,8 +36,9 @@ allCards.forEach(function (el) {
             var xMulti = event.deltaX * 0.03;
             var yMulti = event.deltaY / 80;
             var rotate = xMulti * yMulti;
+            var posX = event.deltaX <= 0 ? event.deltaX : 0;
 
-            event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)';
+            event.target.style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
         }
     });
 
@@ -48,7 +48,7 @@ allCards.forEach(function (el) {
         swiperContainer.classList.remove('card_nope');
 
         var moveOutWidth = document.body.clientWidth;
-        var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 1;
+        var keep = Math.abs(event.deltaX) < 80;
 
         if (keep) {
             event.target.style.transform = '';
@@ -59,7 +59,7 @@ allCards.forEach(function (el) {
             if (event.target.classList.contains('card')) {
                 event.target.style.transform = 'translate(' + toX + 'px, ' + (0) + 'px) rotate(' + 0 + 'deg)';
             }
-            if( toX < 0 ) {
+            if (toX < 0) {
                 event.target.classList.toggle('card-removed');
                 initCards();
             }
@@ -70,19 +70,32 @@ allCards.forEach(function (el) {
 
 var parentSwiper = new Hammer(swiperContainer);
 var parentSwipDirection = false;
-parentSwiper.on('panright', function () {
+
+parentSwiper.on('panright', function (event) {
     parentSwipDirection = true;
+    var allRemovedCards = document.querySelectorAll('.card-removed');
+
+    for (var i = 0; i < allRemovedCards.length; i++) {
+        var xMulti = event.deltaX * 0.03;
+        var yMulti = event.deltaY / 80;
+        var rotate = xMulti * yMulti;
+        var posX = event.deltaX <= 0 ? event.deltaX * 1.5  : 0;
+
+        allRemovedCards[allRemovedCards.length - 1].style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
+        allRemovedCards[allRemovedCards.length - 1].style.zIndex = allCards.length + 1;
+    }
 });
-parentSwiper.on('panend', function(event) {
+parentSwiper.on('panend', function (event) {
     var allRemovedCards = document.querySelectorAll('.card-removed');
     var moveOutWidth = document.body.clientWidth;
-    var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 1;
+    var keep = Math.abs(event.deltaX) < 80;
 
     if (!keep) {
         var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
         var toX = event.deltaX > 0 ? 0 : -endX;
-        for( var i = 0; i < allRemovedCards.length; i++ ) {
-            if( allRemovedCards && parentSwipDirection) {
+
+        for (var i = 0; i < allRemovedCards.length; i++) {
+            if (allRemovedCards && parentSwipDirection) {
                 parentSwipDirection = false;
                 allRemovedCards[allRemovedCards.length - 1].classList.remove('card-removed');
                 initCards();
@@ -92,6 +105,7 @@ parentSwiper.on('panend', function(event) {
 
 
 });
+
 function getCards() {
 
 }
