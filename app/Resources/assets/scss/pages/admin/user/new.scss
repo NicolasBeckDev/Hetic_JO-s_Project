@@ -1,0 +1,70 @@
+.header{
+  position: relative;
+  height: 7%;
+
+  .toList{
+    z-index: 10;
+    position: absolute;
+    width: 150px;
+    height: auto;
+    @extend .proxima-regular;
+    font-size: 18px;
+    top: 27px;
+    left:30px;
+
+    a{
+      display: block;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  height: 93%;
+  background-color: #f8f8f9;
+
+  .form-add-user {
+    text-align: left;
+
+    .title {
+      margin-bottom: 50px;
+      text-align: center;
+      @extend .proxima-bold
+    }
+
+    .input-wrapper {
+      text-align: center;
+      width: 100%;
+
+      input, #user-picture {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 20px;
+      }
+    }
+
+    input#user_picture {
+      padding: 15px 0 0 15px;
+      text-align: center;
+    }
+
+    select#user_roles {
+      width: 175px;
+      height: 30px;
+      margin-bottom: 20px;
+    }
+
+    .button-validate{
+      text-align: center;
+
+      input.add-user {
+        width: 75px;
+        height: 30px;
+      }
+    }
+
+  }
+}
+
+
+

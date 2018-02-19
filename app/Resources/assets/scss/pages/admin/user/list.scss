@@ -1,0 +1,77 @@
+
+  .list {
+    background-color: #f8f8f9;
+    margin-top: 100px;
+    padding-top: 15px;
+    height: 100%;
+
+    .rechercher {
+      width: 400px;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+
+    .add-user {
+      float: right;
+      width: 240px;
+
+      .text {
+        @extend .proxima-bold;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+
+      .button {
+        width: 40px;
+        height: 40px;
+        background-image: linear-gradient(to right, #4885e7, #569ceb);
+        border-radius: 25px;
+        text-align: center;
+        font-size: 25px;
+
+        a {
+          color: white;
+          text-decoration: none;
+
+          h3{
+            width: 100px;
+          }
+        }
+      }
+    }
+
+    .user {
+      margin-bottom: 30px;
+      background-color: white;
+      height: 140px;
+
+      .wrapper-info {
+        padding-top: 23px;
+        margin-left: 60px;
+
+        .image {
+          margin-top: 12px;
+          height: 70px;
+          width: 70px;
+
+          @include border-radius(20px);
+        }
+
+        .informations {
+          margin-left: 15px;
+
+          .name {
+            @extend .proxima-regular;
+            color: $light-black;
+            text-decoration: none;
+
+          }
+
+          .email {
+            color: lightgrey;
+          }
+        }
+
+      }
+    }
+  }
