@@ -1,37 +1,94 @@
 .homepage-content {
+    @media screen and (max-width: $screen-xs-max) {
+        height:  calc(100vh - (#{$header-height-mobile}));
+        background-image: url('../img/background-homepage.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        padding: 0 20px;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: -ms-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        &:before{
+            content: '';
+            background-color: rgba(0,0,0,0.3);
+            height:  calc(100vh - (#{$header-height-mobile}));
+            margin-top: 75px;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    }
+
     .main {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         width: 100%;
-
+        @media screen and (max-width: $screen-xs-max) {
+            position: relative;
+            top: inherit;
+            -webkit-transform: inherit;
+            -moz-transform: inherit;
+            -ms-transform: inherit;
+            -o-transform: inherit;
+            transform: inherit;
+            color: #ffffff;
+        }
         .citation {
             margin-bottom: 30px;
-
+            @media screen and (max-width: $screen-xs-max) {
+                text-align: center;
+            }
             span {
                 @extend .proxima-bold;
                 font-size: 70px;
+                @media screen and (max-width: $screen-xs-max) {
+                    font-size: 36px;
+                }
             }
         }
 
         .description {
             margin-bottom: 50px;
 
+            @media screen and (max-width: $screen-xs-max) {
+                margin-bottom: 20px;
+            }
+
             p {
                 @extend .proxima-regular;
                 font-size: 22px;
                 line-height: 40px;
                 text-align: justify;
-
+                @media screen and (max-width: $screen-xs-max) {
+                    font-size: 20px;
+                    line-height: 30px;
+                    text-align: center;
+                }
                 a {
                     @extend .proxima-bold;
+                    @media screen and (max-width: $screen-xs-max) {
+                        display: block;
+                        color: #ffffff;
+                    }
                 }
             }
         }
 
         .button-wrapper {
             display: inline-block;
-
+            @media screen and (max-width: $screen-xs-max) {
+                text-align: center;
+            }
             input {
                 @include border-radius(35px);
                 @extend .proxima-bold;
@@ -40,9 +97,15 @@
                 color: white;
                 border: none;
                 font-size: 20px;
-
+                @media screen and (max-width: $screen-xs-max) {
+                    float: inherit;
+                }
                 &:first-child {
                     margin-right: 20px;
+                    @media screen and (max-width: $screen-xs-max) {
+                        margin-bottom: 20px;
+                      margin-right: 0px;
+                    }
                 }
             }
         }

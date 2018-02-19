@@ -57,6 +57,9 @@ form[name='project']{
             -ms-align-items: center;
             -ms-flex-align: center;
             align-items: center;
+            &:before, &:after{
+                display: none;
+            }
             .left{
                 margin-left: 0;
             }
@@ -481,7 +484,7 @@ form[name='project']{
                                 content: '+';
                                 position: absolute;
                                 color: #ffffff;
-                                top:53%;
+                                top: 47%;
                                 left:47%;
                                 font-size: 20px;
                                 -webkit-transform: translate(-50%,-50%);
@@ -538,6 +541,7 @@ form[name='project']{
                                     p{
                                         display: inline-block;
                                         vertical-align: middle;
+                                        margin-bottom: 0px;
                                     }
                                     span{
                                         @extend .proxima-regular;
