@@ -81,7 +81,16 @@ html, body
         }
 
         &:focus {
-            outline: 0;
+            outline: 0 !important;
+        }
+    }
+
+    p{
+        margin-bottom: 0px;
+    }
+    .col-xs-hide{
+        @media screen and (max-width: $screen-xs-max) {
+            display: none;
         }
     }
 }

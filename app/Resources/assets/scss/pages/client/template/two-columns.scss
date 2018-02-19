@@ -3,9 +3,10 @@
         background-color: white;
         padding: 0 100px;
         height: 100vh;
-
         @media screen and (max-width: $screen-xs-max) {
-            background-color: darkseagreen;
+            padding: 0px;
+            margin-top: 75px;
+            height:inherit;
         }
 
         .content {

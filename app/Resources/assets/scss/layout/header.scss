@@ -27,7 +27,9 @@ header {
         @media screen and (max-width: $screen-sm-max) {
             border-bottom: 2px solid #F7F7F7;
             padding: 0 20px;
-            position: relative;
+            position: absolute;
+            width: 100%;
+            background-color: #f8f8f9;
         }
         .menu-desktop{
             height: 100%;
@@ -153,6 +155,10 @@ header {
                 }
                 &.connect{
                     position: relative;
+                    padding: 10px 20px;
+                    border-radius: 30px;
+                    background-color: #fff;
+                    width: 260px;
                     & > a{
                         display: none;
                     }
@@ -181,6 +187,10 @@ header {
                             -ms-align-items: center;
                             -ms-flex-align: center;
                             align-items: center;
+                            -webkit-justify-content:center;
+                            -moz-justify-content:center;
+                            -ms-justify-content:center;
+                            justify-content:center;
                             &:after{
                                 font-family: "Font Awesome 5 Free";
                                 font-weight: 900;
@@ -214,12 +224,15 @@ header {
                         @extend .proxima-bold;
                         position: absolute;
                         background-color: white;
-                        width: 260px;
-                        right: -40px;
-                        top: 70px;
                         text-align: center;
                         color: $light-black;
                         font-size: 18px;
+                        width: 260px;
+                        right: 0px;
+                        z-index: -1;
+                        border-radius: 30px;
+                        top: 0;
+                        padding-top: 60px;
                         &.active{
                             visibility: visible;
                             opacity: 1;
@@ -240,6 +253,9 @@ header {
                             background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
                             padding: 15px 20px;
                             line-height: 20px;
+                            p{
+                                margin: 0;
+                            }
                             p:first-of-type{
                                 @extend .proxima-bold;
                                 width: 100%;
@@ -413,6 +429,7 @@ header {
                     .social{
                         position: absolute;
                         bottom: 40px;
+                        left: 100px ;
                         div{
                             span{
                                 display: inline-block;
@@ -543,7 +560,7 @@ header {
                 position: relative;
                 .burger{
                     display: inline-block;
-                    vertical-align: middle;
+                    vertical-align: baseline;
                     span {
                         width: 30px;
                         height: 3px;
@@ -571,7 +588,7 @@ header {
                 }
                 .titreMenu{
                     display: inline-block;
-                    vertical-align: middle;
+                    vertical-align: top ;
                     visibility: hidden;
                     opacity: 0;
                     transition: visibility 0s, opacity 0.5s linear;
@@ -680,7 +697,7 @@ header {
                             content :'✕';
                             position: absolute;
                             font-size: 20px;
-                            top: 12px;
+                            top: 8px;
                             right: 12px;
                             opacity:0;
                         }
@@ -874,7 +891,8 @@ header {
                     }
                     .social{
                         position: absolute;
-                        bottom: 40px;
+                        bottom: 20px;
+                        left: 60px;
                         div{
                             span{
                                 display: inline-block;
