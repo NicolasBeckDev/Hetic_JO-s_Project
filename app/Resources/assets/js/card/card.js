@@ -1,12 +1,14 @@
-'use strict';
+
 const Hammer = require('hammerjs')
 
 var allCards = document.querySelectorAll('.card');
-let tinderContainer = document.querySelector('.swiper-container');
+var swiperContainer = document.querySelector('.swiper-container');
+var cardEvent = "";
 
 
-function initCards(card, index) {
-    var newCards = document.querySelectorAll('.card:not(.removed)');
+function initCards(card, index, next) {
+    var nextIndex = next;
+    var newCards = document.querySelectorAll('.card:not(.card-removed)');
 
     newCards.forEach(function (card, index) {
         card.style.zIndex = allCards.length - index;
@@ -27,11 +29,10 @@ allCards.forEach(function (el) {
 
     hammertime.on('pan', function (event) {
         if (event.target.classList.contains('card')) {
+            cardEvent = event;
             if (event.deltaX === 0) return;
             if (event.center.x === 0 && event.center.y === 0) return;
 
-            tinderContainer.classList.toggle('card_love', event.deltaX > 0);
-            tinderContainer.classList.toggle('card_nope', event.deltaX < 0);
 
             var xMulti = event.deltaX * 0.03;
             var yMulti = event.deltaY / 80;
@@ -43,60 +44,54 @@ allCards.forEach(function (el) {
 
     hammertime.on('panend', function (event) {
         el.classList.remove('moving');
-        tinderContainer.classList.remove('card_love');
-        tinderContainer.classList.remove('card_nope');
+        swiperContainer.classList.remove('card_love');
+        swiperContainer.classList.remove('card_nope');
 
         var moveOutWidth = document.body.clientWidth;
-        var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
-
-        event.target.classList.toggle('removed', !keep);
+        var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 1;
 
         if (keep) {
             event.target.style.transform = '';
         } else {
             var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
-            var toX = event.deltaX > 0 ? endX : -endX;
-            var endY = Math.abs(event.velocityY) * moveOutWidth;
-            var toY = event.deltaY > 0 ? endY : -endY;
-            var xMulti = event.deltaX * 0.03;
-            var yMulti = event.deltaY / 80;
-            var rotate = xMulti * yMulti;
+            var toX = event.deltaX > 0 ? 0 : -endX;
 
             if (event.target.classList.contains('card')) {
-                event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
+                event.target.style.transform = 'translate(' + toX + 'px, ' + (0) + 'px) rotate(' + 0 + 'deg)';
             }
-            initCards();
+            if( toX < 0 ) {
+                event.target.classList.toggle('card-removed');
+                initCards();
+            }
             getCards();
         }
     });
 });
 
-function createButtonListener(love) {
-    return function (event) {
-        var cards = document.querySelectorAll('.card:not(.removed)');
-        var moveOutWidth = document.body.clientWidth * 1.5;
+var parentSwiper = new Hammer(swiperContainer);
+var parentSwipDirection = false;
+parentSwiper.on('panright', function () {
+    parentSwipDirection = true;
+});
+parentSwiper.on('panend', function(event) {
+    var allRemovedCards = document.querySelectorAll('.card-removed');
+    var moveOutWidth = document.body.clientWidth;
+    var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 1;
 
-        if (!cards.length) return false;
-
-        var card = cards[0];
-
-        card.classList.add('removed');
-
-        if (love) {
-            card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
-        } else {
-            card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+    if (!keep) {
+        var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
+        var toX = event.deltaX > 0 ? 0 : -endX;
+        for( var i = 0; i < allRemovedCards.length; i++ ) {
+            if( allRemovedCards && parentSwipDirection) {
+                parentSwipDirection = false;
+                allRemovedCards[allRemovedCards.length - 1].classList.remove('card-removed');
+                initCards();
+            }
         }
+    }
 
-        initCards();
 
-        event.preventDefault();
-    };
-}
+});
 function getCards() {
-    console.log('CALLBACK INTENSIFIES')
+
 }
-
-var nopeListener = createButtonListener(false);
-var loveListener = createButtonListener(true);
-
