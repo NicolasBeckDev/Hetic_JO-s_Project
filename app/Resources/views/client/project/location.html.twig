@@ -1,19 +1,48 @@
-{% extends "@Admin/project/layout.html.twig" %}
+{% extends "@Client/layout.html.twig" %}
 
-{% block body %}
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
 
-    <div>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+{% block content %}
+    <div class="location-content">
+        <div class="filter-container">
+            <div class="filter-wrapper">
+                {{ form_start(form) }}
+                    {{ form_widget(form.location) }}
+                    {{ form_widget(form.address) }}
+                    {{ form_widget(form.category) }}
+                    {{ form_widget(form.status) }}
+                    {{ form_widget(form.range) }}
+                    {{ form_widget(form.search) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="row">
+                <div class="col-sm-7 no-padding">
+                    <div class="project-list-content">
+                        <div class="project-wrapper">
+                            <div id="project-prototype" data-prototype="
+                     {% filter escape %}
+                         {{ include('@Client/project/project-prototype.html.twig') }}
+                     {% endfilter %}
+                    "></div>
+
+                            <div id="projects" class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="map-col" class="col-sm-5 no-padding">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="map" style="height: 300px"></div>
-
-    <div id="projectsHandler"></div>
-
-    </body>
-
-
 {% endblock %}
 
 {% block addJavascripts %}
@@ -316,7 +345,19 @@
         }
 
         function showProject(project) {
-            document.getElementById('projectsHandler').innerHTML += project.name;
+            let template = document.getElementById('project-prototype').dataset.prototype;
+
+            template = template
+                .replace(/__project_category_color__/g, project.category.color)
+                .replace(/__project_id__/g, project.id)
+                .replace(/__project_main_picture__/g, project.mainPicture)
+                .replace(/__project_category_name__/g, project.category.name)
+                .replace(/__project_name__/g, project.name)
+                .replace(/__project_district_name__/g, project.district.name)
+            ;
+
+
+            document.getElementById('projects').innerHTML += template;
         }
 
 

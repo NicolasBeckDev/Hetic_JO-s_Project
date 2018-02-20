@@ -1,0 +1,59 @@
+.location-content
+{
+    $filter-bar-height: 75px;
+    margin-top: $header-height;
+
+    .filter-container
+    {
+        width: 100%;
+        height: $filter-bar-height;
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+        padding: 15px 35px;
+
+        .filter-wrapper
+        {
+            form
+            {
+                display: inline-block;
+
+                > div, > input, > button, > select {
+                    float: left;
+                }
+            }
+        }
+    }
+
+    .main-container
+    {
+        padding: 0 15px;
+
+        .no-padding
+        {
+            padding: 0;
+        }
+
+        .project-list-content
+        {
+            margin: 0;
+
+            .project
+            {
+                margin-bottom: 30px;
+            }
+        }
+
+        #map-col
+        {
+            position: fixed;
+            right: 0;
+
+            #map
+            {
+                height: calc(100vh - (#{$header-height} + #{$filter-bar-height}))
+            }
+        }
+    }
+
+
+}
