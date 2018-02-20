@@ -132,20 +132,5 @@ module.exports = function ()
                 // show an error if it's not
             } else input.val('');
         });
-        /*
-        $('.pac-container.pac-logo .pac-item').each(function() {
-            if (valueInput !== $('span.pac-item-query', this).text()){
-                console.log('------------------------ faux -----------------------')
-                console.log('value = ' + valueInput)
-                console.log($('span.pac-item-query', this).text());
-            } else {
-                console.log('------------------------ vrai -----------------------')
-            }
-            //
-        })
-        if (valueInput.length === 1) {  //check for no. of characters entered
-            $(this).val('');  // clear the textbox
-        }
-        */
     })
 };
