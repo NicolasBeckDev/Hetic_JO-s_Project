@@ -1,0 +1,129 @@
+.container {
+  padding: 0 40px;
+  font-family: 'Proxima Nova';
+  @media screen and (max-width: 1024px) {
+    padding: 0 20px;
+  }
+  .blockApropos {
+    margin-bottom: 100px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: -ms-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    @media screen and (max-width: 1024px) {
+      -webkit-flex-flow: row wrap;
+      -moz-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      margin-bottom: 50px;
+    }
+    &.oneBlock {
+      margin-bottom: 0px;
+      background-color: #fafafa;
+      padding: 40px;
+      padding-bottom: 100px;
+      @media screen and (max-width: 1024px) {
+        padding: 20px;
+        padding-bottom: 50px;
+      }
+      .textContainer {
+        width: 100%;
+      }
+    }
+    &:last-of-type {
+      margin-bottom: 0px;
+    }
+    .imgContainer {
+      width: 50%;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 20px;
+        order: 2;
+      }
+      img {
+        height: auto;
+        max-width: 100%;
+        vertical-align: top;
+      }
+    }
+    .textContainer {
+      padding: 0 5%;
+      width: 50%;
+      font-size: 16px;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        font-size: 14px;
+        order: 1;
+        margin-bottom: 20px;
+      }
+      .subTitleText {
+        font-weight: 100;
+        font-style: italic;
+        font-size: 18px;
+      }
+      .titleBlock {
+        margin: 10px 0 30px;
+        font-size: 36px;
+        font-weight: 700;
+        &.team {
+          color: $gradient-dark-red;
+        }
+        &.concept {
+          color: $gradient-light-yellow;
+        }
+        &.communaute {
+          color: $gradient-dark-blue;
+        }
+        &.projets {
+          color: $gradient-dark-green;
+        }
+        @media screen and (max-width: 1024px) {
+          margin-bottom: 15px;
+        }
+      }
+      .textBlock {
+        line-height: 25px;
+      }
+    }
+  }
+  .textMajeur {
+    background-image: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
+    max-width: 1040px;
+    margin-right: auto;
+    z-index: 101;
+    margin-top: -50px;
+    margin-left: auto;
+    margin-bottom: 100px;
+    &:last-of-type {
+      background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
+      margin-bottom: 0px;
+    }
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 50px;
+      margin-top: -30px;
+    }
+    div {
+      width: 75%;
+      padding: 5%;
+      margin: auto;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 40px;
+      color: #FFFFFF;
+      position: relative;
+      @media screen and (max-width: 1024px) {
+        font-size: 16px;
+        line-height: 30px;
+      }
+    }
+  }
+}

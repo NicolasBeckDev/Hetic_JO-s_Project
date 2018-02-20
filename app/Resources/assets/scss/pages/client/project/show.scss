@@ -112,6 +112,11 @@
             &:last-child
             {
                 float: right;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    $margin-mobile: 30px;
+                    margin-top: $margin-mobile;
+                }
             }
         }
 
@@ -310,6 +315,11 @@
             {
                 margin-bottom: 10px;
 
+                @media screen and (max-width: $screen-xs-max) {
+                    text-align: center;
+                    margin-bottom: 0px;
+                }
+
                 .category
                 {
                     @extend .proxima-bold;
@@ -317,12 +327,21 @@
                     -webkit-background-clip: text;
                     background-clip: text;
                     -webkit-text-fill-color: transparent;
+
+                    @media screen and (max-width: $screen-xs-max) {
+                        font-size: 18px;
+                    }
                 }
             }
 
             .name-container
             {
                 margin-bottom: 10px;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    text-align: center;
+                    margin-bottom: 0px  ;
+                }
 
                 .name
                 {
@@ -334,6 +353,9 @@
 
             .district-container
             {
+                @media screen and (max-width: $screen-xs-max) {
+                    text-align: center;
+                }
                 .district
                 {
                     @extend .proxima-regular;
@@ -346,6 +368,15 @@
         .detail-information
         {
             margin-bottom: 50px;
+            position: relative;
+
+            &:before{
+                content: '';
+                display: block;
+                margin-top: -20px;
+                background-color: #ff5250;
+
+            }
 
             .switch-text-wrapper
             {
