@@ -112,6 +112,40 @@ module.exports = function ()
             }
         });
     });
+    $('.adresse input').attr('id', "autocomplete");
+    $('.adresse').on("focus"," input", function() {
+        geolocate();
+    });
+    $('.adresse').on("change"," input", function() {
+        let input = $(this);
+        var geocoder = new google.maps.Geocoder();
 
+        // Geocode the address
+        geocoder.geocode({
+            'address': input.value
+        }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
 
+                // set it to the correct, formatted address if it's valid
+                input.value = results[0].formatted_address;
+
+                // show an error if it's not
+            } else input.val('');
+        });
+        /*
+        $('.pac-container.pac-logo .pac-item').each(function() {
+            if (valueInput !== $('span.pac-item-query', this).text()){
+                console.log('------------------------ faux -----------------------')
+                console.log('value = ' + valueInput)
+                console.log($('span.pac-item-query', this).text());
+            } else {
+                console.log('------------------------ vrai -----------------------')
+            }
+            //
+        })
+        if (valueInput.length === 1) {  //check for no. of characters entered
+            $(this).val('');  // clear the textbox
+        }
+        */
+    })
 };
