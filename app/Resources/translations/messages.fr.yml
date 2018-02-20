@@ -48,3 +48,12 @@ app:
                     picture: "Image"
                     password: "Mot de passe"
                     confirm_password: "Confirmation de mot de passe"
+        admin:
+            user:
+                list:
+                     adduser: "Ajouter un nouvel utilisateur"
+
+                edit:
+                     register: "Enregistrer"
+                     suppress: "Supprimer l'utilisateur"
+                     edit: "Editer mon profil"

@@ -37,7 +37,7 @@ class ProjectController extends Controller
     /**
      * Finds and displays a project entity.
      *
-     * @Route("voir/{id}", name="admin_project_show")
+     * @Route("/voir/{id}", name="admin_project_show")
      * @Method("GET")
      * @param Project $project
      * @return \Symfony\Component\HttpFoundation\Response
@@ -87,9 +87,10 @@ class ProjectController extends Controller
      * @Method("POST")
      * @param Request $request
      * @param Project $project
+     * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function validateAction(Request $request, Project $project)
+    public function validateAction(Request $request, Project $project, \Swift_Mailer $mailer)
     {
         $form = $this->createValidateForm($project);
         $form->handleRequest($request);
@@ -99,6 +100,23 @@ class ProjectController extends Controller
             $project->setIsValidated(true);
             $em->persist($project);
             $em->flush();
+
+
+            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( validé )"))
+                ->setFrom('nicolasbeck.dev@gmail.com')
+                ->setTo($project->getCreator()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        '@Email/projectCreation.html.twig',
+                        [
+                            'project' => $project
+                        ]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($mail);
         }
 
         return $this->redirectToRoute('admin_project_index');

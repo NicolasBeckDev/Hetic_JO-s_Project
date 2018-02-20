@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,7 +71,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/mot-de-passe-oublié", name="forgotten_password")
+     * @Route("/mot-de-passe-oublie", name="forgotten_password")
      * @param Request $request
      * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\Response
@@ -90,9 +91,12 @@ class SecurityController extends Controller
             $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $user->getEmail()]);
 
             if ($user){
+
+                $user->setToken(hash("sha512", uniqid()));
+
                 $routerContext = $this->container->get('router')->getContext();
 
-                $mail = (new \Swift_Message('Réinitialisation de votre mot de passe'))
+                $mail = (new \Swift_Message('Tous Paris. : Réinitialisation de votre mot de passe'))
                     ->setFrom('nicolasbeck.dev@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody(
@@ -100,7 +104,7 @@ class SecurityController extends Controller
                             '@Email/forgottenPassword.html.twig',
                             [
                                 'name' => $user->getFirstname(),
-                                'url' => $routerContext->getHost() . ":" . $routerContext->getHttpPort() . '/reinitialization/' . $user->getId()
+                                'url' => $routerContext->getHost() . ":" . $routerContext->getHttpPort() . '/reinitialisation/' . $user->getToken()
                             ]
                         ),
                         'text/html'
@@ -108,6 +112,8 @@ class SecurityController extends Controller
                 ;
 
                 $mailer->send($mail);
+
+                $this->getDoctrine()->getManager()->flush();
 
                 $message = 'Nous venons de vous envoyer une demande de réinitialisation par e-mail, veuillez la compléter.';
                 $type = 'success';
@@ -125,43 +131,52 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/réinitialisation/{$id}", name="reinitialization")
-     * @param $id
+     * @Route("/reinitialisation/{token}", name="reinitialization")
+     * @Method({"GET", "POST"})
+     * @param $token
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function reinitializationAction($id, Request $request)
+    public function reinitializationAction($token, Request $request)
     {
-        $userForm = New User();
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'token' => $token]);
 
-        $form = $this->createForm('AppBundle\Form\UserType', $userForm, [
-            'type' => 'reinitialisation'
-        ]);
+        if ($user){
 
-        $form->handleRequest($request);
+            $userForm = New User();
 
-        if($form->isSubmitted() && $form->isValid()){
+            $form = $this->createForm('AppBundle\Form\UserType', $userForm, [
+                'type' => 'reinitialisation'
+            ]);
 
-            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'id' => $id]);
+            $form->handleRequest($request);
 
-            $user->setPassword($userForm->getPassword());
+            if($form->isSubmitted() && $form->isValid()){
 
-            $this->getDoctrine()->getManager()->flush();
+                $user->setPassword($userForm->getPassword());
 
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
+                $user->setToken(null);
 
-            $this->get('session')->set('_security_main', serialize($token));
+                $this->getDoctrine()->getManager()->flush();
 
-            $event = new InteractiveLoginEvent($request, $token);
-            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+                $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+                $this->get('security.token_storage')->setToken($token);
 
-            return $this->redirectToRoute('project_index');
+                $this->get('session')->set('_security_main', serialize($token));
+
+                $event = new InteractiveLoginEvent($request, $token);
+                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+                return $this->redirectToRoute('project_index');
+            }
+
+            return $this->render('@Client/register.html.twig', [
+                'form' => $form->createView()
+            ]);
+
         }
 
-        return $this->render('@Client/register.html.twig', [
-            'form' => $form->createView()
-        ]);
+        return $this->redirectToRoute('homepage');
 
     }
 

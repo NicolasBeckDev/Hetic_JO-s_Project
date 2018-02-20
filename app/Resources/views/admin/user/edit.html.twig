@@ -1,21 +1,125 @@
 {% extends "@Admin/user/layout.html.twig" %}
+{% form_theme edit_form 'form/form-widget.html.twig' %}
+
 
 {% block body %}
-    <h1>User edit</h1>
 
-    {{ form_start(edit_form) }}
-    {{ form_widget(edit_form) }}
-    <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <div class="header">
 
-    <ul>
-        <li>
+        <div class="toList">
             <a href="{{ path('admin_user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+
+        <div class="actions">
+            <div class="actions-save">
+                <div class="media">
+                    <div class="media-body">
+                        <p class="text">Enregistrer</p>
+                    </div>
+                    <div class="media-right">
+                        <div class="button-save">
+                            <a href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions-delete">
+                <div class="media">
+                    <div class="media-body">
+                        <p class="text">Supprimer l'utilisateur</p>
+                    </div>
+                    <div class="media-right">
+                        {{ form_start(delete_form) }}
+                        <input class="button-delete" type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="actions-edit">
+                <div class="media">
+                    <div class="media-body">
+                        <p class="text">Editer mon profil</p>
+                    </div>
+                    <div class="media-right">
+                        <input class="button-edit" type="submit" value="Edit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="left">
+            <form class="form-edit">
+
+                <div class="row">
+                    <div class="image-profile">
+                        <button class="button-edit" type="button">Ajouter une image de profil</button>
+                    </div>
+                </div>
+
+                <div class="name">
+                    <div class="row">
+                        <div class="lastname">
+                            {{ form_row(edit_form.firstname) }}
+                        </div>
+
+                        <div class="firstname">
+                            {{ form_row(edit_form.lastname) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mail">
+                    <div class="row">
+                        {{ form_row(edit_form.email) }}
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="right">
+            <div class="resume">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="project">
+                            <div class="wrapper">
+                                <span class="nb-projects">{{ user.createdProject | length }}</span>
+                                <span class="label-projects">Projets créés</span>
+                            </div>
+                            <div class="blue rec-projects-color"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="project">
+                            <div class="wrapper">
+                                <span class="nb-projects">{{ user.followedProjects | length }}</span>
+                                <span class="label-projects">Projets inscrit</span>
+                            </div>
+                            <div class="white rec-projects-color"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="project">
+                            <div class="wrapper">
+                                <span class="nb-projects">{{ user.participatingProject | length }}</span>
+                                <span class="label-projects">Projets participés</span>
+                            </div>
+                            <div class="red rec-projects-color"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

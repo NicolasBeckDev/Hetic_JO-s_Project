@@ -67,7 +67,7 @@ class Project
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_validated", type="boolean")
+     * @ORM\Column(name="is_validated", type="boolean", nullable=true)
      */
     private $isValidated;
 

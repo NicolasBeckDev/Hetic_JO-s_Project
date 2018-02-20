@@ -1,48 +1,123 @@
 {% extends "@Admin/user/layout.html.twig" %}
 
 {% block body %}
-    <h1>User</h1>
+    <!--<div class="show">
+        <div class="header">
+            <div class="toList">
+                <a href="{{ path('admin_user_index') }}">Back to the list</a>
+            </div>
 
-    <table>
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ user.id }}</td>
-        </tr>
-        <tr>
-            <th>Firstname</th>
-            <td>{{ user.firstname }}</td>
-        </tr>
-        <tr>
-            <th>Lastname</th>
-            <td>{{ user.lastname }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-            <th>Picture</th>
-            <td>{{ user.picture }}</td>
-        </tr>
-        <tr>
-            <th>Roles</th>
-            <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
-        </tr>
-        </tbody>
-    </table>
+            <div class="actions">
+                <div class="actions-save">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">Enregistrer</p>
+                        </div>
+                        <div class="media-right">
+                            <div class="button-save">
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-delete">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">Supprimer l'utilisateur</p>
+                        </div>
+                        <div class="media-right">
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-edit">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">Editer mon profil</p>
+                        </div>
+                        <div class="media-right">
+                            <div class="button-edit">
+                                <a href="{{ path('admin_user_edit', { 'id': user.id }) }}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+        <div class="content">
+            <div class="left">
+                <form class="form-edit">
+
+                    <div class="row">
+                        <div class="image-profile"></div>
+                    </div>
+
+                    <div class="name">
+                        <div class="row">
+                            <div class="lastname">
+                            </div>
+
+                            <div class="firstname">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mail">
+                        <div class="row">
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>-->
+
+        <h1>User</h1>
+
+        <table>
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ user.picture }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('admin_user_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
 {% endblock %}
