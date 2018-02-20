@@ -32,6 +32,13 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="token", type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -95,6 +102,30 @@ class User implements UserInterface, \Serializable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     *
+     * @return User
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /**

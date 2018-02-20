@@ -10,11 +10,9 @@ use AppBundle\Form\LocationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -34,7 +32,7 @@ class ProjectController extends Controller
     public function indexAction()
     {
         return $this->render('@Client/project/list.html.twig', [
-            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll(),
+            'projects' => $this->getDoctrine()->getRepository(Project::class)->findBy(['isValidated' => true]),
             'districts' => $this->getDoctrine()->getRepository(District::class)->findAll(),
             'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll(),
         ]);
@@ -46,9 +44,10 @@ class ProjectController extends Controller
      * @Route("/nouveau", name="project_new")
      * @Method({"GET", "POST"})
      * @param Request $request
+     * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, \Swift_Mailer $mailer)
     {
         $project = new Project();
         $project->setInProgress(false);
@@ -56,9 +55,27 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project->setDate(new \DateTime(str_replace('/', '-',$project->getDate())));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
+
+            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( en attente de validation )"))
+                ->setFrom('nicolasbeck.dev@gmail.com')
+                ->setTo($this->getUser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        '@Email/projectCreation.html.twig',
+                        [
+                            'project' => $project
+                        ]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($mail);
 
             return $this->redirectToRoute('project_show', [
                 'id' => $project->getId()
@@ -106,7 +123,7 @@ class ProjectController extends Controller
             /** @var User $user */
             $user = $this->getUser();
 
-            if (in_array($project, $user->getParticipatingProject()->toArray())){
+            if (in_array($project, $user->getParticipatingProjects()->toArray())){
                 $user->removeParticipatingProject($project);
             }else{
                 $user->addParticipatingProject($project);
@@ -136,6 +153,7 @@ class ProjectController extends Controller
     public function editAction(Request $request, Project $project)
     {
         $deleteForm = $this->createDeleteForm($project);
+        $project->setMainPicture(new File($this->getParameter('project_picture_directory').'/'.$project->getMainPicture()));
         $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
 
@@ -205,11 +223,9 @@ class ProjectController extends Controller
         });
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $projects = $serializer->serialize($this->getDoctrine()->getRepository(Project::class)->findAll(), 'json');
-
         return $this->render('@Client/project/location.html.twig', [
             'form' => $this->createForm(LocationType::class)->createView(),
-            'projects' => $projects
+            'projects' => $serializer->serialize($this->getDoctrine()->getRepository(Project::class)->findBy(['isValidated' => true]), 'json')
             ]);
     }
 }

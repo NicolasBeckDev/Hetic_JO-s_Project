@@ -24,7 +24,7 @@ security:
                 default_target_path: /
 
             logout:
-                path: /logout
+                path: /deconnexion
                 target: /
 
         secured_area:

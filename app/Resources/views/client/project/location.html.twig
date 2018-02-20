@@ -22,12 +22,15 @@
         //INIT
         let projects = {{ projects|raw }};
         let markers = [];
+        let infoWindows = [];
+
 
         (function() {
             setTimeout(function(){
-                showProjects(projects)
+                showProjects(projects);
             }, 2000);
         })();
+
 
         function initMap() {
             window.map = new google.maps.Map(document.getElementById('map'), {
@@ -89,6 +92,7 @@
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                 infowindow.open(map, marker);
             });
+
         }
 
         // LOCATION
@@ -163,6 +167,7 @@
             }
 
             markers = [];
+            infoWindows = [];
 
             let p = projects;
 
@@ -267,14 +272,21 @@
                 (results[0].address_components[5].long_name || '')
             ].join('');
 
+            const link = '<br><a href="{{ path('project_show', {'id': "project.id" }) }}">Voir le projet en détail</a>'.replace('project.id', project.id);
+
             const infoWindow = new google.maps.InfoWindow({
                 map: map,
                 disableAutoPan: true,
-                content: '<div><strong>' + project.name + '</strong><br>' + address,
+                content: '<div><strong>' + project.name + '</strong><br>' + address + link,
             });
             infoWindow.open(map, marker);
-
+            infoWindows.push(infoWindow);
             markers.push(marker);
+
+            marker.addListener('click', function() {
+                infoWindows[markers.indexOf(this)].open(map, this)
+            });
+
         }
 
         function initMarkerFromProjet(project) {
