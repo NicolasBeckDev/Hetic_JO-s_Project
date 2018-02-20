@@ -15,8 +15,8 @@
             </div>
 
             <div class="button-wrapper">
-                <input type="button" class="blue" value="{{ 'app.page.client.home.buttons.participate'|trans }}" />
-                <input type="button" class="red" value="{{ 'app.page.client.home.buttons.create'|trans }}" />
+                <a href="{{ path('project_index') }}" class="blue">{{ 'app.page.client.home.buttons.list'|trans }}</a>
+                <a href="{{ path('project_new') }}" class="red">{{ 'app.page.client.home.buttons.create'|trans }}</a>
             </div>
         </div>
 

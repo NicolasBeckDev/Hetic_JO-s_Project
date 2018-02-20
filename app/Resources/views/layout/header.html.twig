@@ -12,34 +12,33 @@
                     <a href="{{ path('homepage') }}" class="title">{{ 'app.name'|trans }}</a>
                 </div>
             </div>
-            <div class="right connect">
-                <a href="#" >Connexion / inscription</a>
+            <div class="right{% if app.user %} connect{% if is_granted('ROLE_ADMIN') %} admin{% endif %}{% endif %}">
+                <a href="{{ path('login') }}" >{{ 'app.layout.header.connection'|trans }}</a>
 
-                <div class="containerImg">
-                    <div class="content">
-                        <div class="imgBlockConnect">
-                            <div class="hexagon"></div>
+                {% if app.user %}
+                    <div class="containerImg">
+                        <div class="content">
                             <div class="imageProfil">
-                                <img src="{{ asset('build/images/connexion.png') }}" alt="">
+                                <img src="{{ asset(app.user.picture ? 'uploads/user/picture/' ~ app.user.picture : 'build/images/user.png') }}" alt="profil picture">
                             </div>
+
+                            <p>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</p>
+                        </div>
+                    </div>
+
+                    <div class="menuUser">
+                        <div class="top">
+                            <p>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</p>
+                            <p>{{ app.user.email }}</p>
                         </div>
 
-                        <p>William Nisole</p>
+                        <div class="bottom">
+                            <a href="{{ path('account_user_edit') }}">Mon profil</a>
+                            <a>Mes projets</a>
+                            <a href="{{ path('logout') }}">Déconnexion</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="menuUser">
-                    <div class="top">
-                        <p>William Nisole</p>
-                        <p>william.nisole@gmail.com</p>
-                    </div>
-
-                    <div class="bottom">
-                        <a href="#">Mon profil</a>
-                        <p>Mes projets</p>
-                        <p>Déconnexion</p>
-                    </div>
-                </div>
+                {% endif %}
             </div>
 
             <div class="menuComplet">
@@ -82,25 +81,27 @@
             </div>
 
             <div class="right">
-                <div class="user connect">
+                <div class="user{% if app.user %} connect{% if is_granted('ROLE_ADMIN') %} admin{% endif %}{% endif %}">
                     <i class="fas fa-user"></i>
 
-                    <div class="imageProfil">
-                        <img src="{{ asset('build/images/connexion.png') }}" alt="">
-                    </div>
-
-                    <div class="menuUser">
-                        <div class="top">
-                            <p>William Nisole</p>
-                            <p>william.nisole@gmail.com</p>
+                    {% if app.user %}
+                        <div class="imageProfil">
+                            <img src="{{ asset(app.user.picture ? 'uploads/user/picture/' ~ app.user.picture : 'build/images/user.png') }}" alt="profil picture">
                         </div>
 
-                        <div class="bottom">
-                            <p>Mon profil</p>
-                            <p>Mes projets</p>
-                            <p>Déconnexion</p>
+                        <div class="menuUser">
+                            <div class="top">
+                                <p>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</p>
+                                <p>{{ app.user.email }}</p>
+                            </div>
+
+                            <div class="bottom">
+                                <a href="{{ path('account_user_edit') }}">Mon profil</a>
+                                <a>Mes projets</a>
+                                <a href="{{ path('logout') }}">Déconnexion</a>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
 

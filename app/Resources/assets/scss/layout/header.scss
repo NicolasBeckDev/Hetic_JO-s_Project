@@ -303,8 +303,27 @@ header {
                             }
                         }
                         .bottom{
-                            padding: 10px 20px ;
                             line-height: 50px;
+
+                            a
+                            {
+                                display: block;
+                                padding: 0;
+                                border-top-left-radius: 0;
+                                border-top-right-radius: 0;
+                                transition: background-color 0.2s ease-in-out;
+
+                                &:not(:last-of-type)
+                                {
+                                    border-radius: 0;
+                                }
+
+                                &:hover
+                                {
+                                    background-color: $gradient-light-blue;
+                                    color: white;
+                                }
+                            }
                         }
                     }
                 }

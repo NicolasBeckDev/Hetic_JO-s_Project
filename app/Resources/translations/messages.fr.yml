@@ -36,7 +36,7 @@ app:
                     améliorer les quartiers de Paris. Devenez acteur de votre ville et améliorer Paris.
                 more: "En savoir plus"
                 buttons:
-                    participate: "Participer à un projet"
+                    list: "Consulter les projets"
                     create: "Créer un projet"
             project:
                 list:
