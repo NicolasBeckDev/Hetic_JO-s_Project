@@ -17,6 +17,12 @@
                                 <img src="{{ asset('uploads/project/picture/' ~ picture) }}" />
                             {% endfor %}
                         </div>
+                        <div class="addFavoris">
+                            <div class="bubbly-button">
+                                <i class="far fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -31,7 +37,7 @@
                         </div>
 
                         <div class="district-container">
-                            <span class="district">{{ project.district.name }}</span>
+                            <span class="district">Paris {{ project.district.name }}</span>
                         </div>
                     </div>
 
@@ -101,7 +107,12 @@
         </div>
 
         <div class="share-container">
-
+            <div class="content">
+                <div class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+                <div class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></div>
+                <div class="linkedin"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+                <div class="enveloppe"><a href="#"><i class="fas fa-envelope"></i></a></div>
+            </div>
         </div>
     </div>
 {% endblock %}

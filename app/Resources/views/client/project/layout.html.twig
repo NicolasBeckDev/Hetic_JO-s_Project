@@ -12,6 +12,11 @@
 <body>
 {% block body %}{% endblock %}
 {% block javascripts %}
+    {% block addJavascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&libraries=places&callback=initAutocomplete" async defer></script>
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
     {% block addJavascripts %}{% endblock %}
 {% endblock %}
 </body>

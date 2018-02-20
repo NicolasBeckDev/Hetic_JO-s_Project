@@ -484,8 +484,8 @@ form[name='project']{
                                 content: '+';
                                 position: absolute;
                                 color: #ffffff;
-                                top: 47%;
-                                left:47%;
+                                top: 11px;
+                                left: 12px;
                                 font-size: 20px;
                                 -webkit-transform: translate(-50%,-50%);
                                 -moz-transform: translate(-50%,-50%);
@@ -607,6 +607,7 @@ form[name='project']{
                 }
                 input, textarea{
                     @extend .proxima-regular;
+                    font-weight: 700;
                     width: 100%;
                     color: $light-black;
                     font-size: 18px;
@@ -617,18 +618,22 @@ form[name='project']{
                     }
                     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                     &::-moz-placeholder { /* Firefox 19+ */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                     &:-ms-input-placeholder { /* IE 10+ */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                     &:-moz-placeholder { /* Firefox 18- */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                 }
