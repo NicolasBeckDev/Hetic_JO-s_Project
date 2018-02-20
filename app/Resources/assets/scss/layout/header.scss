@@ -5,16 +5,28 @@ header {
     height: $header-height;
     top: 0;
     width: 100%;
+    font-family: 'Proxima Nova Regular', sans-serif;
 
     &.transparent
     {
         background-color: transparent;
+        .left, .right{
+            .content{
+                background-color: transparent;
+            }
+        }
     }
 
     &.white
     {
         background-color: white;
         border-bottom: 1px solid #DCDCDC;
+        
+        .left, .right{
+            .content{
+                background-color: #ffffff;
+            }
+        }
     }
 
     @media screen and (max-width: $screen-sm-max) {

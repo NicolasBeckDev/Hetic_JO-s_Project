@@ -261,6 +261,7 @@ form[name='project']{
                     }
                     .list{
                         width:100%;
+                        height: auto;
                         padding: 20px;
                         -webkit-box-sizing: border-box;
                         -moz-box-sizing: border-box;
@@ -412,7 +413,8 @@ form[name='project']{
                     img{
                         display: none;
                         max-width: 100%;
-                        height: 100%;
+                        max-height: 100%;
+                        width: auto;
                     }
                     span{
                         &.modif {
@@ -485,8 +487,8 @@ form[name='project']{
                                 content: '+';
                                 position: absolute;
                                 color: #ffffff;
-                                top: 11px;
-                                left: 12px;
+                                top: 10px;
+                                left: 13px;
                                 font-size: 20px;
                                 -webkit-transform: translate(-50%,-50%);
                                 -moz-transform: translate(-50%,-50%);

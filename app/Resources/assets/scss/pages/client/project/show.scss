@@ -7,13 +7,22 @@
     margin-top: $header-height;
     display: inline-block;
     font-family: 'Proxima Nova Regular', sans-serif;
-
+    @media screen and (max-width: $screen-xs-max) {
+        margin-top: $header-height-mobile;
+    }
     .project-container
     {
         width: $content-width;
         float: left;
         padding: $content-padding;
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+            padding: 0px;
 
+            & > .row {
+                margin: 0;
+            }
+        }
         &.black
         {
             .category, .number {
@@ -90,6 +99,14 @@
             {
                 position: fixed;
                 width: calc(#{$content-width} * 0.5 - (#{$content-padding} - 15px));
+
+                @media screen and (max-width: $screen-xs-max) {
+                    width: 100%;
+                    display: block;
+                    position: inherit;
+                    float: inherit;
+                    padding: 0;
+                }
             }
 
             &:last-child
@@ -104,6 +121,10 @@
             height: calc(100vh - (#{$header-height} + #{$content-padding} * 2));
             width: 100%;
             position: relative;
+
+            @media screen and (max-width: $screen-xs-max) {
+                height: 60vh;
+            }
 
             .owl-carousel
             {
@@ -176,6 +197,11 @@
                 font-size: 20px;
                 cursor: pointer;
                 color: #272727;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    display: none;
+                }
+
                 div{
                     position: relative;
                     height: 100%;
@@ -451,6 +477,10 @@
         width: 50px;
         height: 250px;
         margin-top: 40px;
+
+        @media screen and (max-width: $screen-xs-max) {
+            display: none;
+        }
 
         .content{
             position: relative;
