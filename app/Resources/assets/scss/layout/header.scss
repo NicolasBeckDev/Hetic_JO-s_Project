@@ -21,7 +21,7 @@ header {
     {
         background-color: white;
         border-bottom: 1px solid #DCDCDC;
-        
+
         .left, .right{
             .content{
                 background-color: #ffffff;
@@ -172,6 +172,28 @@ header {
                     border-radius: 30px;
                     background-color: #fff;
                     width: 260px;
+                    &.admin{
+                        .hexagon{
+                            display: block;
+                            position: absolute;
+                            width: 100%;
+                            font-size: 20px;
+                            z-index: 10;
+                            height: 100%;
+                            &:after{
+                                content: '\2B23';
+                                position: absolute;
+                                bottom: -5px;
+                                right: -5px;
+                                color: $gradient-dark-blue;
+                            }
+
+                        }
+                        .imageProfil{
+                            border: 2px solid $gradient-dark-blue;
+                            position: relative;
+                        }
+                    }
                     & > a{
                         display: none;
                     }
@@ -219,17 +241,23 @@ header {
                             p{
                                 margin: 0 0 0 20px;
                             }
-                            .imageProfil{
-                                display: block;
+                            .imgBlockConnect{
                                 width: 40px;
                                 height: 40px;
-                                border-radius: 30px;
-                                overflow: hidden;
-                                text-align: center;
-                                img{
-                                    width: 100%;
+                                display: block;
+                                position: relative;
+                                .imageProfil{
+                                    display: block;
                                     height: 100%;
+                                    border-radius: 30px;
+                                    overflow: hidden;
+                                    text-align: center;
+                                    img{
+                                        width: 100%;
+                                        height: 100%;
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -287,6 +315,9 @@ header {
                     text-decoration: none;
                     color: $light-black;
                     background-color: white;
+                }
+                .hexagon{
+                    display: none;
                 }
                 .menuUser{
                     position: absolute;
