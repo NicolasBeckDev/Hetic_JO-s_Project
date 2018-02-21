@@ -9,9 +9,9 @@ function initCards() {
     var maxCards = 5;
     var countCards = 0;
     var cards = document.querySelectorAll('.card:not(.card-removed)');
-    var newCards = Array.from(cards)
-    cards = newCards.slice(maxCards)
-    newCards = newCards.slice(0, maxCards)
+    var newCards = Array.from(cards);
+    cards = newCards.slice(maxCards);
+    newCards = newCards.slice(0, maxCards);
 
     cards.forEach( function (card) {
         card.style.opacity = "0"
