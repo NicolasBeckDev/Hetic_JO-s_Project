@@ -11,6 +11,15 @@ require('../img/connexion.png');
 require('../img/inscription.png');
 require('../img/user.png');
 
+require('../img/pages/project/default_environnement.jpg');
+require('../img/pages/project/default_mobilite_transport.jpg');
+require('../img/pages/project/default_solidaire_citoyen.jpg');
+require('../img/pages/project/default_technologie.jpg');
+require('../img/pages/project/default_urbanisme.jpg');
+
+require('../img/pages/about/campagne_celebration.jpg');
+require('../img/pages/about/team.jpg');
+
 require('./lib/jquery-nice-select/jquery.nice-select.min')();
 require('./lib/picker/picker')();
 require('./lib/picker/picker.date')();

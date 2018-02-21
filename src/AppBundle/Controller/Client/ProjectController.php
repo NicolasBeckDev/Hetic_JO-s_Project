@@ -11,6 +11,7 @@ use AppBundle\Service\ProjectServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -107,8 +108,8 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project, Request $request)
     {
-        $followForm = $this->createFormBuilder()->getForm();
-        $participateForm = $this->createFormBuilder()->getForm();
+        $followForm = $this->get('form.factory')->createNamedBuilder('follow', FormType::class, null)->getForm();
+        $participateForm = $this->get('form.factory')->createNamedBuilder('participate', FormType::class, null)->getForm();
 
         $followForm->handleRequest($request);
         $participateForm->handleRequest($request);

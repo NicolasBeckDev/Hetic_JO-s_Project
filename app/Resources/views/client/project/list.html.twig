@@ -23,7 +23,7 @@
                             <a href="{{ path('project_show', { 'id': project.id }) }}">
                                 <div class="image-container">
                                     <div class="image-positioner">
-                                        <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
+                                        <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg' ) }}" />
                                     </div>
                                 </div>
 
