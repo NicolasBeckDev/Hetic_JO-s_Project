@@ -1,6 +1,8 @@
-.container {
-  padding: 0 40px;
-  font-family: 'Proxima Nova';
+.about-container {
+  @extend .proxima-regular;
+  padding: 20px 40px 0;
+  margin-top: $header-height;
+
   @media screen and (max-width: 1024px) {
     padding: 0 20px;
   }

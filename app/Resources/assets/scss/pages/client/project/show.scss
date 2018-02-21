@@ -207,8 +207,13 @@
                     display: none;
                 }
 
-                div{
+                form {
+                    height: 100%;
+                }
+
+                button{
                     position: relative;
+                    background: none;
                     height: 100%;
                     width: 100%;
                     i{

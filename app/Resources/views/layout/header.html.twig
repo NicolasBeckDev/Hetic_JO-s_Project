@@ -16,10 +16,14 @@
                 <a href="{{ path('login') }}" >{{ 'app.layout.header.connection'|trans }}</a>
 
                 {% if app.user %}
+
                     <div class="containerImg">
                         <div class="content">
-                            <div class="imageProfil">
-                                <img src="{{ asset(app.user.picture ? 'uploads/user/picture/' ~ app.user.picture : 'build/images/user.png') }}" alt="profil picture">
+                            <div class="imgBlockConnect">
+                                <div class="hexagon"></div>
+                                <div class="imageProfil">
+                                    <img src="{{ asset(app.user.picture ? 'uploads/user/picture/' ~ app.user.picture : 'build/images/user.png') }}" alt="profil picture">
+                                </div>
                             </div>
 
                             <p>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</p>
@@ -47,7 +51,7 @@
                         <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.home'|trans }}</a></li>
                         <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.listing_projects'|trans }}</a></li>
                         <li><a href="{{ path('project_location') }}">{{ 'app.layout.menu.onglets.near_projects'|trans }}</a></li>
-                        <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
+                        <li><a href="{{ path('about') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
                         <li><a href="http://www.paris2024.org/fr">{{ 'app.layout.menu.onglets.paris_2024'|trans }}</a></li>
                     </ul>
 
@@ -111,7 +115,7 @@
                         <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.home'|trans }}</a></li>
                         <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.listing_projects'|trans }}</a></li>
                         <li><a href="{{ path('project_location') }}">{{ 'app.layout.menu.onglets.near_projects'|trans }}</a></li>
-                        <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
+                        <li><a href="{{ path('about') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
                         <li><a href="http://www.paris2024.org/fr">{{ 'app.layout.menu.onglets.paris_2024'|trans }}</a></li>
                     </ul>
 

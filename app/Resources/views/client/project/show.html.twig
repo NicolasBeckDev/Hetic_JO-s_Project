@@ -12,16 +12,19 @@
                     <div class="carousel-container">
                         <div class="owl-carousel">
                             <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
-                            <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture|default('photo1.jpg') ) }}" />
                             {% for picture in project.subPictures %}
                                 <img src="{{ asset('uploads/project/picture/' ~ picture) }}" />
                             {% endfor %}
                         </div>
+
                         <div class="addFavoris">
-                            <div class="bubbly-button">
-                                <i class="far fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            {{ form_start(followForm) }}
+                                <button type="submit" class="bubbly-button">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                {{ form_widget(followForm) }}
+                            {{ form_end(followForm) }}
                         </div>
                     </div>
                 </div>
@@ -94,11 +97,14 @@
                     <div class="button-wrapper">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="button" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.participate'|trans }}" />
+                                {{ form_start(participateForm) }}
+                                    <input type="submit" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.participate'|trans }}" />
+                                    {{ form_widget(participateForm) }}
+                                {{ form_end(participateForm) }}
                             </div>
 
                             <div class="col-md-6">
-                                <input type="button" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.finance'|trans }}" />
+                                <input type="submit" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.finance'|trans }}" />
                             </div>
                         </div>
                     </div>

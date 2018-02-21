@@ -1,75 +1,83 @@
-<div class="container">
-    <div class="blockApropos">
-        <div class="imgContainer">
-            <img src="{{ asset('build/images/about/team.jpg') }}" alt="">
+{% extends "@Client/layout.html.twig" %}
+
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
+
+{% block content %}
+    <div class="about-container">
+        <div class="blockApropos">
+            <div class="imgContainer">
+                <img src="{{ asset('build/images/about/team.jpg') }}" alt="">
+            </div>
+            <div class="textContainer">
+                <p class="subTitleText">A propos</p>
+                <p class="titleBlock team">Notre équipe</p>
+                <p class="textBlock">Notre équipe est composée de  6 passionnés, étudiants à Hétic, en dernière année d’études et en alternance.
+                    Notre Bachelor Web nous a mené à mixer différentes compétences comme la gestion de projet, le design, le développement front ou back-end
+                    pour atteindre nos buts.
+                    Dans le cadre d’un projet d’études, nous avons eu pour thématiques les Jeux Olympiques 2024 qui se dérouleront à Paris. Pou répondre aux
+                    attentes de nos professeurs, nous avons conçu et développé cette plateforme. Nous souhaiterions à terme, avoir des partenariats notamment avec
+                    la mairie de Paris, et d’autres grandes entreprises (vinci, ratp, etc).
+                </p>
+            </div>
         </div>
-        <div class="textContainer">
-            <p class="subTitleText">A propos</p>
-            <p class="titleBlock team">Notre équipe</p>
-            <p class="textBlock">Notre équipe est composée de  6 passionnés, étudiants à Hétic, en dernière année d’études et en alternance.
-                Notre Bachelor Web nous a mené à mixer différentes compétences comme la gestion de projet, le design, le développement front ou back-end
-                pour atteindre nos buts.
-                Dans le cadre d’un projet d’études, nous avons eu pour thématiques les Jeux Olympiques 2024 qui se dérouleront à Paris. Pou répondre aux
-                attentes de nos professeurs, nous avons conçu et développé cette plateforme. Nous souhaiterions à terme, avoir des partenariats notamment avec
-                la mairie de Paris, et d’autres grandes entreprises (vinci, ratp, etc).
-            </p>
+        <div class="blockApropos oneBlock">
+            <div class="textContainer">
+                <p class="subTitleText">A propos</p>
+                <p class="titleBlock concept">Notre concept</p>
+                <p class="textBlock">Nous sommes partis d’un constat connu, Paris, aussi belle et élégante soit-elle, demeure bruyante, polluée, peu fleurie.
+                    Une étude récente avec les réflexions des Parisiens sur la propreté de la ville conclue aussi que Paris n’est pas au maximum.
+                    Pour pallier à ces points qui peuvent être améliorer facilement, nous avons crée cette plateforme participative.
+                    <br/><br/>
+                    Vous voulez participer à l’amélioration de votre ville, vous avez du temps mais pas d’idée ? En tant que participant, Parisy vous permet de
+                    voir des projets, près de chez vous. Plutôt bricoleur ? Aidez un groupe à monter des mangeoires en bois pour les oiseaux. Plutôt créatif ?
+                    Venez peindre les barrières parisiennes en couleurs vives pour égayer le paysage. Vous avez au contre une super idée mais vous avez besoin
+                    d’aide pour la mettre en place ? Créez un projet rapidement, rencontrez et discutez avec des parisiens qui pourront vous aider.
+                </p>
+            </div>
+        </div>
+        <div class="textMajeur">
+            <div>
+                <p>L’enjeu est de rendre la ville de Paris plus accueillante, plus vivante, plus sociale et plus agréable que ce soit à vivre et à visiter pour
+                    2024 ! Et ce, grâce à vous, vos idées et votre temps !
+                </p>
+            </div>
+        </div>
+        <div class="blockApropos">
+            <div class="textContainer">
+                <p class="subTitleText">A propos</p>
+                <p class="titleBlock communaute">Notre communauté</p>
+                <p class="textBlock">C’est vous !
+                    Toutes les  personnes qui se sentent impliquées dans la vie parisienne peuvent déposer un projet ou y participer. Elles peuvent le
+                    faire à titre individuel (habitant, commerçant) ou collectif (association, collectif d’habitants, structures). Il n’y a pas de condition
+                    d'âge ou de nationalité.
+                    Enfants accompagnés, adolescents, comme adultes peuvent participer !
+                </p>
+            </div>
+            <div class="imgContainer">
+                <img src="{{ asset('build/images/about/campagne_celebration_desktop_2880x1800_temp.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="blockApropos oneBlock">
+            <div class="textContainer">
+                <p class="subTitleText">A propos</p>
+                <p class="titleBlock projets">Les projets</p>
+                <p class="textBlock">
+                    Quelques conseils pour les porteurs de projets :
+                    Pour créer un projet, il faut simplement s’assurer qu’il s’inscrive dans une démarche qui s’inscrit dans les valeurs que sont la liberté, l’égalité, la fraternité, la solidarité, la laïcité, le respect de l’autre et la non-discrimination
+                    Pour assurer le succès du projets, privilégiez la transparence, par la présentation des objectifs de chacune des actions, par les besoins et les qualifications si besoin. N’hésitez pas à donner le plus de détails possibles !
+                    Il est préférable de proposer des projets faisables par tous, bien que certains projets puissent être repérés par des entreprises.
+                    <br/><br/>
+                    Si vous voyez des projets similaires au votre ou à celui que vous envisager, n’hésitez pas à contacter ou rencontrer le créateur, ce qui permettra d’envisager la fusion des projets identiques ou conçus pour le même espace, en accord avec chacun des porteurs de projets.
+                </p>
+            </div>
+        </div>
+        <div class="textMajeur">
+            <div>
+                <p>Nous avons regroupé les projets en 5 catégories pour tous les goûts : Environnement, Solidaire et Citoyen , Mobilité et transports, Urbanisme et Technologie. Nous modérons chaque projet.
+                </p>
+            </div>
         </div>
     </div>
-    <div class="blockApropos oneBlock">
-        <div class="textContainer">
-            <p class="subTitleText">A propos</p>
-            <p class="titleBlock concept">Notre concept</p>
-            <p class="textBlock">Nous sommes partis d’un constat connu, Paris, aussi belle et élégante soit-elle, demeure bruyante, polluée, peu fleurie.
-                Une étude récente avec les réflexions des Parisiens sur la propreté de la ville conclue aussi que Paris n’est pas au maximum.
-                Pour pallier à ces points qui peuvent être améliorer facilement, nous avons crée cette plateforme participative.
-                <br/><br/>
-                Vous voulez participer à l’amélioration de votre ville, vous avez du temps mais pas d’idée ? En tant que participant, Parisy vous permet de
-                voir des projets, près de chez vous. Plutôt bricoleur ? Aidez un groupe à monter des mangeoires en bois pour les oiseaux. Plutôt créatif ?
-                Venez peindre les barrières parisiennes en couleurs vives pour égayer le paysage. Vous avez au contre une super idée mais vous avez besoin
-                d’aide pour la mettre en place ? Créez un projet rapidement, rencontrez et discutez avec des parisiens qui pourront vous aider.
-            </p>
-        </div>
-    </div>
-    <div class="textMajeur">
-        <div>
-            <p>L’enjeu est de rendre la ville de Paris plus accueillante, plus vivante, plus sociale et plus agréable que ce soit à vivre et à visiter pour
-                2024 ! Et ce, grâce à vous, vos idées et votre temps !
-            </p>
-        </div>
-    </div>
-    <div class="blockApropos">
-        <div class="textContainer">
-            <p class="subTitleText">A propos</p>
-            <p class="titleBlock communaute">Notre communauté</p>
-            <p class="textBlock">C’est vous !
-                Toutes les  personnes qui se sentent impliquées dans la vie parisienne peuvent déposer un projet ou y participer. Elles peuvent le
-                faire à titre individuel (habitant, commerçant) ou collectif (association, collectif d’habitants, structures). Il n’y a pas de condition
-                d'âge ou de nationalité.
-                Enfants accompagnés, adolescents, comme adultes peuvent participer !
-            </p>
-        </div>
-        <div class="imgContainer">
-            <img src="{{ asset('build/images/about/campagne_celebration_desktop_2880x1800_temp.jpg') }}" alt="">
-        </div>
-    </div>
-    <div class="blockApropos oneBlock">
-        <div class="textContainer">
-            <p class="subTitleText">A propos</p>
-            <p class="titleBlock projets">Les projets</p>
-            <p class="textBlock">
-                Quelques conseils pour les porteurs de projets :
-                Pour créer un projet, il faut simplement s’assurer qu’il s’inscrive dans une démarche qui s’inscrit dans les valeurs que sont la liberté, l’égalité, la fraternité, la solidarité, la laïcité, le respect de l’autre et la non-discrimination
-                Pour assurer le succès du projets, privilégiez la transparence, par la présentation des objectifs de chacune des actions, par les besoins et les qualifications si besoin. N’hésitez pas à donner le plus de détails possibles !
-                Il est préférable de proposer des projets faisables par tous, bien que certains projets puissent être repérés par des entreprises.
-                <br/><br/>
-                Si vous voyez des projets similaires au votre ou à celui que vous envisager, n’hésitez pas à contacter ou rencontrer le créateur, ce qui permettra d’envisager la fusion des projets identiques ou conçus pour le même espace, en accord avec chacun des porteurs de projets.
-            </p>
-        </div>
-    </div>
-    <div class="textMajeur">
-        <div>
-            <p>Nous avons regroupé les projets en 5 catégories pour tous les goûts : Environnement, Solidaire et Citoyen , Mobilité et transports, Urbanisme et Technologie. Nous modérons chaque projet.
-            </p>
-        </div>
-    </div>
-</div>
+{% endblock %}
