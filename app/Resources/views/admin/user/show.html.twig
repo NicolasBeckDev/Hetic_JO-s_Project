@@ -1,43 +1,35 @@
 {% extends "@Admin/user/layout.html.twig" %}
 
 {% block body %}
-    <!--<div class="show">
+    <div class="show">
         <div class="header">
             <div class="toList">
                 <a href="{{ path('admin_user_index') }}">Back to the list</a>
             </div>
 
             <div class="actions">
-                <div class="actions-save">
-                    <div class="media">
-                        <div class="media-body">
-                            <p class="text">Enregistrer</p>
-                        </div>
-                        <div class="media-right">
-                            <div class="button-save">
-                                <a href="#"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="actions-delete">
                     <div class="media">
                         <div class="media-body">
-                            <p class="text">Supprimer l'utilisateur</p>
+                            <p class="text">{{ 'app.page.admin.user.show.delete' | trans }}</p>
                         </div>
                         <div class="media-right">
+                            {{ form_start(delete_form) }}
+                            <input class="button-delete" type="submit" value="Delete">
+                            {{ form_end(delete_form) }}
                         </div>
                     </div>
                 </div>
                 <div class="actions-edit">
                     <div class="media">
                         <div class="media-body">
-                            <p class="text">Editer mon profil</p>
+                            <p class="text">{{ 'app.page.admin.user.show.edit' | trans }}</p>
                         </div>
                         <div class="media-right">
-                            <div class="button-edit">
-                                <a href="{{ path('admin_user_edit', { 'id': user.id }) }}"></a>
-                            </div>
+                            <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">
+                                <button class="button-edit"></button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -50,74 +42,81 @@
                 <form class="form-edit">
 
                     <div class="row">
-                        <div class="image-profile"></div>
+                        <div class="image-profile">
+                            {{ user.picture }}
+                        </div>
                     </div>
 
                     <div class="name">
                         <div class="row">
                             <div class="lastname">
+                                {{ user.lastname }}
                             </div>
 
                             <div class="firstname">
+                                {{ user.firstname }}
                             </div>
                         </div>
                     </div>
 
-                    <div class="mail">
-                        <div class="row">
+                    <div class="row">
+                        <div class="mail">
+                            {{ user.email }}
                         </div>
-                        <div class="row">
 
+                    </div>
+
+                    <div class="row">
+                        <div class="role">
+                            {% if user.roles %}{{ user.roles|join(', ') }}{% endif %}
                         </div>
                     </div>
 
                 </form>
             </div>
-        </div>-->
 
-        <h1>User</h1>
+            <div class="right">
+                <div class="resume">
 
-        <table>
-            <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ user.picture }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
-            </tr>
-            </tbody>
-        </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.createdProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.admin.user.show.created' | trans }}</span>
+                                </div>
+                                <div class="blue rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
 
-        <ul>
-            <li>
-                <a href="{{ path('admin_user_index') }}">Back to the list</a>
-            </li>
-            <li>
-                <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">Edit</a>
-            </li>
-            <li>
-                {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-                {{ form_end(delete_form) }}
-            </li>
-        </ul>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.followedProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.admin.user.show.followed' | trans }}</span>
+                                </div>
+                                <div class="white rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.participatingProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.admin.user.show.participated' | trans }}</span>
+                                </div>
+                                <div class="red rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
