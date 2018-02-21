@@ -74,6 +74,7 @@ class UserServices
     public function preLoadByAdmin(User $user){
         return $user
             ->setPicture($this->pictureStringToFile($user->getPicture()))
+            ->setRoles($this->roleArrayToString($user->getRoles()))
             ;
     }
 
@@ -84,6 +85,10 @@ class UserServices
             ->setFirstname($formUser->getFirstname() ?? $user->getFirstname())
             ->setLastname($formUser->getLastname() ?? $user->getLastname())
             ;
+    }
+
+    private function roleArrayToString($roles){
+        return $roles[0];
     }
 
     private function getUserRole()
