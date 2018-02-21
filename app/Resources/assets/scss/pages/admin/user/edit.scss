@@ -1,203 +1,199 @@
-.header{
-  position: relative;
-  height: 7%;
-
-  .toList{
-    z-index: 10;
-    position: absolute;
-    width: 150px;
-    height: auto;
-    @extend .proxima-regular;
-    font-size: 18px;
-    top: 27px;
-    left:30px;
-    
-    a{
-      display: block;
-    }
-  }
-
-  .actions{
-    @extend .proxima-regular;
-    height: 100%;
-    width: 100%;
+.edit {
+  .header {
     position: relative;
+    height: 75px;
 
-    &-save, &-delete, &-edit{
-      margin-top: 20px;
-      width: 200px;
-      height: 45px;
-      display: inline-block;
-      text-align: center;
+    .toList {
+      z-index: 10;
+      position: absolute;
+      width: 150px;
+      height: auto;
+      @extend .proxima-regular;
+      font-size: 18px;
+      top: 27px;
+      left: 30px;
 
-      .text{
-        margin-top: 10px;
+      a {
+        display: block;
       }
     }
 
-    &-edit{
-      width:157px;
-    }
+    .actions {
+      @extend .proxima-regular;
+      height: 100%;
+      width: 100%;
+      position: relative;
 
-    , &-save, &-edit, &-delete, text{
-      text-align: right;
-
-      margin-right: 46px;
-    }
-  }
-
-  .button{
-    &-save{
-      width: 40px;
-      height: 40px;
-      border-radius: 25px;
-      text-align: center;
-      font-size: 25px;
-      background-image: linear-gradient(to right, #61d432, #429321);
-    }
-
-    &-delete{
-      width: 40px;
-      height: 40px;
-      border-radius: 25px;
-      text-align: center;
-      font-size: 25px;
-      background-image: linear-gradient(to left, #eb3351, #ff5250);
-    }
-
-    &-edit{
-      width: 40px;
-      height: 40px;
-      border-radius: 25px;
-      text-align: center;
-      font-size: 25px;
-      background-image: linear-gradient(to right, #ffbf38, #ff8b24);
-    }
-
-    &-save, &-delete, &-edit{
-      color: transparent;
-    }
-  }
-}
-
-.content {
-  width: 100%;
-  height: 93%;
-  background-color: #f8f8f9;
-
-  .left {
-    margin-left: 7%;
-    margin-top: 37px;
-    padding-top: 15px;
-    float: left;
-    width: 40%;
-
-    .form-edit {
-      .image-profile {
-        margin-bottom: 15px;
-        width: 100%;
-        height: 350px;
+      &-save, &-delete, &-edit {
+        margin-top: 20px;
+        width: 200px;
+        height: 45px;
+        display: inline-block;
         text-align: center;
-        font-size: 18px;
-        @extend .proxima-regular;
-        background-color: white;
-        @include border-radius(5px);
 
-        .button-edit {
-          margin-top: 160px;
-          width: 347px;
-          height: 60px;
-          color: white;
-          @include border-radius(25px);
-          background-image: linear-gradient(to right, #4885e7, #569ceb);
+        .text {
+          margin-top: 10px;
         }
       }
 
-      .name {
-        width: 100%;
-        height: 100%;
-        margin-bottom: 15px;
+      , &-save, &-edit, &-delete, text {
+        text-align: right;
 
-        .lastname input {
-          float: left;
+        margin-right: 46px;
+      }
+    }
+
+    .button {
+      &-save {
+        width: 40px;
+        height: 40px;
+        border-radius: 25px;
+        text-align: center;
+        font-size: 25px;
+        background-image: linear-gradient(to right, #61d432, #429321);
+      }
+
+      &-delete {
+        width: 40px;
+        height: 40px;
+        border-radius: 25px;
+        text-align: center;
+        font-size: 25px;
+        background-image: linear-gradient(to left, #eb3351, #ff5250);
+      }
+
+      &-edit {
+        width: 40px;
+        height: 40px;
+        border-radius: 25px;
+        text-align: center;
+        font-size: 25px;
+        background-image: linear-gradient(to right, #ffbf38, #ff8b24);
+      }
+
+      &-save, &-delete, &-edit {
+        color: transparent;
+      }
+    }
+  }
+
+  .content {
+    background-color: #f8f8f9;
+
+    .left {
+      margin-left: 7%;
+      margin-top: 37px;
+      padding-top: 15px;
+      float: left;
+      width: 40%;
+
+      .form-edit {
+        .image-profile {
+          margin-bottom: 15px;
+          width: 100%;
+          height: 350px;
+          text-align: center;
+          font-size: 18px;
+          @extend .proxima-regular;
+          background-color: white;
+          @include border-radius(5px);
+
+          .button-edit {
+            margin-top: 160px;
+            width: 347px;
+            height: 60px;
+            color: white;
+            @include border-radius(25px);
+            background-image: linear-gradient(to right, #4885e7, #569ceb);
+          }
+        }
+
+        .name {
+          width: 100%;
+          height: 100%;
+          margin-bottom: 15px;
+
+          .lastname input {
+            float: left;
+            width: 49%;
+            height: 100px;
+          }
+        }
+
+        .firstname input {
+          float: right;
           width: 49%;
           height: 100px;
         }
       }
 
-      .firstname input {
-        float: right;
-        width: 49%;
+      .mail input {
+        width: 100%;
         height: 100px;
       }
     }
 
-    .mail input {
-      width: 100%;
-      height: 100px;
-    }
-  }
+    .right {
+      float: right;
+      width: 40%;
+      margin-right: 30px;
 
-  .right {
-    float: right;
-    width: 40%;
-    margin-right: 30px;
+      .resume {
+        margin-top: 135px;
 
-    .resume {
-      margin-top: 135px;
-
-      .project {
-        position: relative;
-        width: 100%;
-        height: 110px;
-        margin-bottom: 104px;
-
-        .wrapper {
+        .project {
           position: relative;
-          width: 600px;
-          height: 50px;
+          width: 100%;
+          height: 110px;
+          margin-bottom: 104px;
 
-          .nb-projects {
-            width: 125px;
-            display: inline-block;
-            @extend .proxima-bold;
-            font-size: 64px;
+          .wrapper {
+            position: relative;
+            width: 600px;
+            height: 50px;
+
+            .nb-projects {
+              width: 90px;
+              display: inline-block;
+              @extend .proxima-bold;
+              font-size: 64px;
+            }
+
+            .label-projects {
+              display: inline-block;
+              @extend .proxima-bold;
+              font-size: 36px;
+            }
           }
 
-          .label-projects {
-            display: inline-block;
-            @extend .proxima-bold;
-            font-size: 36px;
+          .rec-projects-color {
+            position: absolute;
+            width: 340px;
+            height: 20px;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+
+            &.blue {
+              background-image: linear-gradient(to right, #4885e7, #569ceb);
+            }
+
+            &.white {
+              background-color: #ffffff;
+            }
+
+            &.red {
+              background-image: linear-gradient(to left, #eb3351, #ff5250);
+            }
           }
         }
 
-        .rec-projects-color {
-          position: absolute;
-          width: 340px;
-          height: 20px;
-          bottom: 0;
-          left: 0;
-          z-index: 10;
-
-          &.blue {
-            background-image: linear-gradient(to right, #4885e7, #569ceb);
-          }
-
-          &.white {
-            background-color: #ffffff;
-          }
-
-          &.red {
-            background-image: linear-gradient(to left, #eb3351, #ff5250);
-          }
-        }
       }
 
     }
-
   }
-}
 
-input{
-  @include border-radius(5px);
+  input {
+    @include border-radius(5px);
+  }
 }

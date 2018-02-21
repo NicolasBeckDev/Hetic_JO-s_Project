@@ -1,8 +1,114 @@
-{{ form_start(edit_form) }}
-{{ form_widget(edit_form) }}
-<button type="submit">envoyer</button>
-{{ form_end(edit_form) }}
-{{ form_start(delete_form) }}
-{{ form_widget(delete_form) }}
-<button type="submit">del</button>
-{{ form_end(delete_form) }}
+{% extends "@Client/template/two-columns.html.twig" %}
+
+
+{% block body %}
+
+    <div class="account">
+        <div class="header">
+
+            <div class="toList">
+                <a href="{{ path('account_index') }}">{{ 'app.page.client.account.index.tolist' | trans }}</a>
+            </div>
+
+            <div class="actions">
+                <div class="actions-save">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">{{ 'app.page.client.account.index.save' | trans }}</p>
+                        </div>
+                        <div class="media-right">
+                            <input class="button-save" type="submit" value="Save"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-delete">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">{{ 'app.page.client.account.index.delete' | trans }}</p>
+                        </div>
+                        <div class="media-right">
+                            {{ form_start(delete_form) }}
+                            <input class="button-delete" type="submit" value="Delete">
+                            {{ form_end(delete_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="left">
+                <form class="form-edit">
+
+                    <div class="row">
+                        <div class="image-profile">
+                            <button class="button-edit" type="button">{{ 'app.page.client.account.index.new_picture' | trans }}</button>
+                        </div>
+                    </div>
+
+                    <div class="name">
+                        <div class="row">
+                            <div class="lastname">
+                                {{ form_row(edit_form.firstname) }}
+                            </div>
+
+                            <div class="firstname">
+                                {{ form_row(edit_form.lastname) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mail">
+                        <div class="row">
+                            {{ form_row(edit_form.email) }}
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="right">
+                <div class="resume">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.createdProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.client.account.index.created' | trans }}</span>
+                                </div>
+                                <div class="blue rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.followedProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.client.account.index.followed' | trans }}</span>
+                                </div>
+                                <div class="white rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.participatingProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.client.account.index.participated' | trans }}</span>
+                                </div>
+                                <div class="red rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
