@@ -6,9 +6,19 @@ var cardEvent = "";
 
 
 function initCards() {
-    var newCards = document.querySelectorAll('.card:not(.card-removed)');
+    var maxCards = 5;
+    var countCards = 0;
+    var cards = document.querySelectorAll('.card:not(.card-removed)');
+    var newCards = Array.from(cards)
+    cards = newCards.slice(maxCards)
+    newCards = newCards.slice(0, maxCards)
+
+    cards.forEach( function (card) {
+        card.style.opacity = "0"
+    });
 
     newCards.forEach(function (card, index) {
+        card.style.opacity = "1";
         card.style.zIndex = allCards.length - index;
         card.style.transform = 'scale(' + (20 - index) / 20 + ') translate(' + 20 * index + 'px,' + 20 * index + 'px )';
         card.style.opacity = (10 - index) / 10;
