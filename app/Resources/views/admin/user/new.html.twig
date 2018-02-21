@@ -2,62 +2,65 @@
 
 {% block body %}
 
-    <div class="header">
+    <div class="new">
 
-        <div class="toList">
-            <a href="{{ path('admin_user_index') }}">Back to the list</a>
+        <div class="header">
+
+            <div class="toList">
+                <a href="{{ path('admin_user_index') }}">{{ 'app.page.admin.user.new.tolist' | trans }}</a>
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <div class="formular">
+                <div class="title">
+                    <h1>{{ 'app.page.admin.user.new.new_admin' | trans }}</h1>
+                </div>
+
+                {{ form_start(form) }}
+
+                <div class="form">
+                    <div class="wrapper">
+                        {{ form_row(form.firstname) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.lastname) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.email) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.password) }}
+                    </div>
+
+                    <div class="wrapper-picture">
+                        {{ form_row(form.picture) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.roles) }}
+                    </div>
+
+
+                    <div class="button-validate">
+                        <input class="button" type="submit" value="Create" />
+                    </div>
+
+                    {{ form_widget(form) }}
+
+                    {{ form_end(form, {'render_rest': false}) }}
+
+                </div>
+
+            </div>
         </div>
 
     </div>
 
-    <div class="content">
-
-        <div class="form-add-user">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="title">
-                        <h1>Créer un nouvel utilisateur</h1>
-                    </div>
-                </div>
-            </div>
-            {{ form_start(form) }}
-            <div class="row">
-                <div class="col-md-offset-5 col-md-2">
-                    <div class=" new-user">
-                        <div class="input-wrapper">
-                            {{ form_row(form.firstname) }}
-                        </div>
-
-                        <div class="input-wrapper">
-                            {{ form_row(form.lastname) }}
-                        </div>
-
-                        <div class="input-wrapper">
-                            {{ form_row(form.email) }}
-                        </div>
-
-                        <div class="input-wrapper">
-                            {{ form_row(form.password) }}
-                        </div>
-
-                        <div class="input-wrapper">
-                            {{ form_row(form.picture) }}
-                        </div>
-
-                        <div class="input-wrapper">
-                            {{ form_row(form.roles) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{ form_end(form, {'render_rest': false}) }}
-
-            <div class="button-validate">
-                <input class="add-user" type="submit" value="Create" />
-            </div>
-            {{ form_widget(form) }}
-        </div>
-    </div>
 
 {% endblock %}

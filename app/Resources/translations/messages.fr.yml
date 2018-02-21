@@ -12,6 +12,23 @@ app:
                 paris_2024: Paris 2024
     page:
         client:
+            account:
+                    index:
+                           tolist: "Revenir à la liste"
+                           delete: "Supprimer l'utilisateur"
+                           edit: "Editer le profil"
+                           created: "Projets créés"
+                           followed: "Projets inscrits"
+                           participated: "Projets participés"
+                    edit:
+                           tolist: "Revenir à la liste"
+                           save: "Enregistrer"
+                           delete: "Supprimer l'utilisateur"
+                           new_picture: "Ajouter une image de profil"
+                           created: "Projets créés"
+                           followed: "Projets inscrits"
+                           participated: "Projets participés"
+
             home:
                 citation: "Soyez volontaire"
                 description: |
@@ -51,9 +68,24 @@ app:
         admin:
             user:
                 list:
-                     adduser: "Ajouter un nouvel utilisateur"
+                     tolist: "Revenir à la liste"
+                     adduser: "Créer un nouvel administrateur"
+                show:
+                     tolist: "Revenir à la liste"
+                     delete: "Supprimer l'utilisateur"
+                     edit: "Editer le profil"
+                     created: "Projets créés"
+                     followed: "Projets inscrits"
+                     participated: "Projets participés"
 
                 edit:
-                     register: "Enregistrer"
-                     suppress: "Supprimer l'utilisateur"
-                     edit: "Editer mon profil"
+                     tolist: "Revenir à la liste"
+                     save: "Enregistrer"
+                     delete: "Supprimer l'utilisateur"
+                     new_picture: "Ajouter une image de profil"
+                     created: "Projets créés"
+                     followed: "Projets inscrits"
+                     participated: "Projets participés"
+                new:
+                     tolist: "Revenir à la liste"
+                     new_admin: "Créer un nouvel administrateur"

@@ -1,10 +1,10 @@
-.show{
-  width: 100%;
+.account{
   height:100%;
+  width: 100%;
 
   .header{
     position: relative;
-    height: 75px;
+    height: 7%;
 
     .toList{
       z-index: 10;
@@ -21,34 +21,33 @@
       }
     }
 
-    .actions {
-      text-align: right;
+    .actions{
       @extend .proxima-regular;
       height: 100%;
       width: 100%;
       position: relative;
 
-      &-save, &-delete, &-edit {
+      &-save, &-delete, &-edit{
         margin-top: 20px;
         width: 200px;
         height: 45px;
         display: inline-block;
         text-align: center;
 
-        .text {
+        .text{
           margin-top: 10px;
         }
       }
 
-      &-edit {
-        width: 157px;
+      &-edit{
+        width:157px;
       }
 
-      &-save, &-edit, &-delete, text {
-        text-align: right;
+    , &-save, &-edit, &-delete, text{
+      text-align: right;
 
-        margin-right: 46px;
-      }
+      margin-right: 46px;
+    }
     }
 
     .button{
@@ -86,6 +85,8 @@
   }
 
   .content {
+    width: 100%;
+    height: 93%;
     background-color: #f8f8f9;
 
     .left {
@@ -95,8 +96,8 @@
       float: left;
       width: 40%;
 
-      .form-edit {
-        position: relative;
+      .form-show {
+
         .image-profile {
           margin-bottom: 15px;
           width: 100%;
@@ -106,18 +107,34 @@
           @extend .proxima-regular;
           background-color: white;
           @include border-radius(5px);
+
+          .button-edit {
+            margin-top: 160px;
+            width: 347px;
+            height: 60px;
+            color: white;
+            @include border-radius(25px);
+            background-image: linear-gradient(to right, #4885e7, #569ceb);
+          }
         }
 
         .name {
           width: 100%;
           height: 100%;
+
+          .lastname{
+            float: left;
+          }
+
+          .firstname{
+            float: right;
+          }
         }
 
-        .lastname, .firstname,.mail, .role{
+        .lastname, .firstname,.mail{
           padding-top: 7px;
           background-color: white;
-          margin-bottom: 20px;
-          display: inline-block;
+          margin-bottom: 30px;
           height:40px;
           width: 48%;
           text-align: center;
@@ -126,15 +143,7 @@
           @include border-radius(5px);
         }
 
-        .lastname{
-          margin-right: 15px;
-        }
-
-        .firstname{
-          margin-left: 10px;
-        }
-
-        .mail, .role{
+        .mail{
           margin-top: -5px;
           margin-bottom: 20px;
           width: 100%;
@@ -162,7 +171,7 @@
             height: 50px;
 
             .nb-projects {
-              width: 90px;
+              width: 100px;
               display: inline-block;
               @extend .proxima-bold;
               font-size: 64px;
@@ -205,5 +214,4 @@
   input{
     @include border-radius(5px);
   }
-
 }
