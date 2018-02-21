@@ -82,9 +82,10 @@ class SecurityController extends Controller
      * @Route("/mot-de-passe-oublie", name="forgotten_password")
      * @param Request $request
      * @param \Swift_Mailer $mailer
+     * @param AuthenticationUtils $authUtils
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function forgottenPasswordAction(Request $request, \Swift_Mailer $mailer)
+    public function forgottenPasswordAction(Request $request, \Swift_Mailer $mailer, AuthenticationUtils $authUtils)
     {
         $user = New User();
 
@@ -99,6 +100,15 @@ class SecurityController extends Controller
             $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $user->getEmail()]);
 
             if ($user){
+
+                $error = $authUtils->getLastAuthenticationError();
+
+                $lastUsername = $authUtils->getLastUsername();
+
+                return $this->render('@Client/connection/connection.html.twig', [
+                    'last_username' => $lastUsername,
+                    'error'         => $error,
+                ]);
 
                 $user = $this->userServices->prePersistForgottenPassword($user);
 
@@ -131,10 +141,13 @@ class SecurityController extends Controller
             }
         }
 
+
         return $this->render('@Client/forgottenPassword.html.twig', [
             'form' => $form->createView(),
             'message' => $message ?? false,
             'type' => $type ?? false,
+            'error' => $error ?? false,
+            'last_username' => $lastUsername ?? false
         ]);
     }
 
