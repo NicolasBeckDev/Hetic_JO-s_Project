@@ -34,21 +34,10 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
-    AppBundle\Service\FileUploader:
+    AppBundle\Service\ProjectServices:
         arguments:
-            $userProfilePictureDir: '%user_profile_picture_directory%'
-            $projectPictureDir: '%project_picture_directory%'
+            $pictureDir: '%project_picture_directory%'
 
-    AppBundle\EventListener\UserListener:
-        tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: postLoad }
-            - { name: doctrine.event_listener, event: preRemove }
-
-    AppBundle\EventListener\ProjectListener:
-        tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: postLoad }
-            - { name: doctrine.event_listener, event: preRemove }
+    AppBundle\Service\UserServices:
+        arguments:
+            $profilePictureDir: '%user_profile_picture_directory%'

@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\User;
 use AppBundle\Service\FileUploader;
+use AppBundle\Service\UserServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,13 +20,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends Controller
 {
 
-    private $uploader;
+    private $userServices;
 
-    public function __construct(FileUploader $uploader)
+    public function __construct(UserServices $userServices)
     {
-        $this->uploader = $uploader;
+        $this->userServices = $userServices;
     }
-
 
     /**
      * Lists all user entities.
@@ -35,12 +35,8 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
-
         return $this->render('@Admin/user/list.html.twig', [
-            'users' => $users
+            'users' => $this->getDoctrine()->getRepository(User::class)->findAll()
         ]);
     }
 
@@ -50,19 +46,21 @@ class UserController extends Controller
      * @Route("/nouveau", name="admin_user_new")
      * @Method({"GET", "POST"})
      * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request, UserPasswordEncoderInterface $encoder)
+    public function newAction(Request $request)
     {
         $user = new User();
+
         $form = $this->createForm('AppBundle\Form\UserType', $user, [
-            'type' => 'new'
+            'type' => 'adminNew'
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->userServices->prePersistNewByAdmin($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -89,11 +87,9 @@ class UserController extends Controller
      */
     public function showAction(User $user)
     {
-        $deleteForm = $this->createDeleteForm($user);
-
         return $this->render('@Admin/user/show.html.twig', array(
             'user' => $user,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $this->createDeleteForm($user)->createView(),
         ));
     }
 
@@ -108,32 +104,20 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        $savedUser = clone $this->getUser();
+        $user = $this->userServices->preLoadByAdmin($user);
+
         $deleteForm = $this->createDeleteForm($user);
 
-        $roles = '';
-        foreach ($user->getRoles() as $role){
-            $roles= $roles . $role . ';';
-        }
-        $roles = substr($roles, 0, -1);
-        $user->setRoles($roles);
-
-        if ($user->getPicture() != null && gettype($user->getPicture()) == 'string'){
-            $picture = new File($this->uploader->getUserProfilePictureDir().'/'.$user->getPicture());
-            $user->setPicture($picture);
-        }
-
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, [
-            'type' => 'edit'
+            'type' => 'adminNew'
         ]);
 
         $editForm->handleRequest($request);
 
-        if ($user->getPicture() == null && isset($picture)){
-            $user->setPicture($picture);
-        }
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $user = $this->userServices->prePersistEditByAdmin($savedUser, $user);
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -162,6 +146,7 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->userServices->preDeleteUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush();

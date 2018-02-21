@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Service\UserServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,6 +14,14 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityController extends Controller
 {
+
+    private $userServices;
+
+    public function __construct(UserServices $userServices)
+    {
+        $this->userServices = $userServices;
+    }
+
     /**
      * @Route("/connexion", name="login")
      * @param Request $request
@@ -40,17 +49,16 @@ class SecurityController extends Controller
         $user = New User();
 
         $form = $this->createForm('AppBundle\Form\UserType', $user, [
-            'type' => 'register'
+            'type' => 'userNew'
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setRoles('ROLE_USER');
+            $user = $this->userServices->prePersistRegister($user);
 
             $em = $this->getDoctrine()->getManager();
-
             $em->persist($user);
             $em->flush();
 
@@ -92,12 +100,14 @@ class SecurityController extends Controller
 
             if ($user){
 
-                $user->setToken(hash("sha512", uniqid()));
+                $user = $this->userServices->prePersistForgottenPassword($user);
+
+                $this->getDoctrine()->getManager()->flush();
 
                 $routerContext = $this->container->get('router')->getContext();
 
                 $mail = (new \Swift_Message('Tous Paris. : Réinitialisation de votre mot de passe'))
-                    ->setFrom('nicolasbeck.dev@gmail.com')
+                    ->setFrom('tousparis2024@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
@@ -112,8 +122,6 @@ class SecurityController extends Controller
                 ;
 
                 $mailer->send($mail);
-
-                $this->getDoctrine()->getManager()->flush();
 
                 $message = 'Nous venons de vous envoyer une demande de réinitialisation par e-mail, veuillez la compléter.';
                 $type = 'success';
@@ -153,9 +161,7 @@ class SecurityController extends Controller
 
             if($form->isSubmitted() && $form->isValid()){
 
-                $user->setPassword($userForm->getPassword());
-
-                $user->setToken(null);
+                $user = $this->userServices->prePersistReinitialization($user, $userForm);
 
                 $this->getDoctrine()->getManager()->flush();
 
@@ -176,12 +182,12 @@ class SecurityController extends Controller
 
         }
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('login');
 
     }
 
     /**
-     * @Route("/déconnexion", name="logout")
+     * @Route("/deconnexion", name="logout")
      */
     public function logoutAction()
     {

@@ -25,11 +25,23 @@ security:
 
             logout:
                 path: /deconnexion
-                target: /
+                target: /connexion
 
         secured_area:
             form_login:
                 csrf_token_generator: security.csrf.token_manager
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
     access_control:
-#        - { path: ^/admin, roles: ROLE_ADMIN }
+#        - { path: ^/administration, roles: ROLE_ADMIN }
+#        - { path: ^/mon-compte, roles: ROLE_USER }
+#        - { path: ^/projets/nouveau, roles: ROLE_USER }
+#        - { path: ^/projets/modifier, roles: ROLE_USER }
+#        - { path: ^/projets/supprimer, roles: ROLE_USER }
+#        - { path: ^/connexion, allow_if: "not has_role('ROLE_USER')" }
+#        - { path: ^/inscription, allow_if: "not has_role('ROLE_USER')" }
+#        - { path: ^/inscription, allow_if: "not has_role('ROLE_USER')" }
+#        - { path: ^/mot-de-passe-oublie, allow_if: "not has_role('ROLE_USER')" }
+#        - { path: ^/reinitialisation, allow_if: "not has_role('ROLE_USER')" }

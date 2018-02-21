@@ -7,6 +7,7 @@ use AppBundle\Entity\District;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\User;
 use AppBundle\Form\LocationType;
+use AppBundle\Service\ProjectServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,6 +24,13 @@ use Symfony\Component\Serializer\Serializer;
  */
 class ProjectController extends Controller
 {
+    private $projectServices;
+
+    public function __construct(ProjectServices $projectServices)
+    {
+        $this->projectServices = $projectServices;
+    }
+
     /**
      * Lists all project entities.
      *
@@ -50,19 +58,19 @@ class ProjectController extends Controller
     public function newAction(Request $request, \Swift_Mailer $mailer)
     {
         $project = new Project();
-        $project->setInProgress(false);
         $form = $this->createForm('AppBundle\Form\ProjectType', $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $project->setDate(new \DateTime(str_replace('/', '-',$project->getDate())));
+
+            $project = $this->projectServices->prePersistNew($project);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
 
             $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( en attente de validation )"))
-                ->setFrom('nicolasbeck.dev@gmail.com')
+                ->setFrom('tousparis2024@gmail.com')
                 ->setTo($this->getUser()->getEmail())
                 ->setBody(
                     $this->renderView(
@@ -107,32 +115,15 @@ class ProjectController extends Controller
 
         if ($followForm->isSubmitted() && $followForm->isValid()) {
 
-            /** @var User $user */
-            $user = $this->getUser();
-
-            if (in_array($project, $user->getFollowedProjects()->toArray())){
-                $user->removeFollowedProject($project);
-            }else{
-                $user->addFollowedProject($project);
-            }
-
+            $this->projectServices->updateFollowedProjects($project);
             $this->getDoctrine()->getManager()->flush();
 
         }elseif ($participateForm->isSubmitted() && $participateForm->isValid()){
 
-            /** @var User $user */
-            $user = $this->getUser();
-
-            if (in_array($project, $user->getParticipatingProjects()->toArray())){
-                $user->removeParticipatingProject($project);
-            }else{
-                $user->addParticipatingProject($project);
-            }
-
+            $this->projectServices->updateParticipatingProjects($project);
             $this->getDoctrine()->getManager()->flush();
 
         }
-
 
         return $this->render('@Client/project/show.html.twig', array(
             'project' => $project,
@@ -152,12 +143,17 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
+        $savedProject = clone  $project;
+        $project = $this->projectServices->preLoadEdit($project);
+
         $deleteForm = $this->createDeleteForm($project);
-        $project->setMainPicture(new File($this->getParameter('project_picture_directory').'/'.$project->getMainPicture()));
         $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $project = $this->projectServices->prePersistEdit($savedProject, $project);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('project_edit', array('id' => $project->getId()));
@@ -185,6 +181,7 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project = $this->projectServices->preDeleteProject($project);
             $em = $this->getDoctrine()->getManager();
             $em->remove($project);
             $em->flush();
@@ -218,9 +215,8 @@ class ProjectController extends Controller
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
 
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object;
-        });
+        $normalizer->setCircularReferenceHandler(function ($object) { return $object; });
+
         $serializer = new Serializer(array($normalizer), array($encoder));
 
         return $this->render('@Client/project/location.html.twig', [

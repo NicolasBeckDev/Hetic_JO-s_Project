@@ -17,7 +17,7 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (in_array($options['type'], ['new','edit','register'])){
+        if (in_array($options['type'], ['adminNew','userEdit','userNew','adminNew'])){
             $builder
                 ->add('firstname', TextType::class, [
                     'label' => false,
@@ -27,7 +27,7 @@ class UserType extends AbstractType
                     ]
                 ]);
         }
-        if (in_array($options['type'], ['new','edit','register'])){
+        if (in_array($options['type'], ['adminNew','userEdit','userNew','adminNew'])){
             $builder
                 ->add('lastname', TextType::class, [
                     'label' => false,
@@ -37,7 +37,7 @@ class UserType extends AbstractType
                     ]
                 ]);
         }
-        if (in_array($options['type'], ['new','edit','register','forgotten'])){
+        if (in_array($options['type'], ['adminNew','userEdit','userNew','forgotten','adminNew'])){
             $builder
                 ->add('email', EmailType::class, [
                     'label' => false,
@@ -47,7 +47,7 @@ class UserType extends AbstractType
                     ]
                 ]);
         }
-        if (in_array($options['type'], ['new','edit','register'])){
+        if (in_array($options['type'], ['adminNew','userEdit','userNew','adminNew'])){
             $builder
                 ->add('picture', FileType::class, [
                     'label' => false,
@@ -57,18 +57,18 @@ class UserType extends AbstractType
                     ]
                 ]);
         }
-        if (in_array($options['type'], ['new','edit'])){
+        if (in_array($options['type'], ['adminNew','adminNew'])){
             $builder
                 ->add('roles', ChoiceType::class, [
                     'label' => 'role *',
                     'choices' => [
                         'Utilisateur' => 'ROLE_USER',
-                        'Administrateur' => 'ROLE_USER;ROLE_ADMIN'
+                        'Administrateur' => 'ROLE_ADMIN'
                     ],
                     'required' => true,
                 ]);
         }
-        if (in_array($options['type'], ['new','register','reinitialisation'])){
+        if (in_array($options['type'], ['adminNew','userNew','reinitialisation','userEdit'])){
             $builder
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
@@ -78,7 +78,7 @@ class UserType extends AbstractType
                             'class' => 'password-field'
                         ]
                     ],
-                    'required' => true,
+                    'required' => false,
                     'first_options'  => [
                         'label' => false,
                         'attr' => [

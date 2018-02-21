@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller\Client;
 
-use AppBundle\Entity\Project;
 use AppBundle\Entity\User;
-use AppBundle\Service\FileUploader;
+use AppBundle\Service\UserServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,50 +17,43 @@ use Symfony\Component\HttpFoundation\Request;
 class AccountController extends Controller
 {
 
-    private $uploader;
+    private $userServices;
 
-    public function __construct(FileUploader $uploader)
+    public function __construct(UserServices $userServices)
     {
-        $this->uploader = $uploader;
+        $this->userServices = $userServices;
     }
 
     /**
      * Edit current user.
      *
      * @Route("/", name="account_user_edit")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editUserAction(Request $request)
     {
-        $user = $this->getUser();
+        $savedUser = clone $this->getUser();
+        $user = $this->userServices->preLoadAccount($this->getUser());
+
         $deleteForm = $this->createDeleteUserForm($user);
 
-        $roles = '';
-        foreach ($user->getRoles() as $role){
-            $roles= $roles . $role . ';';
-        }
-        $roles = substr($roles, 0, -1);
-        $user->setRoles($roles);
-
-        if ($user->getPicture() != null && gettype($user->getPicture()) == 'string'){
-            $picture = new File($this->uploader->getUserProfilePictureDir().'/'.$user->getPicture());
-            $user->setPicture($picture);
-        }
-
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, [
-            'type' => 'edit'
+            'type' => 'userEdit'
         ]);
-        $editForm->handleRequest($request);
 
-        if ($user->getPicture() == null && isset($picture)){
-            $user->setPicture($picture);
-        }
+        $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
+            $user = $this->userServices->prePersistAccount($savedUser, $user);
+
             $this->getDoctrine()->getManager()->flush();
+
+            if ($user->getPassword() != $savedUser->getPassword()){
+                $this->redirectToRoute('logout');
+            }
         }
 
         return $this->render('@Client/account/index.html.twig', array(
@@ -75,7 +66,7 @@ class AccountController extends Controller
     /**
      * Lists all created projects by user.
      *
-     * @Route("/projets-crées", name="account_show_created_projects")
+     * @Route("/projets-crees", name="account_show_created_projects")
      * @Method("GET")
      */
     public function showCreatedProjectsAction()
@@ -101,7 +92,7 @@ class AccountController extends Controller
     /**
      * Lists all participating projects by user.
      *
-     * @Route("/projets-participés", name="account_show_participating_projects")
+     * @Route("/projets-participes", name="account_show_participating_projects")
      * @Method("GET")
      */
     public function showParticipatingProjectsAction()
@@ -126,9 +117,13 @@ class AccountController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->userServices->preDeleteUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush();
+
+            $this->get('security.token_storage')->setToken(null);
         }
 
         return $this->redirectToRoute('login');

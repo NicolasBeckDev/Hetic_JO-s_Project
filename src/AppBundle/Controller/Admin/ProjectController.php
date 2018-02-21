@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\AppBundle;
 use AppBundle\Entity\Project;
+use AppBundle\Service\ProjectServices;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,6 +18,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ProjectController extends Controller
 {
+    private $projectServices;
+
+    public function __construct(ProjectServices $projectServices)
+    {
+        $this->projectServices = $projectServices;
+    }
+
     /**
      * Lists all project entities.
      *
@@ -25,13 +33,9 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $projects = $this->getDoctrine()
-            ->getRepository(Project::class)
-            ->findAll();
-
-        return $this->render('@Admin/project/index.html.twig', array(
-            'projects' => $projects,
-        ));
+        return $this->render('@Admin/project/index.html.twig', [
+            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
+        ]);
     }
 
     /**
@@ -44,12 +48,10 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        $deleteForm = $this->createDeleteForm($project);
-
-        return $this->render('@Admin/project/show.html.twig', array(
+        return $this->render('@Admin/project/show.html.twig', [
             'project' => $project,
-            'delete_form' => $deleteForm->createView(),
-        ));
+            'delete_form' => $this->createDeleteForm($project)->createView(),
+        ]);
     }
 
     /**
@@ -63,11 +65,17 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
+        $savedProject = clone  $project;
+        $project = $this->projectServices->preLoadEdit($project);
+
         $deleteForm = $this->createDeleteForm($project);
         $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $project = $this->projectServices->prePersistEdit($savedProject, $project);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_project_edit', array('id' => $project->getId()));
@@ -96,14 +104,13 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $project->setIsValidated(true);
-            $em->persist($project);
-            $em->flush();
 
+            $project = $this->projectServices->prePersistValidated($project);
+
+            $this->getDoctrine()->getManager()->flush();
 
             $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( validé )"))
-                ->setFrom('nicolasbeck.dev@gmail.com')
+                ->setFrom('tousparis2024@gmail.com')
                 ->setTo($project->getCreator()->getEmail())
                 ->setBody(
                     $this->renderView(
@@ -151,6 +158,7 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project = $this->projectServices->preDeleteProject($project);
             $em = $this->getDoctrine()->getManager();
             $em->remove($project);
             $em->flush();
