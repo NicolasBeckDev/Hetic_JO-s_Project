@@ -1,4 +1,6 @@
 .edit {
+  width: 100%;
+  height: 100%;
   .header {
     position: relative;
     height: 75px;
@@ -130,6 +132,21 @@
       .mail input {
         width: 100%;
         height: 100px;
+      }
+
+      .roles{
+        text-align: center;
+        margin-top: 20px;
+
+        label.required{
+          display: none;
+        }
+
+        select#user_roles{
+          width: 50%;
+          height:50px;
+          display: inline-block;
+        }
       }
     }
 
