@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Client;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\User;
 use AppBundle\Service\UserServices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -72,7 +73,8 @@ class AccountController extends Controller
     public function showCreatedProjectsAction()
     {
         return $this->render('@Client/account/project/list.html.twig', [
-            'projects' => $this->getUser()->getCreatedProjects()
+            'projects' => $this->getUser()->getCreatedProjects(),
+            'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll()
         ]);
     }
 
@@ -85,7 +87,8 @@ class AccountController extends Controller
     public function showFollowedProjectsAction()
     {
         return $this->render('@Client/account/project/list.html.twig', [
-            'projects' => $this->getUser()->getFollowedProjects()
+            'projects' => $this->getUser()->getFollowedProjects(),
+            'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll()
         ]);
     }
 
@@ -98,7 +101,8 @@ class AccountController extends Controller
     public function showParticipatingProjectsAction()
     {
         return $this->render('@Client/account/project/list.html.twig', [
-            'projects' => $this->getUser()->getParticipatingProject()
+            'projects' => $this->getUser()->getParticipatingProject(),
+            'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll()
         ]);
     }
 
