@@ -2,13 +2,11 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,8 +40,14 @@ class LocationType extends AbstractType
                 'required' =>false,
                 'multiple' => true
             ])
-            ->add('range', RangeType::class, [
+            ->add('range', ChoiceType::class, [
                 'label' => 'Km',
+                'choices' => [
+                    '2'     => 2,
+                    '5'     => 5,
+                    '10'    => 10,
+                    '20'    => 20
+                ],
                 'required' =>false
             ])
             ->add('search', ButtonType::class)

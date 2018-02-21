@@ -1,22 +1,26 @@
 module.exports = function ()
 {
-    var x = 1; //initlal text box count
-    var max_fields = 10; //maximum input boxes allowed
-
     $(document).ready(function () {
 
         /*** FONCTION POUR AJOUTER PLUSIEURS IMAGES ****/
+
+        var x = 1; //initlal text box count
+        var max_fields = 7; //maximum input boxes allowed
         var wrapper = $('.containerOtherFile'); //Fields wrapper
 
         $(".addFiles span").on("click" , function (e) {
             e.preventDefault();
-            var htmlInput = "<div class='blockImgOther block"+x+"'><label class='otherImg"+x+"' for='otherImg' >Uploader votre image <input id='otherImg"+x+"' onchange='handleFileSelect(this)' type='file' name='otherImg[]' class='otherImg' accept='image/*'> </label></div>"
-            $(wrapper).append(htmlInput); //add input box$
-            /*if(x <= max_fields) { //max input box allowed
-             x ++;
-             $(wrapper).append(htmlInput); //add input box$
-             }
-             */
+            var htmlInput = "<div class='blockImgOther block"+x+"'><label class='otherImg"+x+"' for='otherImg' >Uploader votre image <input id='otherImg"+x+"' type='file' name='otherImg[]' class='otherImg' accept='image/*'> </label></div>"
+            if(x <= max_fields) { //max input box allowed
+                x++; //text box increment
+                $(wrapper).append(htmlInput); //add input box$
+            }
+        });
+
+        $(wrapper).on("change",".blockImgOther input", function(e) { //user click on remove text
+            var file = $(this)[0].files[0]
+            $(this).parents('.blockImgOther').addClass('fileIn');
+            $(this).parents('.blockImgOther').append("<div class='infoFiles'><p>" + file.name+ "<br clear=\"left\"/></p><span class='selFile'>+</span></div>").show('slow'); //add input box
         });
 
         $(wrapper).on("click",".selFile", function(e) { //user click on remove text
@@ -108,13 +112,25 @@ module.exports = function ()
             }
         });
     });
+    $('.adresse input').attr('id', "autocomplete");
+    $('.adresse').on("focus"," input", function() {
+        geolocate();
+    });
+    $('.adresse').on("change"," input", function() {
+        let input = $(this);
+        var geocoder = new google.maps.Geocoder();
 
-    function handleFileSelect(el){
-        var file = $(el)[0].files[0]
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(el).parents('.blockImgOther').addClass('fileIn');
-            $(el).parents('.blockImgOther').append("<div class='infoFiles'><p>" + file.name+ "<br clear=\"left\"/></p><span class='selFile'>+</span></div>").show('slow'); //add input box
-        }
-    }
+        // Geocode the address
+        geocoder.geocode({
+            'address': input.value
+        }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+
+                // set it to the correct, formatted address if it's valid
+                input.value = results[0].formatted_address;
+
+                // show an error if it's not
+            } else input.val('');
+        });
+    })
 };

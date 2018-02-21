@@ -57,6 +57,9 @@ form[name='project']{
             -ms-align-items: center;
             -ms-flex-align: center;
             align-items: center;
+            &:before, &:after{
+                display: none;
+            }
             .left{
                 margin-left: 0;
             }
@@ -258,6 +261,7 @@ form[name='project']{
                     }
                     .list{
                         width:100%;
+                        height: auto;
                         padding: 20px;
                         -webkit-box-sizing: border-box;
                         -moz-box-sizing: border-box;
@@ -409,7 +413,8 @@ form[name='project']{
                     img{
                         display: none;
                         max-width: 100%;
-                        height: 100%;
+                        max-height: 100%;
+                        width: auto;
                     }
                     span{
                         &.modif {
@@ -459,6 +464,7 @@ form[name='project']{
                         width: 100%;
                         p{
                             display: inline-block;
+                            font-weight: 700;
                         }
                         span{
                             cursor: pointer;
@@ -481,8 +487,8 @@ form[name='project']{
                                 content: '+';
                                 position: absolute;
                                 color: #ffffff;
-                                top:53%;
-                                left:47%;
+                                top: 10px;
+                                left: 13px;
                                 font-size: 20px;
                                 -webkit-transform: translate(-50%,-50%);
                                 -moz-transform: translate(-50%,-50%);
@@ -538,6 +544,7 @@ form[name='project']{
                                     p{
                                         display: inline-block;
                                         vertical-align: middle;
+                                        margin-bottom: 0px;
                                     }
                                     span{
                                         @extend .proxima-regular;
@@ -603,6 +610,7 @@ form[name='project']{
                 }
                 input, textarea{
                     @extend .proxima-regular;
+                    font-weight: 700;
                     width: 100%;
                     color: $light-black;
                     font-size: 18px;
@@ -613,18 +621,22 @@ form[name='project']{
                     }
                     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                     &::-moz-placeholder { /* Firefox 19+ */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                     &:-ms-input-placeholder { /* IE 10+ */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                     &:-moz-placeholder { /* Firefox 18- */
                         @extend .proxima-regular;
+                        font-weight: 700;
                         color: #D1D1D1;
                     }
                 }
