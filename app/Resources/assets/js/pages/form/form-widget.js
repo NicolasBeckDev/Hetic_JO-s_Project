@@ -1,5 +1,4 @@
 module.exports = function () {
-    console.log("LE ZOB")
     $('.input-placeholder-effect input').on('change', function ()
     {
         var input = $(this);
