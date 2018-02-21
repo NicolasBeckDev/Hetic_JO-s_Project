@@ -24,10 +24,10 @@ class UserServices
 
     public function prePersistRegister(User $user){
         return $user
-            ->setRoles($this->getUserRole())
+            ->setRoles($this->rolesStringToArray($this->getUserRole()))
             ->setPassword($this->encodePassword($user))
             ->setPicture($this->uploadPicture($user))
-        ;
+            ;
     }
 
     public function prePersistForgottenPassword(User $user){
@@ -56,7 +56,7 @@ class UserServices
             ->setEmail($formUser->getEmail() ?? $user->getEmail())
             ->setFirstname($formUser->getFirstname() ?? $user->getFirstname())
             ->setLastname($formUser->getLastname() ?? $user->getLastname())
-        ;
+            ;
     }
 
     public function preDeleteUser(User $user){
@@ -68,13 +68,14 @@ class UserServices
         return $user
             ->setPassword($this->encodePassword($user))
             ->setPicture($this->uploadPicture($user))
+            ->setRoles($this->rolesStringToArray($user->getRoles()))
             ;
     }
 
     public function preLoadByAdmin(User $user){
         return $user
             ->setPicture($this->pictureStringToFile($user->getPicture()))
-            ->setRoles($this->roleArrayToString($user->getRoles()))
+            ->setRoles($this->rolesArrayToString($user->getRoles()))
             ;
     }
 
@@ -87,8 +88,12 @@ class UserServices
             ;
     }
 
-    private function roleArrayToString($roles){
+    private function rolesArrayToString($roles){
         return $roles[0];
+    }
+
+    private function rolesStringToArray($roles){
+        return [$roles];
     }
 
     private function getUserRole()
