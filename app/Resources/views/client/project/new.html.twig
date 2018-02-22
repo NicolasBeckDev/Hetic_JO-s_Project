@@ -1,8 +1,12 @@
 {% extends "@Client/layout.html.twig" %}
 
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
 
-{% block body %}
-    {{ form_start(form) }}
+{% block content %}
+    <div class="project-create-content">
+        {{ form_start(form) }}
         <div class="menuForm">
             <div class="container">
                 <div class="left">
@@ -43,7 +47,11 @@
                     <div class="addFiles">
                         <p>Ajouter d’autre images <span></span>
                     </div>
-                    <div class="containerOtherFile"></div>
+                    <div class="containerOtherFile" data-prototype="
+                        {% filter escape %}
+                            {{ include('@Client/project/sub-picture-prototype.html.twig', { 'form': form.subPictures.vars.prototype }) }}
+                        {% endfilter %}
+                    "></div>
                 </div>
             </div>
             <div class="right">
@@ -81,8 +89,10 @@
                 </div>
             </div>
         </div>
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
+
 {% block addJavascripts %}
     <script>
     var placeSearch, autocomplete;
