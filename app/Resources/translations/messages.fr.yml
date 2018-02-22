@@ -41,6 +41,7 @@ app:
             project:
                 list:
                     all: "Tous"
+                    near_projects: "Proche de moi"
                 show:
                     description: "Description"
                     goal: "Objectif"
