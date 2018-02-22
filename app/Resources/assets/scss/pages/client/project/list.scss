@@ -419,6 +419,8 @@
         -webkit-box-shadow: 0 12px 34px 0 rgba(0,0,0,0.3) ;
         -moz-box-shadow: 0 12px 34px 0 rgba(0,0,0,0.3) ;
         box-shadow: 0 12px 34px 0 rgba(0,0,0,0.3) ;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
         &:after{
             content: '';
             position: absolute;
@@ -445,6 +447,12 @@
                 left: 0px;
                 background: #4885E7;
             }
+        }
+        &.hide-popup {
+            opacity: 0;
+        }
+        &.show-popup {
+            opacity: 1;
         }
     }
 }

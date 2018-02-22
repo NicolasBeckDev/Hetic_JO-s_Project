@@ -33,6 +33,7 @@ require('./pages/client/project/button-mobile')();
 require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
 require('./pages/client/project/show/favoris-color')();
+require('./pages/client/popup')();
 
 $(function () {
 
