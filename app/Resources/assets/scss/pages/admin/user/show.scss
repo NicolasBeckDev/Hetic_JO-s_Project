@@ -4,7 +4,7 @@
 
   .header{
     position: relative;
-    height: 75px;
+    height: 80px;
 
     .toList{
       z-index: 10;
@@ -13,7 +13,7 @@
       height: auto;
       @extend .proxima-regular;
       font-size: 18px;
-      top: 27px;
+      top: 30px;
       left:30px;
 
       a{
