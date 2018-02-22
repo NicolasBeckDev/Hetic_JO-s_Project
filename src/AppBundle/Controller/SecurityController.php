@@ -131,7 +131,8 @@ class SecurityController extends Controller
             }
         }
 
-        return $this->render('@Client/forgottenPassword.html.twig', [
+
+        return $this->render('@Client/forgottenPassword/forgottenPassword.html.twig', [
             'form' => $form->createView(),
             'message' => $message ?? false,
             'type' => $type ?? false,
@@ -176,7 +177,7 @@ class SecurityController extends Controller
                 return $this->redirectToRoute('homepage');
             }
 
-            return $this->render('@Client/register.html.twig', [
+            return $this->render('@Client/reinitialization/reinitalization.html.twig', [
                 'form' => $form->createView()
             ]);
 

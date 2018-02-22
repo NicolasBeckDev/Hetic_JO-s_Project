@@ -55,9 +55,15 @@ app:
                 button: "Se connecter"
                 or: "Ou"
                 forgotten_password: "Mot de passe oublié ?"
+            forgotten_password:
+                button: "Rechercher"
+                cancel: "Annuler"
             registration:
                 title: "Inscrivez-vous, soyez volontaire"
                 button: "S'inscrire"
+            reinitialization:
+                title: "Réinitialisez votre mot de passe"
+                button: "Réinitialiser"
             user:
                 inputs:
                     lastname: "Nom"
