@@ -8,11 +8,7 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "picker": "^0.1.4"
-=======
-    "hammerjs": "^2.0.8",
-    "swiper": "^4.1.0"
->>>>>>> add cards tinder on /projects
+    "picker": "^0.1.4",
+    "hammerjs": "^2.0.8"
   }
 }

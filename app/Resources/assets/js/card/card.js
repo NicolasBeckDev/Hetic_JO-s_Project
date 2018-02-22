@@ -1,7 +1,7 @@
 const Hammer = require('hammerjs')
 
 var allCards = document.querySelectorAll('.card');
-var swiperContainer = document.querySelector('.swiper-container');
+var swiperContainer = document.querySelector('.card--holder');
 var cardEvent = "";
 
 
