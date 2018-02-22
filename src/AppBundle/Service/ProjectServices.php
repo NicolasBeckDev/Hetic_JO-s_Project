@@ -25,7 +25,6 @@ class ProjectServices
     public function prePersistNew(Project $project){
         return $project
             ->setDate($this->stringToDate($project->getDate()))
-            ->setInProgress(false)
             ->setCreator($this->getUser())
             ->setMainPicture($this->uploadMainPicture($project))
             ->setSubPictures($this->uploadSubPictures($project))
