@@ -12,6 +12,8 @@
             {% endfor %}
 
             <button type="button" class="filter blue active" data-filter="*">{{ 'app.page.client.project.list.all'|trans }}</button>
+
+            <a href="{{ path('project_location') }}" class="filter blue location-button">Localisation</a>
         </div>
 
         <div class="project-wrapper">
@@ -23,7 +25,7 @@
                             <a href="{{ path('project_show', { 'id': project.id }) }}">
                                 <div class="image-container">
                                     <div class="image-positioner">
-                                        <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg' ) }}" />
+                                        <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg') }}" />
                                     </div>
                                 </div>
 

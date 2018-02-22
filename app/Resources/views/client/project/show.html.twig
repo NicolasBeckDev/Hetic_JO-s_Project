@@ -17,7 +17,7 @@
                             {% endfor %}
                         </div>
 
-                        <div class="addFavoris">
+                        <div class="addFavoris{% if project.followers.contains(app.user) %} active{% endif %}">
                             {{ form_start(followForm) }}
                                 <button type="submit" class="bubbly-button">
                                     <i class="far fa-star"></i>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="district-container">
-                            <span class="district">Paris {{ project.district.name }}</span>
+                            <span class="district">Paris {{ project.district.name }} arrondissement</span>
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                                 </div>
 
                                 <div class="media-body media-middle">
-                                    <span class="text">{{ 'app.page.client.project.show.participant'|trans }}</span>
+                                    <span class="text">{{ 'app.page.client.project.show.participant'|transchoice(project.participants|length) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="media-body media-middle">
-                                    <span class="text">{{ 'app.page.client.project.show.day_left'|trans }}</span>
+                                    <span class="text">{{ 'app.page.client.project.show.day_left'|transchoice(project.date|remaining_days) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {{ form_start(participateForm) }}
-                                    <input type="submit" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.participate'|trans }}" />
+                                    <input type="submit" class="{{ project.category.color }}" value="{% if project.participants.contains(app.user) %}{{ 'app.page.client.project.show.buttons.unparticipate'|trans }}{% else %}{{ 'app.page.client.project.show.buttons.participate'|trans }}{% endif %}" />
                                     {{ form_widget(participateForm) }}
                                 {{ form_end(participateForm) }}
                             </div>

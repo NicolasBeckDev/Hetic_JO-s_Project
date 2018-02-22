@@ -44,10 +44,11 @@ app:
                 show:
                     description: "Description"
                     goal: "Objectif"
-                    participant: "Participants"
-                    day_left: "Restants"
+                    participant: "[0, 1] Participant|[2, Inf[ Participants"
+                    day_left: "[0, 1] Restant|[2, Inf[ Restants"
                     buttons:
                         participate: "Participer au projet"
+                        unparticipate: "Ne plus participer au projet"
                         finance: "Financer"
             connection:
                 title: "Connectez-vous"

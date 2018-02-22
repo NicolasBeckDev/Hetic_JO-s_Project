@@ -1,9 +1,10 @@
+{% spaceless %}
 <div class="col-sm-6">
     <div class="project __project_category_color__">
         <a href="{{ path('project_show', { 'id': '__project_id__' }) }}">
             <div class="image-container">
                 <div class="image-positioner">
-                    <img src="{{ asset('uploads/project/picture/__project_main_picture__') }}" />
+                    <img src="{{ asset('__project_picture_url__') }}" />
                 </div>
             </div>
 
@@ -25,3 +26,4 @@
         <div class="color-line"></div>
     </div>
 </div>
+{% endspaceless %}

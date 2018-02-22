@@ -30,6 +30,7 @@ require('./layout/header')();
 require('./pages/form/form-widget')();
 require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
+require('./pages/client/project/show/favoris-color')();
 
 $(function () {
 

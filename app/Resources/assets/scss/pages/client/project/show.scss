@@ -202,6 +202,17 @@
                 cursor: pointer;
                 color: #272727;
 
+                &.active
+                {
+                    .fas{
+                        opacity:1;
+                        color: $gradient-light-yellow;
+                    }
+                    .far{
+                        opacity:0;
+                    }
+                }
+
                 @media screen and (max-width: $screen-xs-max) {
                     display: none;
                 }
@@ -234,10 +245,9 @@
                         &.fas{
                             opacity:0;
                         }
-                        &.fa{
+                        &.far{
                             opacity:1;
                         }
-                        
                     }
                     &:before, &:after{
                         position: absolute;
