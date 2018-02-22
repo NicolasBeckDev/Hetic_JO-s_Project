@@ -60,7 +60,7 @@ class Project
     /**
      * @var bool
      *
-     * @ORM\Column(name="in_progress", type="boolean")
+     * @ORM\Column(name="in_progress", type="boolean", nullable=true)
      */
     private $inProgress;
 

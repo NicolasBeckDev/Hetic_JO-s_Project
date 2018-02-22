@@ -70,7 +70,7 @@ class SecurityController extends Controller
             $event = new InteractiveLoginEvent($request, $token);
             $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('@Client/registration/registration.html.twig', [
@@ -173,7 +173,7 @@ class SecurityController extends Controller
                 $event = new InteractiveLoginEvent($request, $token);
                 $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-                return $this->redirectToRoute('project_index');
+                return $this->redirectToRoute('homepage');
             }
 
             return $this->render('@Client/register.html.twig', [

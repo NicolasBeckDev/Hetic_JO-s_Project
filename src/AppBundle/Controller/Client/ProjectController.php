@@ -143,6 +143,10 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
+        if ($project->getCreator()->getId() != $this->getUser()->getId()){
+            return $this->redirectToRoute('project_index');
+        }
+
         $savedProject = clone  $project;
         $project = $this->projectServices->preLoadEdit($project);
 
@@ -177,6 +181,10 @@ class ProjectController extends Controller
      */
     public function deleteAction(Request $request, Project $project)
     {
+        if ($project->getCreator()->getId() != $this->getUser()->getId()){
+            return $this->redirectToRoute('project_index');
+        }
+
         $form = $this->createDeleteForm($project);
         $form->handleRequest($request);
 
