@@ -27,6 +27,18 @@ header {
                 background-color: #ffffff;
             }
         }
+        .menu-desktop {
+            .menuUser {
+                padding-top: 79px !important;
+                .bottom{
+                    -webkit-box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
+                    -moz-box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
+                    box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
+                    border-bottom-left-radius: 30px;
+                    border-bottom-right-radius: 30px;
+                }
+            }
+        }
     }
 
     @media screen and (max-width: $screen-sm-max) {
@@ -180,14 +192,12 @@ header {
                             font-size: 20px;
                             z-index: 10;
                             height: 100%;
-                            &:after{
-                                content: '\2B23';
+                            i{
                                 position: absolute;
                                 bottom: -5px;
                                 right: -5px;
-                                color: $gradient-dark-blue;
+                                color: #26C6DA;
                             }
-
                         }
                         .imageProfil{
                             border: 2px solid $gradient-dark-blue;
@@ -790,7 +800,7 @@ header {
                     background-color: white;
                     width: 80%;
                     right: 0;
-                    top: 77px;
+                    top: 74px;
                     text-align: center;
                     color: $light-black;
                     font-size: 18px;

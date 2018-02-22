@@ -10,6 +10,7 @@ require('../img/background-homepage.jpg');
 require('../img/connexion.png');
 require('../img/inscription.png');
 require('../img/user.png');
+require('../img/pinMarker.png');
 
 require('../img/pages/project/default_environnement.jpg');
 require('../img/pages/project/default_mobilite_transport.jpg');
@@ -28,6 +29,7 @@ require('./lib/owl-carousel/owl.carousel.min')();
 
 require('./layout/header')();
 require('./pages/form/form-widget')();
+require('./pages/client/project/button-mobile')();
 require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
 require('./pages/client/project/show/favoris-color')();
