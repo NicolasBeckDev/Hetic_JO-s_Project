@@ -163,7 +163,7 @@
                     var contentString = '<div id="content">'+
                         '<div id="siteNotice">'+
                         '</div>'+
-                        '<h4 id="firstHeading" class="firstHeading">Adresse du projet</h1>'+
+                        '<h5 id="firstHeading" class="firstHeading">Adresse du projet</h5>'+
                         '<div id="bodyContent">'+
                         '<p>{{ project.address }}'+
                         '</div>'+
@@ -183,7 +183,7 @@
                         title: 'Adresse du projet',
                         position: results[0].geometry.location
                     });
-
+                    infowindow.open(map, marker);
                     marker.addListener('click', function() {
                         infowindow.open(map, marker);
                     });

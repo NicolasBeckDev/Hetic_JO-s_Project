@@ -9,12 +9,14 @@
         <div class="filter-container">
             <div class="filter-wrapper">
                 {{ form_start(form) }}
-                    {{ form_widget(form.location) }}
-                    {{ form_widget(form.address) }}
+                    {{ form_widget(form.location, {'label': ' ' }) }}
+                    <div class="location_address">
+                        {{ form_widget(form.address) }}
+                    </div>
                     {{ form_widget(form.category) }}
                     {{ form_widget(form.status) }}
                     {{ form_widget(form.range) }}
-                    {{ form_widget(form.search) }}
+                    {{ form_widget(form.search, {'label': 'Rechercher' }) }}
                 {{ form_end(form) }}
             </div>
         </div>
@@ -293,8 +295,13 @@
         }
 
         function createMarker(loc, project, results) {
+            let image = '{{ asset('build/images/pinMarker.png') }}';
             let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(loc[0],loc[1]),
+                icon: {
+                    scaledSize: new google.maps.Size(30, 35),
+                    url: image
+                },
                 map: map
             });
             const address = [

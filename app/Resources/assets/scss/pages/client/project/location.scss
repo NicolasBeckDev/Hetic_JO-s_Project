@@ -6,19 +6,128 @@
     .filter-container
     {
         width: 100%;
-        height: $filter-bar-height;
+        height: 65px;
         background-color: white;
         border-bottom: 1px solid lightgray;
-        padding: 15px 35px;
+        padding: 10px 35px;
 
         .filter-wrapper
         {
             form
             {
-                display: inline-block;
+                width: 100%;
+                display: -webkit-flex;
+                display: -moz-flex;
+                display: -ms-flexbox;
+                display: -ms-flex;
+                display: flex;
+                -webkit-align-items: center;
+                -moz-align-items: center;
+                -ms-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
 
-                > div, > input, > button, > select {
-                    float: left;
+                > div, > input, > button, > select, > div {
+                    background-color: #F2F2F2;
+                    color: #272727;
+                    height: 40px;
+                    margin-right: 20px;
+                    border-radius: 5px;
+                    @extend .proxima-regular;
+                    font-weight: 700;
+                    &#location_location{
+                        margin-right: 10px;
+                    }
+                    &#location_location{
+                        position: relative;
+                        width: 40px;
+                        border-radius: 30px;
+                        &:after{
+                            font-family: "Font Awesome 5 Free";
+                            font-size: 20px;
+                            font-weight: 700;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            -webkit-transform: translate(-50%,-50%);
+                            -moz-transform: translate(-50%,-50%);
+                            -ms-transform: translate(-50%,-50%);
+                            -o-transform: translate(-50%,-50%);
+                            transform: translate(-50%,-50%);
+                            content: '\f3c5';
+                        }
+                    }
+                    &.location_address{
+                        padding: 10px;
+                        padding-left: 30px;
+                        position: relative;
+                        input{
+                            background-color: #F2F2F2;
+                            vertical-align: top;
+                            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                                @extend .proxima-regular;
+                                font-weight: 500;
+                                color: #D1D1D1;
+                            }
+                            &::-moz-placeholder { /* Firefox 19+ */
+                                @extend .proxima-regular;
+                                font-weight: 500;
+                                color: #D1D1D1;
+                            }
+                            &:-ms-input-placeholder { /* IE 10+ */
+                                @extend .proxima-regular;
+                                font-weight: 500;
+                                color: #D1D1D1;
+                            }
+                            &:-moz-placeholder { /* Firefox 18- */
+                                @extend .proxima-regular;
+                                font-weight: 500;
+                                color: #D1D1D1;
+                            }
+                        }
+                        &:before{
+                            margin-right: 5px;
+                            background-image: url('../img/searchPicto.png');
+                            background-size: 18px 18px;
+                            display: inline-block;
+                            width: 18px;
+                            height: 18px;
+                            content:"";
+                            margin-left: -15px;
+                        }
+                    }
+                    & .nice-select{
+                        @extend .proxima-bold;
+                        width: 100%;
+                        border: 0px;
+                        padding: 0;
+                        height: inherit;
+                        line-height: 23px;
+                        float: inherit;
+                        font-size: 18px;
+                        color: $light-black;
+                        &:after{
+                            border-width: 8.7px 5px 10px 5px;
+                            border-style: solid;
+                            border-color: $gradient-light-blue transparent transparent transparent;
+                            content: '';
+                            display: block;
+                            height: inherit;
+                            margin-top: -4px;
+                            pointer-events: none;
+                            position: absolute;
+                            right: 12px;
+                            top: 50%;
+                            -webkit-transform: rotate(0deg);
+                            -moz-transform: rotate(0deg);
+                            -ms-transform: rotate(0deg);
+                            -o-transform: rotate(0deg);
+                            transform: rotate(0deg);
+                            -webkit-transition: all 0.15s ease-in-out;
+                            transition: all 0.15s ease-in-out;
+                            width: auto;
+                        }
+                    }
                 }
             }
         }
