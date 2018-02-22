@@ -3,6 +3,7 @@ module.exports = function () {
 
     popupTab.forEach( function ( popup, index ) {
         let id = popup.getAttribute('id');
+        let quitButton = popup.querySelector('.js-closePopup');
         let isStored = getItem(id);
 
         if ( isStored == 'false' ) {
@@ -12,7 +13,7 @@ module.exports = function () {
             setItem(id, true);
         }
 
-        popup.addEventListener('click', function () {
+        quitButton.addEventListener('click', function () {
             hidePopup(popup);
             setItem(id, false);
         })

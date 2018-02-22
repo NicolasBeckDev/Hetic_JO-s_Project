@@ -454,5 +454,9 @@
         &.show-popup {
             opacity: 1;
         }
+        .js-closePopup {
+            padding: 4px;
+            cursor: pointer;
+        }
     }
 }
