@@ -83,7 +83,13 @@
 
             window.geocoder = new google.maps.Geocoder;
 
-            const autocomplete = new google.maps.places.Autocomplete(document.getElementById('{{ form.address.vars.id }}'));
+            const autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('{{ form.address.vars.id }}'),
+                {
+                    componentRestrictions: {country: "fr"},
+                    types: ['address']
+                });
+            
             autocomplete.bindTo('bounds', map);
 
             autocomplete.addListener('place_changed', function() {

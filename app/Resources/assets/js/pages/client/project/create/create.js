@@ -113,9 +113,7 @@ module.exports = function ()
         });
     });
     $('.adresse input').attr('id', "autocomplete");
-    $('.adresse').on("focus"," input", function() {
-        geolocate();
-    });
+
     $('.adresse').on("change"," input", function() {
         let input = $(this);
         var geocoder = new google.maps.Geocoder();

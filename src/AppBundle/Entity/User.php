@@ -67,7 +67,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(name="picture", type="string", nullable=true)
+     * @ORM\Column(name="picture", type="string")
      */
     private $picture;
 
@@ -89,7 +89,7 @@ class User implements UserInterface, \Serializable
     private $createdProjects;
 
     /**
-     * @ORM\Column(type="array", nullable=false)
+     * @ORM\Column(type="array")
      *
      */
     private $roles;
