@@ -37,13 +37,18 @@ class ProjectController extends Controller
      *
      * @Route("/liste", name="project_index")
      * @Method("GET")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return $this->render('@Client/project/list.html.twig', [
             'projects' => $this->getDoctrine()->getRepository(Project::class)->findBy(['isValidated' => true]),
             'districts' => $this->getDoctrine()->getRepository(District::class)->findAll(),
             'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll(),
+            'message' => $request->query->get('message') ?? false,
+            'type' => $request->query->get('type') ?? false,
+            'title' => $request->query->get('title') ?? false,
         ]);
     }
 
@@ -136,7 +141,7 @@ class ProjectController extends Controller
     /**
      * Displays a form to edit an existing project entity.
      *
-     * @Route("/modifier/{id}", name="project_edit")
+     * @Route("/modifier/{project}", name="project_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Project $project
@@ -145,7 +150,11 @@ class ProjectController extends Controller
     public function editAction(Request $request, Project $project)
     {
         if ($project->getCreator()->getId() != $this->getUser()->getId()){
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('project_index', [
+                'message' => "Vous n'avez pas les droits pour modifier ce projet",
+                'title' => "Oops...",
+                'type' => 'error'
+            ]);
         }
 
         $savedProject = clone  $project;
@@ -182,10 +191,6 @@ class ProjectController extends Controller
      */
     public function deleteAction(Request $request, Project $project)
     {
-        if ($project->getCreator()->getId() != $this->getUser()->getId()){
-            return $this->redirectToRoute('project_index');
-        }
-
         $form = $this->createDeleteForm($project);
         $form->handleRequest($request);
 
@@ -208,7 +213,7 @@ class ProjectController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
-            ->setMethod('POST')
+            ->setMethod('DELETE')
             ->getForm()
             ;
     }

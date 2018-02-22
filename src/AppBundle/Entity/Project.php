@@ -109,7 +109,7 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="mainPicture", type="string", length=255)
+     * @ORM\Column(name="mainPicture", type="string", length=255, nullable=true)
      */
     private $mainPicture;
 

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Project;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -13,20 +14,22 @@ class ProjectServices
     private $uploader;
     private $tokenStorage;
     private $pictureDir;
+    private $defaultPictureDir;
 
-    public function __construct(Filesystem $fs, FileUploader $uploader, TokenStorageInterface $tokenStorage, $pictureDir)
+    public function __construct(Filesystem $fs, FileUploader $uploader, TokenStorageInterface $tokenStorage, $pictureDir, $defaultPictureDir)
     {
         $this->fs = $fs;
         $this->uploader = $uploader;
         $this->tokenStorage = $tokenStorage;
         $this->pictureDir = $pictureDir;
+        $this->defaultPictureDir = $defaultPictureDir;
     }
 
     public function prePersistNew(Project $project){
         return $project
             ->setDate($this->stringToDate($project->getDate()))
             ->setCreator($this->getUser())
-            ->setMainPicture($this->uploadMainPicture($project))
+            ->setMainPicture($this->uploadMainPicture($project) ?? $this->uploadDefaultPicture($project))
             ->setSubPictures($this->uploadSubPictures($project))
             ;
     }
@@ -90,6 +93,30 @@ class ProjectServices
             return array_map(function ($subPicture){ return $this->uploader->upload($subPicture, $this->pictureDir);}, $project->getSubPictures());
         }
         return null;
+    }
+
+    private function uploadDefaultPicture(Project $project){
+        return $this->uploader->uploadDefaultPicture($this->defaultPictureDir.$this->getPictureByCategory($project->getCategory()), $this->pictureDir);
+    }
+
+    private function getPictureByCategory(Category $category){
+        switch ($category->getName()) {
+            case 'Environnement':
+                return '/default_environnement.jpg';
+                break;
+            case 'Solidaire et Citoyen':
+                return '/default_solidaire_citoyen.jpg';
+                break;
+            case 'Mobilité et transports':
+                return '/default_mobilite_transport.jpg';
+                break;
+            case 'Urbanisme':
+                return '/default_urbanisme.jpg';
+                break;
+            case 'Technologie':
+                return '/default_technologie.jpg';
+                break;
+        }
     }
 
     private function getUser(){

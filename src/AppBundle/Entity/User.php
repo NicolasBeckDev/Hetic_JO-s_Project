@@ -84,7 +84,7 @@ class User implements UserInterface, \Serializable
     private $participatingProjects;
 
     /**
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator", cascade={"remove"})
      */
     private $createdProjects;
 

@@ -60,31 +60,34 @@ $(function () {
 
     let elem = document.querySelector('.grid');
 
-    let item = elem.querySelectorAll('.grid-item');
+    if (elem){
+        let item = elem.querySelectorAll('.grid-item');
 
-    item.forEach(function (currentItem) {
-        addRandomSizeClass(currentItem);
-    });
-
-    let iso = new Isotope( elem, {
-        // options
-        itemSelector: '.grid-item',
-        percentPosition: true,
-        masonry: {
-            columnWidth: '.grid-sizer'
-        },
-        stagger: 50
-    });
-
-    $('.filter-wrapper button').on('click', function ()
-    {
-        let filterValue = $(this).attr('data-filter');
-
-        $('.filter-wrapper button').removeClass('active');
-        $(this).addClass('active');
-
-        iso.arrange({
-            filter: filterValue
+        item.forEach(function (currentItem) {
+            addRandomSizeClass(currentItem);
         });
-    })
+
+        let iso = new Isotope( elem, {
+            // options
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            masonry: {
+                columnWidth: '.grid-sizer'
+            },
+            stagger: 50
+        });
+
+        $('.filter-wrapper button').on('click', function ()
+        {
+            let filterValue = $(this).attr('data-filter');
+
+            $('.filter-wrapper button').removeClass('active');
+            $(this).addClass('active');
+
+            iso.arrange({
+                filter: filterValue
+            });
+        })
+    }
+
 });

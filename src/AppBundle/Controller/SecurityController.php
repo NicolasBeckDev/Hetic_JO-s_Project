@@ -55,26 +55,36 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $user->getEmail()])) {
+                $message = 'Cette adresse email est déjà utilisée, veuillez en saisir une autre';
+                $type = 'error';
+            }else{
+                $user = $this->userServices->prePersistRegister($user);
 
-            $user = $this->userServices->prePersistRegister($user);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+                $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+                $this->get('security.token_storage')->setToken($token);
 
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
+                $this->get('session')->set('_security_main', serialize($token));
 
-            $this->get('session')->set('_security_main', serialize($token));
+                $event = new InteractiveLoginEvent($request, $token);
+                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            $event = new InteractiveLoginEvent($request, $token);
-            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
-            return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('homepage',[
+                    'message' => "Vous êtes maintenant prêt à rejoindre les autres participants",
+                    'type' => "success",
+                    'title' => "Félicitations !"
+                ]);
+            }
         }
 
         return $this->render('@Client/registration/registration.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'message' => $message ?? false,
+            'type' => $type ?? false,
         ]);
     }
 
@@ -123,11 +133,13 @@ class SecurityController extends Controller
 
                 $mailer->send($mail);
 
+                $title = 'Eh voilà !';
                 $message = 'Nous venons de vous envoyer une demande de réinitialisation par e-mail, veuillez la compléter.';
                 $type = 'success';
             }else{
+                $title = "Oops...";
                 $message = "L'adresse e-mail saisie n'est associée à aucun compte.";
-                $type = 'danger';
+                $type = 'error';
             }
         }
 
@@ -135,6 +147,7 @@ class SecurityController extends Controller
         return $this->render('@Client/forgottenPassword/forgottenPassword.html.twig', [
             'form' => $form->createView(),
             'message' => $message ?? false,
+            'title' => $title ?? false,
             'type' => $type ?? false,
         ]);
     }

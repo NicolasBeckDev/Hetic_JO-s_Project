@@ -70,3 +70,4 @@ swiftmailer:
     transport: gmail
     username:  tousparis2024@gmail.com
     password:  "!TousParis2024"
+    spool: { type: memory }

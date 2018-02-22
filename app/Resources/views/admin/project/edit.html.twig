@@ -14,8 +14,34 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <button type="button" class="blockButton delete" id="delete_button">
+                <p>Supprimer le projet</p>
+                <span><img src="src/img/delete.png" alt=""></span>
+            </button>
+            <button style="display: none" id="delete_form"></button>
             {{ form_end(delete_form) }}
         </li>
     </ul>
+{% endblock %}
+
+{% block addJavascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+    <script>
+        document.getElementById('delete_button').addEventListener('click', function () {
+            swal({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas récupérer ce projet !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('delete_form').click();
+                }
+            })
+        });
+    </script>
 {% endblock %}

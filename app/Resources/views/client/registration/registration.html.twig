@@ -38,3 +38,19 @@
 {% block right_content %}
     <img src="{{ asset('build/images/inscription.png') }}" />
 {% endblock %}
+
+
+{% block addJavascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+    {% if message %}
+        <script>
+            setTimeout(function () {
+                swal({
+                    type: "{{ type }}",
+                    title: 'Oops...',
+                    text: "{{ message | raw }}"
+                })
+            }, 100);
+        </script>
+    {% endif %}
+{% endblock %}

@@ -3,6 +3,7 @@
 parameters:
     user_profile_picture_directory: '%kernel.project_dir%/web/uploads/user/profilePicture'
     project_picture_directory: '%kernel.project_dir%/web/uploads/project/picture'
+    default_picture_directory: '%kernel.project_dir%/src/AppBundle/Media'
 
 services:
     # default configuration for services in *this* file
@@ -37,7 +38,9 @@ services:
     AppBundle\Service\ProjectServices:
         arguments:
             $pictureDir: '%project_picture_directory%'
+            $defaultPictureDir: '%default_picture_directory%'
 
     AppBundle\Service\UserServices:
         arguments:
             $profilePictureDir: '%user_profile_picture_directory%'
+            $defaultPictureDir: '%default_picture_directory%'
