@@ -1,0 +1,17 @@
+// VARIABLES
+$bg-color: #e45656;
+$bg-gradient-color-one: #e45661;
+$bg-gradient-color-two: #e96fb3;
+$bg-gradient-color-three: #ec7ad6;
+
+.container {
+  display: flex;
+
+  // background: $bg-color;
+  background: linear-gradient(135deg, $bg-gradient-color-one, $bg-gradient-color-two 66%, $bg-gradient-color-three);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  align-items: center;
+  justify-content: center;
+}

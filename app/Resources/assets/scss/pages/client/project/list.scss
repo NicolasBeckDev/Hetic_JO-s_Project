@@ -495,3 +495,20 @@
         }
     }
 }
+
+.mobile {
+    display: none;
+    
+    @media (max-width: 764px) {
+        display: block;
+    }
+}
+.no-mobile {
+    display: block;
+
+    @media (max-width: 764px) {
+        display: none;
+    }
+}
+
+

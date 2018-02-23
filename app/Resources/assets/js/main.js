@@ -1,4 +1,5 @@
 const $ = require('jquery');
+// const Hammer = require('hammerjs/hammer.min')
 
 require('bootstrap-sass');
 
@@ -35,6 +36,7 @@ require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
 require('./pages/client/project/show/favoris-color')();
 require('./pages/client/popup')();
+require('./card/card')();
 
 $(function () {
 
