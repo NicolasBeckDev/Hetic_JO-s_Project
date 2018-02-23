@@ -102,6 +102,7 @@
                             <div class="bottom">
                                 <a href="{{ path('account_user_edit') }}">Mon profil</a>
                                 <a href="{{ path('account_show_created_projects') }}">Mes projets</a>
+                                {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('admin_project_index') }}">Administration</a>{% endif %}
                                 <a href="{{ path('logout') }}">Déconnexion</a>
                             </div>
                         </div>
