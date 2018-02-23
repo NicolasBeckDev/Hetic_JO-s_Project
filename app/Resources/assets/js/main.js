@@ -35,13 +35,10 @@ require('./pages/client/project/selectFirstOption')();
 require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
 require('./pages/client/project/show/favoris-color')();
-<<<<<<< HEAD
 require('./pages/client/account/index')();
 require('./pages/admin/user/edit')();
-=======
 require('./pages/client/popup')();
 require('./card/card')();
->>>>>>> dev
 
 $(function () {
 
