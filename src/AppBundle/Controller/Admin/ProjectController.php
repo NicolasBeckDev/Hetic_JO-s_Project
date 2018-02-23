@@ -39,22 +39,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Finds and displays a project entity.
-     *
-     * @Route("/voir/{id}", name="admin_project_show")
-     * @Method("GET")
-     * @param Project $project
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showAction(Project $project)
-    {
-        return $this->render('@Admin/project/show.html.twig', [
-            'project' => $project,
-            'delete_form' => $this->createDeleteForm($project)->createView(),
-        ]);
-    }
-
-    /**
      * Displays a form to edit an existing project entity.
      *
      * @Route("/modifier/{id}", name="admin_project_edit")
@@ -133,7 +117,7 @@ class ProjectController extends Controller
             $mailer->send($mail);
         }
 
-        return $this->redirectToRoute('admin_project_index');
+        return $this->redirectToRoute('admin_project_edit', ['id' => $project->getId()]);
     }
 
     /**

@@ -53,7 +53,7 @@
         <tbody>
         {% for project in projects %}
             <tr>
-                <td><a href="{{ path('admin_project_show', { 'id': project.id }) }}">{{ project.id }}</a></td>
+                <td>{{ project.id }}</td>
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.mainPicture }}</td>
@@ -67,9 +67,6 @@
                 <td>{% if project.inProgress %}Yes{% else %}No{% endif %}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('admin_project_show', { 'id': project.id }) }}">show</a>
-                        </li>
                         <li>
                             <a href="{{ path('admin_project_edit', { 'id': project.id }) }}">edit</a>
                         </li>
