@@ -75,19 +75,23 @@ class ProjectController extends Controller
             $em->persist($project);
             $em->flush();
 
-            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( en attente de validation )"))
+            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet (en attente de validation)"))
                 ->setFrom('tousparis2024@gmail.com')
                 ->setTo($this->getUser()->getEmail())
                 ->setBody(
-                    $this->renderView(
-                        '@Email/projectCreation.html.twig',
-                        [
-                            'project' => $project
-                        ]
-                    ),
+                    '<html>' .
+                    '<head></head>' .
+                    '<body>' .
+                    'Bonjour'.$this->getUser()->getFirstname().'<br><br>'.
+                    'Vous venez de créer le projet ' . $project->getName() . '.<br>'.
+                    'Par mesure de sécurité, les nouveaux projets nécessitent une validation par un membre de notre équipe.<br>'.
+                    'Vous recevrez un e-mail lors de la validation de votre projet afin de vous prévenir de sa mise en ligne publique.<br><br>'.
+                    'Cordialement,<br>'.
+                    "L'équipe de Tous Paris.".
+                    ' </body>' .
+                    '</html>',
                     'text/html'
-                )
-            ;
+                );
 
             $mailer->send($mail);
 

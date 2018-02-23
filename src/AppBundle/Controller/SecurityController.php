@@ -30,6 +30,7 @@ class SecurityController extends Controller
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
+        $test = 'ok';
         $error = $authUtils->getLastAuthenticationError();
         $lastUsername = $authUtils->getLastUsername();
 
@@ -116,20 +117,24 @@ class SecurityController extends Controller
 
                 $routerContext = $this->container->get('router')->getContext();
 
+                $url = 'http://' . $routerContext->getHost() . ':' . $routerContext->getHttpPort() . '/reinitialisation/' . $user->getToken();
+
                 $mail = (new \Swift_Message('Tous Paris. : Réinitialisation de votre mot de passe'))
                     ->setFrom('tousparis2024@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody(
-                        $this->renderView(
-                            '@Email/forgottenPassword.html.twig',
-                            [
-                                'name' => $user->getFirstname(),
-                                'url' => $routerContext->getHost() . ":" . $routerContext->getHttpPort() . '/reinitialisation/' . $user->getToken()
-                            ]
-                        ),
+                        '<html>' .
+                        '<head></head>' .
+                        '<body>' .
+                        'Bonjour'.$user->getFirstname().'<br><br>'.
+                        'Nous avons reçu une demande de réinitialisation de votre mot de passe.<br>'.
+                        '<a href="' . $url . ' ">Cliquez ici pour réinitialiser votre mot de passe.</a><br><br>'.
+                        'Cordialement,<br>'.
+                        "L'équipe de Tous Paris.".
+                        ' </body>' .
+                        '</html>',
                         'text/html'
-                    )
-                ;
+                    );
 
                 $mailer->send($mail);
 

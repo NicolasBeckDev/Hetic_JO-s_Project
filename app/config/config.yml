@@ -41,7 +41,6 @@ twig:
     paths:
         '%kernel.project_dir%/app/Resources/views/client': Client
         '%kernel.project_dir%/app/Resources/views/admin': Admin
-        '%kernel.project_dir%/app/Resources/views/email': Email
 
 # Doctrine Configuration
 doctrine:
