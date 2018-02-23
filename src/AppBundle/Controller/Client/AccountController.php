@@ -101,7 +101,7 @@ class AccountController extends Controller
     public function showParticipatingProjectsAction()
     {
         return $this->render('@Client/account/project/list.html.twig', [
-            'projects' => $this->getUser()->getParticipatingProject(),
+            'projects' => $this->getUser()->getParticipatingProjects(),
             'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll()
         ]);
     }

@@ -1,0 +1,110 @@
+{% extends "@Client/layout.html.twig" %}
+
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
+
+{% block content %}
+    <div class="account-project-list-content">
+        <div class="menuForm">
+            <div class="container">
+                <ul>
+                    <li>
+                        <a href="{{ path('account_show_created_projects') }}" class="active">Mes projets crées</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('account_show_participating_projects') }}">Mes projets participés</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('account_show_followed_projects') }}">Mes projets suivis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="filter-container">
+                <div class="filter-wrapper button-group left" data-filter-group="category">
+                    {% for category in categories %}
+                        <button type="button" class="filter {{ category.color }}" data-filter="{{ '.' ~ category.name|snake }}">{{ category.name }}</button>
+                    {% endfor %}
+
+                    <button type="button" class="filter blue active" data-filter="">{{ 'app.page.client.project.list.all'|trans }}</button>
+                </div>
+
+                <div class="filter-wrapper button-group right" data-filter-group="state">
+                    <button type="button" class="filter blue active" data-filter=".in_progress">En cours</button>
+                    <button type="button" class="filter blue" data-filter=".finished">Fini</button>
+                </div>
+            </div>
+
+            <div class="project-wrapper">
+                <div class="grid row">
+                    <div class="grid-sizer"></div>
+                    {% for project in projects %}
+                        <div class="grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3 {{ project.category.name|snake }} {{ project.inProgress ? 'in_progress' : 'finished' }}">
+                            <div class="project {{ project.category.color }}">
+                                <a href="{{ path('project_show', { 'id': project.id }) }}">
+                                    <div class="image-container">
+                                        <div class="image-positioner">
+                                            <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture) }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="text-content-wrapper">
+                                        <div class="category-container">
+                                            <span class="category">{{ project.category.name }}</span>
+                                        </div>
+
+                                        <div class="name-container">
+                                            <span class="name">{{ project.name }}</span>
+                                        </div>
+
+                                        <div class="district-container">
+                                            <span class="district">{{ project.district.name }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="color-line"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popUpContainer">
+        <div class="principaleButton3Btn"></div>
+        <div>
+            <div class="button3Btn firstButton3Btn list"></div>
+            <div class="button3Btn secondButton3Btn list"></div>
+            <div class="button3Btn lastButton3Btn list"></div>
+        </div>
+        <div class="popUpTuto">
+            <span>&#10005;</span>
+            <p class="titlePopUp">Bienvenue sur Tous Paris</p>
+            <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block addJavascripts %}
+    <script src="https://unpkg.com/isotope-layout@3.0.5/dist/isotope.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+    {% if message is defined %}
+        <script>
+            setTimeout(function () {
+                swal({
+                    type: "{{ type }}",
+                    title: '{{ title | raw }}',
+                    text: "{{ message | raw }}"
+                })
+            }, 100);
+        </script>
+    {% endif %}
+{% endblock %}

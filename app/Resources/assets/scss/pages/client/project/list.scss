@@ -45,6 +45,10 @@
     {
         width: 50%;
 
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+        }
+
         @media screen and (min-width: $screen-md-min) {
             width: 33.333%;
         }
@@ -58,9 +62,17 @@
     {
         margin-bottom: 30px;
 
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+        }
+
         &.width-2
         {
             width: 50%;
+
+            @media screen and (max-width: $screen-xs-max) {
+                width: 100%;
+            }
 
             @media screen and (min-width: $screen-md-min) and (max-width: $screen-md-max) {
                 width: 66.666%;
@@ -419,6 +431,8 @@
         -webkit-box-shadow: 0 12px 34px 0 rgba(0,0,0,0.3) ;
         -moz-box-shadow: 0 12px 34px 0 rgba(0,0,0,0.3) ;
         box-shadow: 0 12px 34px 0 rgba(0,0,0,0.3) ;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
         &:after{
             content: '';
             position: absolute;
@@ -445,6 +459,16 @@
                 left: 0px;
                 background: #4885E7;
             }
+        }
+        &.hide-popup {
+            opacity: 0;
+        }
+        &.show-popup {
+            opacity: 1;
+        }
+        .js-closePopup {
+            padding: 4px;
+            cursor: pointer;
         }
     }
 }

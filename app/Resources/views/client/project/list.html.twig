@@ -13,7 +13,7 @@
 
             <button type="button" class="filter blue active" data-filter="*">{{ 'app.page.client.project.list.all'|trans }}</button>
 
-            <a href="{{ path('project_location') }}" class="filter blue location-button">{{ 'app.page.client.project.list.near_projects'|trans }}</a>
+            <a href="{{ path('project_location') }}" class="filter blue location-button"><i class="fas fa-map-marker-alt"></i>{{ 'app.page.client.project.list.near_projects'|trans }}</a>
         </div>
 
         <div class="project-wrapper">
@@ -58,8 +58,8 @@
             <div class="button3Btn secondButton3Btn list"></div>
             <div class="button3Btn lastButton3Btn list"></div>
         </div>
-        <div class="popUpTuto">
-            <span>&#10005;</span>
+        <div id="js-cachedPopup2" class="popUpTuto">
+            <span class="js-closePopup">&#10005;</span>
             <p class="titlePopUp">Bienvenue sur Tous Paris</p>
             <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
         </div>

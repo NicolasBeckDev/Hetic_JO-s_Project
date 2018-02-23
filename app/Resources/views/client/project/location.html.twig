@@ -353,26 +353,14 @@
         function showProject(project) {
             let template = document.getElementById('project-prototype').dataset.prototype;
 
-            let snake_categories = {
-                'Environnement': 'environnement',
-                'Mobilité & transport': 'mobilite_transport',
-                'Solidaire & citoyen': 'solidaire_citoyen',
-                'Technologie': 'technologie',
-                'Urbanisme': 'urbanisme'
-            };
-
             template = template
                 .replace(/__project_category_color__/g, project.category.color)
                 .replace(/__project_id__/g, project.id)
+                .replace(/__project_picture__/g, project.mainPicture)
                 .replace(/__project_category_name__/g, project.category.name)
                 .replace(/__project_name__/g, project.name)
                 .replace(/__project_district_name__/g, project.district.name)
             ;
-
-            if (project.mainPicture)
-                template = template.replace(/__project_picture_url____project_picture_url__/g, 'uploads/project/picture/' + project.mainPicture);
-            else
-                template = template.replace(/__project_picture_url__/g, 'build/images/default_' + snake_categories[project.category.name] + '.jpg');
 
             document.getElementById('projects').innerHTML += template;
         }
