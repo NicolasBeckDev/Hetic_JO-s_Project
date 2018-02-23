@@ -40,6 +40,54 @@
             &:before, &:after {
                 display: none;
             }
+            ul{
+                width: 100%;
+                display: -webkit-flex;
+                display: -moz-flex;
+                display: -ms-flexbox;
+                display: -ms-flex;
+                display: flex;
+                -webkit-justify-content: center;
+                -moz-justify-content: center;
+                -ms-justify-content: center;
+                justify-content: center;
+                -webkit-align-items: center;
+                -moz-align-items: center;
+                -ms-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                list-style: none;
+                margin-bottom: 0px;
+                li{
+                    font-family: 'Proxima Nova Bold', sans-serif;
+                    margin-right: 10%;
+                    font-weight: 700;
+                    font-size: 20px;
+                    position: relative;
+                    &.active{
+                        a{
+                            color: $gradient-dark-blue;
+                            text-decoration: none;
+                        }
+                        &:after{
+                            content: '';
+                            position: absolute;
+                            width: 100%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            height: 3px;
+                            bottom: -23px;
+                            background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
+                        }
+                    }
+                    a{
+                        color: #999999;
+                    }
+                    &:last-child{
+                        margin-right: 0;
+                    }
+                }
+            }
         }
     }
 
