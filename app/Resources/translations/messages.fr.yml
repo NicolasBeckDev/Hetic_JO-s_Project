@@ -7,7 +7,7 @@ app:
             onglets:
                 home: Accueil
                 listing_projects: Liste des projets
-                near_projects: Projets autour de moi
+                create_project: Créer un projet
                 about: A propos
                 paris_2024: Paris 2024
     page:
