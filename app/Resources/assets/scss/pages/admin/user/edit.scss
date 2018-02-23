@@ -3,19 +3,21 @@
   height: 100%;
   .header {
     position: relative;
-    height: 75px;
+    height: 100px;
+    border-bottom: 1px solid #DCDCDC;
 
     .toList {
       z-index: 10;
       position: absolute;
-      width: 150px;
+      width: 200px;
       height: auto;
       @extend .proxima-regular;
       font-size: 18px;
-      top: 27px;
+      top: 36px;
       left: 30px;
 
       a {
+        text-decoration: none;
         display: block;
       }
     }
@@ -26,8 +28,8 @@
       width: 100%;
       position: relative;
 
-      &-save, &-delete, &-edit {
-        margin-top: 20px;
+      &-save, &-delete {
+        margin-top: 32px;
         width: 200px;
         height: 45px;
         display: inline-block;
@@ -38,11 +40,11 @@
         }
       }
 
-      , &-save, &-edit, &-delete, text {
-        text-align: right;
+    , &-save, &-delete, text {
+      text-align: right;
 
-        margin-right: 46px;
-      }
+      margin-right: 46px;
+    }
     }
 
     .button {
@@ -53,6 +55,14 @@
         text-align: center;
         font-size: 25px;
         background-image: linear-gradient(to right, #61d432, #429321);
+        padding-bottom: 1px;
+
+        .img-validate {
+          width: 15px;
+          height: 15px;
+          margin-bottom: 4px;
+        }
+
       }
 
       &-delete {
@@ -62,18 +72,15 @@
         text-align: center;
         font-size: 25px;
         background-image: linear-gradient(to left, #eb3351, #ff5250);
+
+        .img-delete {
+          width: 20px;
+          height: 23px;
+          margin-bottom: 4px;
+        }
       }
 
-      &-edit {
-        width: 40px;
-        height: 40px;
-        border-radius: 25px;
-        text-align: center;
-        font-size: 25px;
-        background-image: linear-gradient(to right, #ffbf38, #ff8b24);
-      }
-
-      &-save, &-delete, &-edit {
+      &-save, &-delete{
         color: transparent;
       }
     }
@@ -90,7 +97,10 @@
       width: 40%;
 
       .form-edit {
+
         .image-profile {
+          position: relative;
+          border: 2px solid #f4f4f4;
           margin-bottom: 15px;
           width: 100%;
           height: 350px;
@@ -100,54 +110,99 @@
           background-color: white;
           @include border-radius(5px);
 
+          .img-profile-background{
+            text-align: left;
+            position: absolute;
+            top: 0;
+            left:0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+          }
+
+          .input-placeholder-effect{
+
+            input#user_picture{
+              width: 45%;
+              display: inline-block;
+              margin-top: 150px;
+            }
+          }
+
+
           .button-edit {
-            margin-top: 160px;
-            width: 347px;
-            height: 60px;
-            color: white;
-            @include border-radius(25px);
+            margin-top: 130px;
+            padding-left: 20px;
+            padding-top: 10px;
+            display: inline-block;
+            height: 50px;
+            @include border-radius(10px);
             background-image: linear-gradient(to right, #4885e7, #569ceb);
+            border: 2px solid #f4f4f4;
+            //background-color: #f8f8f9;
+
           }
         }
 
-        .name {
+        .identifiants {
           width: 100%;
           height: 100%;
-          margin-bottom: 15px;
 
-          .lastname input {
-            float: left;
+          .lastname, .firstname {
             width: 49%;
-            height: 100px;
+          }
+
+          .lastname {
+            display: inline-block;
+            margin-left: 8px;
+
+          }
+
+          .firstname {
+            display: inline-block;
+          }
+
+          .mail {
+            width: 100%;
+          }
+
+          input#user_picture {
+            display: none;
+          }
+
+          .input-placeholder-effect {
+            margin-bottom: 10px;
+            @extend .proxima-bold;
+          }
+
+
+          .roles {
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            height: 40px;
+            margin-bottom:10px;
+
+            label.required {
+              display: none;
+            }
+
+            select#user_roles {
+              width: 49%;
+              height: 50px;
+              display: inline-block;
+              position: absolute;
+              @extend .proxima-bold;
+              bottom: 0;
+              left: 0;
+              background-color: white;
+              border: 2px solid #f4f4f4;
+            }
           }
         }
-
-        .firstname input {
-          float: right;
-          width: 49%;
-          height: 100px;
-        }
       }
 
-      .mail input {
-        width: 100%;
-        height: 100px;
-      }
-
-      .roles{
-        text-align: center;
-        margin-top: 20px;
-
-        label.required{
-          display: none;
-        }
-
-        select#user_roles{
-          width: 50%;
-          height:50px;
-          display: inline-block;
-        }
-      }
     }
 
     .right {

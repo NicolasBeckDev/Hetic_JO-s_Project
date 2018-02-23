@@ -2,12 +2,12 @@
 
 {% block content %}
 
-        <div class="list">
+    <div class="list">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
+            <div class="head-buttons">
                 <input class="rechercher" type="search" placeholder="Rechercher">
-
 
                 <div class="add-user">
                     <div class="media">
@@ -15,19 +15,20 @@
                             <p class="text">{{ 'app.page.admin.user.list.adduser' | trans }}</p>
                         </div>
                         <div class="media-right">
-                            <div class="button">
-                                <a href="{{ path('admin_user_new') }}">+</a>
-                            </div>
+                            <a href="{{ path('admin_user_new') }}">
+                                <div class="button">+</div>
+                            </a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="user-list">
+            <div class="user-list">
+                <div class="row">
 
-                    <div class="row">
-
-                        {% for user in users %}
-                            <div class="col-md-4">
+                    {% for user in users %}
+                        <div class="col-md-4">
+                            <a class="redirect-to-user" href="{{ path('admin_user_show', { 'id': user.id }) }}">
                                 <div class="user">
                                     <div class="media wrapper-info">
                                         <div class="media-left">
@@ -35,20 +36,19 @@
                                         </div>
                                         <div class="media-body">
                                             <div class="informations">
-                                                <a class="name" href="{{ path('admin_user_show', { 'id': user.id }) }}">
-                                                    <h3>{{ user.firstname}} {{ user.lastname }}</h3>
-                                                </a>
+                                                <h3>{{ user.firstname}} {{ user.lastname }}</h3>
                                                 <p class="email">{{ user.email }}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            </a>
+                        </div>
+                    {% endfor %}
 
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
 {% endblock %}

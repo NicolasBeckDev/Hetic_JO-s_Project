@@ -4,20 +4,21 @@
 
   .header{
     position: relative;
-    height: 80px;
-    background-color: white;
+    height: 100px;
+    border-bottom: 1px solid #DCDCDC;
 
-    .toList{
-      display: inline-block;
+    .toList {
       z-index: 10;
-      width: 150px;
+      position: absolute;
+      width: 200px;
       height: auto;
       @extend .proxima-regular;
       font-size: 18px;
+      top: 36px;
+      left: 30px;
 
-      a{
+      a {
         display: block;
-        text-decoration: none;
       }
     }
   }
@@ -39,33 +40,68 @@
       .form{
         text-align: center;
 
-        .wrapper{
-          margin-bottom: 20px;
+        [name=user] {
+          display: inline-block;
+          width: 35%;
 
-          div{
+          .wrapper {
+            margin-bottom: 20px;
 
-            input{
-              height: 60px;
-              width: 50%;
-              padding-left: 20px;
+            .input-wrapper-effect input {
+              display: unset;
+
+            }
+
+            div {
+
+              input {
+                height: 60px;
+                width: 100%;
+                padding-left: 20px;
+              }
+            }
+
+            input#user_password_first {
+              margin-bottom: 20px;
+            }
+
+            label.required{
+              display:none;
+            }
+
+            select#user_roles{
+              width: 100%;
+              height: 55px;
+              background-color: white;
+              border: 2px solid #f4f4f4;
             }
           }
 
-          input#user_password_first{
+          .wrapper-picture {
+            width: 100%;
+            display: inline-block;
             margin-bottom: 20px;
+
+            .input-wrapper-effect{
+              width: 100%;
+
+              input#user_picture{
+                width: 100%;
+
+              }
+            }
           }
-        }
 
-        .wrapper-picture{
-          display: inline-block;
-          margin-bottom: 20px;
-        }
-
-        .button{
-
+          .button-validate {
+            .button{
+              width: 100px;
+              height: 50px;
+              @include border-radius(15px);
+              border: 2px solid #f4f4f4;
+            }
+          }
         }
       }
     }
-
   }
 }
