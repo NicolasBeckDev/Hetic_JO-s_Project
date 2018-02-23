@@ -70,10 +70,14 @@
             });
 
             window.infowindow = new google.maps.InfoWindow({map: map});
-
+            let image = '{{ asset('build/images/pinMarker.png') }}';
             window.marker = new google.maps.Marker({
                 map: map,
-                anchorPoint: new google.maps.Point(0, -29)
+                anchorPoint: new google.maps.Point(0, -29),
+                icon: {
+                    scaledSize: new google.maps.Size(30, 35),
+                    url: image
+                },
             });
             marker.setIcon(/** @type {google.maps.Icon} */({
                 url: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
