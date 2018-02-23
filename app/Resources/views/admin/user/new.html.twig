@@ -1,4 +1,6 @@
 {% extends "@Admin/user/layout.html.twig" %}
+{% form_theme form 'form/form-widget.html.twig' %}
+
 
 {% block body %}
 
@@ -19,9 +21,10 @@
                     <h1>{{ 'app.page.admin.user.new.new_admin' | trans }}</h1>
                 </div>
 
-                {{ form_start(form) }}
 
                 <div class="form">
+
+                    {{ form_start(form) }}
                     <div class="wrapper">
                         {{ form_row(form.firstname) }}
                     </div>
@@ -48,7 +51,7 @@
 
 
                     <div class="button-validate">
-                        <input class="button" type="submit" value="Create" />
+                        <button class="button" type="submit" value="" >Create</button>
                     </div>
 
                     {{ form_widget(form) }}

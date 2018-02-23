@@ -18,7 +18,9 @@
                             <p class="text">{{ 'app.page.admin.user.edit.save' | trans }}</p>
                         </div>
                         <div class="media-right">
-                            <input class="button-save" type="submit" value="Save"/>
+                            <button class="button-save" type="submit" value="Save">
+                                <span><img class="img-validate" src="{{ asset('build/images/validate.png') }}" alt=""></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -29,11 +31,9 @@
                         </div>
                         <div class="media-right">
                             {{ form_start(delete_form) }}
-                            <button type="button" class="blockButton delete" id="delete_button">
-                                <p>Supprimer cet utilisateur</p>
-                                <span><img src="src/img/delete.png" alt=""></span>
+                            <button class="button-delete" type="submit" value="Delete">
+                                <span><img class="img-delete" src="{{ asset('build/images/delete.png') }}" alt=""></span>
                             </button>
-                            <button style="display: none" id="delete_form"></button>
                             {{ form_end(delete_form) }}
                         </div>
                     </div>
@@ -44,31 +44,38 @@
         <div class="content">
             <div class="left">
                 <form class="form-edit">
-
                     <div class="row">
-                        <div class="image-profile">
-                            <button class="button-edit" type="button">{{ 'app.page.admin.user.edit.new_picture' | trans }}</button>
-                        </div>
-                    </div>
 
-                    <div class="name">
-                        <div class="row">
-                            <div class="lastname">
-                                {{ form_row(edit_form.firstname) }}
-                            </div>
+                        {{ form_start(edit_form) }}
+
+                        <div class="image-profile">
+                            <img class="img-profile-background" src="#" alt="Image de profil">
+                            {{ form_widget(edit_form.picture) }}
+                        </div>
+
+                        <div class="identifiants">
 
                             <div class="firstname">
                                 {{ form_row(edit_form.lastname) }}
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="mail">
-                        <div class="row">
-                            {{ form_row(edit_form.email) }}
-                        </div>
-                    </div>
+                            <div class="lastname">
+                                {{ form_row(edit_form.firstname) }}
+                            </div>
 
+
+                            <div class="mail">
+                                {{ form_row(edit_form.email) }}
+                            </div>
+
+                            <div class="roles">
+                                {{ form_row(edit_form.roles) }}
+                            </div>
+
+                            {{ form_end(edit_form) }}
+                        </div>
+
+                    </div>
                 </form>
             </div>
 
@@ -108,7 +115,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

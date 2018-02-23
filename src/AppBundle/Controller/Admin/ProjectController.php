@@ -69,6 +69,9 @@ class ProjectController extends Controller
         $project = $this->projectServices->preLoadEdit($project);
 
         $deleteForm = $this->createDeleteForm($project);
+
+        $validationForm = $this->createValidationForm($project);
+
         $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
 
@@ -85,6 +88,7 @@ class ProjectController extends Controller
             'project' => $project,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'validation_form' => $validationForm->createView(),
         ));
     }
 
@@ -100,7 +104,7 @@ class ProjectController extends Controller
      */
     public function validateAction(Request $request, Project $project, \Swift_Mailer $mailer)
     {
-        $form = $this->createValidateForm($project);
+        $form = $this->createValidationForm($project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -109,19 +113,22 @@ class ProjectController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( validé )"))
+            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet (validé)"))
                 ->setFrom('tousparis2024@gmail.com')
                 ->setTo($project->getCreator()->getEmail())
                 ->setBody(
-                    $this->renderView(
-                        '@Email/projectCreation.html.twig',
-                        [
-                            'project' => $project
-                        ]
-                    ),
+                    '<html>' .
+                    '<head></head>' .
+                    '<body>' .
+                    'Bonjour'.$project->getCreator()->getFirstname().'<br><br>'.
+                    'Un membre de notre équipe vient de valider votre projet '. $project->getName() . '.<br>'.
+                    'De ce fait, il est maintenant visible par tous.<br><br>'.
+                    'Cordialement,<br>'.
+                    "L'équipe de Tous Paris.".
+                    ' </body>' .
+                    '</html>',
                     'text/html'
-                )
-            ;
+                );
 
             $mailer->send($mail);
         }
@@ -134,7 +141,7 @@ class ProjectController extends Controller
      * @param Project $project
      * @return \Symfony\Component\Form\FormInterface
      */
-    private function createValidateForm(Project $project)
+    private function createValidationForm(Project $project)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_project_validate', array('id' => $project->getId())))

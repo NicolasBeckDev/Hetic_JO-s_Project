@@ -4,7 +4,7 @@
     <div class="show">
         <div class="header">
             <div class="toList">
-                <a href="{{ path('admin_user_index') }}">Back to the list</a>
+                <a href="{{ path('admin_user_index') }}">{{ 'app.page.admin.user.show.tolist' | trans }}</a>
             </div>
 
             <div class="actions">
@@ -15,12 +15,13 @@
                             <p class="text">{{ 'app.page.admin.user.show.delete' | trans }}</p>
                         </div>
                         <div class="media-right">
-                            {{ form_start(delete_form) }}
-                            <input class="button-delete" type="submit" value="Delete">
-                            {{ form_end(delete_form) }}
+                            <button class="button-delete" type="submit" value="Delete">
+                                <span><img class="img-delete" src="{{ asset('build/images/delete.png') }}" alt=""></span>
+                            </button>
                         </div>
                     </div>
                 </div>
+
                 <div class="actions-edit">
                     <div class="media">
                         <div class="media-body">
@@ -28,7 +29,9 @@
                         </div>
                         <div class="media-right">
                             <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">
-                                <button class="button-edit"></button>
+                                <button class="button-edit" type="submit" value="Edit">
+                                    <span><img class="img-edit" src="{{ asset('build/images/edit.png') }}" alt=""></span>
+                                </button>
                             </a>
                         </div>
                     </div>

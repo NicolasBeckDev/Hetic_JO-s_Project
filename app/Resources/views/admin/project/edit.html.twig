@@ -21,6 +21,17 @@
             <button style="display: none" id="delete_form"></button>
             {{ form_end(delete_form) }}
         </li>
+        {% if project.isValidated != true %}
+        <li>
+            {{ form_start(validation_form) }}
+            <button type="button" class="blockButton validate" id="validation_button">
+                <p>Supprimer le projet</p>
+                <span><img src="{{ asset('build/images/validate.5d38151e.png') }}" alt=""></span>
+            </button>
+            <button style="display: none" id="validation_form"></button>
+            {{ form_end(validation_form) }}
+        </li>
+        {% endif %}
     </ul>
 {% endblock %}
 
@@ -35,7 +46,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Oui !',
+                confirmButtonText: 'Supprimer',
                 cancelButtonText: 'Annuler'
             }).then((result) => {
                 if (result.value) {
@@ -43,5 +54,23 @@
                 }
             })
         });
+        {% if project.isValidated != true %}
+        document.getElementById('delete_button').addEventListener('click', function () {
+            swal({
+                title: 'Êtes-vous sûr?',
+                text: "Une fois accepté, ce projet sera visible publiquement",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Valider',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('delete_form').click();
+                }
+            })
+        });
+        {% endif %}
     </script>
 {% endblock %}
