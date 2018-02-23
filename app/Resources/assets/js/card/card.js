@@ -13,7 +13,7 @@ function initCards() {
     cards = newCards.slice(maxCards);
     newCards = newCards.slice(0, maxCards);
 
-    cards.forEach( function (card) {
+    cards.forEach(function (card) {
         card.style.opacity = "0"
     });
 
@@ -37,17 +37,17 @@ allCards.forEach(function (el) {
 
     hammertime.on('pan', function (event) {
 
-            cardEvent = event;
-            if (event.deltaX === 0) return;
-            if (event.center.x === 0 && event.center.y === 0) return;
+        cardEvent = event;
+        if (event.deltaX === 0) return;
+        if (event.center.x === 0 && event.center.y === 0) return;
 
 
-            var xMulti = event.deltaX * 0.03;
-            var yMulti = event.deltaY / 80;
-            var rotate = xMulti * yMulti;
-            var posX = event.deltaX <= 0 ? event.deltaX : 0;
+        var xMulti = event.deltaX * 0.03;
+        var yMulti = event.deltaY / 80;
+        var rotate = xMulti * yMulti;
+        var posX = event.deltaX <= 0 ? event.deltaX : 0;
 
-           el.style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
+        el.style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
 
     });
 
@@ -69,10 +69,9 @@ allCards.forEach(function (el) {
                 el.style.transform = 'translate(' + toX + 'px, ' + (0) + 'px) rotate(' + 0 + 'deg)';
             }
             if (toX < 0) {
-               el.classList.toggle('card-removed');
+                el.classList.toggle('card-removed');
                 initCards();
             }
-            getCards();
         }
     });
 });
@@ -88,7 +87,7 @@ parentSwiper.on('panright', function (event) {
         var xMulti = event.deltaX * 0.03;
         var yMulti = event.deltaY / 80;
         var rotate = xMulti * yMulti;
-        var posX = event.deltaX <= 0 ? event.deltaX * 1.5  : 0;
+        var posX = event.deltaX <= 0 ? event.deltaX * 1.5 : 0;
 
         allRemovedCards[allRemovedCards.length - 1].style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
         allRemovedCards[allRemovedCards.length - 1].style.zIndex = allCards.length + 1;
@@ -111,10 +110,21 @@ parentSwiper.on('panend', function (event) {
             }
         }
     }
-
-
 });
 
-function getCards() {
+let toggleViewBtn = document.querySelector('.js-toggleView');
+let toggleFilter = document.querySelector('.js-toggleFilters');
 
-}
+toggleViewBtn.addEventListener('click', function () {
+    let cardView = document.querySelector('.card--holder');
+    let listView = document.querySelector('.list--holder');
+
+    cardView.classList.toggle('hide');
+    listView.classList.toggle('show');
+});
+
+toggleFilter.addEventListener('click', function() {
+    let cardView = document.querySelector('.filter-wrapper');
+
+    cardView.classList.toggle('js-toggleFilters')
+})

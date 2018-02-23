@@ -15,6 +15,14 @@
 
         @media (max-width: 764px) {
             background: transparent;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: height .3s ease-in-out;
+        }
+        &.js-toggleFilters {
+            height: 250px;
+            overflow: initial;
         }
 
         .filter
@@ -26,7 +34,9 @@
             font-size: 18px;
             float: left;
             text-decoration: none !important;
-
+            @media (max-width: 764px) {
+                margin: 7px 5px;
+            }
             &:not(.active)
             {
                 color: $light-black;
@@ -34,7 +44,6 @@
 
                 @media (max-width: 764px) {
                     background: #ffffff;
-                    margin: 7px 5px;
                 }
             }
 
@@ -425,6 +434,7 @@
     right: 15px;
     bottom: 15px;
     position: fixed;
+    z-index: 100;
     .popUpTuto{
         font-family: 'Proxima Nova';
         background: #ffffff;
