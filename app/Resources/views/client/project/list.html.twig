@@ -8,48 +8,47 @@
     <div class="project-list-content">
         <div class="filter-wrapper">
             {% for category in categories %}
-                <button type="button" class="filter {{ category.color }}" data-filter="{{ '.' ~ category.name|snake }}">{{ category.name }}</button>
+                <button type="button" class="filter {{ category.color }}"
+                        data-filter="{{ '.' ~ category.name|snake }}">{{ category.name }}</button>
             {% endfor %}
 
-            <button type="button" class="filter blue active" data-filter="*">{{ 'app.page.client.project.list.all'|trans }}</button>
+            <button type="button" class="filter blue active"
+                    data-filter="*">{{ 'app.page.client.project.list.all'|trans }}</button>
 
             <a href="{{ path('project_location') }}" class="filter blue location-button"><i class="fas fa-map-marker-alt"></i>{{ 'app.page.client.project.list.near_projects'|trans }}</a>
         </div>
 
-        <div class="card--holder">
+        <div class="card--holder project-wrapper mobile">
             <ul class="cards">
-                <li class="card">
-                    <img class="card--image" src="https://picsum.photos/200/300" alt="">
-                    <span class="card--desc">
-                            <h2>TOTO</h2>
-                            <p>a basic card</p>
-                        </span>
-                </li>
-                <li class="card">
-                    <img class="card--image" src="https://picsum.photos/200/300" alt="">
-                    <span class="card--desc">
-                            <h2>TOTO</h2>
-                            <p>a basic card</p>
-                        </span>
-                </li>
-                <li class="card">
-                    <img class="card--image" src="https://picsum.photos/200/300" alt="">
-                    <span class="card--desc">
-                            <h2>TOTO</h2>
-                            <p>a basic card</p>
-                        </span>
-                </li>
-                <li class="card">
-                    <img class="card--image" src="https://picsum.photos/200/300" alt="">
-                    <span class="card--desc">
-                            <h2>TOTO</h2>
-                            <p>a basic card</p>
-                        </span>
-                </li>
+                {% for project in projects %}
+                    <li class="card {{ project.category.name|snake }} {{ project.category.color }}">
+                        <a href="{{ path('project_show', { 'id': project.id }) }}">
+                            <div class="image-container">
+                                <div class="image-positioner">
+                                    <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg') }}"/>
+                                </div>
+                            </div>
+                            <div class="text-content-wrapper">
+                                <div class="category-container">
+                                    <span class="category">{{ project.category.name }}</span>
+                                </div>
+
+                                <div class="name-container">
+                                    <span class="name">{{ project.name }}</span>
+                                </div>
+
+                                <div class="district-container">
+                                    <span class="district">{{ project.district.name }}</span>
+                                </div>
+                                <div class="color-line"></div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
 
-        <div class="project-wrapper">
+        <div class="project-wrapper no-mobile">
             <div class="grid row">
                 <div class="grid-sizer"></div>
                 {% for project in projects %}
@@ -58,7 +57,7 @@
                             <a href="{{ path('project_show', { 'id': project.id }) }}">
                                 <div class="image-container">
                                     <div class="image-positioner">
-                                        <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg') }}" />
+                                        <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg') }}"/>
                                     </div>
                                 </div>
 
@@ -94,7 +93,8 @@
         <div id="js-cachedPopup2" class="popUpTuto">
             <span class="js-closePopup">&#10005;</span>
             <p class="titlePopUp">Bienvenue sur Tous Paris</p>
-            <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
+            <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le
+                "+" pour : </p>
         </div>
     </div>
 

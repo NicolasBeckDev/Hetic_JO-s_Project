@@ -4,12 +4,12 @@
 
 .card--holder {
   position: relative;
-  width: 100vw;
-  height: 300px;
+  width: 100%;
+  height: 65vh;
 }
 
 .card {
-  top: 30%;
+  top: 0;
   position: absolute;
   display: flex;
   flex-flow: column nowrap;
@@ -31,6 +31,168 @@
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
+  }
+  @include border-radius(5px);
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 2px 20px -5px rgba(0,0,0,0.3);
+
+  &.black
+  {
+    border-bottom: 2px solid $border-black;
+
+    .category {
+      background-image: linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
+    }
+
+    .color-line {
+      @include linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
+    }
+  }
+
+  &.blue
+  {
+    border-bottom: 2px solid $border-blue;
+
+    .category {
+      background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
+    }
+
+    .color-line {
+      @include linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
+    }
+  }
+
+  &.green
+  {
+    border-bottom: 2px solid $border-green;
+
+    .category {
+      background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
+    }
+
+    .color-line {
+      @include linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
+    }
+  }
+
+  &.red
+  {
+    border-bottom: 2px solid $border-red;
+
+    .category {
+      background-image: linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
+    }
+
+    .color-line {
+      @include linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
+    }
+  }
+
+  &.yellow
+  {
+    border-bottom: 2px solid $border-yellow;
+
+    .category {
+      background-image: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
+    }
+
+    .color-line {
+      @include linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
+    }
+  }
+
+  &:hover
+  {
+    transform: scale(1.02);
+  }
+
+  a
+  {
+    display: inline-block;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .image-container
+  {
+    padding: 10px 10px 0;
+    width: 100%;
+    height: 300px;
+
+    .image-positioner
+    {
+      @include border-radius(5px);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      img
+      {
+        width: 100%;
+        min-height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .text-content-wrapper
+  {
+    padding: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+
+    .category-container
+    {
+      margin-bottom: 10px;
+
+      .category
+      {
+        @extend .proxima-bold;
+        font-size: 20px;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .name-container
+    {
+      margin-bottom: 10px;
+
+      .name
+      {
+        @extend .proxima-bold;
+        font-size: 25px;
+        color: $light-black;
+      }
+    }
+
+    .district-container
+    {
+      .district
+      {
+        @extend .proxima-regular;
+        font-size: 15px;
+        color: #9b9b9b;
+      }
+    }
+  }
+
+  .color-line
+  {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    left: 0;
   }
 }
 

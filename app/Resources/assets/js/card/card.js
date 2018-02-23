@@ -36,7 +36,7 @@ allCards.forEach(function (el) {
     });
 
     hammertime.on('pan', function (event) {
-        if (event.target.classList.contains('card')) {
+
             cardEvent = event;
             if (event.deltaX === 0) return;
             if (event.center.x === 0 && event.center.y === 0) return;
@@ -47,8 +47,8 @@ allCards.forEach(function (el) {
             var rotate = xMulti * yMulti;
             var posX = event.deltaX <= 0 ? event.deltaX : 0;
 
-            event.target.style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
-        }
+           el.style.transform = 'translateX(' + posX + 'px) rotate(' + rotate + 'deg)';
+
     });
 
     hammertime.on('panend', function (event) {
@@ -60,16 +60,16 @@ allCards.forEach(function (el) {
         var keep = Math.abs(event.deltaX) < 80;
 
         if (keep) {
-            event.target.style.transform = '';
+            el.style.transform = '';
         } else {
             var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
             var toX = event.deltaX > 0 ? 0 : -endX;
 
-            if (event.target.classList.contains('card')) {
-                event.target.style.transform = 'translate(' + toX + 'px, ' + (0) + 'px) rotate(' + 0 + 'deg)';
+            if (el.classList.contains('card')) {
+                el.style.transform = 'translate(' + toX + 'px, ' + (0) + 'px) rotate(' + 0 + 'deg)';
             }
             if (toX < 0) {
-                event.target.classList.toggle('card-removed');
+               el.classList.toggle('card-removed');
                 initCards();
             }
             getCards();
