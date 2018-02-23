@@ -9,16 +9,12 @@
         <div class="menuForm">
             <div class="container">
                 <ul>
+                    <li>
+                        <a href="{{ path('admin_user_index') }}">Utilisateurs</a>
+                    </li>
+
                     <li class="active">
-                        <a href="{{ path('account_show_created_projects') }}">Mes projets crées</a>
-                    </li>
-
-                    <li>
-                        <a href="{{ path('account_show_participating_projects') }}">Mes projets participés</a>
-                    </li>
-
-                    <li>
-                        <a href="{{ path('account_show_followed_projects') }}">Mes projets suivis</a>
+                        <a href="{{ path('admin_project_index') }}">Projets</a>
                     </li>
                 </ul>
             </div>
@@ -85,12 +81,11 @@
             <div class="button3Btn lastButton3Btn list"></div>
         </div>
         <div class="popUpTuto">
-            <span>&#10005;</span>
+            <span class="js-closePopup">&#10005;</span>
             <p class="titlePopUp">Bienvenue sur Tous Paris</p>
             <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
         </div>
     </div>
-
 {% endblock %}
 
 {% block addJavascripts %}
