@@ -3,6 +3,7 @@
     padding: 15px 35px;
     width: 100%;
     margin-top: $header-height;
+    text-align: center;
 
     .filter-wrapper
     {
@@ -55,6 +56,28 @@
             &:not(:last-child)
             {
                 margin-right: 10px;
+            }
+            &.location-button{
+                position: relative;
+                &:after{
+                    content: '';
+                    position: absolute;
+                    width: 50px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    height: 2px;
+                    bottom: 0px;
+                    background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
+                }
+                i{
+                    margin-right: 10px;
+                }
+                &:hover{
+                    box-shadow: inherit !important;
+                    background: inherit !important;
+                    -webkit-background-clip: text !important;
+                    -webkit-text-fill-color: inherit;
+                }
             }
         }
     }
