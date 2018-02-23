@@ -9,7 +9,7 @@
         <div class="filter-container">
             <div class="filter-wrapper">
                 {{ form_start(form) }}
-                    <div class="closeFilter">
+                    <div class="closeFilter" style="display: none">
                         <span >&#10005;</span>
                     </div>
                     {{ form_widget(form.location, {'label': ' ' }) }}
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-sm-7 no-padding">
                     <div class="project-list-content">
-                        <div class="project-wrapper">
+                        <div class="project-wrapper" id="projectsHandler">
                             <div id="project-prototype" data-prototype="
                                  {% filter escape %}
                                      {{ include('@Client/project/project-prototype.html.twig') }}
@@ -70,6 +70,8 @@
         let projects = {{ projects|raw }};
         let markers = [];
         let infoWindows = [];
+        const image = '{{ asset('build/images/pinMarker.png') }}';
+        let template = document.getElementById('project-prototype').dataset.prototype;
 
 
         (function() {
@@ -86,7 +88,6 @@
             });
 
             window.infowindow = new google.maps.InfoWindow({map: map});
-            let image = '{{ asset('build/images/pinMarker.png') }}';
             window.marker = new google.maps.Marker({
                 map: map,
                 anchorPoint: new google.maps.Point(0, -29),
@@ -96,7 +97,7 @@
                 },
             });
             marker.setIcon(({
-                url: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
+                url: image,
                 size: new google.maps.Size(71, 71),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(17, 34),
@@ -240,6 +241,9 @@
 
         function categorySorter(projects) {
             const categories = [...document.getElementById('{{ form.category.vars.id }}').childNodes].filter(option => option.selected).map(option => option.value);
+            if (categories[0] == 'Catégorie du projet'){
+                categories.splice(0, 1)
+            }
 
             if (typeof categories !== 'undefined' && categories.length > 0) {
                 return projects.filter( project => categories.includes(project.category.id.toString()));
@@ -250,7 +254,9 @@
 
         function statusSorter(projects) {
             const status = [...document.getElementById('{{ form.status.vars.id }}').childNodes].filter(option => option.selected).map(option => option.value);
-
+            if (status[0] == 'Status du projet'){
+                status.splice(0, 1)
+            }
             if (typeof status !== 'undefined' && status.length > 0) {
                 const pr = [];
 
@@ -275,8 +281,7 @@
         }
 
         function rangeSorter(projects) {
-
-            if( document.getElementById('{{ form.address.vars.id }}').value!== ""){
+            if( document.getElementById('{{ form.address.vars.id }}').value!== "" && document.getElementById('{{ form.range.vars.id }}').value !== "Km autour de moi Km"){
                 projects.forEach(function (project) {
                     distanceCalc(project);
                 });
@@ -315,7 +320,6 @@
         }
 
         function createMarker(loc, project, results) {
-            let image = '{{ asset('build/images/pinMarker.png') }}';
             let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(loc[0],loc[1]),
                 icon: {
@@ -378,7 +382,6 @@
         }
 
         function showProject(project) {
-            let template = document.getElementById('project-prototype').dataset.prototype;
 
             template = template
                 .replace(/__project_category_color__/g, project.category.color)
@@ -389,7 +392,7 @@
                 .replace(/__project_district_name__/g, project.district.name)
             ;
 
-            document.getElementById('projects').innerHTML += template;
+            document.getElementById('projectsHandler').innerHTML += template;
         }
 
 
