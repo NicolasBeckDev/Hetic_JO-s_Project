@@ -6,12 +6,15 @@ module.exports = function ()
     $('#location_category').prepend(selectOption1)
     $('#location_status').prepend(selectOption2)
     $('#location_range').prepend(selectOption3)
-    setTimeout(function(){
-        if (!$('.option').html()){
-            console.log($(this))
-        } else {
-            console.log($(this))
-        }
-    }, 3000);
 
+    $('option').each(function(){
+        if ($(this).text() == ""){
+            $(this).remove()
+        }
+    });
+
+    $('#location_range option').each(function () {
+        var i = $(this).text() + ' Km'
+        $(this).text(i)
+    })
 }

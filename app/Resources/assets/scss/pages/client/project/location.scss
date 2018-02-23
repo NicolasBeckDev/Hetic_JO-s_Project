@@ -158,6 +158,7 @@
                                 -o-transition: none;
                                 transition: none;
                                 font-size: 14px;
+                                padding:0 15px;
                                 &.selected, &.focus {
                                     background-color: $gradient-light-blue !important;
                                     color: white !important;
