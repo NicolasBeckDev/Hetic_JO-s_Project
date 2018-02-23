@@ -34,11 +34,8 @@ require('./pages/client/project/button-mobile')();
 require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
 require('./pages/client/project/show/favoris-color')();
-<<<<<<< HEAD
 require('./pages/client/popup')();
-=======
 require('./card/card')();
->>>>>>> add cards tinder on /projects
 
 $(function () {
 
