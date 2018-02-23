@@ -31,6 +31,7 @@ class ProjectServices
             ->setCreator($this->getUser())
             ->setMainPicture($this->uploadMainPicture($project) ?? $this->uploadDefaultPicture($project))
             ->setSubPictures($this->uploadSubPictures($project))
+            ->setInProgress(true)
             ;
     }
 
