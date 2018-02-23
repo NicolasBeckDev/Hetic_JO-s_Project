@@ -13,6 +13,10 @@
         margin-bottom: 15px;
         text-align: center;
 
+        @media (max-width: 764px) {
+            background: transparent;
+        }
+
         .filter
         {
             @include border-radius(25px);
@@ -27,6 +31,11 @@
             {
                 color: $light-black;
                 background: none;
+
+                @media (max-width: 764px) {
+                    background: #ffffff;
+                    margin: 7px 5px;
+                }
             }
 
             &:not(:first-child)
