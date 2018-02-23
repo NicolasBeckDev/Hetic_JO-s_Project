@@ -88,6 +88,8 @@
             display: inline-block;
             @media screen and (max-width: $screen-xs-max) {
                 text-align: center;
+                display: flex;
+                flex-flow: column nowrap;
             }
             a {
                 @include border-radius(35px);

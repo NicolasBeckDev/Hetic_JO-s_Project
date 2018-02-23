@@ -22,8 +22,10 @@
             transition: height .3s ease-in-out;
         }
         &.js-toggleFilters {
-            height: 250px;
-            overflow: initial;
+            @media (max-width: 764px) {
+                height: 250px;
+                overflow: initial;
+            }
         }
 
         .filter
