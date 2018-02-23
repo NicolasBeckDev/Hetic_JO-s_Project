@@ -8,6 +8,7 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
+    "hammerjs": "^2.0.8",
     "picker": "^0.1.4"
   }
 }

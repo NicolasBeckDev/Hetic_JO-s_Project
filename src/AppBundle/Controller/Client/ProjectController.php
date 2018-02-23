@@ -37,13 +37,18 @@ class ProjectController extends Controller
      *
      * @Route("/liste", name="project_index")
      * @Method("GET")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return $this->render('@Client/project/list.html.twig', [
             'projects' => $this->getDoctrine()->getRepository(Project::class)->findBy(['isValidated' => true]),
             'districts' => $this->getDoctrine()->getRepository(District::class)->findAll(),
             'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll(),
+            'message' => $request->query->get('message') ?? false,
+            'type' => $request->query->get('type') ?? false,
+            'title' => $request->query->get('title') ?? false,
         ]);
     }
 
@@ -70,19 +75,23 @@ class ProjectController extends Controller
             $em->persist($project);
             $em->flush();
 
-            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet ( en attente de validation )"))
+            $mail = (new \Swift_Message("Tous Paris. : Création d'un projet (en attente de validation)"))
                 ->setFrom('tousparis2024@gmail.com')
                 ->setTo($this->getUser()->getEmail())
                 ->setBody(
-                    $this->renderView(
-                        '@Email/projectCreation.html.twig',
-                        [
-                            'project' => $project
-                        ]
-                    ),
+                    '<html>' .
+                    '<head></head>' .
+                    '<body>' .
+                    'Bonjour'.$this->getUser()->getFirstname().'<br><br>'.
+                    'Vous venez de créer le projet ' . $project->getName() . '.<br>'.
+                    'Par mesure de sécurité, les nouveaux projets nécessitent une validation par un membre de notre équipe.<br>'.
+                    'Vous recevrez un e-mail lors de la validation de votre projet afin de vous prévenir de sa mise en ligne publique.<br><br>'.
+                    'Cordialement,<br>'.
+                    "L'équipe de Tous Paris.".
+                    ' </body>' .
+                    '</html>',
                     'text/html'
-                )
-            ;
+                );
 
             $mailer->send($mail);
 
@@ -136,7 +145,7 @@ class ProjectController extends Controller
     /**
      * Displays a form to edit an existing project entity.
      *
-     * @Route("/modifier/{id}", name="project_edit")
+     * @Route("/modifier/{project}", name="project_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Project $project
@@ -145,7 +154,11 @@ class ProjectController extends Controller
     public function editAction(Request $request, Project $project)
     {
         if ($project->getCreator()->getId() != $this->getUser()->getId()){
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('project_index', [
+                'message' => "Vous n'avez pas les droits pour modifier ce projet",
+                'title' => "Oops...",
+                'type' => 'error'
+            ]);
         }
 
         $savedProject = clone  $project;
@@ -182,10 +195,6 @@ class ProjectController extends Controller
      */
     public function deleteAction(Request $request, Project $project)
     {
-        if ($project->getCreator()->getId() != $this->getUser()->getId()){
-            return $this->redirectToRoute('project_index');
-        }
-
         $form = $this->createDeleteForm($project);
         $form->handleRequest($request);
 
@@ -208,7 +217,7 @@ class ProjectController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
-            ->setMethod('POST')
+            ->setMethod('DELETE')
             ->getForm()
             ;
     }

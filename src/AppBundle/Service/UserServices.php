@@ -4,29 +4,31 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\User;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 class UserServices
 {
     private $fs;
     private $uploader;
     private $profilePictureDir;
+    private $defaultPictureDir;
     private $passwordEncoder;
 
-    public function __construct(Filesystem $fs, FileUploader $uploader, UserPasswordEncoderInterface $passwordEncoder, $profilePictureDir)
+    public function __construct(Filesystem $fs, FileUploader $uploader, UserPasswordEncoderInterface $passwordEncoder, $profilePictureDir, $defaultPictureDir)
     {
         $this->fs = $fs;
         $this->uploader = $uploader;
         $this->passwordEncoder = $passwordEncoder;
         $this->profilePictureDir = $profilePictureDir;
+        $this->defaultPictureDir = $defaultPictureDir;
     }
 
     public function prePersistRegister(User $user){
         return $user
             ->setRoles($this->rolesStringToArray($this->getUserRole()))
             ->setPassword($this->encodePassword($user))
-            ->setPicture($this->uploadPicture($user))
+            ->setPicture($this->uploadPicture($user) ?? $this->uploadDefaultPicture())
             ;
     }
 
@@ -118,6 +120,9 @@ class UserServices
             return $this->uploader->upload($user->getPicture(), $this->profilePictureDir);
         }
         return null;
+    }
+    private function uploadDefaultPicture() {
+        return $this->uploader->uploadDefaultPicture($this->defaultPictureDir.'/default_user.png', $this->profilePictureDir);
     }
 
     private function pictureStringToFile($picture){

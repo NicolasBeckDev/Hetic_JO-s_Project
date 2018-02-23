@@ -22,7 +22,7 @@
                             <div class="imgBlockConnect">
                                 <div class="hexagon"></div>
                                 <div class="imageProfil">
-                                    <img src="{{ asset(app.user.picture ? 'uploads/user/profilePicture/' ~ app.user.picture : 'build/images/user.png') }}" alt="profil picture">
+                                    <img src="{{ asset('uploads/user/profilePicture/' ~ app.user.picture) }}" alt="profil picture">
                                 </div>
                             </div>
 
@@ -50,16 +50,16 @@
                     <ul>
                         <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.home'|trans }}</a></li>
                         <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.listing_projects'|trans }}</a></li>
-                        <li><a href="{{ path('project_location') }}">{{ 'app.layout.menu.onglets.near_projects'|trans }}</a></li>
+                        <li><a href="{{ path('project_new') }}">{{ 'app.layout.menu.onglets.create_project'|trans }}</a></li>
                         <li><a href="{{ path('about') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
                         <li><a href="http://www.paris2024.org/fr">{{ 'app.layout.menu.onglets.paris_2024'|trans }}</a></li>
                     </ul>
 
                     <div class="social">
                         <div>
-                            <span><a href="#"><i class="fab fa-facebook-f"></i></a></span>
-                            <span><a href="#"><i class="fab fa-linkedin-in"></i></a></span>
-                            <span><a href="#"><i class="fab fa-twitter"></i></a></span>
+                            <span><a href="https://www.facebook.com/Paris2024/"><i class="fab fa-facebook-f"></i></a></span>
+                            <span><a href="https://www.linkedin.com/company/paris-2024-olympic-and-paralympic-games-bid/?originalSubdomain=fr"><i class="fab fa-linkedin-in"></i></a></span>
+                            <span><a href="https://twitter.com/paris2024"><i class="fab fa-twitter"></i></a></span>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
 
                     {% if app.user %}
                         <div class="imageProfil">
-                            <img src="{{ asset(app.user.picture ? 'uploads/user/profilePicture/' ~ app.user.picture : 'build/images/user.png') }}" alt="profil picture">
+                            <img src="{{ asset('uploads/user/profilePicture/' ~ app.user.picture) }}" alt="profil picture">
                         </div>
 
                         <div class="menuUser">
@@ -114,7 +114,7 @@
                     <ul>
                         <li><a href="{{ path('homepage') }}">{{ 'app.layout.menu.onglets.home'|trans }}</a></li>
                         <li><a href="{{ path('project_index') }}">{{ 'app.layout.menu.onglets.listing_projects'|trans }}</a></li>
-                        <li><a href="{{ path('project_location') }}">{{ 'app.layout.menu.onglets.near_projects'|trans }}</a></li>
+                        <li><a href="{{ path('project_new') }}">{{ 'app.layout.menu.onglets.create_project'|trans }}</a></li>
                         <li><a href="{{ path('about') }}">{{ 'app.layout.menu.onglets.about'|trans }}</a></li>
                         <li><a href="http://www.paris2024.org/fr">{{ 'app.layout.menu.onglets.paris_2024'|trans }}</a></li>
                     </ul>

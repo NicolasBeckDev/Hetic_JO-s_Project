@@ -13,11 +13,17 @@
             <a href="{{ path('admin_project_index') }}">Back to the list</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+
         </li>
     </ul>#}
+
+    {{ form_start(delete_form) }}
+    <button type="button" class="blockButton delete" id="delete_button">
+        <p>Supprimer le projet</p>
+        <span><img src="src/img/delete.png" alt=""></span>
+    </button>
+    <button style="display: none" id="delete_form"></button>
+    {{ form_end(delete_form) }}
 
     <form action="addremove.php" id="projectPage" name="projectPage" method="post" enctype="multipart/form-data">
         <div class="menuForm">
@@ -38,10 +44,6 @@
                     <button type="submit" class="blockButton validate">
                         <p>Enregister le projet</p>
                         <span><img src="src/img/validate.png" alt=""></span>
-                    </button>
-                    <button type="button" class="blockButton delete">
-                        <p>Supprimer le projet</p>
-                        <span><img src="src/img/delete.png" alt=""></span>
                     </button>
                 </div>
             </div>
@@ -129,3 +131,26 @@
         </div>
     </form>
 {% endblock %}
+
+{% block addJavascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+    <script>
+        document.getElementById('delete_button').addEventListener('click', function () {
+            swal({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas récupérer ce projet !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('delete_form').click();
+                }
+            })
+        });
+    </script>
+{% endblock %}
+

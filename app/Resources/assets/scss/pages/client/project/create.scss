@@ -9,267 +9,451 @@
     }
 }
 
-.header {
-    width: 100%;
-    background-color: white;
-    .haut {
-        height: 75px;
-        position: fixed;
+.project-create-content
+{
+    @extend .proxima-regular;
+
+    ::-webkit-file-upload-button { cursor:pointer; }
+
+    .header {
         width: 100%;
-        top: 0;
-        background-color: #fff;
-    }
-}
-form[name='project']{
-    .menuForm{
         background-color: white;
-        border-top: 2px solid #f8f8f9;
-        margin-top: 75px;
-        height: 75px;
-        padding: 0 40px;
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flexbox;
-        display: -ms-flex;
-        display: flex;
-        -webkit-justify-content:space-between;
-        -moz-justify-content:space-between;
-        -ms-justify-content:space-between;
-        justify-content:space-between;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        .container{
+        .haut {
+            height: 75px;
+            position: fixed;
             width: 100%;
+            top: 0;
+            background-color: #fff;
+        }
+    }
+    form[name='project'] {
+        .menuForm {
+            background-color: white;
+            margin-top: $header-height;
+            height: 75px;
+            padding: 0 40px;
             display: -webkit-flex;
             display: -moz-flex;
             display: -ms-flexbox;
             display: -ms-flex;
             display: flex;
-            -webkit-justify-content:space-between;
-            -moz-justify-content:space-between;
-            -ms-justify-content:space-between;
-            justify-content:space-between;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
             -webkit-align-items: center;
             -moz-align-items: center;
             -ms-align-items: center;
             -ms-flex-align: center;
             align-items: center;
-            &:before, &:after{
-                display: none;
-            }
-            .left{
-                margin-left: 0;
-            }
-            .right{
-                margin-right: 0;
-                .statutProjet{
-                    margin-right: 20px;
-                    vertical-align: middle;
-                    display: inline-block;
-                    input[type=checkbox]{
-                        height: 0;
-                        width: 0;
-                        position: absolute;
-                        visibility: hidden;
-                    }
-                    p{
-                        display: inline-block;
-                        vertical-align: middle;
-                        margin-right: 10px;
-                        margin-top: 7px;
-                        &.no{
-                            display: none;
-                        }
-                    }
-                    label {
-                        float: right;
-                        vertical-align: middle;
-                        cursor: pointer;
-                        text-indent: -9999px;
-                        width: 60px;
-                        height: 30px;
-                        background: #D1D1D1;
-                        display: inline-block;
-                        border-radius: 100px;
-                        position: relative;
-                    }
-
-                    label:after {
-                        content: '';
-                        position: absolute;
-                        top: 3px;
-                        left: 3px;
-                        width: 25px;
-                        height: 25px;
-                        background: #fff;
-                        border-radius: 30px;
-                        transition: 0.3s;
-                    }
-                    input:checked + label{
-                        background: $gradient-light-blue;
-                    }
-
-                    input:checked + label:after {
-                        left: calc(100% - 3px);
-                        transform: translateX(-100%);
-                    }
-
-                    label:active:after {
-                        width: 40px;
-                    }
-                }
-                .blockButton{
-                    display: inline-block;
-                    p{
-                        margin-right: 20px;
-                    }
-                }
-            }
-            .blockButton{
-                text-decoration: none;
-                color: $light-black;
-                border: 0px;
-                cursor: pointer;
-                background: none;
-
-                &:not(:last-of-type)
-                {
-                    margin-right: 20px;
-                }
-
-                span{
-                    width: 40px;
-                    height: 40px;
-                    position: relative;
-                    display: inline-block;
-                    border-radius: 30px;
-                    vertical-align: middle;
-                    img{
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        -webkit-transform: translate(-50%,-50%) scale(0.5);
-                        -moz-transform: translate(-50%,-50%) scale(0.5);
-                        -ms-transform: translate(-50%,-50%) scale(0.5);
-                        -o-transform: translate(-50%,-50%) scale(0.5);
-                        transform: translate(-50%,-50%) scale(0.5);
-                    }
-                }
-                &.goBack{
-                    span{
-                        background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
-                        background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
-                        background-image:    -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
-                        background-image:      -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
-                        background-image:         linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
-                    }
-                }
-                &.validate{
-                    span{
-                        background-color: $gradient-light-green; /* fallback color if gradients are not supported */
-                        background-image: -webkit-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
-                        background-image:    -moz-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Firefox (3.6 to 15) */
-                        background-image:      -o-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For old Opera (11.1 to 12.0) */
-                        background-image:         linear-gradient(to right, $gradient-light-green, $gradient-dark-green); /* Standard syntax; must be last */
-                    }
-                }
-                &.delete{
-                    span{
-                        background-color: $gradient-light-red; /* fallback color if gradients are not supported */
-                        background-image: -webkit-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
-                        background-image:    -moz-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Firefox (3.6 to 15) */
-                        background-image:      -o-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For old Opera (11.1 to 12.0) */
-                        background-image:         linear-gradient(to right, $gradient-light-red, $gradient-dark-red); /* Standard syntax; must be last */
-                    }
-                }
-                p{
-                    font-size: 14px;
-                    display: inline-block;
-                }
-            }
-        }
-    }
-    .containerForm{
-        padding: 40px 40px 0;
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flexbox;
-        display: -ms-flex;
-        display: flex;
-        -webkit-justify-content:space-between;
-        -moz-justify-content:space-between;
-        -ms-justify-content:space-between;
-        justify-content:space-between;
-        -webkit-align-items: flex-start;
-        -moz-align-items: flex-start;
-        -ms-align-items: flex-start;
-        -ms-flex-align: flex-start;
-        align-items: flex-start;
-        .left, .right{
-            width: 50%;
-            &.left{
-                border-right: 13px solid #f8f8f9;
-            }
-            &.right{
-                border-left: 13px solid #f8f8f9;
-            }
-            .block2x{
+            .container {
+                width: 100%;
                 display: -webkit-flex;
                 display: -moz-flex;
                 display: -ms-flexbox;
                 display: -ms-flex;
                 display: flex;
-                -webkit-justify-content:space-between;
-                -moz-justify-content:space-between;
-                -ms-justify-content:space-between;
-                justify-content:space-between;
+                -webkit-justify-content: space-between;
+                -moz-justify-content: space-between;
+                -ms-justify-content: space-between;
+                justify-content: space-between;
                 -webkit-align-items: center;
                 -moz-align-items: center;
                 -ms-align-items: center;
                 -ms-flex-align: center;
                 align-items: center;
-                .blockInput{
-                    width: 50%;
-                    &:first-child{
-                        border-right: 13px solid #f8f8f9;
+                &:before, &:after {
+                    display: none;
+                }
+                .left {
+                    margin-left: 0;
+                }
+                .right {
+                    margin-right: 0;
+                    .statutProjet {
+                        margin-right: 20px;
+                        vertical-align: middle;
+                        display: inline-block;
+                        input[type=checkbox] {
+                            height: 0;
+                            width: 0;
+                            position: absolute;
+                            visibility: hidden;
+                        }
+                        p {
+                            display: inline-block;
+                            vertical-align: middle;
+                            margin-right: 10px;
+                            margin-top: 7px;
+                            &.no {
+                                display: none;
+                            }
+                        }
+                        label {
+                            float: right;
+                            vertical-align: middle;
+                            cursor: pointer;
+                            text-indent: -9999px;
+                            width: 60px;
+                            height: 30px;
+                            background: #D1D1D1;
+                            display: inline-block;
+                            border-radius: 100px;
+                            position: relative;
+                        }
+
+                        label:after {
+                            content: '';
+                            position: absolute;
+                            top: 3px;
+                            left: 3px;
+                            width: 25px;
+                            height: 25px;
+                            background: #fff;
+                            border-radius: 30px;
+                            transition: 0.3s;
+                        }
+                        input:checked + label {
+                            background: $gradient-light-blue;
+                        }
+
+                        input:checked + label:after {
+                            left: calc(100% - 3px);
+                            transform: translateX(-100%);
+                        }
+
+                        label:active:after {
+                            width: 40px;
+                        }
                     }
-                    &:last-child{
-                        border-left: 13px solid #f8f8f9;
+                    .blockButton {
+                        display: inline-block;
+                        p {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+                .blockButton {
+                    text-decoration: none;
+                    color: $light-black;
+                    border: 0px;
+                    cursor: pointer;
+                    background: none;
+
+                    &:not(:last-of-type) {
+                        margin-right: 20px;
+                    }
+
+                    span {
+                        width: 40px;
+                        height: 40px;
+                        position: relative;
+                        display: inline-block;
+                        border-radius: 30px;
+                        vertical-align: middle;
+                        img {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            -webkit-transform: translate(-50%, -50%) scale(0.5);
+                            -moz-transform: translate(-50%, -50%) scale(0.5);
+                            -ms-transform: translate(-50%, -50%) scale(0.5);
+                            -o-transform: translate(-50%, -50%) scale(0.5);
+                            transform: translate(-50%, -50%) scale(0.5);
+                        }
+                    }
+                    &.goBack {
+                        span {
+                            background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                            background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                            background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                            background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                            background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                        }
+                    }
+                    &.validate {
+                        span {
+                            background-color: $gradient-light-green; /* fallback color if gradients are not supported */
+                            background-image: -webkit-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                            background-image: -moz-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Firefox (3.6 to 15) */
+                            background-image: -o-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For old Opera (11.1 to 12.0) */
+                            background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green); /* Standard syntax; must be last */
+                        }
+                    }
+                    &.delete {
+                        span {
+                            background-color: $gradient-light-red; /* fallback color if gradients are not supported */
+                            background-image: -webkit-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                            background-image: -moz-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Firefox (3.6 to 15) */
+                            background-image: -o-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For old Opera (11.1 to 12.0) */
+                            background-image: linear-gradient(to right, $gradient-light-red, $gradient-dark-red); /* Standard syntax; must be last */
+                        }
+                    }
+                    p {
+                        font-size: 14px;
+                        display: inline-block;
                     }
                 }
             }
-            .blockInput{
-                background-color: white;
-                padding: 25px 20px;
-                margin-bottom: 25px;
-                &.titreProjet{
-                    label{
-                        margin-bottom: 3px;
-                    }
-                    input{
-                        font-size: 24px;
-                    }
+        }
+        .containerForm {
+            padding: 40px 40px 0;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: -ms-flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-align-items: flex-start;
+            -moz-align-items: flex-start;
+            -ms-align-items: flex-start;
+            -ms-flex-align: flex-start;
+            align-items: flex-start;
+            .left, .right {
+                width: 50%;
+                &.left {
+                    border-right: 13px solid #f8f8f9;
                 }
-                &.arrondissement, &.categorie{
-                    &.categorie{
-                        .list{
-                            width:100%;
+                &.right {
+                    border-left: 13px solid #f8f8f9;
+                }
+                .block2x {
+                    display: -webkit-flex;
+                    display: -moz-flex;
+                    display: -ms-flexbox;
+                    display: -ms-flex;
+                    display: flex;
+                    -webkit-justify-content: space-between;
+                    -moz-justify-content: space-between;
+                    -ms-justify-content: space-between;
+                    justify-content: space-between;
+                    -webkit-align-items: center;
+                    -moz-align-items: center;
+                    -ms-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    .blockInput {
+                        width: 50%;
+                        &:first-child {
+                            border-right: 13px solid #f8f8f9;
+                        }
+                        &:last-child {
+                            border-left: 13px solid #f8f8f9;
                         }
                     }
-                    .list{
-                        width:100%;
-                        height: auto;
-                        padding: 20px;
-                        -webkit-box-sizing: border-box;
-                        -moz-box-sizing: border-box;
-                        box-sizing: border-box;
-                        border: 0px;
-                        -webkit-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12) ;
-                        -moz-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12) ;
-                        box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12) ;
+                }
+                .blockInput {
+                    background-color: white;
+                    padding: 25px 20px;
+                    margin-bottom: 25px;
+                    &.titreProjet {
+                        label {
+                            margin-bottom: 3px;
+                        }
+                        input {
+                            font-size: 24px;
+                        }
+                    }
+                    &.arrondissement, &.categorie {
+                        &.categorie {
+                            .list {
+                                width: 100%;
+                            }
+                        }
+                        .list {
+                            width: 100%;
+                            height: auto;
+                            padding: 20px;
+                            -webkit-box-sizing: border-box;
+                            -moz-box-sizing: border-box;
+                            box-sizing: border-box;
+                            border: 0px;
+                            -webkit-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12);
+                            -moz-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12);
+                            box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12);
+                            display: -webkit-flex;
+                            display: -moz-flex;
+                            display: -ms-flexbox;
+                            display: -ms-flex;
+                            display: flex;
+                            -webkit-flex-flow: row wrap;
+                            -moz-flex-flow: row wrap;
+                            -ms-flex-flow: row wrap;
+                            flex-flow: row wrap;
+                            li {
+                                color: #999999;
+                                padding: 0 15px;
+                                -webkit-transition: none;
+                                -moz-transition: none;
+                                -ms-transition: none;
+                                -o-transition: none;
+                                transition: none;
+                                font-size: 14px;
+                                &.selected, &.focus {
+                                    background-color: $gradient-light-blue !important;
+                                    color: white !important;
+                                    border-radius: 30px !important;
+                                }
+                                &:hover {
+                                    background-color: $gradient-light-blue;
+                                    color: white;
+                                    border-radius: 30px;
+                                }
+                                &.disabled {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    &.date {
+                        position: relative;
+                        label {
+                            position: relative;
+                            &:after {
+                                border-width: 8.7px 5px 10px 5px;
+                                border-style: solid;
+                                border-color: $gradient-light-blue transparent transparent transparent;
+                                content: '';
+                                display: block;
+                                height: inherit;
+                                margin-top: -4px;
+                                pointer-events: none;
+                                position: absolute;
+                                right: 12px;
+                                bottom: -37px;
+                                -webkit-transform-origin: 66% 66%;
+                                -ms-transform-origin: 66% 66%;
+                                transform-origin: 66% 66%;
+                                -webkit-transform: rotate(0deg);
+                                -moz-transform: rotate(0deg);
+                                -ms-transform: rotate(0deg);
+                                -o-transform: rotate(0deg);
+                                transform: rotate(0deg);
+                                -webkit-transition: all 0.15s ease-in-out;
+                                transition: all 0.15s ease-in-out;
+                                width: auto;
+                            }
+                        }
+                        .picker {
+                            right: 0;
+                            bottom: 0px;
+                            .picker__holder {
+                                border: 0px;
+                                &:focus {
+                                    outline: none;
+                                }
+                                .picker__day--selected {
+                                    background-color: $gradient-light-blue;
+                                }
+                                button {
+                                    @extend .proxima-regular;
+                                }
+                            }
+                        }
+                    }
+                    &.file {
+                        display: -webkit-flex;
+                        display: -moz-flex;
+                        display: -ms-flexbox;
+                        display: -ms-flex;
+                        display: flex;
+                        -webkit-justify-content: center;
+                        -moz-justify-content: center;
+                        -ms-justify-content: center;
+                        justify-content: center;
+                        -webkit-align-items: center;
+                        -moz-align-items: center;
+                        -ms-align-items: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        height: 40vh;
+                        position: relative;
+                        &.imgAdd {
+                            label {
+                                display: none;
+                            }
+                            img {
+                                display: block;
+                            }
+                            span {
+                                z-index: 99;
+                                opacity: 1;
+                            }
+                        }
+                        label {
+                            @extend .proxima-bold;
+                            cursor: pointer;
+                            margin-bottom: 0px;
+                            position: relative;
+                            overflow: hidden;
+                            -webkit-border-radius: 30px;
+                            -moz-border-radius: 30px;
+                            border-radius: 30px;
+                            color: white;
+                            font-size: 18px;
+                            padding: 15px 20px;
+                            display: inline-block;
+                            background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                            background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                            background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                            background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                            background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                            input {
+                                cursor: inherit;
+                                display: block;
+                                filter: alpha(opacity=0);
+                                min-height: 100%;
+                                min-width: 100%;
+                                opacity: 0;
+                                position: absolute;
+                                right: 0;
+                                text-align: right;
+                                top: 0;
+                            }
+                        }
+                        img {
+                            display: none;
+                            max-width: 100%;
+                            max-height: 100%;
+                            width: auto;
+                        }
+                        span {
+                            &.modif {
+                                right: 60px;
+                            }
+                            &:hover {
+                                background-color: $gradient-light-blue;
+                                color: white;
+                            }
+                            -webkit-transition: opacity 0.5s ease-in-out;
+                            -moz-transition: opacity 0.5s ease-in-out;
+                            -ms-transition: opacity 0.5s ease-in-out;
+                            -o-transition: opacity 0.5s ease-in-out;
+                            transition: opacity 0.5s ease-in-out;
+                            z-index: -1;
+                            opacity: 0;
+                            cursor: pointer;
+                            position: absolute;
+                            top: 20px;
+                            right: 20px;
+                            background-color: white;
+                            -webkit-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12);
+                            -moz-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12);
+                            box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12);
+                            color: $light-black;
+                            height: 30px;
+                            border-radius: 30px;
+                            width: 30px;
+                            font-size: 15px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                    &.multipleFile {
                         display: -webkit-flex;
                         display: -moz-flex;
                         display: -ms-flexbox;
@@ -279,36 +463,198 @@ form[name='project']{
                         -moz-flex-flow: row wrap;
                         -ms-flex-flow: row wrap;
                         flex-flow: row wrap;
-                        li{
-                            color: #999999;
-                            padding: 0 15px;
-                            -webkit-transition: none ;
-                            -moz-transition: none ;
-                            -ms-transition: none ;
-                            -o-transition: none ;
-                            transition: none ;
-                            font-size: 14px;
-                            &.selected, &.focus{
-                                background-color: $gradient-light-blue !important;
-                                color: white !important;
-                                border-radius: 30px !important;
+                        .addFiles {
+                            display: block;
+                            width: 100%;
+                            p {
+                                display: inline-block;
+                                font-weight: 700;
                             }
-                            &:hover {
-                                background-color: $gradient-light-blue;
-                                color: white;
+                            span {
+                                cursor: pointer;
+                                vertical-align: middle;
+                                display: inline-block;
+                                -webkit-border-radius: 30px;
+                                -moz-border-radius: 30px;
                                 border-radius: 30px;
-                            }
-                            &.disabled{
-                                display: none;
+                                width: 25px;
+                                height: 25px;
+                                margin-left: 10px;
+                                position: relative;
+                                background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                                background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                                background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                                background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                                &:after {
+                                    @extend .proxima-regular;
+                                    content: '+';
+                                    position: absolute;
+                                    color: #ffffff;
+                                    top: 10px;
+                                    left: 50%;
+                                    font-size: 20px;
+                                    -webkit-transform: translate(-50%, -50%);
+                                    -moz-transform: translate(-50%, -50%);
+                                    -ms-transform: translate(-50%, -50%);
+                                    -o-transform: translate(-50%, -50%);
+                                    transform: translate(-50%, -50%);
+                                }
                             }
                         }
+                        .containerOtherFile {
+                            width: 100%;
+                            display: -webkit-flex;
+                            display: -moz-flex;
+                            display: -ms-flexbox;
+                            display: -ms-flex;
+                            display: flex;
+                            -webkit-flex-flow: row wrap;
+                            -moz-flex-flow: row wrap;
+                            -ms-flex-flow: row wrap;
+                            flex-flow: row wrap;
+                            .blockImgOther {
+                                animation: animateElement linear .3s;
+                                animation-iteration-count: 1;
+                                cursor: pointer;
+                                position: relative;
+                                margin-right: 10px;
+                                margin-bottom: 10px;
+                                padding: 10px;
+                                font-size: 14px;
+                                border: 2px solid $gradient-light-blue;
+                                -webkit-border-radius: 30px;
+                                -moz-border-radius: 30px;
+                                border-radius: 30px;
+                                &.fileIn {
+                                    padding: 0;
+                                    border: 0px solid $gradient-light-blue;
+                                    -webkit-border-radius: 0px;
+                                    -moz-border-radius: 0px;
+                                    border-radius: 0px;
+                                    label {
+                                        opacity: 0;
+                                        position: absolute;
+                                        visibility: hidden;
+                                    }
+                                    div.infoFiles {
+                                        padding: 10px;
+                                        font-size: 14px;
+                                        color: $light-black;
+                                        border: 2px solid $gradient-light-blue;
+                                        -webkit-border-radius: 30px;
+                                        -moz-border-radius: 30px;
+                                        border-radius: 30px;
+                                        p {
+                                            display: inline-block;
+                                            vertical-align: middle;
+                                            margin-bottom: 0px;
+                                        }
+                                        span {
+                                            @extend .proxima-regular;
+                                            cursor: pointer;
+                                            margin-left: 10px;
+                                            display: inline-block;
+                                            font-size: 30px;
+                                            -webkit-transform: rotate(45deg);
+                                            -moz-transform: rotate(45deg);
+                                            -ms-transform: rotate(45deg);
+                                            -o-transform: rotate(45deg);
+                                            transform: rotate(45deg);
+                                            line-height: 10px;
+                                            vertical-align: middle;
+                                        }
+                                    }
+                                }
+                                label {
+                                    color: #D1D1D1;
+                                    cursor: pointer;
+                                    overflow: hidden;
+                                    font-size: 14px;
+                                    display: -webkit-flex;
+                                    display: -moz-flex;
+                                    display: -ms-flexbox;
+                                    display: -ms-flex;
+                                    display: flex;
+                                    -webkit-align-items: center;
+                                    -moz-align-items: center;
+                                    -ms-align-items: center;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    margin-bottom: 0px;
+                                    input {
+                                        z-index: 10;
+                                        cursor: inherit;
+                                        display: block;
+                                        filter: alpha(opacity=0);
+                                        min-height: 100%;
+                                        min-width: 100%;
+                                        opacity: 0;
+                                        position: absolute;
+                                        right: 0;
+                                        text-align: right;
+                                        top: 0;
+                                    }
+                                }
+                            }
+                        }
+
                     }
-                }
-                &.date{
-                    position: relative;
-                    label{
-                        position: relative;
-                        &:after{
+                    &.noContain {
+                        span.current {
+                            color: #D1D1D1;
+                        }
+                    }
+                    label, .addFiles {
+                        @extend .proxima-regular;
+                        display: block;
+                        color: #999999;
+                        font-size: 14px;
+                        margin-bottom: 10px;
+                    }
+                    input, textarea {
+                        @extend .proxima-regular;
+                        font-weight: 700;
+                        width: 100%;
+                        color: $light-black;
+                        font-size: 18px;
+                        border: 0px;
+                        resize: none;
+                        &:focus {
+                            outline: none;
+                        }
+                        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                            @extend .proxima-regular;
+                            font-weight: 700;
+                            color: #D1D1D1;
+                        }
+                        &::-moz-placeholder { /* Firefox 19+ */
+                            @extend .proxima-regular;
+                            font-weight: 700;
+                            color: #D1D1D1;
+                        }
+                        &:-ms-input-placeholder { /* IE 10+ */
+                            @extend .proxima-regular;
+                            font-weight: 700;
+                            color: #D1D1D1;
+                        }
+                        &:-moz-placeholder { /* Firefox 18- */
+                            @extend .proxima-regular;
+                            font-weight: 700;
+                            color: #D1D1D1;
+                        }
+                    }
+                    .nice-select {
+                        @extend .proxima-bold;
+                        width: 100%;
+                        border: 0px;
+                        padding: 0;
+                        height: inherit;
+                        line-height: 23px;
+                        float: inherit;
+                        font-size: 18px;
+                        color: $light-black;
+                        &:after {
                             border-width: 8.7px 5px 10px 5px;
                             border-style: solid;
                             border-color: $gradient-light-blue transparent transparent transparent;
@@ -319,10 +665,7 @@ form[name='project']{
                             pointer-events: none;
                             position: absolute;
                             right: 12px;
-                            bottom: -37px;
-                            -webkit-transform-origin: 66% 66%;
-                            -ms-transform-origin: 66% 66%;
-                            transform-origin: 66% 66%;
+                            top: 50%;
                             -webkit-transform: rotate(0deg);
                             -moz-transform: rotate(0deg);
                             -ms-transform: rotate(0deg);
@@ -332,344 +675,6 @@ form[name='project']{
                             transition: all 0.15s ease-in-out;
                             width: auto;
                         }
-                    }
-                    .picker{
-                        right: 0;
-                        bottom: 0px ;
-                        .picker__holder{
-                            border: 0px;
-                            &:focus{
-                                outline: none;
-                            }
-                            .picker__day--selected{
-                                background-color: $gradient-light-blue;
-                            }
-                            button{
-                                @extend .proxima-regular;
-                            }
-                        }
-                    }
-                }
-                &.file{
-                    display: -webkit-flex;
-                    display: -moz-flex;
-                    display: -ms-flexbox;
-                    display: -ms-flex;
-                    display: flex;
-                    -webkit-justify-content:center;
-                    -moz-justify-content:center;
-                    -ms-justify-content:center;
-                    justify-content:center;
-                    -webkit-align-items: center;
-                    -moz-align-items: center;
-                    -ms-align-items: center;
-                    -ms-flex-align: center;
-                    align-items: center;
-                    height: 40vh;
-                    position: relative;
-                    &.imgAdd{
-                        label{
-                            display: none;
-                        }
-                        img{
-                            display: block;
-                        }
-                        span{
-                            z-index: 99;
-                            opacity:1;
-                        }
-                    }
-                    label{
-                        @extend .proxima-bold;
-                        cursor: pointer;
-                        margin-bottom: 0px;
-                        position: relative;
-                        overflow: hidden;
-                        -webkit-border-radius: 30px;
-                        -moz-border-radius: 30px;
-                        border-radius: 30px;
-                        color: white;
-                        font-size: 18px;
-                        padding: 15px 20px;
-                        display: inline-block;
-                        background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
-                        background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
-                        background-image:    -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
-                        background-image:      -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
-                        background-image:         linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
-                        input{
-                            cursor: inherit;
-                            display: block;
-                            filter: alpha(opacity=0);
-                            min-height: 100%;
-                            min-width: 100%;
-                            opacity: 0;
-                            position: absolute;
-                            right: 0;
-                            text-align: right;
-                            top: 0;
-                        }
-                    }
-                    img{
-                        display: none;
-                        max-width: 100%;
-                        max-height: 100%;
-                        width: auto;
-                    }
-                    span{
-                        &.modif {
-                            right: 60px;
-                        }
-                        &:hover{
-                            background-color: $gradient-light-blue;
-                            color: white;
-                        }
-                        -webkit-transition: opacity 0.5s ease-in-out ;
-                        -moz-transition: opacity 0.5s ease-in-out ;
-                        -ms-transition: opacity 0.5s ease-in-out ;
-                        -o-transition: opacity 0.5s ease-in-out ;
-                        transition: opacity 0.5s ease-in-out ;
-                        z-index: -1;
-                        opacity:0;
-                        cursor: pointer;
-                        position: absolute;
-                        top: 20px;
-                        right: 20px;
-                        background-color: white;
-                        -webkit-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12) ;
-                        -moz-box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12) ;
-                        box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12) ;
-                        color: $light-black;
-                        height: 30px;
-                        border-radius: 30px;
-                        width: 30px;
-                        font-size: 15px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                }
-                &.multipleFile{
-                    display: -webkit-flex;
-                    display: -moz-flex;
-                    display: -ms-flexbox;
-                    display: -ms-flex;
-                    display: flex;
-                    -webkit-flex-flow: row wrap;
-                    -moz-flex-flow: row wrap;
-                    -ms-flex-flow: row wrap;
-                    flex-flow: row wrap;
-                    .addFiles{
-                        display: block;
-                        width: 100%;
-                        p{
-                            display: inline-block;
-                            font-weight: 700;
-                        }
-                        span{
-                            cursor: pointer;
-                            vertical-align: middle;
-                            display: inline-block;
-                            -webkit-border-radius: 30px;
-                            -moz-border-radius: 30px;
-                            border-radius: 30px;
-                            width: 25px;
-                            height: 25px;
-                            margin-left: 10px;
-                            position: relative;
-                            background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
-                            background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
-                            background-image:    -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
-                            background-image:      -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
-                            background-image:         linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
-                            &:after{
-                                @extend .proxima-regular;
-                                content: '+';
-                                position: absolute;
-                                color: #ffffff;
-                                top: 10px;
-                                left: 13px;
-                                font-size: 20px;
-                                -webkit-transform: translate(-50%,-50%);
-                                -moz-transform: translate(-50%,-50%);
-                                -ms-transform: translate(-50%,-50%);
-                                -o-transform: translate(-50%,-50%);
-                                transform: translate(-50%,-50%);
-                            }
-                        }
-                    }
-                    .containerOtherFile{
-                        width: 100%;
-                        display: -webkit-flex;
-                        display: -moz-flex;
-                        display: -ms-flexbox;
-                        display: -ms-flex;
-                        display: flex;
-                        -webkit-flex-flow: row wrap;
-                        -moz-flex-flow: row wrap;
-                        -ms-flex-flow: row wrap;
-                        flex-flow: row wrap;
-                        .blockImgOther{
-                            animation: animateElement linear .3s;
-                            animation-iteration-count: 1;
-                            cursor: pointer;
-                            position: relative;
-                            margin-right: 10px;
-                            margin-bottom: 10px;
-                            padding: 10px;
-                            font-size: 14px;
-                            border: 2px solid $gradient-light-blue;
-                            -webkit-border-radius: 30px;
-                            -moz-border-radius: 30px;
-                            border-radius: 30px;
-                            &.fileIn{
-                                padding: 0;
-                                border: 0px solid $gradient-light-blue;
-                                -webkit-border-radius: 0px;
-                                -moz-border-radius: 0px;
-                                border-radius: 0px;
-                                label{
-                                    opacity:0;
-                                    position: absolute;
-                                    visibility: hidden;
-                                }
-                                div.infoFiles{
-                                    padding: 10px;
-                                    font-size: 14px;
-                                    color: $light-black;
-                                    border: 2px solid $gradient-light-blue;
-                                    -webkit-border-radius: 30px;
-                                    -moz-border-radius: 30px;
-                                    border-radius: 30px;
-                                    p{
-                                        display: inline-block;
-                                        vertical-align: middle;
-                                        margin-bottom: 0px;
-                                    }
-                                    span{
-                                        @extend .proxima-regular;
-                                        cursor: pointer;
-                                        margin-left: 10px;
-                                        display: inline-block;
-                                        font-size: 30px;
-                                        -webkit-transform: rotate(45deg);
-                                        -moz-transform: rotate(45deg);
-                                        -ms-transform: rotate(45deg);
-                                        -o-transform: rotate(45deg);
-                                        transform: rotate(45deg);
-                                        line-height: 10px;
-                                        vertical-align: middle;
-                                    }
-                                }
-                            }
-                            label{
-                                color: #D1D1D1;
-                                cursor: pointer;
-                                overflow: hidden;
-                                font-size: 14px;
-                                display: -webkit-flex;
-                                display: -moz-flex;
-                                display: -ms-flexbox;
-                                display: -ms-flex;
-                                display: flex;
-                                -webkit-align-items: center;
-                                -moz-align-items: center;
-                                -ms-align-items: center;
-                                -ms-flex-align: center;
-                                align-items: center;
-                                margin-bottom: 0px;
-                                input{
-                                    z-index:10;
-                                    cursor: inherit;
-                                    display: block;
-                                    filter: alpha(opacity=0);
-                                    min-height: 100%;
-                                    min-width: 100%;
-                                    opacity: 0;
-                                    position: absolute;
-                                    right: 0;
-                                    text-align: right;
-                                    top: 0;
-                                }
-                            }
-                        }
-                    }
-
-                }
-                &.noContain{
-                    span.current{
-                        color: #D1D1D1;
-                    }
-                }
-                label, .addFiles{
-                    @extend .proxima-regular;
-                    display: block;
-                    color: #999999;
-                    font-size: 14px;
-                    margin-bottom: 10px;
-                }
-                input, textarea{
-                    @extend .proxima-regular;
-                    font-weight: 700;
-                    width: 100%;
-                    color: $light-black;
-                    font-size: 18px;
-                    border: 0px;
-                    resize: none;
-                    &:focus{
-                        outline: none;
-                    }
-                    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-                        @extend .proxima-regular;
-                        font-weight: 700;
-                        color: #D1D1D1;
-                    }
-                    &::-moz-placeholder { /* Firefox 19+ */
-                        @extend .proxima-regular;
-                        font-weight: 700;
-                        color: #D1D1D1;
-                    }
-                    &:-ms-input-placeholder { /* IE 10+ */
-                        @extend .proxima-regular;
-                        font-weight: 700;
-                        color: #D1D1D1;
-                    }
-                    &:-moz-placeholder { /* Firefox 18- */
-                        @extend .proxima-regular;
-                        font-weight: 700;
-                        color: #D1D1D1;
-                    }
-                }
-                .nice-select{
-                    @extend .proxima-bold;
-                    width: 100%;
-                    border: 0px;
-                    padding: 0;
-                    height: inherit;
-                    line-height: 23px;
-                    float: inherit;
-                    font-size: 18px;
-                    color: $light-black;
-                    &:after{
-                        border-width: 8.7px 5px 10px 5px;
-                        border-style: solid;
-                        border-color: $gradient-light-blue transparent transparent transparent;
-                        content: '';
-                        display: block;
-                        height: inherit;
-                        margin-top: -4px;
-                        pointer-events: none;
-                        position: absolute;
-                        right: 12px;
-                        top: 50%;
-                        -webkit-transform: rotate(0deg);
-                        -moz-transform: rotate(0deg);
-                        -ms-transform: rotate(0deg);
-                        -o-transform: rotate(0deg);
-                        transform: rotate(0deg);
-                        -webkit-transition: all 0.15s ease-in-out;
-                        transition: all 0.15s ease-in-out;
-                        width: auto;
                     }
                 }
             }

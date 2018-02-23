@@ -10,6 +10,7 @@
 
 // components
 @import "components/fonts";
+@import "components/card";
 
 // layout
 @import "layout/header";
@@ -24,6 +25,7 @@
 
 // pages
 @import "pages/form/form-widget";
+@import "pages/client/account/project/list";
 @import "pages/client/project/create";
 @import "pages/client/layout";
 @import "pages/client/template/two-columns";

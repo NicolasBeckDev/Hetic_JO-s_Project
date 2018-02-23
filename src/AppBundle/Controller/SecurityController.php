@@ -30,6 +30,7 @@ class SecurityController extends Controller
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
+        $test = 'ok';
         $error = $authUtils->getLastAuthenticationError();
         $lastUsername = $authUtils->getLastUsername();
 
@@ -55,26 +56,36 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->getDoctrine()->getRepository('AppBundle:User')->findOneBy([ 'email' => $user->getEmail()])) {
+                $message = 'Cette adresse email est déjà utilisée, veuillez en saisir une autre';
+                $type = 'error';
+            }else{
+                $user = $this->userServices->prePersistRegister($user);
 
-            $user = $this->userServices->prePersistRegister($user);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+                $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+                $this->get('security.token_storage')->setToken($token);
 
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
+                $this->get('session')->set('_security_main', serialize($token));
 
-            $this->get('session')->set('_security_main', serialize($token));
+                $event = new InteractiveLoginEvent($request, $token);
+                $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            $event = new InteractiveLoginEvent($request, $token);
-            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
-            return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('homepage',[
+                    'message' => "Vous êtes maintenant prêt à rejoindre les autres participants",
+                    'type' => "success",
+                    'title' => "Félicitations !"
+                ]);
+            }
         }
 
         return $this->render('@Client/registration/registration.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'message' => $message ?? false,
+            'type' => $type ?? false,
         ]);
     }
 
@@ -106,28 +117,34 @@ class SecurityController extends Controller
 
                 $routerContext = $this->container->get('router')->getContext();
 
+                $url = 'http://' . $routerContext->getHost() . ':' . $routerContext->getHttpPort() . '/reinitialisation/' . $user->getToken();
+
                 $mail = (new \Swift_Message('Tous Paris. : Réinitialisation de votre mot de passe'))
                     ->setFrom('tousparis2024@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody(
-                        $this->renderView(
-                            '@Email/forgottenPassword.html.twig',
-                            [
-                                'name' => $user->getFirstname(),
-                                'url' => $routerContext->getHost() . ":" . $routerContext->getHttpPort() . '/reinitialisation/' . $user->getToken()
-                            ]
-                        ),
+                        '<html>' .
+                        '<head></head>' .
+                        '<body>' .
+                        'Bonjour'.$user->getFirstname().'<br><br>'.
+                        'Nous avons reçu une demande de réinitialisation de votre mot de passe.<br>'.
+                        '<a href="' . $url . ' ">Cliquez ici pour réinitialiser votre mot de passe.</a><br><br>'.
+                        'Cordialement,<br>'.
+                        "L'équipe de Tous Paris.".
+                        ' </body>' .
+                        '</html>',
                         'text/html'
-                    )
-                ;
+                    );
 
                 $mailer->send($mail);
 
+                $title = 'Eh voilà !';
                 $message = 'Nous venons de vous envoyer une demande de réinitialisation par e-mail, veuillez la compléter.';
                 $type = 'success';
             }else{
+                $title = "Oops...";
                 $message = "L'adresse e-mail saisie n'est associée à aucun compte.";
-                $type = 'danger';
+                $type = 'error';
             }
         }
 
@@ -135,6 +152,7 @@ class SecurityController extends Controller
         return $this->render('@Client/forgottenPassword/forgottenPassword.html.twig', [
             'form' => $form->createView(),
             'message' => $message ?? false,
+            'title' => $title ?? false,
             'type' => $type ?? false,
         ]);
     }

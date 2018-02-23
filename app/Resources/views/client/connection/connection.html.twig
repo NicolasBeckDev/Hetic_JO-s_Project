@@ -8,9 +8,6 @@
             </div>
 
             <div class="form-container">
-                {% if error %}
-                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
 
                 <form action="{{ path('login') }}" method="post">
                     <div class="input-wrapper">
@@ -60,4 +57,20 @@
 
 {% block right_content %}
     <img src="{{ asset('build/images/connexion.png') }}" />
+{% endblock %}
+
+{% block addJavascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+
+    {% if error %}
+    <script>
+        setTimeout(function () {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: "{{ error.messageKey|trans(error.messageData, 'security') }}"
+            })
+        }, 100);
+    </script>
+    {% endif %}
 {% endblock %}

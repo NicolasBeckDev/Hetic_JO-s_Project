@@ -67,7 +67,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(name="picture", type="string", nullable=true)
+     * @ORM\Column(name="picture", type="string")
      */
     private $picture;
 
@@ -84,12 +84,12 @@ class User implements UserInterface, \Serializable
     private $participatingProjects;
 
     /**
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="creator", cascade={"remove"})
      */
     private $createdProjects;
 
     /**
-     * @ORM\Column(type="array", nullable=false)
+     * @ORM\Column(type="array")
      *
      */
     private $roles;

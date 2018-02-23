@@ -14,4 +14,13 @@ class FileUploader
 
         return $fileName;
     }
+
+    public function uploadDefaultPicture($file, $dir)
+    {
+        $fileName = md5(uniqid()).substr($file, -4);
+
+        copy($file, $dir.'/'.$fileName);
+
+        return $fileName;
+    }
 }

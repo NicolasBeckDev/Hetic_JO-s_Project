@@ -67,7 +67,6 @@
                             </p>
                         </div>
                     </div>
-
                     <div class="participant-day-left-wrapper">
                         <div class="participant">
                             <div class="media">
@@ -108,17 +107,92 @@
                             </div>
                         </div>
                     </div>
+                    <div id="map">
+
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="share-container">
             <div class="content">
-                <div class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></div>
-                <div class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></div>
-                <div class="linkedin"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
-                <div class="enveloppe"><a href="#"><i class="fas fa-envelope"></i></a></div>
+                <div class="socialBlock">
+                    <span>&#10005;</span>
+                    <p>Partager le projet sur les réseaux sociaux</p>
+                    <div class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+                    <div class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></div>
+                    <div class="linkedin"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+                    <div class="enveloppe"><a href="#"><i class="fas fa-envelope"></i></a></div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="popUpContainer">
+        <div class="principaleButton3Btn"></div>
+        <div>
+            <div class="button3Btn firstButton3Btn"></div>
+            <div class="button3Btn secondButton3Btn"></div>
+            <div class="button3Btn lastButton3Btn social"></div>
+        </div>
+        <div id="js-cachedPopup1" class="popUpTuto">
+            <span class="js-closePopup">&#10005;</span>
+            <p class="titlePopUp">Bienvenue sur Tous Paris</p>
+            <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
+        </div>
+    </div>
+{% endblock %}
+{% block addJavascripts %}
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: {lat: -34.397, lng: 150.644}
+            });
+            var geocoder = new google.maps.Geocoder();
+            geocodeAddress(geocoder, map);
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = "{{ project.address }} ";
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+
+                    var image = '{{ asset('build/images/pinMarker.png') }}';
+
+                    var contentString = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<h5 id="firstHeading" class="firstHeading">Adresse du projet</h5>'+
+                        '<div id="bodyContent">'+
+                        '<p>{{ project.address }}'+
+                        '</div>'+
+                        '</div>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        title: 'Adresse du projet',
+                        content: contentString
+                    });
+
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        icon: {
+                            scaledSize: new google.maps.Size(30, 35),
+                            url: image
+                        },
+                        title: 'Adresse du projet',
+                        position: results[0].geometry.location
+                    });
+                    infowindow.open(map, marker);
+                    marker.addListener('click', function() {
+                        infowindow.open(map, marker);
+                    });
+
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&callback=initMap"></script>
 {% endblock %}
