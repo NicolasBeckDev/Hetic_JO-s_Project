@@ -681,3 +681,43 @@
         }
     }
 }
+
+@media (max-width: 764px) {
+    .containerForm {
+        flex-flow: column nowrap;
+
+        .left, .right, .left.left {
+            border: 0;
+            width: 100%;
+        }
+    }
+    .project-create-content form[name='project'] .containerForm .left, .project-create-content form[name='project'] .containerForm .right  {
+        width: 100%;
+    }
+    .project-create-content form[name='project'] .containerForm .left.left, .project-create-content form[name='project'] .containerForm .right.right  {
+        border: 0;
+    }
+    .block2x {
+        flex-flow: column nowrap;
+    }
+    .project-create-content form[name='project'] .containerForm .left .block2x .blockInput, .project-create-content form[name='project'] .containerForm .right .block2x .blockInput {
+        width: 100%;
+    }
+    .project-create-content form[name='project'] .containerForm .left .block2x .blockInput:first-child, .project-create-content form[name='project'] .containerForm .right .block2x .blockInput:first-child {
+        border: 0;
+    }
+    .project-create-content form[name='project'] .containerForm .left .block2x .blockInput:last-child, .project-create-content form[name='project'] .containerForm .right .block2x .blockInput:last-child {
+        border: 0;
+    }
+    .project-create-content form[name='project'] .menuForm {
+        padding: 0;
+    }
+    .project-create-content form[name='project'] .menuForm .container .blockButton {
+        p {
+            display: none;
+        }
+    }
+    .project-create-content form[name='project'] .menuForm .container .blockButton:not(:last-of-type) {
+        margin: 0;
+    }
+}

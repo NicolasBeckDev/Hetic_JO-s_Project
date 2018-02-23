@@ -4,7 +4,8 @@
 
   .header{
     position: relative;
-    height: 75px;
+    height: 100px;
+    border-bottom: 1px solid #DCDCDC;
 
     .toList{
       z-index: 10;
@@ -13,7 +14,7 @@
       height: auto;
       @extend .proxima-regular;
       font-size: 18px;
-      top: 27px;
+      top: 36px;
       left:30px;
 
       a{
@@ -28,8 +29,8 @@
       width: 100%;
       position: relative;
 
-      &-save, &-delete, &-edit {
-        margin-top: 20px;
+      &-delete, &-edit {
+        margin-top: 32px;
         width: 200px;
         height: 45px;
         display: inline-block;
@@ -44,7 +45,7 @@
         width: 157px;
       }
 
-      &-save, &-edit, &-delete, text {
+     &-edit, &-delete, text {
         text-align: right;
 
         margin-right: 46px;
@@ -52,14 +53,6 @@
     }
 
     .button{
-      &-save{
-        width: 40px;
-        height: 40px;
-        border-radius: 25px;
-        text-align: center;
-        font-size: 25px;
-        background-image: linear-gradient(to right, #61d432, #429321);
-      }
 
       &-delete{
         width: 40px;
@@ -68,6 +61,12 @@
         text-align: center;
         font-size: 25px;
         background-image: linear-gradient(to left, #eb3351, #ff5250);
+
+        .img-delete {
+          width: 20px;
+          height: 23px;
+          margin-bottom: 4px;
+        }
       }
 
       &-edit{
@@ -77,6 +76,12 @@
         text-align: center;
         font-size: 25px;
         background-image: linear-gradient(to right, #ffbf38, #ff8b24);
+
+        .img-edit {
+          width: 15px;
+          height: 15px;
+          margin-bottom: 4px;
+        }
       }
 
       &-save, &-delete, &-edit{
@@ -114,11 +119,11 @@
         }
 
         .lastname, .firstname,.mail, .role{
-          padding-top: 7px;
+          padding-top: 27px;
           background-color: white;
           margin-bottom: 20px;
           display: inline-block;
-          height:40px;
+          height:80px;
           width: 48%;
           text-align: center;
           @extend .proxima-bold;
@@ -131,7 +136,7 @@
         }
 
         .firstname{
-          margin-left: 10px;
+          margin-left: 9px;
         }
 
         .mail, .role{

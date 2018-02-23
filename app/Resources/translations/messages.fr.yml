@@ -14,14 +14,7 @@ app:
         client:
             account:
                     index:
-                           tolist: "Revenir à la liste"
-                           delete: "Supprimer l'utilisateur"
-                           edit: "Editer le profil"
-                           created: "Projets créés"
-                           followed: "Projets inscrits"
-                           participated: "Projets participés"
-                    edit:
-                           tolist: "Revenir à la liste"
+                           tolist: "Revenir à l'accueil"
                            save: "Enregistrer"
                            delete: "Supprimer l'utilisateur"
                            new_picture: "Ajouter une image de profil"

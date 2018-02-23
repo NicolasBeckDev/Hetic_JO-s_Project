@@ -1,19 +1,27 @@
+.list {
+  background-color: #f8f8f9;
+  margin-top: 100px;
+  padding-top: 15px;
+  height: 100%;
 
-  .list {
-    background-color: #f8f8f9;
-    margin-top: 100px;
-    padding-top: 15px;
-    height: 100%;
+  .head-buttons {
+    height: 55px;
+    position: relative;
+    margin-bottom: 10px;
 
-    .rechercher {
-      width: 400px;
+    .rechercher{
+      width: 350px;
       height: 50px;
-      margin-bottom: 15px;
+      border: 2px solid #f4f4f4;
+      padding-left: 20px;
     }
 
     .add-user {
-      float: right;
+      position: absolute;
+      display: inline-block;
       width: 260px;
+      right: 20px;
+      top: 8px;
 
       .text {
         @extend .proxima-bold;
@@ -21,29 +29,31 @@
         margin-top: 10px;
       }
 
-      .button {
-        width: 40px;
-        height: 40px;
-        background-image: linear-gradient(to right, #4885e7, #569ceb);
-        border-radius: 25px;
-        text-align: center;
-        font-size: 25px;
+      a {
+        color: white;
+        text-decoration: none;
 
-        a{
-          color: white;
-          text-decoration: none;
-
-          h3{
-            width: 100px;
-          }
+        .button {
+          width: 40px;
+          height: 40px;
+          background-image: linear-gradient(to right, #4885e7, #569ceb);
+          border-radius: 25px;
+          text-align: center;
+          font-size: 25px;
         }
       }
     }
+  }
+
+  .redirect-to-user {
+    text-decoration: none;
 
     .user {
+      z-index: 10;
       margin-bottom: 30px;
       background-color: white;
       height: 140px;
+      border: 2px solid #f4f4f4;
 
       .wrapper-info {
         padding-top: 23px;
@@ -71,7 +81,7 @@
             color: lightgrey;
           }
         }
-
       }
     }
   }
+}

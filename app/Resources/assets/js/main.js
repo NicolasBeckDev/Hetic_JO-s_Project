@@ -31,10 +31,12 @@ require('./lib/owl-carousel/owl.carousel.min')();
 require('./layout/header')();
 require('./pages/form/form-widget')();
 require('./pages/client/project/button-mobile')();
-require('./pages/client/project/selectFirstOption')();
+require('./pages/client/project/geolocalisation-page')();
 require('./pages/client/project/create/create')();
 require('./pages/client/project/show/display-text')();
 require('./pages/client/project/show/favoris-color')();
+require('./pages/client/account/index')();
+require('./pages/admin/user/edit')();
 require('./pages/client/popup')();
 require('./card/card')();
 

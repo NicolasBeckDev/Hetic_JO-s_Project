@@ -1,36 +1,17 @@
-{% extends "@Admin/project/layout.html.twig" %}
+{% extends "@Client/layout.html.twig" %}
 
-{% block body %}
-    {#<h1>Project edit</h1>
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_project_index') }}">Back to the list</a>
-        </li>
-        <li>
-
-        </li>
-    </ul>#}
-
-    {{ form_start(delete_form) }}
-    <button type="button" class="blockButton delete" id="delete_button">
-        <p>Supprimer le projet</p>
-        <span><img src="src/img/delete.png" alt=""></span>
-    </button>
-    <button style="display: none" id="delete_form"></button>
-    {{ form_end(delete_form) }}
-
-    <form action="addremove.php" id="projectPage" name="projectPage" method="post" enctype="multipart/form-data">
+{% block content %}
+    <div class="project-create-content">
+        {{ form_start(edit_form) }}
         <div class="menuForm">
             <div class="container">
                 <div class="left">
-                    <a href="#" class="blockButton goBack">
-                        <span><img src="src/img/arrow.png" alt=""></span>
+                    <a href="{{ path('project_index') }}" class="blockButton goBack">
+                        <span><img src="{{ asset('build/images/arrow.png') }}" alt=""></span>
                         <p>Retour au listing produits</p>
                     </a>
                 </div>
@@ -43,18 +24,22 @@
                     </div>
                     <button type="submit" class="blockButton validate">
                         <p>Enregister le projet</p>
-                        <span><img src="src/img/validate.png" alt=""></span>
+                        <span><img src="{{ asset('build/images/validate.png') }}" alt=""></span>
+                    </button>
+                    <button type="button" class="blockButton delete" id="delete-button">
+                        <p>Supprimer le projet</p>
+                        <span><img src="{{ asset('build/images/delete.png') }}" alt=""></span>
                     </button>
                 </div>
             </div>
         </div>
         <div class="containerForm">
             <div class="left">
-                <div class="blockInput file">
+                <div class="blockInput file imgAdd">
                     <label for="imgProjet">Ajouter une image à la une
-                        <input type="file" id="imgProjet" name="imgProjet" accept="image/*">
+                        {{ form_widget(edit_form.mainPicture) }}
                     </label>
-                    <img class="imgFirstProject" src="#" alt="Image à la une">
+                    <img class="imgFirstProject" src="{{ asset('uploads/project/picture/') }}{{ edit_form.mainPicture.vars.data.filename }}" alt="Image à la une">
                     <span class="modif"><i class="fas fa-pencil-alt"></i></span>
                     <span class="remove">&#10005;</span>
                 </div>
@@ -62,80 +47,122 @@
                     <div class="addFiles">
                         <p>Ajouter d’autre images <span></span>
                     </div>
-                    <div class="containerOtherFile"></div>
+                    <div class="containerOtherFile" data-prototype="
+                        {% filter escape %}
+                            {{ include('@Client/project/sub-picture-prototype.html.twig', { 'form': edit_form.subPictures.vars.prototype }) }}
+                        {% endfilter %}
+                    ">
+
+                        {% for subPicture in edit_form.subPictures.children %}
+
+                            <div class="blockImgOther fileIn">
+                                <label for="otherImg">
+                                    Uploader votre image
+                                    <input id="{{ subPicture.vars.id }}" name="project[subPictures][{{ subPicture.vars.name }}]" required="required" type="file">
+                                </label>
+                                <div class="infoFiles"><p>{{ subPicture.vars.data.filename }}<br clear="left"></p><span class="selFile">+</span></div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
                 </div>
             </div>
             <div class="right">
                 <div class="blockInput titreProjet">
                     <label for="titreProjet">Titre du projet</label>
-                    <input type="text" id="titreProjet" name="titreProjet" placeholder="Ex : Amélioration du métro parisien" required>
+                    {{ form_widget(edit_form.name) }}
                 </div>
                 <div class="block2x">
                     <div class="blockInput arrondissement noContain">
                         <label for="arrondissement">Arrondissement</label>
-                        <select name=arrondissement" id="arrondissement" required>
-                            <option value="Paris 20eme" disabled selected data-display="Paris 20eme">Paris 20eme</option>
-                            <option value="Paris 1er">Paris 1er</option>
-                            <option value="Paris 2eme">Paris 2eme</option>
-                            <option value="Paris 3eme">Paris 3eme</option>
-                            <option value="Paris 4eme">Paris 4eme</option>
-                            <option value="Paris 5eme">Paris 5eme</option>
-                            <option value="Paris 6eme">Paris 6eme</option>
-                            <option value="Paris 7eme">Paris 7eme</option>
-                            <option value="Paris 8eme">Paris 8eme</option>
-                            <option value="Paris 9eme">Paris 9eme</option>
-                            <option value="Paris 10eme">Paris 10eme</option>
-                            <option value="Paris 11eme">Paris 11eme</option>
-                            <option value="Paris 12eme">Paris 12eme</option>
-                            <option value="Paris 13eme">Paris 13eme</option>
-                            <option value="Paris 14eme">Paris 14eme</option>
-                            <option value="Paris 15eme">Paris 15eme</option>
-                            <option value="Paris 16eme">Paris 16eme</option>
-                            <option value="Paris 17eme">Paris 17eme</option>
-                            <option value="Paris 18eme">Paris 18eme</option>
-                            <option value="Paris 19eme">Paris 19eme</option>
-                            <option value="Paris 20eme">Paris 20eme</option>
-                        </select>
+                        {{ form_widget(edit_form.district) }}
                     </div>
                     <div class="blockInput date ">
                         <label for="dateFirst">Date de début du projet</label>
-                        <input type="text" id="dateFirst" name="dateFirst" required placeholder="Ex : 02/08/2024" >
+                        {{ form_widget(edit_form.date) }}
                     </div>
                 </div>
                 <div class="block2x">
                     <div class="blockInput categorie noContain">
                         <label for="categorie">Catégorie du projet</label>
-                        <select name=categorie" id="categorie" required>
-                            <option value="Mobilité & transport" disabled data-display="Mobilité & transport" selected>Mobilité & transport</option>
-                            <option value="Environnement">Environnement</option>
-                            <option value="Solidaire & citoyen">Solidaire & citoyen</option>
-                            <option value="Mobilité & transport">Mobilité & transport</option>
-                            <option value="Urbanisme">Urbanisme</option>
-                            <option value="Technologies">Technologies</option>
-                        </select>
+                        {{ form_widget(edit_form.category) }}
                     </div>
-                    <div class="blockInput">
+                    <div class="blockInput adresse">
                         <label for="adresse">Adresse du projet</label>
-                        <input type="text" id="adresse" name="adresse" required placeholder="Ex : 24 rue du buisson Paris 75012" >
+                        {{ form_widget(edit_form.address) }}
                     </div>
                 </div>
                 <div class="blockInput">
                     <label for="objectif">Objectif du projet</label>
-                    <textarea name="objectif" id="objectif" cols="30" rows="3" required placeholder="Ex : Améliorer l'accueil ainsi que la propreté des stations de métro" ></textarea>
+                    {{ form_widget(edit_form.objectif) }}
                 </div>
                 <div class="blockInput">
                     <label for="description">Description du projet</label>
-                    <textarea name="objectif" id="description" cols="30" rows="6" required placeholder="Ex : Dans le cadre des JO, nous voulons améliorer les conditions de transport des visiteurs" ></textarea>
+                    {{ form_widget(edit_form.description) }}
                 </div>
             </div>
         </div>
-    </form>
+        <div style="display: none">{{ form_row(edit_form.subPictures) }}</div>
+        {{ form_end(edit_form) }}
+
+        {{ form_start(delete_form, {'attr': {'id': 'delete_form'}}) }}
+        {{ form_widget(delete_form) }}
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}
 
 {% block addJavascripts %}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+
     <script>
-        document.getElementById('delete_button').addEventListener('click', function () {
+
+        var placeSearch, autocomplete;
+        var componentForm = {
+            street_number: 'short_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+            postal_code: 'short_name'
+        };
+
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'),
+                {
+                    componentRestrictions: {country: "fr"},
+                    types: ['address']
+                });
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+                document.getElementById(component).value = '';
+                document.getElementById(component).disabled = false;
+            }
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+                var addressType = place.address_components[i].types[0];
+                if (componentForm[addressType]) {
+                    var val = place.address_components[i][componentForm[addressType]];
+                    document.getElementById(addressType).value = val;
+                }
+            }
+        }
+
+        document.getElementById('delete-button').addEventListener("click", function () {
             swal({
                 title: 'Êtes-vous sûr?',
                 text: "Vous ne pourrez pas récupérer ce projet !",
@@ -143,14 +170,14 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Oui !',
+                confirmButtonText: 'Supprimer',
                 cancelButtonText: 'Annuler'
             }).then((result) => {
                 if (result.value) {
-                    document.getElementById('delete_form').click();
+                    document.getElementById('delete_form').submit();
                 }
             })
         });
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}
-
