@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\AppBundle;
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Project;
 use AppBundle\Service\ProjectServices;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,7 +35,8 @@ class ProjectController extends Controller
     public function indexAction()
     {
         return $this->render('@Admin/project/index.html.twig', [
-            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
+            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll(),
+            'categories' => $this->getDoctrine()->getRepository(Category::class)->findAll()
         ]);
     }
 

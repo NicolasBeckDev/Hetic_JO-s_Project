@@ -1,83 +1,98 @@
 {% extends "@Admin/project/layout.html.twig" %}
 
-{% block body %}
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
 
-    <div class="project-index">
+{% block content %}
+    <div class="account-project-list-content">
+        <div class="menuForm">
+            <div class="container">
+                <ul>
+                    <li class="active">
+                        <a href="{{ path('account_show_created_projects') }}">Mes projets crées</a>
+                    </li>
 
-        <div class="header"></div>
+                    <li>
+                        <a href="{{ path('account_show_participating_projects') }}">Mes projets participés</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('account_show_followed_projects') }}">Mes projets suivis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <div class="content">
+            <div class="filter-container">
+                <div class="filter-wrapper button-group left" data-filter-group="category">
+                    {% for category in categories %}
+                        <button type="button" class="filter {{ category.color }}" data-filter="{{ '.' ~ category.name|snake }}">{{ category.name }}</button>
+                    {% endfor %}
 
-            <div class="wrapper-filters">
-
-                <div class="type">
-
-                    <div class="tous">
-                        <p>Tous</p>
-                    </div>
-                    <div class="environment">Environnement</div>
-                    <div class="solidaritie">Solidarité & citoyen</div>
-                    <div class="mobility">Mobilité & transport</div>
-                    <div class="urbanism">Urbanisme</div>
-                    <div class="technology">Technologie</div>
+                    <button type="button" class="filter blue active" data-filter="">{{ 'app.page.client.project.list.all'|trans }}</button>
                 </div>
 
-                <div class="button-search"></div>
-
-                <div class="status">
-
+                <div class="filter-wrapper button-group right" data-filter-group="state">
+                    <button type="button" class="filter blue active" data-filter=".in_progress">En cours</button>
+                    <button type="button" class="filter blue" data-filter=".finished">Fini</button>
                 </div>
-
             </div>
 
+            <div class="project-wrapper">
+                <div class="grid row">
+                    <div class="grid-sizer"></div>
+                    {% for project in projects %}
+                        <div class="grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3 {{ project.category.name|snake }} {{ project.inProgress ? 'in_progress' : 'finished' }}">
+                            <div class="project {{ project.category.color }}">
+                                <a href="{{ path('project_show', { 'id': project.id }) }}">
+                                    <div class="image-container">
+                                        <div class="image-positioner">
+                                            <img src="{{ asset('uploads/project/picture/' ~ project.mainPicture) }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="text-content-wrapper">
+                                        <div class="category-container">
+                                            <span class="category">{{ project.category.name }}</span>
+                                        </div>
+
+                                        <div class="name-container">
+                                            <span class="name">{{ project.name }}</span>
+                                        </div>
+
+                                        <div class="district-container">
+                                            <span class="district">{{ project.district.name }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="color-line"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 
+    <div class="popUpContainer">
+        <div class="principaleButton3Btn"></div>
+        <div>
+            <div class="button3Btn firstButton3Btn list"></div>
+            <div class="button3Btn secondButton3Btn list"></div>
+            <div class="button3Btn lastButton3Btn list"></div>
+        </div>
+        <div class="popUpTuto">
+            <span>&#10005;</span>
+            <p class="titlePopUp">Bienvenue sur Tous Paris</p>
+            <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
+        </div>
+    </div>
 
+{% endblock %}
 
-    <h1>Projects list</h1>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>MainPicture</th>
-            <th>SubPicture</th>
-            <th>Date</th>
-            <th>Inprogress</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.name }}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.mainPicture }}</td>
-                <td>
-                    {% for subPicture in project.subPictures %}
-                        {{ subPicture }}
-                        <br>
-                    {% endfor %}
-                </td>
-                <td>{% if project.date %}{{ project.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if project.inProgress %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_project_edit', { 'id': project.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <h1>YOUHOU JE SUIS UN ADMIN !!!</h1>
-    {% endif %}
+{% block addJavascripts %}
+    <script src="https://unpkg.com/isotope-layout@3.0.5/dist/isotope.pkgd.min.js"></script>
 {% endblock %}
