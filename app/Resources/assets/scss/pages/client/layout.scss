@@ -9,6 +9,13 @@ html, body
         margin: 0;
     }
 
+    .popUpContainer
+    {
+        @media screen and (min-width: $screen-sm-min) {
+            display: none;
+        }
+    }
+
     button, a, input
     {
         transition: all .2s ease-in-out;
