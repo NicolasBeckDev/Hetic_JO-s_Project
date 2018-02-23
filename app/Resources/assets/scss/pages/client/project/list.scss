@@ -45,6 +45,10 @@
     {
         width: 50%;
 
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+        }
+
         @media screen and (min-width: $screen-md-min) {
             width: 33.333%;
         }
@@ -58,9 +62,17 @@
     {
         margin-bottom: 30px;
 
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+        }
+
         &.width-2
         {
             width: 50%;
+
+            @media screen and (max-width: $screen-xs-max) {
+                width: 100%;
+            }
 
             @media screen and (min-width: $screen-md-min) and (max-width: $screen-md-max) {
                 width: 66.666%;
