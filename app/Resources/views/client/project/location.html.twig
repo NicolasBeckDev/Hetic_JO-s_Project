@@ -9,6 +9,9 @@
         <div class="filter-container">
             <div class="filter-wrapper">
                 {{ form_start(form) }}
+                    <div class="closeFilter">
+                        <span >&#10005;</span>
+                    </div>
                     {{ form_widget(form.location, {'label': ' ' }) }}
                     <div class="location_address">
                         {{ form_widget(form.address) }}
@@ -42,6 +45,19 @@
                 <div id="map-col" class="col-sm-5 no-padding">
                     <div id="map"></div>
                 </div>
+            </div>
+        </div>
+        <div class="popUpContainer geoloc">
+            <div class="pictoMap">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+        </div>
+        <div class="mapSwitch">
+            <div class="left">
+                <p>Liste</p>
+            </div>
+            <div class="right">
+                <p>Filtres</p>
             </div>
         </div>
     </div>
@@ -79,7 +95,6 @@
                     url: image
                 },
             });
-            /*
             marker.setIcon(({
                 url: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
                 size: new google.maps.Size(71, 71),
@@ -87,7 +102,6 @@
                 anchor: new google.maps.Point(17, 34),
                 scaledSize: new google.maps.Size(35, 35)
             }));
-            */
 
             window.geocoder = new google.maps.Geocoder;
 
