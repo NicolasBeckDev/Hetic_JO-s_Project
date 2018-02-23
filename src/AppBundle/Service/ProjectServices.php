@@ -55,6 +55,7 @@ class ProjectServices
         return $project
             ->setMainPicture($this->pictureStringToFile($project->getMainPicture()))
             ->setSubPictures($this->picturesStringToFile($project->getSubPictures()))
+            ->setDate($this->dateToString($project->getDate()))
             ;
     }
 
@@ -62,7 +63,7 @@ class ProjectServices
         return $formProject
             ->setMainPicture($this->uploadMainPicture($formProject) ?? $project->getMainPicture())
             ->setSubPictures($this->uploadSubPictures($formProject) ?? $project->getSubPictures())
-            ->setDate($this->stringToDate($formProject) ?? $project->getDate())
+            ->setDate($this->stringToDate($formProject->getDate()) ?? $project->getDate())
             ;
     }
 
@@ -80,6 +81,10 @@ class ProjectServices
 
     private function stringToDate($date){
         return new \DateTime(str_replace('/', '-',$date));
+    }
+
+    private function dateToString(\DateTime $date){
+        return $date->format("d/m/Y");
     }
 
     private function uploadMainPicture(Project $project){

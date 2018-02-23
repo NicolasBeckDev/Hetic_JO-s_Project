@@ -174,7 +174,7 @@ class ProjectController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('project_edit', array('id' => $project->getId()));
+            return $this->redirectToRoute('project_edit', array('project' => $project->getId()));
         }
 
         return $this->render('@Client/project/edit.html.twig', array(

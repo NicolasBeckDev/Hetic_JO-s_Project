@@ -16,19 +16,9 @@
                     </a>
                 </div>
                 <div class="right">
-                    <div class="statutProjet">
-                        <input type="checkbox" id="switch" />
-                        <label for="switch">Toggle</label>
-                        <p class="enCours">En cours</p>
-                        <p  class="finis no">Finis</p>
-                    </div>
                     <button type="submit" class="blockButton validate">
                         <p>Enregister le projet</p>
                         <span><img src="{{ asset('build/images/validate.png') }}" alt=""></span>
-                    </button>
-                    <button type="button" class="blockButton delete">
-                        <p>Supprimer le projet</p>
-                        <span><img src="{{ asset('build/images/delete.png') }}" alt=""></span>
                     </button>
                 </div>
             </div>
@@ -89,6 +79,7 @@
                 </div>
             </div>
         </div>
+        <div style="display: none">{{ form_row(form.subPictures) }}</div>
         {{ form_end(form) }}
     </div>
 {% endblock %}
