@@ -1,0 +1,1015 @@
+header {
+    z-index: 98;
+    color: $light-black;
+    position: fixed;
+    height: $header-height;
+    top: 0;
+    width: 100%;
+    font-family: 'Proxima Nova Regular', sans-serif;
+
+    &.transparent
+    {
+        background-color: transparent;
+        .left, .right{
+            .content{
+                background-color: transparent;
+            }
+        }
+    }
+
+    &.white
+    {
+        background-color: white;
+        border-bottom: 1px solid #DCDCDC;
+
+        .left, .right{
+            .content{
+                background-color: #ffffff;
+            }
+        }
+        .menu-desktop {
+            .menuUser {
+                padding-top: 79px !important;
+                .bottom{
+                    -webkit-box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
+                    -moz-box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
+                    box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
+                    border-bottom-left-radius: 30px;
+                    border-bottom-right-radius: 30px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $screen-sm-max) {
+        height:75px;
+        background-color: white;
+    }
+
+    .header-container {
+        height: 100%;
+        padding: 0 40px;
+        @media screen and (max-width: $screen-sm-max) {
+            border-bottom: 2px solid #F7F7F7;
+            padding: 0 20px;
+            position: absolute;
+            width: 100%;
+            background-color: #f8f8f9;
+        }
+        .menu-desktop{
+            height: 100%;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: -ms-flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            @media screen and (max-width: $screen-sm-max) {
+                display: none;
+            }
+            .left {
+                height: 100%;
+                .content {
+                    height: 100%;
+                    display: -webkit-flex;
+                    display: -moz-flex;
+                    display: -ms-flexbox;
+                    display: -ms-flex;
+                    display: flex;
+                    -webkit-align-items: center;
+                    -moz-align-items: center;
+                    -ms-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    position: relative;
+                    z-index: 100;
+                    &.open {
+                        .menuBurger {
+                            position: relative;
+                            span {
+                                border-radius: 30px;
+                                &:first-of-type {
+                                    -webkit-transform: translate(2px, 250%) rotate(45deg);
+                                    -moz-transform: translate(2px, 250%) rotate(45deg);
+                                    -ms-transform: translate(2px, 250%) rotate(45deg);
+                                    -o-transform: translate(2px, 250%) rotate(45deg);
+                                    transform: translate(2px, 250%) rotate(45deg);
+                                }
+                                &:nth-child(2) {
+                                    -webkit-transform: rotate(-45deg);
+                                    -moz-transform: rotate(-45deg);
+                                    -ms-transform: rotate(-45deg);
+                                    -o-transform: rotate(-45deg);
+                                    transform: rotate(-45deg);
+                                }
+                                &:last-of-type {
+                                    -webkit-transform: translate(90%, -250%) rotate(45deg);
+                                    -moz-transform: translate(90%, -250%) rotate(45deg);
+                                    -ms-transform: translate(90%, -250%) rotate(45deg);
+                                    -o-transform: translate(90%, -250%) rotate(45deg);
+                                    transform: translate(90%, -250%) rotate(45deg);
+                                }
+                            }
+                        }
+                    }
+                    .menuBurger {
+                        width: 30px;
+                        min-height: 30px;
+                        cursor: pointer;
+                        span {
+                            width: 30px;
+                            height: 3px;
+                            background-color: $light-black;
+                            margin-bottom: 10px;
+                            display: block;
+                            -webkit-transition: all 0.5s;
+                            -moz-transition: all 0.5s;
+                            -ms-transition: all 0.5s;
+                            -o-transition: all 0.5s;
+                            transition: all 0.5s;
+                            &:first-of-type {
+                                width: 15px;
+                            }
+                            &:last-of-type {
+                                width: 15px;
+                                margin-bottom: 0px;
+                                -webkit-transform: translateX(100%);
+                                -moz-transform: translateX(100%);
+                                -ms-transform: translateX(100%);
+                                -o-transform: translateX(100%);
+                                transform: translateX(100%);
+                            }
+                        }
+                    }
+                    .title {
+                        @extend .futura-bold;
+                        margin-left: 40px;
+                        font-size: 28px;
+                        position: relative;
+                        color: $light-black;
+                        text-decoration: none;
+                        &:after {
+                            content: '';
+                            display: inline-block;
+                            vertical-align: baseline;
+                            margin-left: 3px;
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 30px;
+                            background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                            background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                            background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                            background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                            background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                        }
+                    }
+                }
+            }
+            .right {
+                margin-left: 0;
+                .imageProfil{
+                    display: none;
+                }
+                &.connect{
+                    position: relative;
+                    padding: 10px 20px;
+                    border-radius: 30px;
+                    background-color: #fff;
+                    width: 260px;
+                    &.admin{
+                        .hexagon{
+                            display: block;
+                            position: absolute;
+                            width: 100%;
+                            font-size: 20px;
+                            z-index: 10;
+                            height: 100%;
+                            i{
+                                position: absolute;
+                                bottom: -5px;
+                                right: -5px;
+                                color: #26C6DA;
+                            }
+                        }
+                        .imageProfil{
+                            border: 2px solid $gradient-dark-blue;
+                            position: relative;
+                        }
+                    }
+                    & > a{
+                        display: none;
+                    }
+                    .containerImg{
+                        display: block;
+                        cursor: pointer;
+                        &.active{
+                            .content{
+                                &:after{
+                                    -webkit-transform: rotate(180deg);
+                                    -moz-transform: rotate(180deg);
+                                    -ms-transform: rotate(180deg);
+                                    -o-transform: rotate(180deg);
+                                    transform: rotate(180deg);
+                                }
+                            }
+                        }
+                        .content{
+                            display: -webkit-flex;
+                            display: -moz-flex;
+                            display: -ms-flexbox;
+                            display: -ms-flex;
+                            display: flex;
+                            -webkit-align-items: center;
+                            -moz-align-items: center;
+                            -ms-align-items: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            -webkit-justify-content:center;
+                            -moz-justify-content:center;
+                            -ms-justify-content:center;
+                            justify-content:center;
+                            &:after{
+                                font-family: "Font Awesome 5 Free";
+                                font-weight: 900;
+                                content: '\f078';
+                                margin-left: 10px;
+                                color: $light-black;
+                                -webkit-transition: all ease-in-out 0.5s ;
+                                -moz-transition: all ease-in-out 0.5s ;
+                                -ms-transition: all ease-in-out 0.5s ;
+                                -o-transition: all ease-in-out 0.5s ;
+                                transition: all ease-in-out 0.5s ;
+                            }
+                            p{
+                                margin: 0 0 0 20px;
+                            }
+                            .imgBlockConnect{
+                                width: 40px;
+                                height: 40px;
+                                display: block;
+                                position: relative;
+                                .imageProfil{
+                                    display: block;
+                                    height: 100%;
+                                    border-radius: 30px;
+                                    overflow: hidden;
+                                    text-align: center;
+                                    img{
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    .menuUser{
+                        @extend .proxima-bold;
+                        position: absolute;
+                        background-color: white;
+                        text-align: center;
+                        color: $light-black;
+                        font-size: 18px;
+                        width: 260px;
+                        right: 0px;
+                        z-index: -1;
+                        border-radius: 30px;
+                        top: 0;
+                        padding-top: 60px;
+                        &.active{
+                            visibility: visible;
+                            opacity: 1;
+                            -webkit-transition: visibility 0s, opacity 0.5s linear;
+                            -moz-transition: visibility 0s, opacity 0.5s linear;
+                            -ms-transition: visibility 0s, opacity 0.5s linear;
+                            -o-transition: visibility 0s, opacity 0.5s linear;
+                            transition: visibility 0s, opacity 0.5s linear;
+                        }
+                        .top{
+                            @extend .proxima-regular;
+                            font-size: 14px;
+                            color: white;
+                            background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                            background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                            background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                            background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                            background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                            padding: 15px 20px;
+                            line-height: 20px;
+                            p{
+                                margin: 0;
+                            }
+                            p:first-of-type{
+                                @extend .proxima-bold;
+                                width: 100%;
+                            }
+                        }
+                        .bottom{
+                            line-height: 50px;
+
+                            a
+                            {
+                                display: block;
+                                padding: 0;
+                                border-top-left-radius: 0;
+                                border-top-right-radius: 0;
+                                transition: background-color 0.2s ease-in-out;
+
+                                &:not(:last-of-type)
+                                {
+                                    border-radius: 0;
+                                }
+
+                                &:hover
+                                {
+                                    background-color: $gradient-light-blue;
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+                a {
+                    font-size: 16px;
+                    padding: 17px 30px;
+                    border-radius: 30px;
+                    text-decoration: none;
+                    color: $light-black;
+                    background-color: white;
+                }
+                .hexagon{
+                    display: none;
+                }
+                .menuUser{
+                    position: absolute;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.5s linear;
+                }
+                .containerImg{
+                    display: none;
+                }
+            }
+            .menuComplet {
+                color: $light-black;
+                width: 450px;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                z-index: 99;
+                left: -450px;
+                background-color: white;
+                -webkit-transition: ease-in-out 0.5s;
+                -moz-transition: ease-in-out 0.5s;
+                -ms-transition: ease-in-out 0.5s;
+                -o-transition: ease-in-out 0.5s;
+                transition: ease-in-out 0.5s;
+                border: 0px solid;
+                &:after {
+                    -webkit-transition: opacity ease-in-out 0.5s;
+                    -moz-transition:opacity ease-in-out 0.5s;
+                    -ms-transition: opacity ease-in-out 0.5s;
+                    -o-transition: opacity ease-in-out 0.5s;
+                    transition: opacity ease-in-out 0.5s;
+                    opacity: 0;
+                    visibility: hidden;
+                    content: '';
+                    position: absolute;
+                    top: 0px;
+                    left: 100%;
+                    z-index: 97;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    width: 100vw;
+                    height: 100vh;
+                }
+                &.open {
+                    left: 0;
+                    &:after {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+                .containerMenu {
+                    display: -webkit-flex;
+                    display: -moz-flex;
+                    display: -ms-flexbox;
+                    display: -ms-flex;
+                    display: flex;
+                    -webkit-flex-flow: row wrap;
+                    -moz-flex-flow: row wrap;
+                    -ms-flex-flow: row wrap;
+                    flex-flow: row wrap;
+                    padding: 0 40px 40px 70px;
+                    -webkit-align-items: center;
+                    -moz-align-items: center;
+                    -ms-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    height: 100%;
+                    position: relative;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+                    ul {
+                        list-style: none;
+
+                        li {
+                            width: 100%;
+                            margin-bottom: 50px;
+                            position: relative;
+                            &:hover, &.active{
+                                &:after{
+                                    width: 50px;
+                                }
+                            }
+                            &:after {
+                                content: '';
+                                width: 0px;
+                                height: 3px;
+                                position: absolute;
+                                bottom: -15px;
+                                left: 0px;
+                                -webkit-transition: width ease-in-out 0.2s ;
+                                -moz-transition: width ease-in-out 0.2s ;
+                                -ms-transition: width ease-in-out 0.2s ;
+                                -o-transition: width ease-in-out 0.2s ;
+                                transition: width ease-in-out 0.2s ;
+                            }
+                            &:first-of-type {
+                                &:after {
+                                    background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(2) {
+                                &:after {
+                                    background-color: $gradient-light-yellow; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-yellow, $gradient-dark-yellow); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-yellow, $gradient-dark-yellow); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-yellow, $gradient-dark-yellow); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(3) {
+                                &:after {
+                                    background-color: $gradient-dark-black; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-dark-black, $gradient-light-black); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-dark-black, $gradient-light-black); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-dark-black, $gradient-light-black); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-dark-black, $gradient-light-black); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(4) {
+                                &:after {
+                                    background-color: $gradient-light-green; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(5) {
+                                &:after {
+                                    background-color: $gradient-light-red; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-red, $gradient-dark-red); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:last-child {
+                                margin-bottom: 0px;
+                            }
+                            a{
+                                @extend .proxima-bold;
+                                font-size: 24px;
+                                color: $light-black;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .social{
+                        position: absolute;
+                        bottom: 40px;
+                        left: 100px ;
+                        div{
+                            span{
+                                display: inline-block;
+                                margin-right: 30px;
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 30px;
+                                &:first-of-type{
+                                    background-color: #3B5998;
+                                }
+                                &:nth-child(2){
+                                    background-color: #0077B5;
+                                }
+                                &:last-child{
+                                    background-color: #55ACEE;
+                                }
+                                a{
+                                    height: 100%;
+                                    display: -webkit-flex;
+                                    display: -moz-flex;
+                                    display: -ms-flexbox;
+                                    display: -ms-flex;
+                                    display: flex;
+                                    color: white;
+                                    text-decoration: none;
+                                    -webkit-justify-content:center;
+                                    -moz-justify-content:center;
+                                    -ms-justify-content:center;
+                                    justify-content:center;
+                                    -webkit-align-items: center;
+                                    -moz-align-items: center;
+                                    -ms-align-items: center;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .menu-mobile{
+            height: 100%;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: -ms-flex;
+            display: flex;
+            -webkit-justify-content:space-between;
+            -moz-justify-content:space-between;
+            -ms-justify-content:space-between;
+            justify-content:space-between;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            & > div:nth-child(2), & > div:nth-child(3) {
+                visibility: visible;
+                opacity: 1;
+                -webkit-transition: visibility 0s, opacity 0.5s linear;
+                -moz-transition: visibility 0s, opacity 0.5s linear;
+                -ms-transition: visibility 0s, opacity 0.5s linear;
+                -o-transition: visibility 0s, opacity 0.5s linear;
+                transition: visibility 0s, opacity 0.5s linear;
+            }
+            @media screen and (min-width: $screen-md-min) {
+                display: none;
+            }
+            &.menu {
+                & > div:nth-child(2), & > div:nth-child(3) {
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.5s linear;
+                }
+                .menuBurger{
+                    @extend .proxima-bold;
+                    font-size: 24px;
+                    color: $light-black;
+                    .titreMenu{
+                        visibility: visible;
+                        opacity: 1;
+                        -webkit-transition: visibility 0s, opacity 0.5s linear;
+                        -moz-transition: visibility 0s, opacity 0.5s linear;
+                        -ms-transition: visibility 0s, opacity 0.5s linear;
+                        -o-transition: visibility 0s, opacity 0.5s linear;
+                        transition: visibility 0s, opacity 0.5s linear;
+                        .menu{
+                            display: block;
+                        }
+                        .filtres{
+                            display: none;
+                        }
+                    }
+                }
+            }
+            &.filtres {
+                & > div:nth-child(2), & > div:nth-child(3){
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.5s linear;
+                }
+                .menuBurger{
+                    @extend .proxima-bold;
+                    font-size: 24px;
+                    color: $light-black;
+                    .titreMenu{
+                        visibility: visible;
+                        opacity: 1;
+                        -webkit-transition: visibility 0s, opacity 0.5s linear;
+                        -moz-transition: visibility 0s, opacity 0.5s linear;
+                        -ms-transition: visibility 0s, opacity 0.5s linear;
+                        -o-transition: visibility 0s, opacity 0.5s linear;
+                        transition: visibility 0s, opacity 0.5s linear;
+                        .filtres{
+                            display: block;
+                        }
+                        .menu{
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .menuBurger {
+                max-height: 30px;
+                cursor: pointer;
+                position: relative;
+                .burger{
+                    display: inline-block;
+                    vertical-align: baseline;
+                    span {
+                        width: 30px;
+                        height: 3px;
+                        background-color: $light-black;
+                        margin-bottom: 7px;
+                        display: block;
+                        -webkit-transition: all 0.5s;
+                        -moz-transition: all 0.5s;
+                        -ms-transition: all 0.5s;
+                        -o-transition: all 0.5s;
+                        transition: all 0.5s;
+                        &:first-of-type {
+                            width: 15px;
+                        }
+                        &:last-of-type {
+                            width: 15px;
+                            margin-bottom: 0px;
+                            -webkit-transform: translateX(100%);
+                            -moz-transform: translateX(100%);
+                            -ms-transform: translateX(100%);
+                            -o-transform: translateX(100%);
+                            transform: translateX(100%);
+                        }
+                    }
+                }
+                .titreMenu{
+                    display: inline-block;
+                    vertical-align: top ;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.5s linear;
+                    p{
+                        display: none;
+                    }
+                }
+                &.open {
+                    span {
+                        border-radius: 30px;
+                        &:first-of-type {
+                            -webkit-transform: translate(2px, 150%) rotate(45deg);
+                            -moz-transform: translate(2px, 150%) rotate(45deg);
+                            -ms-transform: translate(2px, 150%) rotate(45deg);
+                            -o-transform: translate(2px, 150%) rotate(45deg);
+                            transform: translate(2px, 150%) rotate(45deg);
+                        }
+                        &:nth-child(2) {
+                            -webkit-transform: rotate(-45deg);
+                            -moz-transform: rotate(-45deg);
+                            -ms-transform: rotate(-45deg);
+                            -o-transform: rotate(-45deg);
+                            transform: rotate(-45deg);
+                        }
+                        &:last-of-type {
+                            -webkit-transform: translate(90%, -150%) rotate(45deg);
+                            -moz-transform: translate(90%, -150%) rotate(45deg);
+                            -ms-transform: translate(90%, -150%) rotate(45deg);
+                            -o-transform: translate(90%, -150%) rotate(45deg);
+                            transform: translate(90%, -150%) rotate(45deg);
+                        }
+                    }
+                }
+            }
+            .title {
+                @extend .futura-bold;
+                font-size: 24px;
+                position: relative;
+                color: $light-black;
+                text-decoration: none;
+                &:after {
+                    content: '';
+                    display: inline-block;
+                    vertical-align: baseline;
+                    margin-left: 3px;
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 30px;
+                    background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                    background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                    background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                    background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                    background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                }
+            }
+            .right{
+                .user{
+                    border-radius: 30px;
+                    width: 40px;
+                    font-size: 18px;
+                    height: 40px;
+                    color: $light-black;
+                    background-color: #F2F2F2;
+                    display: -webkit-flex;
+                    display: -moz-flex;
+                    display: -ms-flexbox;
+                    display: -ms-flex;
+                    display: flex;
+                    -webkit-justify-content:center;
+                    -moz-justify-content:center;
+                    -ms-justify-content:center;
+                    justify-content:center;
+                    -webkit-align-items: center;
+                    -moz-align-items: center;
+                    -ms-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    position: relative;
+                    &.connect{
+                        i{
+                            display: none;
+                        }
+                        &.active{
+                            &:after{
+                                opacity:1;
+                                -webkit-transition: opacity 0.5s ease-in-out ;
+                                -moz-transition: opacity 0.5s ease-in-out ;
+                                -ms-transition: opacity 0.5s ease-in-out ;
+                                -o-transition: opacity 0.5s ease-in-out ;
+                                transition: opacity 0.5s ease-in-out ;
+                            }
+                            .imageProfil{
+                                opacity:0;
+                            }
+                            .menuUser{
+                                visibility: visible;
+                                opacity: 1;
+                                -webkit-transition: visibility 0s, opacity 0.5s linear;
+                                -moz-transition: visibility 0s, opacity 0.5s linear;
+                                -ms-transition: visibility 0s, opacity 0.5s linear;
+                                -o-transition: visibility 0s, opacity 0.5s linear;
+                                transition: visibility 0s, opacity 0.5s linear;
+                            }
+                        }
+                        &:after{
+                            content :'✕';
+                            position: absolute;
+                            font-size: 20px;
+                            top: 8px;
+                            right: 12px;
+                            opacity:0;
+                        }
+                        .imageProfil{
+                            opacity:1;
+                            -webkit-transition: opacity 0.5s ease-in-out ;
+                            -moz-transition: opacity 0.5s ease-in-out ;
+                            -ms-transition: opacity 0.5s ease-in-out ;
+                            -o-transition: opacity 0.5s ease-in-out ;
+                            transition: opacity 0.5s ease-in-out ;
+                            display: block;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 30px;
+                            overflow: hidden;
+                            text-align: center;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+                .menuUser{
+                    @extend .proxima-bold;
+                    position: fixed;
+                    background-color: white;
+                    width: 80%;
+                    right: 0;
+                    top: 74px;
+                    text-align: center;
+                    color: $light-black;
+                    font-size: 18px;
+                    visibility: hidden;
+                    opacity: 0;
+                    -webkit-transition: visibility 0s, opacity 0.5s linear;
+                    -moz-transition: visibility 0s, opacity 0.5s linear;
+                    -ms-transition: visibility 0s, opacity 0.5s linear;
+                    -o-transition: visibility 0s, opacity 0.5s linear;
+                    transition: visibility 0s, opacity 0.5s linear;
+                    &.active{
+                        visibility: visible;
+                        opacity: 1;
+                        -webkit-transition: visibility 0s, opacity 0.5s linear;
+                        -moz-transition: visibility 0s, opacity 0.5s linear;
+                        -ms-transition: visibility 0s, opacity 0.5s linear;
+                        -o-transition: visibility 0s, opacity 0.5s linear;
+                        transition: visibility 0s, opacity 0.5s linear;
+                    }
+                    .top{
+                        @extend .proxima-regular;
+                        font-size: 14px;
+                        color: white;
+                        background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                        background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                        background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                        background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                        background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                        padding: 15px 30px;
+                        line-height: 20px;
+                        p:first-of-type{
+                            @extend .proxima-bold;
+                            width: 100%;
+                        }
+                    }
+                    .bottom{
+                        padding: 10px 20px ;
+                        line-height: 50px;
+                        a{
+                            display: block;
+                        }
+                    }
+                }
+            }
+            .menuComplet {
+                color: $light-black;
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                z-index: -1;
+                left: -100%;
+                background-color: white;
+                -webkit-transition: ease-in-out 0.5s;
+                -moz-transition: ease-in-out 0.5s;
+                -ms-transition: ease-in-out 0.5s;
+                -o-transition: ease-in-out 0.5s;
+                transition: ease-in-out 0.5s;
+                border: 0px solid;
+                &.open {
+                    left: 0;
+                }
+                .containerMenu {
+                    display: -webkit-flex;
+                    display: -moz-flex;
+                    display: -ms-flexbox;
+                    display: -ms-flex;
+                    display: flex;
+                    -webkit-flex-flow: row wrap;
+                    -moz-flex-flow: row wrap;
+                    -ms-flex-flow: row wrap;
+                    flex-flow: row wrap;
+                    padding: 0 20px 20px 20px;
+                    -webkit-align-items: center;
+                    -moz-align-items: center;
+                    -ms-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    height: 100%;
+                    position: relative;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+                    ul {
+                        list-style: none;
+
+                        li {
+                            width: 100%;
+                            margin-bottom: 40px;
+                            position: relative;
+                            &:hover, &.active{
+                                &:after{
+                                    width: 50px;
+                                }
+                            }
+                            &:after {
+                                content: '';
+                                width: 0px;
+                                height: 3px;
+                                position: absolute;
+                                bottom: -15px;
+                                left: 0px;
+                                -webkit-transition: width ease-in-out 0.5s ;
+                                -moz-transition: width ease-in-out 0.5s ;
+                                -ms-transition: width ease-in-out 0.5s ;
+                                -o-transition: width ease-in-out 0.5s ;
+                                transition: width ease-in-out 0.5s ;
+                            }
+                            &:first-of-type {
+                                &:after {
+                                    background-color: $gradient-light-blue; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-blue, $gradient-dark-blue); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(2) {
+                                &:after {
+                                    background-color: $gradient-light-yellow; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-yellow, $gradient-dark-yellow); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-yellow, $gradient-dark-yellow); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-yellow, $gradient-dark-yellow); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(3) {
+                                &:after {
+                                    background-color: $gradient-dark-black; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-dark-black, $gradient-light-black); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-dark-black, $gradient-light-black); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-dark-black, $gradient-light-black); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-dark-black, $gradient-light-black); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(4) {
+                                &:after {
+                                    background-color: $gradient-light-green; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-green, $gradient-dark-green); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-green, $gradient-dark-green); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:nth-child(5) {
+                                &:after {
+                                    background-color: $gradient-light-red; /* fallback color if gradients are not supported */
+                                    background-image: -webkit-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+                                    background-image: -moz-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For Firefox (3.6 to 15) */
+                                    background-image: -o-linear-gradient(left, $gradient-light-red, $gradient-dark-red); /* For old Opera (11.1 to 12.0) */
+                                    background-image: linear-gradient(to right, $gradient-light-red, $gradient-dark-red); /* Standard syntax; must be last */
+                                }
+                            }
+                            &:last-child {
+                                margin-bottom: 0px;
+                            }
+                            a{
+                                @extend .proxima-bold;
+                                font-size: 24px;
+                                color: $light-black;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .social{
+                        position: absolute;
+                        bottom: 20px;
+                        left: 60px;
+                        div{
+                            span{
+                                display: inline-block;
+                                margin-right: 30px;
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 30px;
+                                &:first-of-type{
+                                    background-color: #3B5998;
+                                }
+                                &:nth-child(2){
+                                    background-color: #0077B5;
+                                }
+                                &:last-child{
+                                    background-color: #55ACEE;
+                                }
+                                a{
+                                    height: 100%;
+                                    display: -webkit-flex;
+                                    display: -moz-flex;
+                                    display: -ms-flexbox;
+                                    display: -ms-flex;
+                                    display: flex;
+                                    color: white;
+                                    text-decoration: none;
+                                    -webkit-justify-content:center;
+                                    -moz-justify-content:center;
+                                    -ms-justify-content:center;
+                                    justify-content:center;
+                                    -webkit-align-items: center;
+                                    -moz-align-items: center;
+                                    -ms-align-items: center;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

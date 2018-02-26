@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/global.css') }}">
+        {% block addStylesheets %}{% endblock %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+{% block body %}{% endblock %}
+{% block javascripts %}
+    {% block addJavascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&libraries=places&callback=initAutocomplete" async defer></script>
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    {% block addJavascripts %}{% endblock %}
+{% endblock %}
+</body>
+</html>

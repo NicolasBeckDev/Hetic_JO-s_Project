@@ -1,0 +1,103 @@
+html, body
+{
+    min-height: 100%;
+    background-color: #f8f8f9;
+
+    .no-padding
+    {
+        padding: 0;
+        margin: 0;
+    }
+
+    .popUpContainer
+    {
+        @media screen and (min-width: $screen-sm-min) {
+            display: none;
+        }
+    }
+
+    button, a, input
+    {
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+        border: none;
+
+        &.black {
+            @include linear-gradient(to right, $gradient-light-black, $gradient-dark-black);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient($gradient-light-black, $gradient-dark-black, 1px);
+                background: linear-gradient(to right, $gradient-light-black, $gradient-dark-black) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.blue {
+            @include linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient($gradient-light-blue, $gradient-dark-blue, 1px);
+                background: linear-gradient(to right, $gradient-light-blue, $gradient-dark-blue) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.green {
+            @include linear-gradient(to right, $gradient-light-green, $gradient-dark-green);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient($gradient-light-green, $gradient-dark-green, 1px);
+                background: linear-gradient(to right, $gradient-light-green, $gradient-dark-green) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.red {
+            @include linear-gradient(to right, $gradient-light-red, $gradient-dark-red);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient($gradient-light-red, $gradient-dark-red, 1px);
+                background: linear-gradient(to right, $gradient-light-red, $gradient-dark-red) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &.yellow {
+            @include linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow);
+            position: relative;
+
+            &:not(.active):hover
+            {
+                @include border-gradient($gradient-light-yellow, $gradient-dark-yellow, 1px);
+                background: linear-gradient(to right, $gradient-light-yellow, $gradient-dark-yellow) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        &:focus {
+            outline: 0 !important;
+        }
+    }
+
+    p{
+        margin-bottom: 0px;
+    }
+    .col-xs-hide{
+        @media screen and (max-width: $screen-xs-max) {
+            display: none;
+        }
+    }
+}

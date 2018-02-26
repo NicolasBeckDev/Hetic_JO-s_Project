@@ -1,0 +1,76 @@
+.project-index{
+  height: 100%;
+  width: 100%;
+
+  .header{
+    height: 7%;
+    width: 100%;
+  }
+
+  .content{
+    height: 93%;
+    width: 100%;
+    background-color: #f8f8f9;
+    padding-top: 24px;
+
+    .wrapper-filters{
+      position: relative;
+      width: 90%;
+      margin-left: 5%;
+
+      .type{
+        display: inline-block;
+        background-color: white;
+        width: 50%;
+        height: 50px;
+        text-align: center;
+
+        div{
+          margin-right: 15px;
+          margin-left: 15px;
+          height: 30px;
+          display: inline-block;
+          @include border-radius(5px);
+
+          p{
+
+          }
+
+          :hover{
+            color: white;
+            background-image: linear-gradient(to right, #4885e7, #569ceb);
+          }
+        }
+      }
+
+      .status{
+        float: right;
+        display: inline-block;
+        background-color: white;
+        width: 450px;
+        height: 50px;
+        margin-right: 35px;
+      }
+
+      .button-search {
+        /*position: absolute;
+        top: 6px;
+        right: 0;*/
+        display: inline-block;
+        margin-top: 6px;
+        float: right;
+        width: 40px;
+        height: 40px;
+        background-image: linear-gradient(to right, #4885e7, #569ceb);
+        @include border-radius(20px);
+
+      }
+    }
+
+
+
+    .wrapper-filters, .type, .status{
+      @include border-radius(5px);
+    }
+  }
+}

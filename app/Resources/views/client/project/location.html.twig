@@ -1,0 +1,402 @@
+{% extends "@Client/layout.html.twig" %}
+
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
+
+{% block content %}
+    <div class="location-content">
+        <div class="filter-container">
+            <div class="filter-wrapper">
+                {{ form_start(form) }}
+                    <div class="closeFilter" style="display: none">
+                        <span >&#10005;</span>
+                    </div>
+                    {{ form_widget(form.location, {'label': ' ' }) }}
+                    <div class="location_address">
+                        {{ form_widget(form.address) }}
+                    </div>
+                    {{ form_widget(form.category) }}
+                    {{ form_widget(form.status) }}
+                    {{ form_widget(form.range) }}
+                    {{ form_widget(form.search, {'label': 'Rechercher' }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="row">
+                <div class="col-sm-7 no-padding">
+                    <div class="project-list-content">
+                        <div class="project-wrapper" id="projectsHandler">
+                            <div id="project-prototype" data-prototype="
+                                 {% filter escape %}
+                                     {{ include('@Client/project/project-prototype.html.twig') }}
+                                 {% endfilter %}
+                            "></div>
+
+                            <div id="projects" class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="map-col" class="col-sm-5 no-padding">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+        <div class="popUpContainer geoloc">
+            <div class="pictoMap">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+        </div>
+        <div class="mapSwitch">
+            <div class="left">
+                <p>Liste</p>
+            </div>
+            <div class="right">
+                <p>Filtres</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block addJavascripts %}
+    <script>
+
+        //INIT
+        let projects = {{ projects|raw }};
+        let markers = [];
+        let infoWindows = [];
+        const image = '{{ asset('build/images/pinMarker.png') }}';
+        let template = document.getElementById('project-prototype').dataset.prototype;
+
+
+        (function() {
+            setTimeout(function(){
+                showProjects(projects);
+            }, 2000);
+        })();
+
+
+        function initMap() {
+            window.map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 48.866667, lng: 2.333333},
+                zoom: 11
+            });
+
+            window.infowindow = new google.maps.InfoWindow({map: map});
+            window.marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29),
+                icon: {
+                    scaledSize: new google.maps.Size(30, 35),
+                    url: image
+                },
+            });
+            marker.setIcon(({
+                url: image,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(35, 35)
+            }));
+
+            window.geocoder = new google.maps.Geocoder;
+
+            const autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('{{ form.address.vars.id }}'),
+                {
+                    componentRestrictions: {country: "fr"},
+                    types: ['address']
+                });
+            
+            autocomplete.bindTo('bounds', map);
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Aucun détail disponible pour la saisie: '" + place.name + "'");
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                    map.setZoom(15);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15);
+                }
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                let address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].long_name || ''),
+                        (' '),
+                        (place.address_components[1] && place.address_components[1].long_name || ''),
+                        (', '),
+                        (place.address_components[2] && place.address_components[2].long_name || ''),
+                        (', '),
+                        (place.address_components[5] && place.address_components[5].long_name || '')
+                    ].join('');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+            });
+
+        }
+
+        // LOCATION
+        document.getElementById('{{ form.location.vars.id }}').addEventListener("click", function () {
+
+            infowindow.close();
+            marker.setVisible(false);
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    infowindow.setPosition(pos);
+                    map.setCenter(pos);
+                    map.setZoom(15);
+
+
+                    const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+                    geocoder.geocode({'location': latlng}, function(results, status) {
+                        if (status === 'OK') {
+                            if (results[1]) {
+
+                                marker.setPosition(latlng);
+                                const address = [
+                                    (results[0].address_components[0].long_name || ''),
+                                    (' '),
+                                    (results[0].address_components[1].long_name || ''),
+                                    (', '),
+                                    (results[0].address_components[2].long_name || ''),
+                                    (', '),
+                                    (results[0].address_components[5].long_name || '')
+                                ].join('');
+
+                                infowindow.setContent('<div><strong>' + results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name + '</strong><br>' + address);
+                                infowindow.open(map, marker);
+                                marker.setVisible(true);
+
+                                document.getElementById('{{ form.address.vars.id }}').value = address
+                            } else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+
+
+                }, function() {
+                    handleLocationError(true, infowindow, map.getCenter());
+                });
+
+            } else {
+                handleLocationError(false, infowindow, map.getCenter());
+            }
+
+        });
+
+        function handleLocationError(browserHasGeolocation, infowindow, pos) {
+            infowindow.setPosition(pos);
+            infowindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+        }
+
+        document.getElementById('{{ form.search.vars.id }}').addEventListener("click", function () {
+
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+
+            markers = [];
+            infoWindows = [];
+
+            let p = projects;
+
+            projectsHandlerCleaner();
+            p = categorySorter(p);
+            p = statusSorter(p);
+            rangeSorter(p);
+        });
+
+        function projectsHandlerCleaner() {
+            document.getElementById('projectsHandler').innerText = ""
+        }
+
+        function categorySorter(projects) {
+            const categories = [...document.getElementById('{{ form.category.vars.id }}').childNodes].filter(option => option.selected).map(option => option.value);
+            if (categories[0] == 'Catégorie du projet'){
+                categories.splice(0, 1)
+            }
+
+            if (typeof categories !== 'undefined' && categories.length > 0) {
+                return projects.filter( project => categories.includes(project.category.id.toString()));
+            }else{
+                return projects;
+            }
+        }
+
+        function statusSorter(projects) {
+            const status = [...document.getElementById('{{ form.status.vars.id }}').childNodes].filter(option => option.selected).map(option => option.value);
+            if (status[0] == 'Status du projet'){
+                status.splice(0, 1)
+            }
+            if (typeof status !== 'undefined' && status.length > 0) {
+                const pr = [];
+
+                projects.forEach( function (project) {
+                    // En préparation
+                    if(project.inProgress && new Date(project.date.timestamp*1000) > new Date() && status.includes("1")){
+                        pr.push(project);
+                    }
+                    // En cours
+                    else if(project.inProgress && new Date(project.date.timestamp*1000) < new Date() && status.includes("2")){
+                        pr.push(project);
+                    }
+                    // Fini
+                    else if(!project.inProgress && new Date(project.date.timestamp*1000) < new Date() && status.includes("3")){
+                        pr.push(project);
+                    }
+                });
+                return pr
+            }else{
+                return projects
+            }
+        }
+
+        function rangeSorter(projects) {
+            if( document.getElementById('{{ form.address.vars.id }}').value!== "" && document.getElementById('{{ form.range.vars.id }}').value !== "Km autour de moi Km"){
+                projects.forEach(function (project) {
+                    distanceCalc(project);
+                });
+            }else{
+                showProjects(projects);
+            }
+        }
+
+        function distanceCalc(project) {
+            const FromLoc=[];
+            const ToLoc=[];
+            const addressInputValue = document.getElementById('{{ form.address.vars.id }}').value;
+
+            window.geocoder.geocode({'address': addressInputValue}, function(results, status) {
+                if (status === 'OK') {
+                    FromLoc[0]=results[0].geometry.location.lat();
+                    FromLoc[1]=results[0].geometry.location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+                window.geocoder.geocode({'address': project.address}, function(results, status) {
+                    if (status === 'OK') {
+                        ToLoc[0]=results[0].geometry.location.lat();
+                        ToLoc[1]=results[0].geometry.location.lng();
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                    const range = document.getElementById('{{ form.range.vars.id }}').value;
+                    const dist = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(FromLoc[0],FromLoc[1]), new google.maps.LatLng(ToLoc[0],ToLoc[1]));
+                    if(dist <= (range*1000)){
+                        showProject(project);
+                        createMarker(ToLoc, project, results);
+                    }
+                });
+            });
+        }
+
+        function createMarker(loc, project, results) {
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(loc[0],loc[1]),
+                icon: {
+                    scaledSize: new google.maps.Size(30, 35),
+                    url: image
+                },
+                map: map
+            });
+            const address = [
+                (results[0].address_components[0].long_name || ''),
+                (' '),
+                (results[0].address_components[1].long_name || ''),
+                (', '),
+                (results[0].address_components[2].long_name || ''),
+                (', '),
+                (results[0].address_components[5].long_name || '')
+            ].join('');
+
+            const link = '<br><a href="{{ path('project_show', {'id': "project.id" }) }}">Voir le projet en détail</a>'.replace('project.id', project.id);
+
+            const infoWindow = new google.maps.InfoWindow({
+                map: map,
+                disableAutoPan: true,
+                content: '<div><strong>' + project.name + '</strong><br>' + address + link,
+            });
+            infoWindow.open(map, marker);
+            infoWindows.push(infoWindow);
+            markers.push(marker);
+
+            marker.addListener('click', function() {
+                infoWindows[markers.indexOf(this)].open(map, this)
+            });
+
+        }
+
+        function initMarkerFromProjet(project) {
+
+            const loc = [];
+
+            const geocoder = new google.maps.Geocoder;
+
+            geocoder.geocode({'address': project.address}, function(results, status) {
+                if (status === 'OK') {
+                    loc[0]=results[0].geometry.location.lat();
+                    loc[1]=results[0].geometry.location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+                createMarker(loc, project, results);
+            });
+        }
+
+        function showProjects(projects) {
+            if (typeof projects !== 'undefined' && projects.length > 0) {
+                projects.forEach(function (project) {
+                    showProject(project);
+                    initMarkerFromProjet(project);
+                })
+            }
+        }
+
+        function showProject(project) {
+
+            template = template
+                .replace(/__project_category_color__/g, project.category.color)
+                .replace(/__project_id__/g, project.id)
+                .replace(/__project_picture__/g, project.mainPicture)
+                .replace(/__project_category_name__/g, project.category.name)
+                .replace(/__project_name__/g, project.name)
+                .replace(/__project_district_name__/g, project.district.name)
+            ;
+
+            document.getElementById('projectsHandler').innerHTML += template;
+        }
+
+
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&libraries=places,geometry&callback=initMap"></script>
+{% endblock %}

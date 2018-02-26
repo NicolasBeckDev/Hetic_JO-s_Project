@@ -1,0 +1,77 @@
+.input-placeholder-effect
+{
+    position: relative;
+    display: block;
+
+    .before-border
+    {
+        @include linear-gradient(to right, #4885e7, #569ceb);
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        z-index: 2;
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input
+    {
+        @extend .proxima-regular;
+        @include placeholder($light-black);
+        box-sizing: border-box;
+        display: block;
+        background-color: white;
+        border: 2px solid #f4f4f4;
+        position: relative;
+        width: 100%;
+        padding: 15px;
+        color: $light-black;
+        font-size: 16px;
+        outline: none;
+
+        &::placeholder {
+            transition: all 0.2s ease-in-out;
+        }
+
+        &:focus
+        {
+            &::before
+            {
+                @include linear-gradient(to right, #4885e7, #569ceb);
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 2px;
+            }
+        }
+
+        &:focus, &.populated {
+            padding-top: 20px !important;
+            padding-bottom: 10px !important;
+
+            &::placeholder {
+                color: transparent;
+            }
+
+            & + span {
+                opacity: 1;
+                top: 10px;
+            }
+        }
+    }
+
+    span {
+        @extend .proxima-regular;
+        color: #d1d1d1;
+        font-size: 11px;
+        position: absolute;
+        top: 0px;
+        left: 17px;
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+    }
+}

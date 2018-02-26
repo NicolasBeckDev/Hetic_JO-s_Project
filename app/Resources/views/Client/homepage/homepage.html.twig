@@ -1,0 +1,49 @@
+{% extends "@Client/template/two-columns.html.twig" %}
+
+{% block left_content %}
+    <div class="homepage-content">
+        <div class="main">
+            <div class="citation">
+                <span>{{ 'app.page.client.home.citation'|trans }}</span>
+            </div>
+
+            <div class="description">
+                <p>
+                    {{ 'app.page.client.home.description'|trans }}
+                    <a href="{{ path('about') }}">{{ 'app.page.client.home.more'|trans }}</a>
+                </p>
+            </div>
+
+            <div class="button-wrapper">
+                <a href="{{ path('project_index') }}" class="blue">{{ 'app.page.client.home.buttons.list'|trans }}</a>
+                <a href="{{ path('project_new') }}" class="red">{{ 'app.page.client.home.buttons.create'|trans }}</a>
+            </div>
+        </div>
+
+        <div class="sub">
+            <div class="social-links">
+
+            </div>
+        </div>
+    </div>
+{% endblock  %}
+
+{% block right_content %}
+    <img src="{{ asset('build/images/background-homepage.jpg') }}" />
+{% endblock %}
+
+
+{% block addJavascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+    {% if message %}
+        <script>
+            setTimeout(function () {
+                swal({
+                    type: "{{ type }}",
+                    title: '{{ title | raw }}',
+                    text: "{{ message | raw }}"
+                })
+            }, 100);
+        </script>
+    {% endif %}
+{% endblock %}

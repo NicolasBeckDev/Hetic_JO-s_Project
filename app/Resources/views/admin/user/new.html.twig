@@ -1,0 +1,69 @@
+{% extends "@Admin/user/layout.html.twig" %}
+{% form_theme form 'form/form-widget.html.twig' %}
+
+
+{% block body %}
+
+    <div class="new">
+
+        <div class="header">
+
+            <div class="toList">
+                <a href="{{ path('admin_user_index') }}">{{ 'app.page.admin.user.new.tolist' | trans }}</a>
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <div class="formular">
+                <div class="title">
+                    <h1>{{ 'app.page.admin.user.new.new_admin' | trans }}</h1>
+                </div>
+
+
+                <div class="form">
+
+                    {{ form_start(form) }}
+                    <div class="wrapper">
+                        {{ form_row(form.firstname) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.lastname) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.email) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.password) }}
+                    </div>
+
+                    <div class="wrapper-picture">
+                        {{ form_row(form.picture) }}
+                    </div>
+
+                    <div class="wrapper">
+                        {{ form_row(form.roles) }}
+                    </div>
+
+
+                    <div class="button-validate">
+                        <button class="button" type="submit" value="" >Create</button>
+                    </div>
+
+                    {{ form_widget(form) }}
+
+                    {{ form_end(form, {'render_rest': false}) }}
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

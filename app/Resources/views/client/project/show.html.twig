@@ -1,0 +1,198 @@
+{% extends "@Client/layout.html.twig" %}
+
+{% block variables %}
+    {{ app.session.set('headerBackground', 'white') }}
+{% endblock %}
+
+{% block content %}
+    <div class="project-show-content">
+        <div class="project-container {{ project.category.color }}">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="carousel-container">
+                        <div class="owl-carousel">
+                            <img src="{{ asset(project.mainPicture ? 'uploads/project/picture/' ~ project.mainPicture : 'build/images/default_' ~ project.category.name|snake ~ '.jpg' ) }}" />
+                            {% for picture in project.subPictures %}
+                                <img src="{{ asset('uploads/project/picture/' ~ picture) }}" />
+                            {% endfor %}
+                        </div>
+
+                        <div class="addFavoris{% if project.followers.contains(app.user) %} active{% endif %}">
+                            {{ form_start(followForm) }}
+                                <button type="submit" class="bubbly-button">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                {{ form_widget(followForm) }}
+                            {{ form_end(followForm) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="header-information">
+                        <div class="category-container">
+                            <span class="category">{{ project.category.name }}</span>
+                        </div>
+
+                        <div class="name-container">
+                            <span class="name">{{ project.name }}</span>
+                        </div>
+
+                        <div class="district-container">
+                            <span class="district">Paris {{ project.district.name }} arrondissement</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-information">
+                        <div class="switch-text-wrapper">
+                            <div class="switch-container active">
+                                <span class="switch" data-target="description">{{ 'app.page.client.project.show.description'|trans }}</span>
+                                <div class="color-line"></div>
+                            </div>
+
+                            <div class="switch-container">
+                                <span class="switch" data-target="goal">{{ 'app.page.client.project.show.goal'|trans }}</span>
+                                <div class="color-line"></div>
+                            </div>
+                        </div>
+
+                        <div class="text-wrapper">
+                            <p class="description active">
+                                {{ project.description }}
+                            </p>
+
+                            <p class="goal">
+                                {{ project.objectif }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="participant-day-left-wrapper">
+                        <div class="participant">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <span class="number">{{ project.participants|length }}</span>
+                                </div>
+
+                                <div class="media-body media-middle">
+                                    <span class="text">{{ 'app.page.client.project.show.participant'|transchoice(project.participants|length) }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="day-left">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <span class="number">{{ project.date|remaining_days ~ 'j' }}</span>
+                                </div>
+
+                                <div class="media-body media-middle">
+                                    <span class="text">{{ 'app.page.client.project.show.day_left'|transchoice(project.date|remaining_days) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-wrapper">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_start(participateForm) }}
+                                    <input type="submit" class="{{ project.category.color }}" value="{% if project.participants.contains(app.user) %}{{ 'app.page.client.project.show.buttons.unparticipate'|trans }}{% else %}{{ 'app.page.client.project.show.buttons.participate'|trans }}{% endif %}" />
+                                    {{ form_widget(participateForm) }}
+                                {{ form_end(participateForm) }}
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="submit" class="{{ project.category.color }}" value="{{ 'app.page.client.project.show.buttons.finance'|trans }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="map">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="share-container">
+            <div class="content">
+                <div class="socialBlock">
+                    <span>&#10005;</span>
+                    <p>Partager le projet sur les réseaux sociaux</p>
+                    <div class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+                    <div class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></div>
+                    <div class="linkedin"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+                    <div class="enveloppe"><a href="#"><i class="fas fa-envelope"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popUpContainer">
+        <div class="principaleButton3Btn"></div>
+        <div>
+            <div class="button3Btn firstButton3Btn"></div>
+            <div class="button3Btn secondButton3Btn"></div>
+            <div class="button3Btn lastButton3Btn social"></div>
+        </div>
+        <div id="js-cachedPopup1" class="popUpTuto">
+            <span class="js-closePopup">&#10005;</span>
+            <p class="titlePopUp">Bienvenue sur Tous Paris</p>
+            <p>Découvrez ici les différents projets, en les filtrant par thématiques ou arrondissement. Sélectionnez le "+" pour : </p>
+        </div>
+    </div>
+{% endblock %}
+{% block addJavascripts %}
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: {lat: -34.397, lng: 150.644}
+            });
+            var geocoder = new google.maps.Geocoder();
+            geocodeAddress(geocoder, map);
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = "{{ project.address }} ";
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+
+                    var image = '{{ asset('build/images/pinMarker.png') }}';
+
+                    var contentString = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<h5 id="firstHeading" class="firstHeading">Adresse du projet</h5>'+
+                        '<div id="bodyContent">'+
+                        '<p>{{ project.address }}'+
+                        '</div>'+
+                        '</div>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        title: 'Adresse du projet',
+                        content: contentString
+                    });
+
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        icon: {
+                            scaledSize: new google.maps.Size(30, 35),
+                            url: image
+                        },
+                        title: 'Adresse du projet',
+                        position: results[0].geometry.location
+                    });
+                    infowindow.open(map, marker);
+                    marker.addListener('click', function() {
+                        infowindow.open(map, marker);
+                    });
+
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqMM0lL3gVMacyR7649s6UF5N-bwIRBEU&callback=initMap"></script>
+{% endblock %}

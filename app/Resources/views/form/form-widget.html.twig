@@ -1,0 +1,8 @@
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    <div class="input-placeholder-effect">
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <span>{{ attr|first|trans }}</span>
+        <div class="before-border"></div>
+    </div>
+{% endblock form_widget_simple %}

@@ -39,8 +39,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     paths:
-        '%kernel.project_dir%/app/Resources/views/public': Public
-        '%kernel.project_dir%/app/Resources/views/private': Private
+        '%kernel.project_dir%/app/Resources/views/client': Client
+        '%kernel.project_dir%/app/Resources/views/admin': Admin
 
 # Doctrine Configuration
 doctrine:
@@ -66,8 +66,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
+    transport: gmail
+    username:  tousparis2024@gmail.com
+    password:  "!TousParis2024"
     spool: { type: memory }

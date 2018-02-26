@@ -1,3 +1,92 @@
 app:
-    name: Choisis ton Paris 2024
-    contact: example@hetic.net
+    name: Tous Paris
+    layout:
+        header:
+            connection: "Connexion / Inscription"
+        menu:
+            onglets:
+                home: Accueil
+                listing_projects: Liste des projets
+                create_project: Créer un projet
+                about: A propos
+                paris_2024: Paris 2024
+    page:
+        client:
+            account:
+                    index:
+                           tolist: "Revenir à l'accueil"
+                           save: "Enregistrer"
+                           delete: "Supprimer l'utilisateur"
+                           new_picture: "Ajouter une image de profil"
+                           created: "Projets créés"
+                           followed: "Projets inscrits"
+                           participated: "Projets participés"
+
+            home:
+                citation: "Soyez volontaire"
+                description: |
+                    À l’occasion des Jeux Olympiques Paris 2024, devenez acteur de votre quartier en participant ou en créant des projets soumis à votre communauté pour améliorer votre quotidien.
+                    Avec Tous Paris, soyez au coeur de votre ville.
+                more: "En savoir plus"
+                buttons:
+                    list: "Consulter les projets"
+                    create: "Créer un projet"
+            project:
+                list:
+                    all: "Tous"
+                    near_projects: "Proche de moi"
+                show:
+                    description: "Description"
+                    goal: "Objectif"
+                    participant: "[0, 1] Participant|[2, Inf[ Participants"
+                    day_left: "[0, 1] Restant|[2, Inf[ Restants"
+                    buttons:
+                        participate: "Participer au projet"
+                        unparticipate: "Ne plus participer au projet"
+                        finance: "Financer"
+            connection:
+                title: "Connectez-vous"
+                button: "Se connecter"
+                or: "Ou"
+                forgotten_password: "Mot de passe oublié ?"
+            forgotten_password:
+                button: "Rechercher"
+                cancel: "Annuler"
+            registration:
+                title: "Inscrivez-vous, soyez volontaire"
+                button: "S'inscrire"
+            reinitialization:
+                title: "Réinitialisez votre mot de passe"
+                button: "Réinitialiser"
+            user:
+                inputs:
+                    lastname: "Nom"
+                    firstname: "Prénom"
+                    email: "Email"
+                    picture: "Image"
+                    password: "Mot de passe"
+                    confirm_password: "Confirmation de mot de passe"
+        admin:
+            user:
+                list:
+                     tolist: "Revenir à la liste"
+                     adduser: "Créer un nouvel administrateur"
+                show:
+                     tolist: "Revenir à la liste"
+                     delete: "Supprimer l'utilisateur"
+                     edit: "Editer le profil"
+                     created: "Projets créés"
+                     followed: "Projets inscrits"
+                     participated: "Projets participés"
+
+                edit:
+                     tolist: "Revenir à la liste"
+                     save: "Enregistrer"
+                     delete: "Supprimer l'utilisateur"
+                     new_picture: "Ajouter une image de profil"
+                     created: "Projets créés"
+                     followed: "Projets inscrits"
+                     participated: "Projets participés"
+                new:
+                     tolist: "Revenir à la liste"
+                     new_admin: "Créer un nouvel administrateur"

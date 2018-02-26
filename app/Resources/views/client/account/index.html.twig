@@ -1,0 +1,143 @@
+{% extends "@Client/template/two-columns.html.twig" %}
+{% form_theme edit_form 'form/form-widget.html.twig' %}
+
+
+{% block body %}
+
+    <div class="account">
+        <div class="header">
+
+            <div class="toList">
+                <a href="{{ path('account_user_edit') }}">{{ 'app.page.client.account.index.tolist' | trans }}</a>
+            </div>
+
+            <div class="actions">
+                <div class="actions-save">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">{{ 'app.page.client.account.index.save' | trans }}</p>
+                        </div>
+                        <div class="media-right">
+                            <button class="button-save" type="submit" value="Save">
+                                <span><img class="img-validate" src="{{ asset('build/images/validate.png') }}" alt=""></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-delete">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">{{ 'app.page.client.account.index.delete' | trans }}</p>
+                        </div>
+                        <div class="media-right">
+                            {{ form_start(delete_form) }}
+                            <button class="button-delete" type="submit" value="Delete">
+                                <span><img class="img-delete" src="{{ asset('build/images/delete.png') }}" alt=""></span>
+                            </button>
+                            {{ form_widget(delete_form) }}
+                            {{ form_end(delete_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="left">
+                <form class="form-edit">
+                    <div class="row">
+
+                        {{ form_start(edit_form) }}
+                        <div class="image-profile">
+                            <img class="img-profile-background" src="#" alt="Image de profil">
+                            {{ form_widget(edit_form.picture) }}
+                        </div>
+
+                        <div class="identifiants">
+                            <div class="firstname">
+                                {{ form_row(edit_form.firstname) }}
+                            </div>
+
+                            <div class="lastname">
+                                {{ form_row(edit_form.lastname) }}
+                            </div>
+
+                            <div class="mail">
+                                {{ form_row(edit_form.email) }}
+                            </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="right">
+                <div class="resume">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.createdProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.client.account.index.created' | trans }}</span>
+                                </div>
+                                <div class="blue rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.followedProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.client.account.index.followed' | trans }}</span>
+                                </div>
+                                <div class="white rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="project">
+                                <div class="wrapper">
+                                    <span class="nb-projects">{{ user.participatingProjects | length }}</span>
+                                    <span class="label-projects">{{ 'app.page.client.account.index.participated' | trans }}</span>
+                                </div>
+                                <div class="red rec-projects-color"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block addJavascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2" ></script>
+    <script>
+        document.getElementById('delete_button').addEventListener('click', function () {
+            swal({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas récupérer ce compte !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('delete_form').click();
+                }
+            })
+        });
+    </script>
+{% endblock %}

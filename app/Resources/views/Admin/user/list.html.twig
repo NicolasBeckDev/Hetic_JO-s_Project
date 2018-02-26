@@ -1,0 +1,54 @@
+{% extends "@Admin/layout.html.twig" %}
+
+{% block content %}
+
+    <div class="list">
+
+        <div class="container-fluid">
+
+            <div class="head-buttons">
+                <input class="rechercher" type="search" placeholder="Rechercher">
+
+                <div class="add-user">
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="text">{{ 'app.page.admin.user.list.adduser' | trans }}</p>
+                        </div>
+                        <div class="media-right">
+                            <a href="{{ path('admin_user_new') }}">
+                                <div class="button">+</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-list">
+                <div class="row">
+
+                    {% for user in users %}
+                        <div class="col-md-4">
+                            <a class="redirect-to-user" href="{{ path('admin_user_show', { 'id': user.id }) }}">
+                                <div class="user">
+                                    <div class="media wrapper-info">
+                                        <div class="media-left">
+                                            <img class="image" href="{{ path('admin_user_show', { 'id': user.id }) }}" src="{{ asset('build/images/user.png') }}" alt="user-image">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="informations">
+                                                <h3>{{ user.firstname}} {{ user.lastname }}</h3>
+                                                <p class="email">{{ user.email }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

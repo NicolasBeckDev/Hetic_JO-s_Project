@@ -1,0 +1,29 @@
+{% spaceless %}
+<div class="col-sm-6">
+    <div class="project __project_category_color__">
+        <a href="{{ path('project_show', { 'id': '__project_id__' }) }}">
+            <div class="image-container">
+                <div class="image-positioner">
+                    <img src="{{ asset('uploads/project/picture/__project_picture__') }}" />
+                </div>
+            </div>
+
+            <div class="text-content-wrapper">
+                <div class="category-container">
+                    <span class="category">__project_category_name__</span>
+                </div>
+
+                <div class="name-container">
+                    <span class="name">__project_name__</span>
+                </div>
+
+                <div class="district-container">
+                    <span class="district">__project_district_name__</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="color-line"></div>
+    </div>
+</div>
+{% endspaceless %}
