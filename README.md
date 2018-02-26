@@ -22,5 +22,5 @@ Ce dernier nous a permis de **travailler en équipe sur un projet conséquent**,
 ![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/location.png "Projects location")
 
 ### Project
-![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/project.png "Project")
+![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/Project.png "Project")
 
