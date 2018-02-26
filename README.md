@@ -7,7 +7,7 @@ Ce dernier nous a permis de **travailler en équipe sur un projet conséquent**,
 
 ## Galerie
 ### Homepage
-![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/homepage.png "Homepage")
+![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/homepage.jpg "Homepage")
 
 ### Menu
 ![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/menu.png "Menu")
@@ -22,5 +22,5 @@ Ce dernier nous a permis de **travailler en équipe sur un projet conséquent**,
 ![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/location.png "Projects location")
 
 ### Project
-![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/location.png "Project")
+![alt text](https://github.com/NicolasBeckDev/Hetic_JO-s_Project/blob/master/screenshots/project.png "Project")
 
