@@ -110,10 +110,10 @@ class ProjectServices
             case 'Environnement':
                 return '/default_environnement.jpg';
                 break;
-            case 'Solidaire et Citoyen':
+            case 'Solidaire & citoyen':
                 return '/default_solidaire_citoyen.jpg';
                 break;
-            case 'Mobilité et transports':
+            case 'Mobilité & transport':
                 return '/default_mobilite_transport.jpg';
                 break;
             case 'Urbanisme':
